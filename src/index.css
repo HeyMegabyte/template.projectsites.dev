@@ -144,6 +144,16 @@ body {
 }
 
 /* Reduced motion */
+/* Print stylesheet */
+@media print {
+  header, footer, .sticky-cta, .speed-dial, nav, .back-to-top, .quick-actions { display: none !important; }
+  body { background: white !important; color: black !important; font-size: 12pt; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+  img { max-width: 100% !important; }
+  .glass, .glass-strong { background: white !important; backdrop-filter: none !important; border: 1px solid #ddd !important; }
+  .gradient-text, .gradient-text-warm { -webkit-text-fill-color: black !important; background: none !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

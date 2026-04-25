@@ -72,6 +72,11 @@ export default function Footer() {
                   Terms of Service
                 </Link>
               </li>
+              <li>
+                <Link to="/accessibility" className="hover:text-[var(--color-accent)] transition-colors">
+                  Accessibility
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
