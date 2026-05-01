@@ -24,6 +24,25 @@
   filter: none !important;
   overflow: hidden !important;
 }
+/* Lightbox typography: inherit site fonts (Inter body, heading font for captions).
+   Override CSS variables `--font-body` and `--font-heading` in your project's
+   globals to restyle. Falls through to system fonts if unset. */
+.yarl__root,
+.yarl__container,
+.yarl__slide_captions_container,
+.yarl__counter,
+.yarl__thumbnails_track,
+.yarl__button {
+  font-family: var(--font-body, 'Inter'), system-ui, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.yarl__slide_title,
+.yarl__slide_description {
+  font-family: var(--font-heading, 'Space Grotesk'), Georgia, serif !important;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
 .yarl__slide {
   width: 100vw !important;
   height: 100dvh !important;
@@ -34,60 +53,6 @@
   width: auto !important;
   height: auto !important;
   object-fit: contain !important;
-}
-
-/* Social share fallback sheet (opened when navigator.share unavailable) */
-.lb-share-sheet {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: grid;
-  place-items: center;
-  background: rgba(8, 0, 12, 0.7);
-  backdrop-filter: blur(8px);
-}
-.lb-share-card {
-  background: #15151f;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 24px;
-  width: min(420px, calc(100vw - 32px));
-  color: #fff;
-  font-family: var(--font-body, 'Inter', sans-serif);
-}
-.lb-share-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin: 0 0 16px;
-  text-align: center;
-}
-.lb-share-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.lb-share-grid button {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #fff;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-.lb-share-grid button:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-.lb-share-close {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 @layer base {
