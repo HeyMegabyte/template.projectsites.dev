@@ -1,38 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 interface Props {
   children: React.ReactNode;
 }
 
+/**
+ * No-flash route wrapper.
+ *
+ * Defers visual transitions to the View Transitions API (configured in
+ * `src/index.css` via `@view-transition { navigation: auto; }`). The wrapper
+ * itself does not opacity-fade content — that caused a brief flash of the
+ * page bg between routes. Instead, it guarantees `<html>` keeps the dark
+ * brand bg during navigation so the cross-fade reads as a single smooth shot.
+ */
 export default function PageTransition({ children }: Props) {
   const location = useLocation();
-  const [visible, setVisible] = useState(false);
-  const [content, setContent] = useState(children);
 
   useEffect(() => {
-    setVisible(false);
-    const timer = setTimeout(() => {
-      setContent(children);
-      setVisible(true);
-    }, 150);
-    return () => clearTimeout(timer);
+    if (typeof document === 'undefined') return;
+    document.documentElement.style.backgroundColor = '#0a0a1a';
   }, [location.pathname]);
 
-  useEffect(() => {
-    setContent(children);
-  }, [children]);
-
-  return (
-    <div
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(12px)',
-        transition:
-          'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-      }}
-    >
-      {content}
-    </div>
-  );
+  return <>{children}</>;
 }
