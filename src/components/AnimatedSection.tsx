@@ -20,8 +20,8 @@ export function AnimatedSection({
     <div
       ref={ref}
       className={cn(
-        'transition-all duration-700',
-        isInView ? `opacity-100 ${animation}` : 'opacity-0 translate-y-8',
+        'animate-on-scroll transition-all duration-700',
+        isInView && `in-view ${animation}`,
         className
       )}
       style={delay ? { animationDelay: delay } : undefined}

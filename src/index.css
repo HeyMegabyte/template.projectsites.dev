@@ -118,28 +118,34 @@ body {
   background-clip: text;
 }
 
-/* Scroll reveal base styles */
-.reveal {
-  opacity: 0.3;
-  transform: translateY(16px);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Animate on scroll utility */
+/* Scroll reveal — visible by default (the floor). Reveal animation is a progressive
+   enhancement under prefers-reduced-motion: no-preference, gated by .js-reveal-active
+   added to <html> by JS when IntersectionObserver is supported. */
+.reveal,
 .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  opacity: 1;
+  transform: none;
 }
 
-.animate-on-scroll.in-view {
-  opacity: 1;
-  transform: translateY(0);
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal-active .reveal:not(.visible) {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .js-reveal-active .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .js-reveal-active .animate-on-scroll:not(.in-view) {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .js-reveal-active .animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Staggered animation delays for grid children */
