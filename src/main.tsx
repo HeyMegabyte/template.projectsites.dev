@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { initCursorRipple } from './lib/cursor';
 import 'animate.css/animate.min.css';
 import './index.css';
 
@@ -12,6 +13,8 @@ if (
 ) {
   document.documentElement.classList.add('js-reveal-active');
 }
+
+initCursorRipple();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -317,3 +317,30 @@ body {
     transform: none;
   }
 }
+
+/* Click-ripple cursor effect (desktop, fine pointer, motion-allowed only).
+   Native cursor stays visible. No ring/follower/dot.
+   See src/lib/cursor.ts and always.md "CLICK RIPPLE ONLY". */
+@media (min-width: 768px) and (pointer: fine) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cursor-ripple {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border: 1.5px solid var(--brand-accent, #00e5ff);
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+      animation: cursor-ripple-expand 600ms ease-out forwards;
+    }
+    @keyframes cursor-ripple-expand {
+      to {
+        transform: translate(-50%, -50%) scale(7.5);
+        opacity: 0;
+      }
+    }
+  }
+}
