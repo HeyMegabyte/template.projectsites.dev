@@ -2,11 +2,11 @@
   "name": "{BUSINESS_NAME}",
   "short_name": "{BUSINESS_SHORT_NAME}",
   "description": "{BUSINESS_DESCRIPTION}",
-  "start_url": "/",
+  "start_url": "/?utm_source=pwa",
   "scope": "/",
   "id": "/?source=pwa",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
   "orientation": "any",
   "background_color": "#0a0a1a",
   "theme_color": "#0a0a1a",
@@ -14,26 +14,45 @@
   "dir": "ltr",
   "categories": ["business", "productivity", "utilities"],
   "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
   "icons": [
     { "src": "/favicon-16x16.png",          "sizes": "16x16",   "type": "image/png" },
     { "src": "/favicon-32x32.png",          "sizes": "32x32",   "type": "image/png" },
     { "src": "/apple-touch-icon.png",       "sizes": "180x180", "type": "image/png", "purpose": "any" },
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/maskable-512x512.png",       "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "/maskable-512x512.png",       "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/monochrome-icon.png",        "sizes": "192x192", "type": "image/png", "purpose": "monochrome" }
   ],
   "screenshots": [
-    { "src": "/screenshot-wide.png",   "sizes": "1920x1080", "type": "image/png", "form_factor": "wide",   "label": "Desktop view" },
-    { "src": "/screenshot-narrow.png", "sizes": "390x844",   "type": "image/png", "form_factor": "narrow", "label": "Mobile view" }
+    { "src": "/screenshot-wide.png",   "sizes": "1920x1080", "type": "image/png", "form_factor": "wide",   "label": "Homepage on desktop" },
+    { "src": "/screenshot-narrow.png", "sizes": "390x844",   "type": "image/png", "form_factor": "narrow", "label": "Homepage on mobile" }
   ],
   "shortcuts": [
-    { "name": "Contact",  "short_name": "Contact",  "url": "/contact",  "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] },
-    { "name": "Services", "short_name": "Services", "url": "/services", "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] },
-    { "name": "Pricing",  "short_name": "Pricing",  "url": "/pricing",  "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] }
+    { "name": "Contact",  "short_name": "Contact",  "description": "Get in touch", "url": "/contact",  "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] },
+    { "name": "Services", "short_name": "Services", "description": "What we offer", "url": "/services", "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] },
+    { "name": "Pricing",  "short_name": "Pricing",  "description": "Plans + pricing", "url": "/pricing",  "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] },
+    { "name": "Gallery",  "short_name": "Gallery",  "description": "All demos",       "url": "/gallery",  "icons": [{ "src": "/favicon-32x32.png", "sizes": "32x32" }] }
   ],
   "share_target": {
     "action": "/contact",
     "method": "GET",
     "params": { "title": "subject", "text": "message", "url": "url" }
-  }
+  },
+  "file_handlers": [
+    {
+      "action": "/import-brand",
+      "accept": { "application/json": [".json"], "text/markdown": [".md"] }
+    }
+  ],
+  "protocol_handlers": [
+    { "protocol": "web+projectsites", "url": "/handle?p=%s" }
+  ],
+  "edge_side_panel": {
+    "preferred_width": 480
+  },
+  "handle_links": "preferred",
+  "scope_extensions": []
 }

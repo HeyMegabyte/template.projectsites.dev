@@ -1,12 +1,17 @@
-# Production robots.txt — generated for projectsites.dev sites.
-# Each AI / LLM crawler is listed explicitly per the always.md mandate.
+# Production robots.txt — v3.5 (idea #40)
+# Each AI / LLM crawler is listed explicitly per the always.md mandate +
+# 2026 AI Search Optimization (GEO) research.
 
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /handle
+Disallow: /import-brand
 Disallow: /*.json$
+Allow: /applied-manifest.json
+Allow: /site.webmanifest
 
-# Major AI / LLM crawlers (allowed for GEO + AI-search inclusion).
+# ─── AI / LLM crawlers (allowed for GEO + AI-search citation) ───
 User-agent: GPTBot
 Allow: /
 
@@ -37,6 +42,9 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: GoogleOther
+Allow: /
+
 User-agent: Applebot-Extended
 Allow: /
 
@@ -46,11 +54,47 @@ Allow: /
 User-agent: FacebookBot
 Allow: /
 
-# Aggressive scraping bots — explicitly blocked.
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: cohere-training-data-crawler
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# ─── Aggressive scrapers (explicitly blocked) ───
 User-agent: Bytespider
 Disallow: /
 
 User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DotBot
 Disallow: /
 
 Sitemap: {BUSINESS_URL}/sitemap.xml

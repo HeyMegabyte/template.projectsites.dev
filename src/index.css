@@ -398,13 +398,200 @@ p          { text-wrap: pretty; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   REDUCED MOTION
+   REDUCED MOTION (idea #21)
    ─────────────────────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    /* Reset scroll-driven animations explicitly — `animation` shorthand
+       doesn't reset `animation-timeline`, so we have to be explicit. */
+    animation-timeline: none !important;
   }
-  .animate-on-scroll, .reveal, .reveal-on-view { opacity: 1; transform: none; }
+  .animate-on-scroll, .reveal, .reveal-on-view, .kinetic-headline {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   REDUCED TRANSPARENCY (idea #22)
+   Users who set this prefer flat surfaces — drop backdrop-filter blur.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .glass-strong, .cmdk-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-surface);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PREFERS-CONTRAST (idea #23)
+   When the user wants more contrast, bump muted text + borders.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (prefers-contrast: more) {
+  :root {
+    --color-text-muted: var(--color-text);
+    --color-text-subtle: color-mix(in oklch, var(--color-text) 80%, var(--color-background) 20%);
+    --color-border: var(--color-text);
+  }
+  /* Make the accent ring thicker for focus states */
+  :focus-visible {
+    outline-width: 4px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FORCED COLORS / Windows High Contrast (idea #24)
+   Replace static colors with system keywords so high-contrast OS modes work.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (forced-colors: active) {
+  :root {
+    forced-color-adjust: none;
+  }
+  .glass, .glass-strong, .card-tactile {
+    background: Canvas;
+    border-color: CanvasText;
+    color: CanvasText;
+  }
+  .gradient-text {
+    background: none;
+    color: LinkText;
+    -webkit-text-fill-color: LinkText;
+  }
+  button, a {
+    forced-color-adjust: none;
+  }
+  /* Buttons use system buttonText for icons */
+  button svg, a svg {
+    fill: currentColor;
+  }
+  /* Underlines for affordance */
+  a:not([role='button']) {
+    text-decoration: underline;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   INVERTED COLORS (idea #25)
+   Drop backdrop-filter (which fights inversion + creates weird artifacts).
+   ─────────────────────────────────────────────────────────────────────── */
+@media (inverted-colors: inverted) {
+  .glass, .glass-strong, .cmdk-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  img, video, picture, [data-no-invert] {
+    filter: invert(1);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PREFERS-REDUCED-DATA (idea #17)
+   Honor the Save-Data hint — disable scroll-driven animation,
+   marquees, and any large background gradient orbs.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-data: reduce) {
+  .kinetic-headline,
+  .marquee__track,
+  .animate-subtleFloat {
+    animation: none !important;
+  }
+  /* Drop the hero orb blur backdrops */
+  [aria-hidden='true'].absolute.blur-\[120px\],
+  [aria-hidden='true'].absolute.blur-\[100px\],
+  [aria-hidden='true'].absolute.blur-3xl {
+    display: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   STARTING-STYLE (idea #5)
+   Native entry animations from display:none without JS timing hacks.
+   ─────────────────────────────────────────────────────────────────────── */
+@supports (transition-behavior: allow-discrete) {
+  [popover] {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity var(--duration-base) var(--ease),
+      transform var(--duration-base) var(--ease),
+      display var(--duration-base) allow-discrete,
+      overlay var(--duration-base) allow-discrete;
+  }
+  [popover]:popover-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @starting-style {
+    [popover]:popover-open {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   VIEW TRANSITION GROUPS (idea #4)
+   Named transitions for the hero, nav, and gallery cards across navigations.
+   ─────────────────────────────────────────────────────────────────────── */
+@view-transition {
+  navigation: auto;
+}
+
+/* Group-based transitions: every card with view-transition-class="gallery-card"
+   gets the same animation, no need to name each individually. */
+::view-transition-group(.gallery-card) {
+  animation-duration: 350ms;
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-old(hero),
+::view-transition-new(hero) {
+  animation-duration: 400ms;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   ORGANIC BLOB BACKGROUNDS via shape() (idea #9)
+   Falls back gracefully where shape() isn't supported.
+   ─────────────────────────────────────────────────────────────────────── */
+@supports (clip-path: shape(from 0 0, line to 100% 0, line to 100% 100%, line to 0 100%)) {
+  .blob-shape {
+    clip-path: shape(
+      from 12% 0,
+      curve to 88% 0 with 50% -10%,
+      curve to 100% 50% with 110% 12%,
+      curve to 88% 100% with 110% 88%,
+      curve to 12% 100% with 50% 110%,
+      curve to 0 50% with -10% 88%,
+      curve to 12% 0 with -10% 12%
+    );
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   CONTAINER SCROLL-STATE QUERIES (idea #8)
+   Style elements based on their sticky / snapping state.
+   ─────────────────────────────────────────────────────────────────────── */
+@supports (container-type: scroll-state) {
+  .sticky-aware {
+    container-type: scroll-state;
+  }
+  @container scroll-state(stuck: top) {
+    .sticky-aware > .indicator {
+      background: var(--color-accent);
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   AUTO-CONTRAST TEXT via contrast-color() (idea #10)
+   Falls back to currentColor where contrast-color() isn't yet supported.
+   ─────────────────────────────────────────────────────────────────────── */
+@supports (color: contrast-color(white)) {
+  .auto-contrast {
+    color: contrast-color(var(--color-primary));
+  }
 }

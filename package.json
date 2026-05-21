@@ -1,7 +1,7 @@
 {
   "name": "projectsites-template",
   "private": true,
-  "version": "3.4.0",
+  "version": "3.5.0",
   "type": "module",
   "description": "Cinematic React + Vite + Tailwind website template with DTCG brand tokens, 15 universal routes, kinetic typography, bento grid, command palette, full PWA kit, Zod-validated brand schema, Vitest + Playwright tests. Built for AI customization (bolt.diy, Claude, Cursor).",
   "scripts": {
@@ -24,7 +24,11 @@
     "deploy:applied": "node scripts/deploy-applied.mjs",
     "screenshot:applied": "node scripts/screenshot-applied.mjs",
     "manifest:applied": "node scripts/build-manifest.mjs",
-    "deploy:template": "node scripts/deploy-template.mjs"
+    "deploy:template": "node scripts/deploy-template.mjs",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "perf-budget": "node scripts/perf-budget.mjs",
+    "hue-rotate": "node scripts/hue-rotate.mjs",
+    "validate:all": "npm run validate:brand && npm run typecheck && npm run test && npm run prompt-evals && npm run build && npm run perf-budget"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",

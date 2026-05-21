@@ -1,0 +1,58 @@
+# Cloudflare Pages headers config — production security + perf headers.
+# Reference: https://developers.cloudflare.com/pages/configuration/headers/
+#
+# Ideas #91-100 — security hardening baseline that runs on every site
+# deployed from this template.
+
+/*
+  # HSTS — force HTTPS for 2 years, include subdomains, preload-ready
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Frame protection
+  X-Frame-Options: DENY
+  Content-Security-Policy-Report-Only: frame-ancestors 'none'; report-to default
+
+  # MIME sniffing
+  X-Content-Type-Options: nosniff
+
+  # Permissions — lock down by default
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), gyroscope=(), accelerometer=(), magnetometer=(), payment=(), usb=(), browsing-topics=()
+
+  # Referrer
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Cross-origin isolation (idea #99) — paves the way for SharedArrayBuffer
+  # without breaking embeds (credentialless lets cross-origin resources load
+  # without explicit CORP headers, but isolates the context).
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Resource-Policy: cross-origin
+  Origin-Agent-Cluster: ?1
+
+  # Reporting endpoints (idea #96) — CSP / COEP / COOP violations POST here
+  Reporting-Endpoints: default="/api/reports/default", csp="/api/reports/csp"
+  Report-To: {"group":"default","max_age":10886400,"endpoints":[{"url":"/api/reports/default"}]}
+
+  # Permissions for sensors / payment APIs that we explicitly don't use
+  # (Document-Policy is gated experimentally — keeping commented for safety)
+  # Document-Policy: js-profiling
+
+/applied-manifest.json
+  # Always fresh — gallery needs the latest demo list
+  Cache-Control: public, max-age=60, stale-while-revalidate=300
+
+/applied/*
+  # Screenshots — long cache, content-hashed by filename
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/assets/*
+  # Hashed bundles — immutable forever
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  # HTML — short cache so users get fresh content
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sw.js
+  # Service worker — never cache the SW itself
+  Cache-Control: no-store

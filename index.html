@@ -9,7 +9,7 @@
 
   <title>{BUSINESS_NAME} — {BUSINESS_TAGLINE}</title>
   <meta name="description" content="{BUSINESS_DESCRIPTION}" />
-  <meta name="generator" content="ProjectSites — projectsites.dev" />
+  <meta name="generator" content="ProjectSites — projectsites.dev · v3.5" />
   <link rel="canonical" href="{BUSINESS_URL}/" />
 
   <!-- Open Graph -->
@@ -20,6 +20,7 @@
   <meta property="og:image" content="{BUSINESS_URL}/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{BUSINESS_NAME} — {BUSINESS_TAGLINE}" />
   <meta property="og:site_name" content="{BUSINESS_SHORT_NAME}" />
   <meta property="og:locale" content="en_US" />
 
@@ -28,6 +29,7 @@
   <meta name="twitter:title" content="{BUSINESS_NAME}" />
   <meta name="twitter:description" content="{BUSINESS_DESCRIPTION}" />
   <meta name="twitter:image" content="{BUSINESS_URL}/og-image.png" />
+  <meta name="twitter:image:alt" content="{BUSINESS_NAME} — {BUSINESS_TAGLINE}" />
 
   <!-- PWA / app identity -->
   <meta name="application-name" content="{BUSINESS_SHORT_NAME}" />
@@ -49,18 +51,62 @@
   <meta name="msapplication-TileColor" content="#0a0a1a" />
   <meta name="msapplication-config" content="/browserconfig.xml" />
 
-  <!-- Speculation Rules — prerender same-origin links for instant nav. -->
+  <!--
+    Security headers (idea #91-100) — these mirror what an edge worker should
+    send via real HTTP headers. Meta-tag delivery is best-effort for browsers
+    that ignore the corresponding HTTP header. In production, prefer headers.
+  -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), gyroscope=(), accelerometer=(), magnetometer=(), payment=()" />
+
+  <!--
+    Speculation Rules — prerender same-origin links for instant nav.
+    Chrome 121+; ignored elsewhere. `eagerness: moderate` triggers on hover.
+  -->
   <script type="speculationrules">
     {
       "prerender": [
-        { "where": { "and": [{ "href_matches": "/*" }, { "not": { "selector_matches": "[data-no-prerender]" } }] }, "eagerness": "moderate" }
+        {
+          "where": {
+            "and": [
+              { "href_matches": "/*" },
+              { "not": { "selector_matches": "[data-no-prerender]" } },
+              { "not": { "selector_matches": "[rel*=external]" } }
+            ]
+          },
+          "eagerness": "moderate"
+        }
+      ],
+      "prefetch": [
+        {
+          "where": { "href_matches": "/*" },
+          "eagerness": "conservative"
+        }
       ]
     }
   </script>
 
-  <!-- Fonts: preconnect, then non-blocking stylesheet load. -->
+  <!--
+    Reporting endpoints (idea #96).
+    Failed CSP / COEP / COOP violations POST here for analysis.
+  -->
+  <meta http-equiv="Reporting-Endpoints" content="default=&quot;/api/reports/default&quot;, csp=&quot;/api/reports/csp&quot;" />
+
+  <!--
+    DNS prefetch + preconnect for fonts + analytics (idea #18).
+    Connecting to fonts.gstatic.com requires crossorigin per spec.
+  -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!--
+    Fonts: preload as style for parallel discovery, then async swap to stylesheet.
+    Inter ships as a variable font (idea #75) but we still request a weight range
+    so older browsers download an interpolated subset.
+  -->
   <link
     rel="preload"
     as="style"
@@ -69,12 +115,28 @@
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    media="print"
+    onload="this.media='all'"
   />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+  </noscript>
 
-  <!-- No-FOUC: match initial bg to brand. Replaced at runtime by applyBrand(). -->
+  <!--
+    Critical inline CSS (idea #16) — paints the page background + sets up
+    the no-FOUC shell BEFORE any external CSS arrives. Real values get
+    overwritten by `applyBrand()` at runtime.
+  -->
   <style>
     :root { color-scheme: dark; }
     html, body { background-color: #0a0a1a; color: #f6f6f8; margin: 0; }
+    /* Skip-link visible at native size only when focused */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    /* Prevent layout shift while web font swaps */
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-display: optional; }
   </style>
 </head>
 <body>
@@ -86,6 +148,7 @@
   </noscript>
   <script type="module" src="/src/main.tsx"></script>
   <script>
+    // Register service worker after main load so it doesn't block LCP
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
     }
