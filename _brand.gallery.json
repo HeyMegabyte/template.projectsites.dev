@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schemas.designtokens.org/2025-10",
+  "$description": "Brand for the gallery deploy at template.projectsites.dev. Showcase of all 9 applied examples.",
+
+  "business": {
+    "name":          { "$value": "ProjectSites" },
+    "shortName":     { "$value": "ProjectSites" },
+    "tagline":       { "$value": "Cinematic site templates" },
+    "description":   { "$value": "Production-ready website template with single-source-of-truth brand tokens. Nine live demos. One master prompt. Built for AI customization." },
+    "url":           { "$value": "https://template.projectsites.dev" },
+    "businessClass": { "$value": "saas" },
+    "email":         { "$value": "hey@megabyte.space" },
+    "phone":         { "$value": "" },
+    "address":       { "$value": "" },
+    "hours":         { "$value": "" }
+  },
+
+  "color": {
+    "brandHue":    { "$value": "245" },
+    "brandChroma": { "$value": "0.20" },
+    "primary":     { "$value": "oklch(0.62 {color.brandChroma} {color.brandHue})" },
+    "primaryHover":{ "$value": "oklch(0.56 {color.brandChroma} {color.brandHue})" },
+    "accent":      { "$value": "oklch(0.85 0.18 165)" },
+    "accentHover": { "$value": "oklch(0.78 0.18 165)" },
+    "background":  { "$value": "oklch(0.08 0.02 {color.brandHue})" },
+    "surface":     { "$value": "oklch(0.12 0.02 {color.brandHue})" },
+    "surfaceElevated": { "$value": "oklch(0.16 0.02 {color.brandHue})" },
+    "border":      { "$value": "oklch(0.22 0.02 {color.brandHue})" },
+    "text":        { "$value": "oklch(0.97 0.005 {color.brandHue})" },
+    "textMuted":   { "$value": "oklch(0.65 0.01 {color.brandHue})" },
+    "textSubtle":  { "$value": "oklch(0.45 0.01 {color.brandHue})" },
+    "success":     { "$value": "oklch(0.74 0.16 152)" },
+    "warning":     { "$value": "oklch(0.82 0.16 85)" },
+    "danger":      { "$value": "oklch(0.66 0.22 28)" },
+    "info":        { "$value": "oklch(0.72 0.15 235)" }
+  },
+
+  "colorScheme": { "$value": "dark" },
+
+  "font": {
+    "heading":   { "$value": "Inter Tight" },
+    "body":      { "$value": "Inter" },
+    "mono":      { "$value": "JetBrains Mono" },
+    "weights":   { "$value": [400, 500, 600, 700, 800, 900] },
+    "fluidScale":{ "$value": "clamp" }
+  },
+
+  "radius":  { "sm": { "$value": "0.375rem" }, "md": { "$value": "0.5rem" }, "lg": { "$value": "0.75rem" }, "xl": { "$value": "1rem" }, "2xl": { "$value": "1.5rem" }, "full": { "$value": "9999px" } },
+  "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.05)" }, "md": { "$value": "0 8px 24px -8px oklch(0 0 0 / 0.40)" }, "lg": { "$value": "0 16px 48px -12px oklch(0 0 0 / 0.55)" }, "glow": { "$value": "0 0 40px -8px {color.primary}" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)" }, "duration": { "fast": { "$value": "150ms" }, "base": { "$value": "250ms" }, "slow": { "$value": "450ms" }, "scroll": { "$value": "1200ms" } } },
+  "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
+
+  "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "https://github.com/heymegabyte/template.projectsites.dev" } },
+
+  "features": {
+    "hero":         { "$value": true },
+    "bento":        { "$value": false },
+    "stats":        { "$value": true },
+    "services":     { "$value": false },
+    "process":      { "$value": false },
+    "testimonials": { "$value": false },
+    "logoCloud":    { "$value": false },
+    "pricing":      { "$value": false },
+    "faq":          { "$value": false },
+    "blog":         { "$value": false },
+    "team":         { "$value": false },
+    "caseStudies":  { "$value": false },
+    "newsletter":   { "$value": false },
+    "cta":          { "$value": true }
+  }
+}

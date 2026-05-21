@@ -15,7 +15,21 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Accessibility from './pages/Accessibility';
+import Gallery from './pages/Gallery';
 import NotFound from './pages/NotFound';
+
+/**
+ * Should `/` redirect to `/gallery`?
+ *
+ * The template repo deploys to `template.projectsites.dev` where the gallery
+ * IS the front door. For any other deployment (a real customer site), the
+ * default `/` route shows the customer's customized Home.tsx.
+ *
+ * The decision is made at build time from `VITE_TEMPLATE_MODE=gallery`.
+ * Set in `.github/workflows/deploy-template.yml` for the template deploy.
+ */
+const TEMPLATE_MODE = import.meta.env.VITE_TEMPLATE_MODE === 'gallery';
+const RootRoute = TEMPLATE_MODE ? Gallery : Home;
 
 export default function App() {
   return (
@@ -23,7 +37,8 @@ export default function App() {
       <ScrollToTop />
       <PageTransition>
         <Routes>
-          <Route path="/"              element={<Home />} />
+          <Route path="/"              element={<RootRoute />} />
+          <Route path="/gallery"       element={<Gallery />} />
           <Route path="/about"         element={<About />} />
           <Route path="/services"      element={<Services />} />
           <Route path="/pricing"       element={<Pricing />} />

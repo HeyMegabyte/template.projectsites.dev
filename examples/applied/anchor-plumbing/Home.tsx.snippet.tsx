@@ -157,22 +157,29 @@ export default function Home() {
         />
       )}
 
-      <TrustBadges items={[
-        { icon: 'shield', label: 'Licensed' },
-        { icon: 'shield', label: 'Insured ($2M)' },
-        { icon: 'shield', label: 'Bonded' },
-        { icon: 'award',  label: 'BBB A+' },
-        { icon: 'award',  label: 'Angi Top Pro' },
-        { icon: 'award',  label: 'EPA Lead-Safe' },
-      ]} />
+      <TrustBadges
+        rating={4.9}
+        reviewCount={412}
+        badges={[
+          { icon: 'shield', label: 'Licensed' },
+          { icon: 'shield', label: 'Insured ($2M)' },
+          { icon: 'shield', label: 'Bonded' },
+          { icon: 'award',  label: 'BBB A+' },
+          { icon: 'award',  label: 'Angi Top Pro' },
+          { icon: 'award',  label: 'EPA Lead-Safe' },
+        ]}
+      />
 
       {featureOn('services') && (
-        <ServiceCards items={[
-          { title: 'Drain cleaning',      icon: 'Wrench',  description: 'Clogs, blockages, sewer lines. Same-day service. Camera inspection available.' },
-          { title: 'Water heater',        icon: 'Zap',     description: 'Tank + tankless repair or replacement. 24-hour emergency service available.' },
-          { title: 'Pipe burst + leaks',  icon: 'Droplet', description: 'Emergency response. We dry out the affected area + repair the wall, not just the pipe.' },
-          { title: 'Bathroom remodel',    icon: 'Home',    description: 'Full bath renovations. Fixed quote upfront. Typical job 2–4 weeks.' },
-        ]} />
+        <ServiceCards
+          heading="What we fix"
+          services={[
+            { name: 'Drain cleaning',      description: 'Clogs, blockages, sewer lines. Same-day service. Camera inspection available.', price: 'from $149' },
+            { name: 'Water heater',        description: 'Tank + tankless repair or replacement. 24-hour emergency service available.',   price: 'from $290' },
+            { name: 'Pipe burst + leaks',  description: 'Emergency response. We dry out the affected area and repair the wall, not just the pipe.', price: '24/7' },
+            { name: 'Bathroom remodel',    description: 'Full bath renovations. Fixed quote upfront. Typical job 2–4 weeks.',             price: 'quote' },
+          ]}
+        />
       )}
 
       {featureOn('stats') && (

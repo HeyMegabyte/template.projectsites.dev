@@ -1,0 +1,155 @@
+[
+  {
+    "example": "anchor-plumbing",
+    "name": "Anchor Plumbing",
+    "tagline": "24/7 emergency · Anchorage",
+    "description": "Licensed Alaska plumber serving Anchorage, Eagle River, Wasilla. Same-day service. 24/7 emergency. Free estimates. License AK #12345 · A+ BBB.",
+    "businessClass": "storefront",
+    "brandHue": "210",
+    "brandChroma": "0.18",
+    "colorScheme": "light",
+    "font": {
+      "heading": "Bebas Neue",
+      "body": "Inter"
+    },
+    "project": "projectsites-demo-anchor-plumbing",
+    "url": "https://projectsites-demo-anchor-plumbing.pages.dev",
+    "screenshot": "/applied/anchor-plumbing.png"
+  },
+  {
+    "example": "anchorage-weekend-bags",
+    "name": "Anchorage Weekend Bags",
+    "tagline": "Feeding kids on weekends",
+    "description": "501(c)(3) packing 1,200 weekend food bags every Friday for Anchorage students who depend on school meals. EIN 12-3456789. Donations tax-deductible.",
+    "businessClass": "nonprofit",
+    "brandHue": "130",
+    "brandChroma": "0.18",
+    "colorScheme": "light",
+    "font": {
+      "heading": "Crimson Pro",
+      "body": "Inter"
+    },
+    "project": "projectsites-demo-anchorage-weekend-bags",
+    "url": "https://projectsites-demo-anchorage-weekend-bags.pages.dev",
+    "screenshot": "/applied/anchorage-weekend-bags.png"
+  },
+  {
+    "example": "chen-family-dentistry",
+    "name": "Chen Family Dentistry",
+    "tagline": "Gentle care since 2003",
+    "description": "Family + pediatric dentistry in Anchorage, AK. Accepting new patients. Most major insurance accepted. Saturday hours. Free new-patient exam.",
+    "businessClass": "medical",
+    "brandHue": "200",
+    "brandChroma": "0.12",
+    "colorScheme": "light",
+    "font": {
+      "heading": "Lora",
+      "body": "Inter"
+    },
+    "project": "projectsites-demo-chen-family-dentistry",
+    "url": "https://projectsites-demo-chen-family-dentistry.pages.dev",
+    "screenshot": "/applied/chen-family-dentistry.png"
+  },
+  {
+    "example": "doe-law",
+    "name": "Doe Law",
+    "tagline": "Estate plans for Alaska",
+    "description": "Estate planning attorney in Anchorage, AK. 20 years preparing wills, trusts, and probate plans for Alaska families. Free 30-minute consultation.",
+    "businessClass": "legal",
+    "brandHue": "220",
+    "brandChroma": "0.10",
+    "colorScheme": "light",
+    "font": {
+      "heading": "Cormorant Garamond",
+      "body": "Lora"
+    },
+    "project": "projectsites-demo-doe-law",
+    "url": "https://projectsites-demo-doe-law.pages.dev",
+    "screenshot": "/applied/doe-law.png"
+  },
+  {
+    "example": "field-studio",
+    "name": "Field Studio",
+    "tagline": "Brand · Web · Product",
+    "description": "Independent design studio of 8. Brooklyn + Lisbon. Brand systems + marketing sites for founders and CMOs who care. Booked through Q4.",
+    "businessClass": "organization",
+    "brandHue": "0",
+    "brandChroma": "0.22",
+    "colorScheme": "dark",
+    "font": {
+      "heading": "Archivo Black",
+      "body": "Archivo"
+    },
+    "project": "projectsites-demo-field-studio",
+    "url": "https://projectsites-demo-field-studio.pages.dev",
+    "screenshot": "/applied/field-studio.png"
+  },
+  {
+    "example": "field-threads",
+    "name": "Field Threads",
+    "tagline": "Made well · Sold honestly",
+    "description": "Independent clothing label. Designed in Brooklyn, manufactured in Portugal. GOTS-organic cotton. Free 30-day returns. Made-to-order, no overstock.",
+    "businessClass": "retail",
+    "brandHue": "340",
+    "brandChroma": "0.18",
+    "colorScheme": "light",
+    "font": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    },
+    "project": "projectsites-demo-field-threads",
+    "url": "https://projectsites-demo-field-threads.pages.dev",
+    "screenshot": "/applied/field-threads.png"
+  },
+  {
+    "example": "latch",
+    "name": "Latch",
+    "tagline": "AI code review",
+    "description": "AI code review for engineering teams. Catches race conditions, off-by-ones, regex DoS, unsafe SQL — bugs human review misses. SOC 2, GDPR.",
+    "businessClass": "saas",
+    "brandHue": "245",
+    "brandChroma": "0.20",
+    "colorScheme": "dark",
+    "font": {
+      "heading": "Inter Tight",
+      "body": "Inter"
+    },
+    "project": "projectsites-demo-latch",
+    "url": "https://projectsites-demo-latch.pages.dev",
+    "screenshot": "/applied/latch.png"
+  },
+  {
+    "example": "maria-chen",
+    "name": "Maria Chen",
+    "tagline": "Designer · Developer · Toronto",
+    "description": "Independent product designer for 8 years. Conversion-driven marketing sites for SaaS + B2B. Toronto-based. Available remote. Q3 2026 booked.",
+    "businessClass": "portfolio",
+    "brandHue": "275",
+    "brandChroma": "0.17",
+    "colorScheme": "dark",
+    "font": {
+      "heading": "Cabinet Grotesk",
+      "body": "Satoshi"
+    },
+    "project": "projectsites-demo-maria-chen",
+    "url": "https://projectsites-demo-maria-chen.pages.dev",
+    "screenshot": "/applied/maria-chen.png"
+  },
+  {
+    "example": "northern-lights-bakery",
+    "name": "Northern Lights Bakery",
+    "tagline": "Sourdough since 1987",
+    "description": "Family-owned Anchorage bakery. Wild-yeast sourdough, almond croissants, seasonal cakes. Open Tue–Sun, 6am–3pm. Walk in or order online.",
+    "businessClass": "restaurant",
+    "brandHue": "30",
+    "brandChroma": "0.22",
+    "colorScheme": "light",
+    "font": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    },
+    "project": "projectsites-demo-northern-lights-bakery",
+    "url": "https://projectsites-demo-northern-lights-bakery.pages.dev",
+    "screenshot": "/applied/northern-lights-bakery.png"
+  }
+]

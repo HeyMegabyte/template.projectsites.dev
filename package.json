@@ -20,7 +20,11 @@
     "validate:brand": "node scripts/validate-brand.mjs",
     "brand:swap": "node scripts/swap-brand.mjs",
     "og": "node scripts/og-image.mjs",
-    "prompt-evals": "node scripts/prompt-evals.mjs"
+    "prompt-evals": "node scripts/prompt-evals.mjs",
+    "deploy:applied": "node scripts/deploy-applied.mjs",
+    "screenshot:applied": "node scripts/screenshot-applied.mjs",
+    "manifest:applied": "node scripts/build-manifest.mjs",
+    "deploy:template": "node scripts/deploy-template.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
