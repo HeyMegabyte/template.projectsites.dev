@@ -41,15 +41,23 @@ export function Stats({ stats, eyebrow, headline, columns, className }: Props) {
             key={`${s.label}-${i}`}
             className="text-center p-6 reveal-on-view card-tactile"
           >
+            {/*
+              WCAG: <dl> direct children must only be <dt>/<dd>/<div>/<script>/<template>.
+              When <div> wraps a row, its children must be only <dt> + <dd>.
+              We put the visible label inside the <dd> (alongside the number) and
+              keep the sr-only <dt> for screen readers.
+            */}
             <dt className="sr-only">{s.label}</dt>
-            <dd
-              className="font-heading text-5xl md:text-6xl font-extrabold tracking-tight gradient-text"
-              aria-label={`${s.value}${s.suffix ?? ''}`}
-            >
-              <AnimatedNumber value={s.value} suffix={s.suffix} />
+            <dd>
+              <span
+                className="font-heading text-5xl md:text-6xl font-extrabold tracking-tight gradient-text block"
+                aria-label={`${s.value}${s.suffix ?? ''}`}
+              >
+                <AnimatedNumber value={s.value} suffix={s.suffix} />
+              </span>
+              <span className="mt-2 text-text font-medium block">{s.label}</span>
+              {s.caption && <span className="mt-1 text-sm text-text-subtle block">{s.caption}</span>}
             </dd>
-            <p className="mt-2 text-text font-medium">{s.label}</p>
-            {s.caption && <p className="mt-1 text-sm text-text-subtle">{s.caption}</p>}
           </div>
         ))}
       </dl>
