@@ -1,7 +1,7 @@
 {
   "name": "projectsites-template",
   "private": true,
-  "version": "3.5.0",
+  "version": "3.6.0",
   "type": "module",
   "description": "Cinematic React + Vite + Tailwind website template with DTCG brand tokens, 15 universal routes, kinetic typography, bento grid, command palette, full PWA kit, Zod-validated brand schema, Vitest + Playwright tests. Built for AI customization (bolt.diy, Claude, Cursor).",
   "scripts": {

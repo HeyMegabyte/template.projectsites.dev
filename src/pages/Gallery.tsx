@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ExternalLink, Github, ArrowRight, Sparkles } from 'lucide-react';
+import { ExternalLink, Github, ArrowRight, Sparkles, Palette } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
 import { JsonLd } from '@/components/JsonLd';
 import { CTASection } from '@/components/sections';
+import { AiChat } from '@/components/AiChat';
 
 interface ManifestEntry {
   example: string;
@@ -73,7 +75,7 @@ export default function Gallery() {
           </code>{' '}
           against an industry brief. Bakery, SaaS, attorney, agency, dentist, designer, nonprofit, retail, plumber — same code, different `_brand.json`.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
           <a
             href={REPO_URL}
             target="_blank"
@@ -82,6 +84,12 @@ export default function Gallery() {
           >
             <Github size={18} /> Use this template
           </a>
+          <Link
+            to="/studio"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-accent/30 bg-accent/10 text-accent hover:bg-accent/20 transition-colors min-h-[44px]"
+          >
+            <Palette size={16} /> Brand studio
+          </Link>
           <a
             href={`${REPO_URL}/blob/main/PROMPT.md`}
             target="_blank"
@@ -242,6 +250,11 @@ export default function Gallery() {
         primary={{ label: 'Use this template', href: REPO_URL }}
         secondary={{ label: 'Read the docs', href: `${REPO_URL}/tree/main/docs` }}
         tone="emphatic"
+      />
+
+      <AiChat
+        greeting="Hi! I can answer questions about this template: how brand tokens work, what's in the prompt system, how to deploy, etc. What's on your mind?"
+        triggerLabel="Ask AI"
       />
     </>
   );

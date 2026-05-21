@@ -16,6 +16,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Accessibility from './pages/Accessibility';
 import Gallery from './pages/Gallery';
+import Studio from './pages/Studio';
 import NotFound from './pages/NotFound';
 
 /**
@@ -39,6 +40,7 @@ export default function App() {
         <Routes>
           <Route path="/"              element={<RootRoute />} />
           <Route path="/gallery"       element={<Gallery />} />
+          <Route path="/studio"        element={<Studio />} />
           <Route path="/about"         element={<About />} />
           <Route path="/services"      element={<Services />} />
           <Route path="/pricing"       element={<Pricing />} />

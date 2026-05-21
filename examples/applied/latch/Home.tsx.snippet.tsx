@@ -21,6 +21,9 @@ import {
   CaseStudyGrid,
   CTASection,
   Newsletter,
+  Quote,
+  SocialProof,
+  MetricRow,
   type BentoTile,
   type Stat,
   type PricingTier,
@@ -241,6 +244,32 @@ export default function Home() {
           stats={stats}
         />
       )}
+
+      <SocialProof
+        initial={342}
+        label="reviews running right now"
+        caption="Updated every second"
+        perSecond={{ min: 0, max: 4 }}
+        tone="success"
+      />
+
+      <MetricRow
+        eyebrow="Customer impact"
+        headline="What teams see after switching"
+        metrics={[
+          { value: 34, suffix: '%', label: 'PR review time cut',  delta: { value: '-2h', direction: 'down', goodIs: 'down' } },
+          { value: 67, suffix: '%', label: 'Bugs caught vs human review', delta: { value: '+12', direction: 'up', goodIs: 'up' } },
+          { value: 4,  suffix: '.1%', label: 'False-positive rate', delta: { value: '-0.3', direction: 'down', goodIs: 'down' } },
+          { value: 12, suffix: 'K+', label: 'Teams using Latch', delta: { value: '+2,400 this Q', direction: 'up', goodIs: 'up' } },
+        ]}
+      />
+
+      <Quote
+        eyebrow="What teams say"
+        text="Latch caught a regex DoS in a PR that already had two approvals. Saved us a P0. Now I read its comments before any merge."
+        author="Maria Chen"
+        role="Staff Engineer · Cyberdyne"
+      />
 
       <FeatureSplit
         eyebrow="How it works"
