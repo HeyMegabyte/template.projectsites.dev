@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "include": ["/api/*"],
+  "exclude": [
+    "/assets/*",
+    "/applied/*",
+    "/_redirects",
+    "/_headers",
+    "/favicon.ico",
+    "/sw.js",
+    "/manifest.webmanifest",
+    "/site.webmanifest",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/humans.txt",
+    "/llms.txt",
+    "/llms-full.txt",
+    "/feed.xml",
+    "/atom.xml",
+    "/feed.json"
+  ]
+}

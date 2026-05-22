@@ -1,0 +1,25 @@
+# Lefthook pre-commit + pre-push hooks
+# https://github.com/evilmartians/lefthook
+#
+# Install once: npm install lefthook --save-dev && npx lefthook install
+# Bypass once:  LEFTHOOK=0 git commit (never use in CI / shared work)
+
+pre-commit:
+  parallel: true
+  commands:
+    typecheck:
+      glob: "*.{ts,tsx}"
+      run: npm run typecheck
+    validate-brand:
+      glob: "_brand.json"
+      run: npm run validate:brand
+    feeds-fresh:
+      glob: "{src/data/content.ts,_brand.json}"
+      run: npm run build:feeds
+
+pre-push:
+  commands:
+    test-unit:
+      run: npm run test
+    build-check:
+      run: npm run build

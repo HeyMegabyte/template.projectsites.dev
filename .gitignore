@@ -6,5 +6,8 @@ dist/
 .env.local
 .vite/
 .claude/settings.local.json
+.claude/worktrees/
+test-results/
+playwright-report/
 tsconfig.tsbuildinfo
 *.tsbuildinfo

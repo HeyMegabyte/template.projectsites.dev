@@ -6,6 +6,7 @@ import BackToTop from './BackToTop';
 import { CommandPalette } from './CommandPalette';
 import { DevA11yBadge } from './DevA11yBadge';
 import { ScrollProgress } from './ScrollProgress';
+import { PWAInstallPrompt } from './PWAInstallPrompt';
 
 interface Props {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ export default function Layout({ children }: Props) {
       <BackToTop />
       <Lightbox />
       <CommandPalette />
+      <PWAInstallPrompt />
       <DevA11yBadge />
     </>
   );

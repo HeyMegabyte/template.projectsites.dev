@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ProjectSites</title>
+    <link>https://template.projectsites.dev</link>
+    <description>Cinematic site templates</description>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 22 May 2026 01:18:01 GMT</lastBuildDate>
+    <atom:link href="https://template.projectsites.dev/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How we made 9 demo sites from one prompt</title>
+      <link>https://template.projectsites.dev/blog/nine-demo-sites-one-prompt</link>
+      <guid isPermaLink="true">https://template.projectsites.dev/blog/nine-demo-sites-one-prompt</guid>
+      <description></description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Why we picked OKLCH over HSL for brand tokens</title>
+      <link>https://template.projectsites.dev/blog/oklch-over-hsl</link>
+      <guid isPermaLink="true">https://template.projectsites.dev/blog/oklch-over-hsl</guid>
+      <description></description>
+      <pubDate>Tue, 28 Apr 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Cinematic websites in 2026: 12 native browser APIs nobody uses yet</title>
+      <link>https://template.projectsites.dev/blog/cinematic-apis-2026</link>
+      <guid isPermaLink="true">https://template.projectsites.dev/blog/cinematic-apis-2026</guid>
+      <description></description>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Latch SaaS — 4 hours from prompt to deploy</title>
+      <link>https://template.projectsites.dev/blog/latch-saas-landing</link>
+      <guid isPermaLink="true">https://template.projectsites.dev/blog/latch-saas-landing</guid>
+      <description></description>
+      <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Northern Lights Bakery — local SEO that brought 73% more bookings</title>
+      <link>https://template.projectsites.dev/blog/northern-lights-bakery</link>
+      <guid isPermaLink="true">https://template.projectsites.dev/blog/northern-lights-bakery</guid>
+      <description></description>
+      <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Doe Law — WCAG 2.2 AA in one sprint</title>
+      <link>https://template.projectsites.dev/blog/doe-law-wcag</link>
+      <guid isPermaLink="true">https://template.projectsites.dev/blog/doe-law-wcag</guid>
+      <description></description>
+      <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

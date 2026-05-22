@@ -77,6 +77,8 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           ls -lh dist/assets/ >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+      - name: Enforce performance budget
+        run: npm run perf-budget
       - uses: actions/upload-artifact@v4
         with:
           name: dist

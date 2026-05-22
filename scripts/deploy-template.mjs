@@ -43,12 +43,22 @@ try {
   console.log(`→ Swap in gallery brand`);
   writeFileSync(brandPath, readFileSync(galleryBrandPath, 'utf8'));
 
+  console.log(`→ Generate feeds + sitemap with gallery brand`);
+  execSync('node scripts/build-feeds.mjs', { cwd: repoRoot, stdio: 'inherit' });
+
   console.log(`→ Build with VITE_TEMPLATE_MODE=gallery`);
   execSync('npx vite build', {
     cwd: repoRoot,
     stdio: 'inherit',
     env: { ...process.env, VITE_TEMPLATE_MODE: 'gallery' },
   });
+
+  console.log(`→ Copy feeds into dist/`);
+  for (const file of ['feed.xml', 'atom.xml', 'feed.json', 'sitemap.xml']) {
+    const src = resolve(repoRoot, 'public', file);
+    const dst = resolve(repoRoot, 'dist', file);
+    if (existsSync(src)) writeFileSync(dst, readFileSync(src));
+  }
 
   console.log(`→ Ensure Pages project ${PROJECT} exists`);
   try {
