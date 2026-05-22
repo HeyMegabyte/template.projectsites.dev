@@ -22,6 +22,10 @@ import { readFileSync, writeFileSync, copyFileSync, readdirSync, statSync, exist
 import { resolve, dirname, join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { syncSecretsToPages, ensureCloudflareAuth, COMMON_SECRETS } from './lib/secrets.mjs';
+
+// Auto-load Cloudflare auth from get-secret if env vars aren't set
+ensureCloudflareAuth();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
@@ -133,6 +137,9 @@ try {
         console.log(`  • Create returned: ${msg.split('\n')[0]}`);
       }
     }
+
+    console.log(`→ Sync available secrets from get-secret`);
+    syncSecretsToPages(project, COMMON_SECRETS);
 
     console.log(`→ Deploy to ${project}.pages.dev`);
     try {

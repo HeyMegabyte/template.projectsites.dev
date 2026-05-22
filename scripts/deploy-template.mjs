@@ -17,11 +17,15 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { syncSecretsToPages, ensureCloudflareAuth, COMMON_SECRETS } from './lib/secrets.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
 const brandPath = resolve(repoRoot, '_brand.json');
 const galleryBrandPath = resolve(repoRoot, '_brand.gallery.json');
+
+// Auto-load CF auth from get-secret if env vars aren't already set
+ensureCloudflareAuth();
 
 if (!existsSync(galleryBrandPath)) {
   console.error(`✗ Missing ${galleryBrandPath}`);
@@ -71,6 +75,9 @@ try {
     if (/already exists/i.test(msg)) console.log(`  • Already exists`);
     else console.log(`  • ${msg.split('\n')[0]}`);
   }
+
+  console.log(`→ Sync available secrets from get-secret`);
+  syncSecretsToPages(PROJECT, COMMON_SECRETS);
 
   console.log(`→ Deploy`);
   execSync(`npx wrangler pages deploy dist --project-name=${PROJECT} --branch=main --commit-dirty=true`, {
