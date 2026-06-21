@@ -5,12 +5,24 @@
 // component/SSR-compat changes. Crawlers (no JS) get real content; users still hydrate the app.
 import { createServer } from 'node:http';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { chromium } from 'playwright';
 
 const DIST = 'dist';
-const ROUTES = ['/about','/services','/contact','/pricing','/faq','/team','/gallery','/case-studies','/blog','/privacy','/terms','/accessibility'];
+// Routes = every indexable URL from the sitemap (incl dynamic /blog/:slug, /case-studies/:slug),
+// minus the home shell (left as-is). Falls back to the static set if no sitemap.
+function discoverRoutes() {
+  const sm = join(DIST, 'sitemap.xml');
+  if (existsSync(sm)) {
+    const locs = [...readFileSync(sm, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)]
+      .map((m) => m[1].replace(/^(https?:\/\/[^/]+|\{[^}]+\})/, '').split('?')[0]) // strip scheme+host OR {PLACEHOLDER}
+      .filter((p) => p && p.startsWith('/') && p !== '/');
+    if (locs.length) return [...new Set(locs)];
+  }
+  return ['/about','/services','/contact','/pricing','/faq','/team','/gallery','/case-studies','/blog','/privacy','/terms','/accessibility'];
+}
+const ROUTES = discoverRoutes();
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.ico':'image/x-icon', '.webmanifest':'application/manifest+json', '.xml':'application/xml', '.txt':'text/plain', '.woff2':'font/woff2' };
 
 // tiny static server with SPA fallback (so the app boots + client-routes)
