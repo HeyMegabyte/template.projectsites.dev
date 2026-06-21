@@ -4,7 +4,7 @@
 // every URL → site collapses to one indexable URL. Fail seo.client_only_head. (checklist #3)
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { htmlFiles, warn } from './lib.mjs';
+import { htmlFiles, fail } from './lib.mjs';
 
 export function validateSsrHead(dist, root = '.') {
   // 1. How many routes does the site claim? (sitemap <loc> count)
@@ -31,7 +31,7 @@ export function validateSsrHead(dist, root = '.') {
 
   // Verdict: multi-route + SPA-fallback + no prerender + no edge rewrite = client-only head.
   if (routeCount > 1 && spaFallback && prerendered === 0 && !edgeRewriter) {
-    return [warn('validate-ssr-head', 'seo.client_only_head', '/*',
+    return [fail('validate-ssr-head', 'seo.client_only_head', '/*',
       `${routeCount} routes (sitemap) all serve one index.html (SPA fallback) with NO per-route server head — no prerendered route HTML, no edge HTMLRewriter. Crawlers read the homepage head on every URL → SEO collapse. Add SSG prerender (vite-ssg) OR a Worker HTMLRewriter keyed on getMeta(pathname).`)];
   }
   return [];
