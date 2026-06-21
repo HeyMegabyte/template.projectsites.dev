@@ -80,6 +80,8 @@ try {
   syncSecretsToPages(PROJECT, COMMON_SECRETS);
 
   console.log(`→ Deploy`);
+  console.log('→ Prerender routes (server-render body + head + JSON-LD per route)');
+  execSync('node scripts/prerender-spa.mjs', { cwd: repoRoot, stdio: 'inherit' });
   execSync(`npx wrangler pages deploy dist --project-name=${PROJECT} --branch=main --commit-dirty=true`, {
     cwd: repoRoot, stdio: 'inherit', env: process.env,
   });
