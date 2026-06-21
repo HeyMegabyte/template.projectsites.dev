@@ -84,6 +84,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Prerender routes (server-render body + head + JSON-LD per route)
+        run: |
+          npx playwright install --with-deps chromium
+          npm run prerender
+
       - name: Determine Pages project name
         id: project
         run: |
