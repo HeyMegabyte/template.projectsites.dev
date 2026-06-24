@@ -53,7 +53,7 @@ export default function Testimonials({
           {testimonials.map((t, i) => (
             <AnimatedSection key={`${t.name}-${i}`} delay={`${i * 0.15}s`}>
               <figure className="glass rounded-2xl p-8 h-full flex flex-col">
-                <div className="flex gap-1 mb-4" aria-label={`${t.rating} out of 5 stars`}>
+                <div className="flex gap-1 mb-4" role="img" aria-label={`${t.rating} out of 5 stars`}>
                   {Array.from({ length: t.rating }).map((_, j) => (
                     <Star
                       key={j}

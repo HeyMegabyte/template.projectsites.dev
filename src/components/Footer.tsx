@@ -60,9 +60,9 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
           </div>
 
           <nav aria-label="Footer navigation">
-            <h4 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
               Navigation
-            </h4>
+            </h3>
             <ul className="space-y-3 text-sm">
               {routes.map((r) => (
                 <li key={r.to}>
@@ -78,9 +78,9 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
           </nav>
 
           <div>
-            <h4 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
               Contact
-            </h4>
+            </h3>
             <address className="not-italic space-y-3 text-sm">
               {address && (
                 <a
@@ -115,9 +115,9 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
           </div>
 
           <div>
-            <h4 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
               Legal
-            </h4>
+            </h3>
             <ul className="space-y-3 text-sm">
               <li><Link to="/privacy"       className="hover:text-accent transition-colors underline-hover">Privacy Policy</Link></li>
               <li><Link to="/terms"         className="hover:text-accent transition-colors underline-hover">Terms of Service</Link></li>
