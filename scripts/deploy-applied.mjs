@@ -143,6 +143,8 @@ try {
 
     console.log(`→ Deploy to ${project}.pages.dev`);
     try {
+      console.log('→ Prerender routes (server-render body + head + JSON-LD per route)');
+      execSync('node scripts/prerender-spa.mjs', { cwd: repoRoot, stdio: 'inherit' });
       execSync(`npx wrangler pages deploy dist --project-name=${project} --branch=main --commit-dirty=true`, {
         cwd: repoRoot,
         stdio: 'inherit',

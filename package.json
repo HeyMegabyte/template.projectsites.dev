@@ -32,7 +32,8 @@
     "perf-budget": "node scripts/perf-budget.mjs",
     "hue-rotate": "node scripts/hue-rotate.mjs",
     "validate:all": "npm run validate:brand && npm run typecheck && npm run test && npm run prompt-evals && npm run build && npm run perf-budget",
-    "validate": "node scripts/build_validators.mjs dist"
+    "validate": "node scripts/build_validators.mjs dist",
+    "prerender": "node scripts/prerender-spa.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
