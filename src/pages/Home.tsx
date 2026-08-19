@@ -65,7 +65,11 @@ const logos: Logo[] = [
 
 export default function Home() {
   useSEO({
-    title: `${brand.business.name} — ${brand.business.tagline}`,
+    // Trailing " — " on an empty tagline renders as "Cedar Ridge Bakeshop — "
+    // (journey 2026-08-19). Only suffix the em-dash when a tagline exists.
+    title: brand.business.tagline
+      ? `${brand.business.name} — ${brand.business.tagline}`
+      : brand.business.name,
     description: brand.business.description,
   });
 
