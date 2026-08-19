@@ -103,6 +103,22 @@ const pick = (key: string, fallback: string): string => {
   if (/^\{[A-Z_]+\}$/.test(t)) return fallback;
   return t;
 };
+/**
+ * Collapse the `..projectsites.dev` double-dot hostname in a business URL.
+ *
+ * The build LLM writes the canonical as `https://<slug>..projectsites.dev`
+ * (slug already dot-suffixed in its model). Consumers (JSON-LD, OG, canonical)
+ * embed `brand.business.url` verbatim, so normalize it at resolution time —
+ * template-side self-healing, no LLM compliance involved. Pure.
+ *
+ * @example
+ * normalizeUrl('https://urban-fitness..projectsites.dev/') // → 'https://urban-fitness.projectsites.dev/'
+ */
+export const normalizeUrl = (u: string): string => {
+  const t = (u || '').trim();
+  if (!t) return t;
+  return t.replace(/\.\.projectsites\.dev/g, '.projectsites.dev');
+};
 const DEFAULT_NAME = 'Your Business';
 const DEFAULTS = {
   name: DEFAULT_NAME,
@@ -122,7 +138,7 @@ export const brand: Brand = {
     shortName: pick('shortName', DEFAULTS.shortName),
     tagline: pick('tagline', DEFAULTS.tagline),
     description: pick('description', DEFAULTS.description),
-    url: pick('url', DEFAULTS.url),
+    url: normalizeUrl(pick('url', DEFAULTS.url)),
     businessClass: pick('businessClass', DEFAULTS.businessClass),
     email: pick('email', DEFAULTS.email),
     phone: pick('phone', DEFAULTS.phone),

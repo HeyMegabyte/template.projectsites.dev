@@ -9,7 +9,7 @@
  *   - Light mode swap via data-theme
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import { brand, applyBrand, featureOn } from '@/brand';
+import { brand, applyBrand, featureOn, normalizeUrl } from '@/brand';
 
 describe('brand resolver', () => {
   it('exposes the resolved business identity', () => {
@@ -46,6 +46,28 @@ describe('brand resolver', () => {
     for (const flag of expectedFlags) {
       expect(typeof brand.features[flag]).toBe('boolean');
     }
+  });
+});
+
+describe('normalizeUrl()', () => {
+  it('collapses the double-dot hostname (the journey canonical defect)', () => {
+    expect(normalizeUrl('https://urban-fitness..projectsites.dev/')).toBe(
+      'https://urban-fitness.projectsites.dev/',
+    );
+  });
+
+  it('repairs every occurrence, not just the first', () => {
+    expect(
+      normalizeUrl('https://a..projectsites.dev/x https://b..projectsites.dev/y'),
+    ).toBe('https://a.projectsites.dev/x https://b.projectsites.dev/y');
+  });
+
+  it('is a no-op on clean URLs', () => {
+    expect(normalizeUrl('https://x.projectsites.dev/')).toBe('https://x.projectsites.dev/');
+  });
+
+  it('passes through empty strings', () => {
+    expect(normalizeUrl('')).toBe('');
   });
 });
 
