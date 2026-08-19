@@ -84,7 +84,44 @@ export interface Brand {
   features: Record<string, boolean>;
 }
 
-export const brand = resolved as unknown as Brand;
+// DTCG leaves that shipped UNRESOLVED (e.g. `{BUSINESS_NAME}` never
+// substituted) would otherwise surface as "Business"/empty to the customer.
+// Fall back per-field so a partially-materialized brand file still shows the
+// real business name wherever the workflow DID provide one. (Journey defect
+// 2026-08-19: a whole pipeline shipped as "Business" for 2 builds.)
+const rawBusiness = (resolved as { business?: Record<string, unknown> }).business ?? {};
+const pick = (key: string, fallback: string): string => {
+  const v = rawBusiness[key];
+  return typeof v === 'string' && v.trim().length > 0 ? v.trim() : fallback;
+};
+const DEFAULT_NAME = 'Your Business';
+const DEFAULTS = {
+  name: DEFAULT_NAME,
+  shortName: DEFAULT_NAME.slice(0, 12),
+  tagline: 'Built for you',
+  description: '',
+  url: '',
+  businessClass: 'organization',
+  email: '',
+  phone: '',
+  address: '',
+  hours: '',
+};
+export const brand: Brand = {
+  business: {
+    name: pick('name', DEFAULTS.name),
+    shortName: pick('shortName', DEFAULTS.shortName),
+    tagline: pick('tagline', DEFAULTS.tagline),
+    description: pick('description', DEFAULTS.description),
+    url: pick('url', DEFAULTS.url),
+    businessClass: pick('businessClass', DEFAULTS.businessClass),
+    email: pick('email', DEFAULTS.email),
+    phone: pick('phone', DEFAULTS.phone),
+    address: pick('address', DEFAULTS.address),
+    hours: pick('hours', DEFAULTS.hours),
+  },
+  ...(resolved as Record<string, unknown>),
+} as unknown as Brand;
 
 const COLOR_KEYS = [
   'primary', 'primaryHover', 'accent', 'accentHover',
