@@ -92,7 +92,16 @@ export interface Brand {
 const rawBusiness = (resolved as { business?: Record<string, unknown> }).business ?? {};
 const pick = (key: string, fallback: string): string => {
   const v = rawBusiness[key];
-  return typeof v === 'string' && v.trim().length > 0 ? v.trim() : fallback;
+  if (typeof v !== 'string') return fallback;
+  const t = v.trim();
+  // Reject EMPTY and PLACEHOLDER-shaped values: the shipped _brand.json has
+  // {BUSINESS_NAME}-style leaves that the DTCG resolver outputs as literal
+  // strings — a valid-looking leaf that is NOT real content. (Journey 2026-08-19:
+  // a whole build shipped these placeholders live; the worker-side validator
+  // caught it, this makes the template side self-healing.)
+  if (t.length === 0) return fallback;
+  if (/^\{[A-Z_]+\}$/.test(t)) return fallback;
+  return t;
 };
 const DEFAULT_NAME = 'Your Business';
 const DEFAULTS = {
