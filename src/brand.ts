@@ -10,7 +10,14 @@
  * If a token references another token's value, this resolver handles it.
  */
 
-import raw from '../_brand.json';
+// The shipped template carries _brand.json at the repo root. A FRESH build
+// copy (e.g. the container's cp -r during site generation) can transiently
+// miss it — the import then fails the whole build with a bare Node error
+// (journey 2026-08-19: 'npm build failed or produced no dist/ files'). Use
+// Vite's optional-glob import so a missing file degrades to {} instead —
+// the per-field `pick` fallbacks below still resolve every surface.
+const rawModules = import.meta.glob('../_brand.json', { eager: true });
+const raw = (Object.values(rawModules)[0] ?? {}) as Record<string, unknown>;
 
 type DtcgValue = string | number | boolean | unknown[] | Record<string, unknown>;
 type DtcgNode = { $value: DtcgValue; $type?: string; $description?: string };

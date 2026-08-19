@@ -10,7 +10,15 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const pub = resolve(root, 'public');
-const brand = JSON.parse(readFileSync(resolve(root, '_brand.json'), 'utf8'));
+// Tolerate a missing _brand.json — fresh build copies can transiently lack
+// it (journey 2026-08-19: this postbuild step ENOENT'd the whole build).
+// `val` already degrades every field; a missing brand file means defaults.
+let brand = {};
+try {
+  brand = JSON.parse(readFileSync(resolve(root, '_brand.json'), 'utf8'));
+} catch {
+  console.warn('[generate-favicons] _brand.json missing — using template defaults');
+}
 const val = (n) => (n && typeof n === 'object' && '$value' in n ? n.$value : n);
 const hue = Number(val(brand?.color?.brandHue)) || 240;
 const name = String(val(brand?.business?.name) || val(brand?.name) || 'A');

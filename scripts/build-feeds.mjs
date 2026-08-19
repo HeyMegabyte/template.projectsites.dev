@@ -11,8 +11,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..');
 const outDir = path.join(repoRoot, 'public');
 
-const brand = JSON.parse(fs.readFileSync(path.join(repoRoot, '_brand.json'), 'utf8'));
-const business = brand.business || {};
+// Tolerate a missing _brand.json — a fresh build copy can transiently lack
+// it (journey 2026-08-19: the postbuild hard-failed with ENOENT and killed
+// the whole build). Every field below already has a fallback; degrade to
+// them instead of throwing.
+let brand = {};
+try {
+  brand = JSON.parse(fs.readFileSync(path.join(repoRoot, '_brand.json'), 'utf8'));
+} catch {
+  console.warn('[build-feeds] _brand.json missing — using template defaults');
+}
+const business = brand.business ?? {};
 const SITE_URL = (business.url?.$value || business.url || 'https://template.projectsites.dev').replace(/\/$/, '');
 const SITE_NAME = business.name?.$value || business.name || 'ProjectSites Template';
 const SITE_TAGLINE = business.tagline?.$value || business.tagline || 'Cinematic React + Vite + Tailwind template';
