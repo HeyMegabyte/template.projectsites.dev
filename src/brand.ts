@@ -139,6 +139,97 @@ const DEFAULTS = {
   address: '',
   hours: '',
 };
+
+/**
+ * A structurally-COMPLETE default brand. Every non-business sub-object
+ * (`color`, `font`, `radius`, `spacing`, `shadow`, `motion`, `layout`,
+ * `social`, `features`) is populated with the same concrete values the shipped
+ * `_brand.json` carries — palette pre-resolved (no unresolved `{...}` refs).
+ *
+ * Why this exists (root-cause fix, journey 2026-08-20 — site scored 2.8/10,
+ * "hero-only, everything below blank"):
+ *
+ * When a FRESH build copy is missing or only partially materializes
+ * `_brand.json`, `resolved` is `{}` (or lacks a sub-object). Spreading that
+ * over `business` alone left `brand.color`, `brand.motion`, `brand.radius`,
+ * etc. as `undefined`. `applyBrand()` then does `const c = brand.color; c[k]`
+ * and throws **`Cannot read properties of undefined (reading 'primary')`** —
+ * the exact fatal reported. Critically, `applyBrand()` runs at module load in
+ * `main.tsx` BEFORE `ReactDOM.createRoot().render(<ErrorBoundary>…)`, so
+ * neither `ErrorBoundary` nor `SafeSection` can catch it: the whole app fails
+ * to mount and the page renders hero-only (the pre-rendered SEO shell) with
+ * nothing below.
+ *
+ * Deep-merging `resolved` OVER this skeleton guarantees every sub-object is
+ * always present, so `applyBrand()` and every component data-access degrade to
+ * a fully-styled default instead of crashing the entire site. Pure data —
+ * no LLM compliance involved; template-side self-healing.
+ */
+const DEFAULT_BRAND: Omit<Brand, 'business'> = {
+  color: {
+    brandHue: 240,
+    brandChroma: 0.18,
+    primary: 'oklch(0.62 0.18 240)',
+    primaryHover: 'oklch(0.55 0.18 240)',
+    accent: 'oklch(0.85 0.18 195)',
+    accentHover: 'oklch(0.78 0.18 195)',
+    background: 'oklch(0.08 0.02 240)',
+    surface: 'oklch(0.13 0.02 240)',
+    surfaceElevated: 'oklch(0.17 0.02 240)',
+    border: 'oklch(0.28 0.02 240)',
+    text: 'oklch(0.97 0.005 240)',
+    textMuted: 'oklch(0.75 0.01 240)',
+    textSubtle: 'oklch(0.55 0.01 240)',
+    success: 'oklch(0.72 0.17 155)',
+    warning: 'oklch(0.80 0.16 85)',
+    danger: 'oklch(0.63 0.22 25)',
+    info: 'oklch(0.70 0.14 240)',
+  },
+  colorScheme: 'dark',
+  font: {
+    heading: 'Space Grotesk',
+    body: 'Inter',
+    mono: 'JetBrains Mono',
+    weights: [300, 400, 500, 600, 700, 800, 900],
+    fluidScale: 'clamp',
+  },
+  radius: { sm: '0.375rem', md: '0.75rem', lg: '1rem', xl: '1.5rem', '2xl': '2rem', full: '9999px' },
+  spacing: {
+    '0': '0', '1': '0.25rem', '2': '0.5rem', '3': '0.75rem', '4': '1rem',
+    '6': '1.5rem', '8': '2rem', '12': '3rem', '16': '4rem', '24': '6rem', '32': '8rem',
+  },
+  shadow: {
+    sm: '0 1px 2px 0 rgb(0 0 0 / 0.25)',
+    md: '0 4px 12px -2px rgb(0 0 0 / 0.35)',
+    lg: '0 12px 32px -8px rgb(0 0 0 / 0.45)',
+    glow: '0 0 40px -8px oklch(0.85 0.18 195 / 0.35)',
+  },
+  motion: {
+    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    duration: { fast: '150ms', base: '250ms', slow: '450ms', scroll: '1200ms' },
+  },
+  layout: { containerWide: '80rem', containerNormal: '64rem', containerProse: '42rem' },
+  social: {},
+  features: {},
+};
+
+/**
+ * Shallow-merge a resolved sub-object over its default, dropping any key whose
+ * resolved value is `undefined`/`null` or a still-unresolved `{TOKEN}` leaf so
+ * a partial `_brand.json` never punches a hole in an otherwise-complete object.
+ */
+function mergeGroup<T extends Record<string, unknown>>(base: T, override: unknown): T {
+  if (!override || typeof override !== 'object') return base;
+  const out: Record<string, unknown> = { ...base };
+  for (const [k, v] of Object.entries(override as Record<string, unknown>)) {
+    if (v === undefined || v === null) continue;
+    if (typeof v === 'string' && (v.trim() === '' || /\{[^}]+\}/.test(v))) continue;
+    out[k] = v;
+  }
+  return out as T;
+}
+
+const r = resolved as Record<string, unknown>;
 export const brand: Brand = {
   business: {
     name: pick('name', DEFAULTS.name),
@@ -152,7 +243,29 @@ export const brand: Brand = {
     address: pick('address', DEFAULTS.address),
     hours: pick('hours', DEFAULTS.hours),
   },
-  ...(resolved as Record<string, unknown>),
+  color: mergeGroup(DEFAULT_BRAND.color, r.color),
+  colorScheme: (typeof r.colorScheme === 'string' ? r.colorScheme : DEFAULT_BRAND.colorScheme) as Brand['colorScheme'],
+  font: {
+    ...mergeGroup(DEFAULT_BRAND.font as unknown as Record<string, unknown>, r.font),
+    weights:
+      Array.isArray((r.font as { weights?: unknown } | undefined)?.weights) &&
+      ((r.font as { weights: unknown[] }).weights.length > 0)
+        ? (r.font as { weights: number[] }).weights
+        : DEFAULT_BRAND.font.weights,
+  } as Brand['font'],
+  radius: mergeGroup(DEFAULT_BRAND.radius, r.radius),
+  spacing: mergeGroup(DEFAULT_BRAND.spacing, r.spacing),
+  shadow: mergeGroup(DEFAULT_BRAND.shadow, r.shadow),
+  motion: {
+    easing:
+      typeof (r.motion as { easing?: unknown } | undefined)?.easing === 'string'
+        ? (r.motion as { easing: string }).easing
+        : DEFAULT_BRAND.motion.easing,
+    duration: mergeGroup(DEFAULT_BRAND.motion.duration, (r.motion as { duration?: unknown } | undefined)?.duration),
+  },
+  layout: mergeGroup(DEFAULT_BRAND.layout, r.layout),
+  social: mergeGroup(DEFAULT_BRAND.social, r.social),
+  features: mergeGroup(DEFAULT_BRAND.features, r.features),
 } as unknown as Brand;
 
 const COLOR_KEYS = [
@@ -170,37 +283,61 @@ const FLUID_TYPE = {
   xl:    'clamp(1.25rem, 1vw + 1rem, 1.5rem)',
 } as const;
 
+/**
+ * Write brand tokens to `:root` as CSS custom properties.
+ *
+ * @remarks
+ * Runs at module load in `main.tsx` BEFORE React mounts, so it executes
+ * OUTSIDE the reach of `ErrorBoundary`/`SafeSection`. A throw here would blank
+ * the entire site (nothing mounts). The `brand` object is now structurally
+ * complete (see `DEFAULT_BRAND`) so the property writes can't hit `undefined`,
+ * but the whole body is additionally wrapped in a guard as a last-resort safety
+ * net: even an unforeseen shape degrades to "CSS defaults from `index.css`"
+ * rather than a dead page. Every access below is also individually
+ * `?.`/`??`-guarded so one bad field can't skip the rest.
+ */
 export function applyBrand(root: HTMLElement = document.documentElement): void {
-  const c = brand.color;
+  try {
+    const c = brand.color ?? {};
 
-  for (const k of COLOR_KEYS) {
-    const v = c[k];
-    if (typeof v === 'string') root.style.setProperty(`--color-${kebab(k)}`, v);
+    for (const k of COLOR_KEYS) {
+      const v = c[k];
+      if (typeof v === 'string') root.style.setProperty(`--color-${kebab(k)}`, v);
+    }
+
+    root.style.setProperty('--brand-hue', String(c.brandHue ?? 240));
+    root.style.setProperty('--brand-chroma', String(c.brandChroma ?? 0.18));
+
+    const font = brand.font ?? DEFAULT_BRAND.font;
+    root.style.setProperty('--font-heading', `'${font.heading}', system-ui, sans-serif`);
+    root.style.setProperty('--font-body',    `'${font.body}', system-ui, sans-serif`);
+    root.style.setProperty('--font-mono',    `'${font.mono}', ui-monospace, monospace`);
+
+    for (const [k, v] of Object.entries(brand.radius ?? {})) root.style.setProperty(`--radius-${k}`, String(v));
+    for (const [k, v] of Object.entries(brand.spacing ?? {})) root.style.setProperty(`--space-${k}`, String(v));
+    for (const [k, v] of Object.entries(brand.shadow ?? {}))  root.style.setProperty(`--shadow-${k}`, String(v));
+    for (const [k, v] of Object.entries(FLUID_TYPE))          root.style.setProperty(`--text-${k}`, v);
+
+    const motion = brand.motion ?? DEFAULT_BRAND.motion;
+    root.style.setProperty('--ease',          motion.easing);
+    root.style.setProperty('--duration-fast', motion.duration.fast);
+    root.style.setProperty('--duration-base', motion.duration.base);
+    root.style.setProperty('--duration-slow', motion.duration.slow);
+
+    const layout = brand.layout ?? DEFAULT_BRAND.layout;
+    root.style.setProperty('--container-wide',   layout.containerWide);
+    root.style.setProperty('--container-normal', layout.containerNormal);
+    root.style.setProperty('--container-prose',  layout.containerProse);
+
+    const scheme = brand.colorScheme ?? DEFAULT_BRAND.colorScheme;
+    root.style.colorScheme = scheme === 'auto' ? 'light dark' : scheme;
+    root.dataset.theme = scheme;
+  } catch (err) {
+    // Last resort: never let a token write crash module init (pre-React,
+    // uncatchable by ErrorBoundary). The site falls back to the static CSS
+    // defaults shipped in index.css. Logged in dev only.
+    if (import.meta.env.DEV) console.error('[applyBrand] skipped — using CSS defaults:', err);
   }
-
-  root.style.setProperty('--brand-hue', String(c.brandHue ?? 240));
-  root.style.setProperty('--brand-chroma', String(c.brandChroma ?? 0.18));
-
-  root.style.setProperty('--font-heading', `'${brand.font.heading}', system-ui, sans-serif`);
-  root.style.setProperty('--font-body',    `'${brand.font.body}', system-ui, sans-serif`);
-  root.style.setProperty('--font-mono',    `'${brand.font.mono}', ui-monospace, monospace`);
-
-  for (const [k, v] of Object.entries(brand.radius)) root.style.setProperty(`--radius-${k}`, v);
-  for (const [k, v] of Object.entries(brand.spacing)) root.style.setProperty(`--space-${k}`, v);
-  for (const [k, v] of Object.entries(brand.shadow))  root.style.setProperty(`--shadow-${k}`, v);
-  for (const [k, v] of Object.entries(FLUID_TYPE))    root.style.setProperty(`--text-${k}`, v);
-
-  root.style.setProperty('--ease',         brand.motion.easing);
-  root.style.setProperty('--duration-fast',brand.motion.duration.fast);
-  root.style.setProperty('--duration-base',brand.motion.duration.base);
-  root.style.setProperty('--duration-slow',brand.motion.duration.slow);
-
-  root.style.setProperty('--container-wide',   brand.layout.containerWide);
-  root.style.setProperty('--container-normal', brand.layout.containerNormal);
-  root.style.setProperty('--container-prose',  brand.layout.containerProse);
-
-  root.style.colorScheme = brand.colorScheme === 'auto' ? 'light dark' : brand.colorScheme;
-  root.dataset.theme = brand.colorScheme;
 }
 
 function kebab(s: string): string {
