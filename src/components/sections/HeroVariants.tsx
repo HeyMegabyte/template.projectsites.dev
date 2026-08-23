@@ -3,8 +3,26 @@ import { ArrowRight, Star, Shield, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { KineticHeadline } from './KineticHeadline';
 import { cn } from '@/lib/utils';
+import { brand } from '@/brand';
+import { scrubText, scrubImage } from '@/lib/placeholders';
 
 type Trust = { icon?: 'star' | 'shield' | 'award'; label: string };
+
+/**
+ * Scrub trust badges: drop any whose label is an unresolved placeholder so the
+ * hero never shows "{TRUST_BADGE_2}" next to real badges.
+ */
+function scrubTrust(items?: Trust[]): Trust[] {
+  if (!items?.length) return [];
+  return items.map((t) => ({ ...t, label: scrubText(t.label) })).filter((t) => t.label.length > 0);
+}
+
+/** Scrub a `{ label, href }` CTA; returns undefined when the label is a placeholder. */
+function scrubCta(cta?: { label: string; href: string }): { label: string; href: string } | undefined {
+  if (!cta) return undefined;
+  const label = scrubText(cta.label);
+  return label ? { label, href: cta.href } : undefined;
+}
 
 interface CommonProps {
   eyebrow?: string;
@@ -37,6 +55,15 @@ function TrustRow({ items }: { items?: Trust[] }) {
 
 /** Centered cinematic hero with orbs + kinetic headline. */
 export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary, trustBadges, className }: CommonProps) {
+  // The headline is the LCP + only <h1> — it must ALWAYS render, so fall back to
+  // the real business name when the generation token is unresolved. Everything
+  // else scrubs to empty/undefined and is hidden by its own guard.
+  const safeHeadline = scrubText(headline, brand.business.name);
+  const safeEyebrow = scrubText(eyebrow);
+  const safeSubheadline = scrubText(subheadline);
+  const safePrimary = scrubCta(primary);
+  const safeSecondary = scrubCta(secondary);
+  const safeTrust = scrubTrust(trustBadges);
   return (
     <section className={cn('relative min-h-screen flex items-center justify-center overflow-hidden', className)}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -53,29 +80,29 @@ export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary,
         }}
       />
       <div className="relative z-10 max-w-container-wide mx-auto px-6 text-center pt-32 pb-20">
-        <KineticHeadline text={headline} eyebrow={eyebrow} />
-        {subheadline && (
+        <KineticHeadline text={safeHeadline} eyebrow={safeEyebrow || undefined} />
+        {safeSubheadline && (
           <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mt-8 leading-relaxed">
-            {subheadline}
+            {safeSubheadline}
           </p>
         )}
-        {(primary || secondary) && (
+        {(safePrimary || safeSecondary) && (
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-            {primary && (
+            {safePrimary && (
               <Button asChild size="xl">
-                <Link to={primary.href}>
-                  {primary.label} <ArrowRight className="ml-2 h-5 w-5" />
+                <Link to={safePrimary.href}>
+                  {safePrimary.label} <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             )}
-            {secondary && (
+            {safeSecondary && (
               <Button asChild variant="outline" size="xl">
-                <Link to={secondary.href}>{secondary.label}</Link>
+                <Link to={safeSecondary.href}>{safeSecondary.label}</Link>
               </Button>
             )}
           </div>
         )}
-        <TrustRow items={trustBadges} />
+        <TrustRow items={safeTrust} />
       </div>
     </section>
   );
@@ -87,49 +114,60 @@ interface SplitProps extends CommonProps {
 
 /** Asymmetric hero: copy left, image right. Good for storefronts + services. */
 export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, image, trustBadges, className }: SplitProps) {
+  const safeHeadline = scrubText(headline, brand.business.name);
+  const safeEyebrow = scrubText(eyebrow);
+  const safeSubheadline = scrubText(subheadline);
+  const safePrimary = scrubCta(primary);
+  const safeSecondary = scrubCta(secondary);
+  const safeTrust = scrubTrust(trustBadges);
+  // Drop a placeholder hero image so `{HERO_IMAGE_URL}` never 404s. When there
+  // is no real image the copy column spans full width (still a valid hero).
+  const safeImage = scrubImage(image);
   return (
     <section className={cn('relative pt-32 pb-16 md:pb-24 max-w-container-wide mx-auto px-6', className)}>
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className={cn('grid gap-16 items-center', safeImage ? 'lg:grid-cols-2' : 'max-w-3xl mx-auto text-center')}>
         <div>
-          {eyebrow && (
-            <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>
+          {safeEyebrow && (
+            <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
           )}
           <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl font-extrabold font-heading tracking-[-0.03em] leading-[0.95]">
-            <span className="gradient-text">{headline}</span>
+            <span className="gradient-text">{safeHeadline}</span>
           </h1>
-          {subheadline && (
-            <p className="mt-6 text-lg md:text-xl text-text-muted leading-relaxed max-w-xl">{subheadline}</p>
+          {safeSubheadline && (
+            <p className="mt-6 text-lg md:text-xl text-text-muted leading-relaxed max-w-xl">{safeSubheadline}</p>
           )}
-          {(primary || secondary) && (
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              {primary && (
+          {(safePrimary || safeSecondary) && (
+            <div className={cn('mt-8 flex flex-col sm:flex-row gap-3', !safeImage && 'justify-center')}>
+              {safePrimary && (
                 <Button asChild size="lg">
-                  <Link to={primary.href}>
-                    {primary.label} <ArrowRight className="ml-2 h-5 w-5" />
+                  <Link to={safePrimary.href}>
+                    {safePrimary.label} <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
               )}
-              {secondary && (
+              {safeSecondary && (
                 <Button asChild size="lg" variant="outline">
-                  <Link to={secondary.href}>{secondary.label}</Link>
+                  <Link to={safeSecondary.href}>{safeSecondary.label}</Link>
                 </Button>
               )}
             </div>
           )}
-          <TrustRow items={trustBadges} />
+          <TrustRow items={safeTrust} />
         </div>
-        <div className="relative">
-          <div className="card-tactile overflow-hidden rounded-2xl aspect-[5/4] shadow-lg">
-            <img
-              src={image.src}
-              alt={image.alt}
-              loading="eager"
-              fetchPriority="high"
-              className="h-full w-full object-cover"
-            />
+        {safeImage && (
+          <div className="relative">
+            <div className="card-tactile overflow-hidden rounded-2xl aspect-[5/4] shadow-lg">
+              <img
+                src={safeImage.src}
+                alt={safeImage.alt}
+                loading="eager"
+                fetchPriority="high"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div aria-hidden="true" className="absolute inset-0 -z-10 blur-3xl bg-accent/10 rounded-full" />
           </div>
-          <div aria-hidden="true" className="absolute inset-0 -z-10 blur-3xl bg-accent/10 rounded-full" />
-        </div>
+        )}
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { scrubText, scrubList, scrubImage } from '@/lib/placeholders';
 
 interface Props {
   eyebrow?: string;
@@ -32,20 +33,37 @@ export function FeatureSplit({
   className,
 }: Props) {
   const flip = imagePosition === 'left';
+  // Scrub unresolved generation tokens so a raw `{ABOUT_HEADLINE}` /
+  // `{ABOUT_DESCRIPTION}` never renders and a `{ABOUT_IMAGE_URL}` never 404s.
+  // Empty → the guards below hide the element; a placeholder image → no <img>.
+  const safeEyebrow = scrubText(eyebrow);
+  const safeHeadline = scrubText(headline);
+  const safeDescription = scrubText(description);
+  const safeBullets = scrubList(bullets);
+  const safeImage = scrubImage(image);
+  // Nothing real to show on the copy side AND no headline → skip the whole
+  // section rather than render an empty husk (SafeSection-style fail-soft).
+  if (!safeHeadline && !safeDescription && safeBullets.length === 0 && !visual && !safeImage) {
+    return null;
+  }
   return (
     <section className={cn('py-24 md:py-32 max-w-container-wide mx-auto px-6', className)}>
       <div className={cn('grid lg:grid-cols-2 gap-12 items-center', flip && 'lg:[&>*:first-child]:order-2')}>
         <div className="reveal-on-view">
-          {eyebrow && (
-            <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>
+          {safeEyebrow && (
+            <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
           )}
-          <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-6 text-text">
-            {headline}
-          </h2>
-          <p className="text-text-muted text-lg leading-relaxed mb-6">{description}</p>
-          {bullets.length > 0 && (
+          {safeHeadline && (
+            <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-6 text-text">
+              {safeHeadline}
+            </h2>
+          )}
+          {safeDescription && (
+            <p className="text-text-muted text-lg leading-relaxed mb-6">{safeDescription}</p>
+          )}
+          {safeBullets.length > 0 && (
             <ul className="space-y-3 mb-8">
-              {bullets.map((b, i) => (
+              {safeBullets.map((b, i) => (
                 <li key={i} className="flex gap-3 text-text-muted">
                   <span className="text-accent" aria-hidden="true">▸</span>
                   <span>{b}</span>
@@ -53,10 +71,10 @@ export function FeatureSplit({
               ))}
             </ul>
           )}
-          {cta && (
+          {cta && scrubText(cta.label) && (
             <Button asChild variant="outline">
               <Link to={cta.href}>
-                {cta.label} <ArrowRight className="ml-2 h-4 w-4" />
+                {scrubText(cta.label)} <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           )}
@@ -65,11 +83,11 @@ export function FeatureSplit({
         <div className="reveal-on-view">
           {visual ? (
             visual
-          ) : image ? (
+          ) : safeImage ? (
             <div className="card-tactile overflow-hidden rounded-2xl aspect-[4/3]">
               <img
-                src={image.src}
-                alt={image.alt}
+                src={safeImage.src}
+                alt={safeImage.alt}
                 loading="lazy"
                 className="h-full w-full object-cover"
               />

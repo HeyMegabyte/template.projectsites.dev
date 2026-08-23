@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { scrubText } from '@/lib/placeholders';
 
 export interface ProcessStep {
   title: string;
@@ -21,20 +22,28 @@ interface Props {
  * card to anchor the editorial brutalism aesthetic.
  */
 export function ProcessSteps({ steps, eyebrow = 'How it works', headline, description, className }: Props) {
+  const safeEyebrow = scrubText(eyebrow, 'How it works');
+  const safeHeadline = scrubText(headline);
+  const safeDescription = scrubText(description);
+  // Drop steps whose title is an unresolved token; scrub each description.
+  const safeSteps = steps
+    .map((s) => ({ ...s, title: scrubText(s.title), description: scrubText(s.description) }))
+    .filter((s) => s.title.length > 0);
+  if (safeSteps.length === 0) return null;
   return (
     <section className={cn('py-24 md:py-32 max-w-container-wide mx-auto px-6', className)}>
       <div className="text-center mb-16 reveal-on-view">
-        <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>
-        {headline && (
+        <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
+        {safeHeadline && (
           <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">
-            {headline}
+            {safeHeadline}
           </h2>
         )}
-        {description && <p className="text-text-muted max-w-2xl mx-auto text-lg">{description}</p>}
+        {safeDescription && <p className="text-text-muted max-w-2xl mx-auto text-lg">{safeDescription}</p>}
       </div>
 
       <ol className="relative grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {steps.map((step, i) => (
+        {safeSteps.map((step, i) => (
           <li
             key={step.title}
             className="relative card-tactile p-6 md:p-8 reveal-on-view"
@@ -52,7 +61,7 @@ export function ProcessSteps({ steps, eyebrow = 'How it works', headline, descri
                 </div>
               )}
               <h3 className="font-heading text-xl font-bold text-text mb-2">{step.title}</h3>
-              <p className="text-text-muted text-sm leading-relaxed">{step.description}</p>
+              {step.description && <p className="text-text-muted text-sm leading-relaxed">{step.description}</p>}
             </div>
           </li>
         ))}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { JsonLd } from '@/components/JsonLd';
 import { cn } from '@/lib/utils';
+import { scrubText } from '@/lib/placeholders';
 
 export interface FAQItem {
   question: string;
@@ -32,6 +33,17 @@ export function FAQ({
 }: Props) {
   const [open, setOpen] = useState<Set<number>>(new Set([0]));
 
+  // Drop Q&A pairs where either side is an unresolved token — this also keeps
+  // the FAQPage JSON-LD from emitting `{FAQ_1_Q}` (which would fail Rich Results
+  // and mislead AI-search crawlers). If nothing real remains, skip the section.
+  const safeItems = items
+    .map((it) => ({ question: scrubText(it.question), answer: scrubText(it.answer) }))
+    .filter((it) => it.question.length > 0 && it.answer.length > 0);
+  const safeEyebrow = scrubText(eyebrow, 'Questions');
+  const safeHeadline = scrubText(headline, 'Frequently asked questions');
+  const safeDescription = scrubText(description);
+  if (safeItems.length === 0) return null;
+
   function toggle(i: number) {
     setOpen((prev) => {
       const next = exclusive ? new Set<number>() : new Set(prev);
@@ -47,7 +59,7 @@ export function FAQ({
         data={{
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          mainEntity: items.map((it) => ({
+          mainEntity: safeItems.map((it) => ({
             '@type': 'Question',
             name: it.question,
             acceptedAnswer: { '@type': 'Answer', text: it.answer },
@@ -55,12 +67,12 @@ export function FAQ({
         }}
       />
       <div className="text-center mb-12 reveal-on-view">
-        <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>
-        <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">{headline}</h2>
-        {description && <p className="text-text-muted max-w-2xl mx-auto">{description}</p>}
+        <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
+        <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">{safeHeadline}</h2>
+        {safeDescription && <p className="text-text-muted max-w-2xl mx-auto">{safeDescription}</p>}
       </div>
       <ul className="divide-y divide-border border-y border-border">
-        {items.map((it, i) => {
+        {safeItems.map((it, i) => {
           const isOpen = open.has(i);
           return (
             <li key={i}>

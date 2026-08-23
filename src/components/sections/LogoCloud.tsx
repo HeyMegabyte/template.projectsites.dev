@@ -1,5 +1,6 @@
 import { Marquee } from './Marquee';
 import { cn } from '@/lib/utils';
+import { scrubText, hasRealImage } from '@/lib/placeholders';
 
 export interface Logo {
   name: string;
@@ -25,7 +26,16 @@ interface Props {
  * never has gaps during development.
  */
 export function LogoCloud({ logos, eyebrow, headline, variant = 'marquee', className }: Props) {
-  const items = logos.map((l) => (
+  // Drop logos whose name is an unresolved token (`{LOGO_1_NAME}`); keep only a
+  // real `src`. If nothing real remains, hide the whole strip.
+  const safeLogos = logos
+    .map((l) => ({ ...l, name: scrubText(l.name), src: hasRealImage(l.src) ? l.src : undefined }))
+    .filter((l) => l.name.length > 0);
+  const safeEyebrow = scrubText(eyebrow);
+  const safeHeadline = scrubText(headline);
+  if (safeLogos.length === 0) return null;
+
+  const items = safeLogos.map((l) => (
     <a
       key={l.name}
       href={l.href ?? '#'}
@@ -44,17 +54,17 @@ export function LogoCloud({ logos, eyebrow, headline, variant = 'marquee', class
 
   return (
     <section className={cn('py-16 md:py-24 max-w-container-wide mx-auto px-6', className)}>
-      {(eyebrow || headline) && (
+      {(safeEyebrow || safeHeadline) && (
         <div className="text-center mb-10">
-          {eyebrow && <span className="text-accent text-xs font-mono tracking-widest uppercase">{eyebrow}</span>}
-          {headline && <h2 className="text-xl md:text-2xl font-medium text-text-muted mt-3">{headline}</h2>}
+          {safeEyebrow && <span className="text-accent text-xs font-mono tracking-widest uppercase">{safeEyebrow}</span>}
+          {safeHeadline && <h2 className="text-xl md:text-2xl font-medium text-text-muted mt-3">{safeHeadline}</h2>}
         </div>
       )}
       {variant === 'marquee' ? (
         <Marquee items={items} speed="slow" pauseOnHover />
       ) : (
         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center justify-items-center">
-          {logos.map((l, i) => (
+          {safeLogos.map((l, i) => (
             <li key={l.name + i} className="opacity-50 hover:opacity-100 transition-opacity">
               {l.src ? (
                 <img src={l.src} alt={l.name} className="h-8 md:h-10 w-auto object-contain" loading="lazy" />

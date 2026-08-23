@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { scrubText } from '@/lib/placeholders';
 
 interface Props {
   headline: string;
@@ -23,6 +24,13 @@ export function CTASection({
   tone = 'emphatic',
   className,
 }: Props) {
+  // CTA is a conversion anchor — keep a real headline even if the token was
+  // unresolved. Labels fall back to sensible verbs so the buttons still act.
+  const safeHeadline = scrubText(headline, 'Ready to get started?');
+  const safeEyebrow = scrubText(eyebrow);
+  const safeDescription = scrubText(description);
+  const primaryLabel = primary ? scrubText(primary.label, 'Get in touch') : '';
+  const secondaryLabel = secondary ? scrubText(secondary.label) : '';
   return (
     <section className={cn('py-20 md:py-28 max-w-container-normal mx-auto px-6', className)}>
       <div
@@ -36,27 +44,27 @@ export function CTASection({
         {tone === 'emphatic' && (
           <div aria-hidden="true" className="absolute inset-0 grain pointer-events-none" />
         )}
-        {eyebrow && (
-          <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>
+        {safeEyebrow && (
+          <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
         )}
         <h2 className="mt-4 text-3xl md:text-5xl font-bold font-heading text-text">
-          <span className={tone === 'emphatic' ? 'gradient-text' : ''}>{headline}</span>
+          <span className={tone === 'emphatic' ? 'gradient-text' : ''}>{safeHeadline}</span>
         </h2>
-        {description && (
-          <p className="mt-6 text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">{description}</p>
+        {safeDescription && (
+          <p className="mt-6 text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">{safeDescription}</p>
         )}
-        {(primary || secondary) && (
+        {(primary || (secondary && secondaryLabel)) && (
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             {primary && (
               <Button asChild size="xl">
                 <Link to={primary.href}>
-                  {primary.label} <ArrowRight className="ml-2 h-5 w-5" />
+                  {primaryLabel} <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             )}
-            {secondary && (
+            {secondary && secondaryLabel && (
               <Button asChild size="xl" variant="outline">
-                <Link to={secondary.href}>{secondary.label}</Link>
+                <Link to={secondary.href}>{secondaryLabel}</Link>
               </Button>
             )}
           </div>

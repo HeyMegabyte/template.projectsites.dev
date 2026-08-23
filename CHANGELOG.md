@@ -2,6 +2,25 @@
 
 All notable changes to `projectsites-template` are documented here. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versioning: [SemVer](https://semver.org).
 
+## [Unreleased]
+
+### Fixed
+
+- **Systemic placeholder leak (2.8/10 root cause).** Every Home-page section
+  component now scrubs unresolved generation tokens at render via the new
+  `src/lib/placeholders.ts` firewall (`isPlaceholder` / `scrubText` /
+  `scrubList` / `hasRealImage` / `scrubImage`). A raw `{ABOUT_HEADLINE}`,
+  `{HERO_SUBHEADLINE}`, `{FEATURE_N_TITLE}`, `{TIER_N_NAME}`, `{FAQ_N_Q}` etc.
+  can no longer reach the DOM: empty tokens hide their element (the existing
+  `{value && …}` guards), placeholder Q&A/tiers/stats/steps/logos are dropped
+  (and excluded from FAQ + Product JSON-LD), and a placeholder image `src`
+  (`{ABOUT_IMAGE_URL}`, `{HERO_IMAGE_URL}`) renders NO `<img>` — killing the
+  guaranteed 404. Hero + CTA headlines fall back to the real business name /
+  sensible defaults so the LCP + conversion anchor always render. Mirrors the
+  brand-side self-healing already in `src/brand.ts`; template-side + structural,
+  so it fixes EVERY generated site regardless of the generation step. Covered by
+  15 unit tests in `tests/unit/placeholders.test.ts`.
+
 ## [3.3.0] — 2026-05-21
 
 Apply the recommendations from the v3.2 ship report. The master prompt is now

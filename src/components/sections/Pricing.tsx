@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { JsonLd } from '@/components/JsonLd';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { scrubText, scrubList } from '@/lib/placeholders';
 
 export interface PricingTier {
   id: string;
@@ -40,9 +41,24 @@ export function Pricing({
   className,
 }: Props) {
   const [annual, setAnnual] = useState(true);
-  const symbol = tiers[0]?.currency ?? '$';
+  // Drop tiers whose name is an unresolved token; scrub each tier's description
+  // + feature list. This also keeps the Product JSON-LD from emitting
+  // `{TIER_1_NAME}` (which fails Rich Results).
+  const safeTiers = tiers
+    .map((t) => ({
+      ...t,
+      name: scrubText(t.name),
+      description: scrubText(t.description),
+      features: scrubList(t.features),
+    }))
+    .filter((t) => t.name.length > 0);
+  const safeEyebrow = scrubText(eyebrow, 'Pricing');
+  const safeHeadline = scrubText(headline, 'Simple, transparent pricing');
+  const safeDescription = scrubText(description);
+  if (safeTiers.length === 0) return null;
+  const symbol = safeTiers[0]?.currency ?? '$';
 
-  const jsonLd = tiers.map((t) => ({
+  const jsonLd = safeTiers.map((t) => ({
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: t.name,
@@ -59,11 +75,11 @@ export function Pricing({
     <section className={cn('py-24 md:py-32 max-w-container-wide mx-auto px-6', className)}>
       <JsonLd data={jsonLd} />
       <div className="text-center mb-12 reveal-on-view">
-        <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>
+        <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
         <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">
-          {headline}
+          {safeHeadline}
         </h2>
-        {description && <p className="text-text-muted max-w-2xl mx-auto text-lg">{description}</p>}
+        {safeDescription && <p className="text-text-muted max-w-2xl mx-auto text-lg">{safeDescription}</p>}
         {showToggle && (
           <div className="inline-flex mt-8 p-1 rounded-full border border-border bg-surface">
             <button
@@ -93,7 +109,10 @@ export function Pricing({
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tiers.map((t) => (
+        {safeTiers.map((t) => {
+          const badge = scrubText(t.badge);
+          const ctaLabel = scrubText(t.cta?.label, 'Get started');
+          return (
           <div
             key={t.id}
             className={cn(
@@ -103,14 +122,14 @@ export function Pricing({
                 : 'border-border bg-surface'
             )}
           >
-            {t.badge && (
+            {badge && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-background text-xs font-bold inline-flex items-center gap-1">
                 <Sparkles size={12} />
-                {t.badge}
+                {badge}
               </div>
             )}
             <h3 className="text-xl font-bold font-heading text-text">{t.name}</h3>
-            <p className="text-text-muted text-sm mt-2 min-h-[3em]">{t.description}</p>
+            {t.description && <p className="text-text-muted text-sm mt-2 min-h-[3em]">{t.description}</p>}
             <div className="mt-6 flex items-baseline gap-1">
               <span className="text-4xl md:text-5xl font-bold font-heading text-text">
                 {symbol}
@@ -127,10 +146,11 @@ export function Pricing({
               ))}
             </ul>
             <Button asChild className="mt-8 w-full" variant={t.featured ? 'default' : 'outline'}>
-              <Link to={t.cta?.href ?? '/contact'}>{t.cta?.label ?? 'Get started'}</Link>
+              <Link to={t.cta?.href ?? '/contact'}>{ctaLabel}</Link>
             </Button>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

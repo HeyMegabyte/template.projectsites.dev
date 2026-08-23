@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { scrubText, hasRealImage } from '@/lib/placeholders';
 
 type Span = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -37,28 +38,42 @@ const SPAN_CLASS: Record<Span, string> = {
  * The first tile is treated as the hero cell (auto-promoted to span-lg + tall).
  */
 export function BentoGrid({ tiles, className, eyebrow, headline, description }: Props) {
+  const safeEyebrow = scrubText(eyebrow);
+  const safeHeadline = scrubText(headline);
+  const safeDescription = scrubText(description);
+  // Drop tiles whose title is an unresolved token; scrub each surviving tile's
+  // text + image so no `{FEATURE_N_TITLE}` / `{FEATURE_N_DESCRIPTION}` renders.
+  const safeTiles = tiles
+    .map((t) => ({
+      ...t,
+      title: scrubText(t.title),
+      description: scrubText(t.description) || undefined,
+      image: hasRealImage(t.image) ? t.image : undefined,
+    }))
+    .filter((t) => t.title.length > 0);
+  if (safeTiles.length === 0) return null;
   return (
     <section className={cn('py-24 md:py-32 max-w-container-wide mx-auto px-6', className)}>
-      {(eyebrow || headline) && (
+      {(safeEyebrow || safeHeadline) && (
         <div className="text-center mb-12 reveal-on-view">
-          {eyebrow && (
+          {safeEyebrow && (
             <span className="text-accent text-sm font-mono tracking-widest uppercase">
-              {eyebrow}
+              {safeEyebrow}
             </span>
           )}
-          {headline && (
+          {safeHeadline && (
             <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">
-              {headline}
+              {safeHeadline}
             </h2>
           )}
-          {description && (
-            <p className="max-w-2xl mx-auto text-text-muted text-lg">{description}</p>
+          {safeDescription && (
+            <p className="max-w-2xl mx-auto text-text-muted text-lg">{safeDescription}</p>
           )}
         </div>
       )}
 
       <div className="bento">
-        {tiles.map((t, i) => {
+        {safeTiles.map((t, i) => {
           const isHero = i === 0;
           const Comp: 'a' | 'div' = t.href ? 'a' : 'div';
           const span = t.span ?? (isHero ? 'lg' : 'sm');

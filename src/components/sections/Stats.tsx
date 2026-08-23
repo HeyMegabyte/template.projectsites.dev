@@ -1,5 +1,6 @@
 import { AnimatedNumber } from '@/components/AnimatedNumber';
 import { cn } from '@/lib/utils';
+import { scrubText } from '@/lib/placeholders';
 
 export interface Stat {
   value: number;
@@ -24,19 +25,26 @@ const COLS: Record<2 | 3 | 4, string> = {
 };
 
 export function Stats({ stats, eyebrow, headline, columns, className }: Props) {
-  const cols = columns ?? (Math.min(4, Math.max(2, stats.length)) as 2 | 3 | 4);
+  const safeEyebrow = scrubText(eyebrow);
+  const safeHeadline = scrubText(headline);
+  // Drop stats whose label is an unresolved token; scrub the optional caption.
+  const safeStats = stats
+    .map((s) => ({ ...s, label: scrubText(s.label), caption: scrubText(s.caption) || undefined }))
+    .filter((s) => s.label.length > 0);
+  if (safeStats.length === 0) return null;
+  const cols = columns ?? (Math.min(4, Math.max(2, safeStats.length)) as 2 | 3 | 4);
   return (
     <section className={cn('py-20 md:py-28 max-w-container-wide mx-auto px-6', className)}>
-      {(eyebrow || headline) && (
+      {(safeEyebrow || safeHeadline) && (
         <div className="text-center mb-12 reveal-on-view">
-          {eyebrow && <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>}
-          {headline && (
-            <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 text-text">{headline}</h2>
+          {safeEyebrow && <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>}
+          {safeHeadline && (
+            <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 text-text">{safeHeadline}</h2>
           )}
         </div>
       )}
       <dl className={cn('grid grid-cols-2 gap-6 md:gap-10', COLS[cols])}>
-        {stats.map((s, i) => (
+        {safeStats.map((s, i) => (
           <div
             key={`${s.label}-${i}`}
             className="text-center p-6 reveal-on-view card-tactile"
