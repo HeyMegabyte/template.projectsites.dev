@@ -1,5 +1,6 @@
 import { Shield, Zap, Users, Target, Award, Star, Rocket, Sparkles, MessageSquare } from 'lucide-react';
 import { JsonLd } from '@/components/JsonLd';
+import { SafeSection } from '@/components/SafeSection';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
 import { buildBusinessJsonLd, type BusinessClass } from '@/lib/businessSchema';
@@ -86,79 +87,105 @@ export default function Home() {
         })}
       />
 
+      {/*
+        Every section is wrapped in <SafeSection> so a render crash in one
+        AI-customized section (e.g. `Cannot read properties of undefined
+        (reading 'primary')`, an empty `services[0]` lookup, a missing brand
+        token) fails soft — that section vanishes while the hero, NAP, every
+        sibling section, the header/footer landmarks, and the pre-rendered SEO
+        head all keep painting. Never let one bad section blank the whole page.
+      */}
       {featureOn('hero') && (
-        <HeroCenter
-          eyebrow={brand.business.tagline}
-          headline="{HERO_HEADLINE}"
-          subheadline="{HERO_SUBHEADLINE}"
-          primary={{ label: '{HERO_CTA}', href: '/contact' }}
-          secondary={{ label: '{HERO_SECONDARY_CTA}', href: '/services' }}
-          trustBadges={[
-            { icon: 'star',   label: '{TRUST_BADGE_1}' },
-            { icon: 'shield', label: '{TRUST_BADGE_2}' },
-            { icon: 'award',  label: '{TRUST_BADGE_3}' },
-          ]}
-        />
+        <SafeSection name="hero">
+          <HeroCenter
+            eyebrow={brand.business.tagline}
+            headline="{HERO_HEADLINE}"
+            subheadline="{HERO_SUBHEADLINE}"
+            primary={{ label: '{HERO_CTA}', href: '/contact' }}
+            secondary={{ label: '{HERO_SECONDARY_CTA}', href: '/services' }}
+            trustBadges={[
+              { icon: 'star',   label: '{TRUST_BADGE_1}' },
+              { icon: 'shield', label: '{TRUST_BADGE_2}' },
+              { icon: 'award',  label: '{TRUST_BADGE_3}' },
+            ]}
+          />
+        </SafeSection>
       )}
 
       {featureOn('logoCloud') && (
-        <LogoCloud logos={logos} eyebrow="Trusted by" />
+        <SafeSection name="logoCloud">
+          <LogoCloud logos={logos} eyebrow="Trusted by" />
+        </SafeSection>
       )}
 
       {featureOn('bento') && (
-        <BentoGrid
-          eyebrow="Why choose us"
-          headline="{FEATURES_HEADLINE}"
-          description="{FEATURES_SUBHEADLINE}"
-          tiles={bentoTiles}
-        />
+        <SafeSection name="bento">
+          <BentoGrid
+            eyebrow="Why choose us"
+            headline="{FEATURES_HEADLINE}"
+            description="{FEATURES_SUBHEADLINE}"
+            tiles={bentoTiles}
+          />
+        </SafeSection>
       )}
 
       {featureOn('stats') && (
-        <Stats stats={stats} eyebrow="By the numbers" headline="{STATS_HEADLINE}" />
+        <SafeSection name="stats">
+          <Stats stats={stats} eyebrow="By the numbers" headline="{STATS_HEADLINE}" />
+        </SafeSection>
       )}
 
-      <FeatureSplit
-        eyebrow="About"
-        headline="{ABOUT_HEADLINE}"
-        description="{ABOUT_DESCRIPTION}"
-        bullets={['{ABOUT_BULLET_1}', '{ABOUT_BULLET_2}', '{ABOUT_BULLET_3}']}
-        cta={{ label: 'Learn more', href: '/about' }}
-        image={{ src: '{ABOUT_IMAGE_URL}', alt: '{ABOUT_IMAGE_ALT}' }}
-      />
+      <SafeSection name="about">
+        <FeatureSplit
+          eyebrow="About"
+          headline="{ABOUT_HEADLINE}"
+          description="{ABOUT_DESCRIPTION}"
+          bullets={['{ABOUT_BULLET_1}', '{ABOUT_BULLET_2}', '{ABOUT_BULLET_3}']}
+          cta={{ label: 'Learn more', href: '/about' }}
+          image={{ src: '{ABOUT_IMAGE_URL}', alt: '{ABOUT_IMAGE_ALT}' }}
+        />
+      </SafeSection>
 
       {featureOn('process') && (
-        <ProcessSteps
-          steps={process}
-          headline="{PROCESS_HEADLINE}"
-          description="{PROCESS_SUBHEADLINE}"
-        />
+        <SafeSection name="process">
+          <ProcessSteps
+            steps={process}
+            headline="{PROCESS_HEADLINE}"
+            description="{PROCESS_SUBHEADLINE}"
+          />
+        </SafeSection>
       )}
 
       {featureOn('pricing') && (
-        <Pricing
-          tiers={tiers}
-          headline="{PRICING_HEADLINE}"
-          description="{PRICING_SUBHEADLINE}"
-        />
+        <SafeSection name="pricing">
+          <Pricing
+            tiers={tiers}
+            headline="{PRICING_HEADLINE}"
+            description="{PRICING_SUBHEADLINE}"
+          />
+        </SafeSection>
       )}
 
       {featureOn('faq') && (
-        <FAQ
-          items={faqs}
-          headline="{FAQ_HEADLINE}"
-          description="{FAQ_SUBHEADLINE}"
-        />
+        <SafeSection name="faq">
+          <FAQ
+            items={faqs}
+            headline="{FAQ_HEADLINE}"
+            description="{FAQ_SUBHEADLINE}"
+          />
+        </SafeSection>
       )}
 
       {featureOn('cta') && (
-        <CTASection
-          eyebrow="Ready?"
-          headline="{CTA_HEADLINE}"
-          description="{CTA_DESCRIPTION}"
-          primary={{ label: '{CTA_BUTTON}', href: '/contact' }}
-          secondary={{ label: 'See pricing', href: '/pricing' }}
-        />
+        <SafeSection name="cta">
+          <CTASection
+            eyebrow="Ready?"
+            headline="{CTA_HEADLINE}"
+            description="{CTA_DESCRIPTION}"
+            primary={{ label: '{CTA_BUTTON}', href: '/contact' }}
+            secondary={{ label: 'See pricing', href: '/pricing' }}
+          />
+        </SafeSection>
       )}
     </>
   );

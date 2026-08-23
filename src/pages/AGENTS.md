@@ -20,7 +20,13 @@
 4. **Emit JSON-LD via `<JsonLd>`** — at least 1 node per page. Homepage and content-heavy pages get 5+.
 5. **Wrap inner pages in `<Breadcrumbs>`** — except `/` and `*`. Breadcrumbs auto-emit `BreadcrumbList` JSON-LD.
 6. **Close with a `<CTASection>`** — every page (except legal + 404) ends with a CTA pointing to the next step.
-7. **No layout chrome** — Header / Footer / Lightbox / CommandPalette come from `Layout.tsx` automatically.
+7. **Wrap every top-level section in `<SafeSection name="…">`** — fail-soft isolation. A render crash in one section (`Cannot read properties of undefined`, empty `services[0]`, missing brand token) must NOT blank the page. `SafeSection` catches it locally: that section vanishes while the hero, NAP, sibling sections, header/footer, and SEO head keep painting. See `src/components/SafeSection.tsx` + `src/pages/Home.tsx` for the pattern.
+   ```tsx
+   <SafeSection name="pricing">
+     <Pricing tiers={tiers} headline="Plans" />
+   </SafeSection>
+   ```
+8. **No layout chrome** — Header / Footer / Lightbox / CommandPalette come from `Layout.tsx` automatically.
 8. **Lift section data to module scope** — define `services`, `tiers`, `faqs` etc. as top-level `const` arrays. Don't put them inside the component body unless they depend on state/props.
 
 ## File skeleton
