@@ -1,6 +1,7 @@
-import { Shield, Zap, Users, Target, Award, Star, Rocket, Sparkles, MessageSquare } from 'lucide-react';
+import { Shield, Zap, Users, Target, Award, Star, Rocket, Sparkles, MessageSquare, Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { JsonLd } from '@/components/JsonLd';
 import { SafeSection } from '@/components/SafeSection';
+import { ContactForm } from '@/components/ContactForm';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
 import { buildBusinessJsonLd, type BusinessClass } from '@/lib/businessSchema';
@@ -63,6 +64,139 @@ const logos: Logo[] = [
   { name: '{LOGO_1_NAME}' }, { name: '{LOGO_2_NAME}' }, { name: '{LOGO_3_NAME}' },
   { name: '{LOGO_4_NAME}' }, { name: '{LOGO_5_NAME}' }, { name: '{LOGO_6_NAME}' },
 ];
+
+/**
+ * Homepage lead-capture + NAP block — the conversion + local-SEO floor every
+ * generated site now ships by default.
+ *
+ * @remarks
+ * Root-cause fix (journey 2026-08-22 — site scored 3/10, "zero conversion /
+ * local-SEO scaffolding: no NAP, no phone/tel:/mailto:, forms=0, hero CTA had
+ * no target"). The template already owned a working `<ContactForm>` (Zod-
+ * validated, React 19 `useActionState`, POSTs to `/api/contact/{slug}`) and a
+ * NAP-aware `<Footer>`, but the DEFAULT `Home` rendered NEITHER — so a naive
+ * generation that only touched the hero shipped a page with no lead form, no
+ * click-to-call, and no machine-readable local-business signal on the homepage.
+ *
+ * This section is 100% additive and self-healing, mirroring the placeholder-
+ * scrub / brand self-heal patterns already in the template:
+ *   - The lead FORM always renders — a working `/contact`-target conversion
+ *     surface exists on the homepage even before any customization.
+ *   - Each NAP row (`tel:`, `mailto:`, maps address, hours) renders ONLY when
+ *     `brand.business` carries real, non-placeholder data (`brand.ts` `pick()`
+ *     already rejects empty + `{TOKEN}`-shaped leaves), so a bare template never
+ *     prints an empty "Call " row.
+ *   - The visible NAP carries schema.org LocalBusiness microdata
+ *     (`itemProp="telephone" | "email" | "address"`) so the homepage emits a
+ *     machine-readable local-business signal in the rendered DOM regardless of
+ *     the JSON-LD `businessClass`.
+ *
+ * Wrapped by the caller in `<SafeSection>` so a crash here fails soft.
+ */
+function HomeContact() {
+  const { name, phone, email, address, hours } = brand.business;
+  const telHref = phone ? `tel:${phone.replace(/[^+\d]/g, '')}` : '';
+  const mapHref = address
+    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
+    : '';
+  const hasNap = Boolean(phone || email || address || hours);
+
+  return (
+    <section id="contact" className="relative py-24 border-t border-border">
+      <div className="max-w-container-wide mx-auto px-6">
+        <div className="text-center mb-14">
+          <span className="text-accent text-sm font-mono tracking-widest uppercase">Get in touch</span>
+          <h2 className="mt-4 text-4xl md:text-5xl font-extrabold font-heading tracking-[-0.02em]">
+            <span className="gradient-text">Request your free estimate</span>
+          </h2>
+          <p className="mt-4 text-text-muted max-w-2xl mx-auto text-lg">
+            Tell us what you need and {name} will get back to you within one business day.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
+          {/* Working, Zod-validated lead form — the homepage conversion surface. */}
+          <ContactForm />
+
+          {/* NAP: click-to-call, email, directions, hours — with LocalBusiness microdata. */}
+          <address
+            className="not-italic space-y-4"
+            itemScope
+            itemType="https://schema.org/LocalBusiness"
+          >
+            <meta itemProp="name" content={name} />
+            {hasNap ? (
+              <>
+                {phone && (
+                  <a
+                    href={telHref}
+                    className="glass rounded-2xl p-6 flex items-center gap-4 hover:border-accent/40 transition-colors"
+                    aria-label={`Call ${name} at ${phone}`}
+                  >
+                    <span className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                      <Phone className="h-5 w-5 text-accent" aria-hidden="true" />
+                    </span>
+                    <span>
+                      <span className="block text-text font-medium">Call us</span>
+                      <span className="block text-text-muted text-sm" itemProp="telephone">{phone}</span>
+                    </span>
+                  </a>
+                )}
+                {email && (
+                  <a
+                    href={`mailto:${email}`}
+                    className="glass rounded-2xl p-6 flex items-center gap-4 hover:border-accent/40 transition-colors"
+                    aria-label={`Email ${name} at ${email}`}
+                  >
+                    <span className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                      <Mail className="h-5 w-5 text-accent" aria-hidden="true" />
+                    </span>
+                    <span>
+                      <span className="block text-text font-medium">Email us</span>
+                      <span className="block text-text-muted text-sm break-all" itemProp="email">{email}</span>
+                    </span>
+                  </a>
+                )}
+                {address && (
+                  <a
+                    href={mapHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass rounded-2xl p-6 flex items-start gap-4 hover:border-accent/40 transition-colors"
+                    aria-label={`Get directions to ${address}`}
+                  >
+                    <span className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                      <MapPin className="h-5 w-5 text-accent" aria-hidden="true" />
+                    </span>
+                    <span>
+                      <span className="block text-text font-medium">Visit us</span>
+                      <span className="block text-text-muted text-sm" itemProp="address">{address}</span>
+                    </span>
+                  </a>
+                )}
+                {hours && (
+                  <div className="glass rounded-2xl p-6 flex items-start gap-4">
+                    <span className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
+                      <Clock className="h-5 w-5 text-accent" aria-hidden="true" />
+                    </span>
+                    <span>
+                      <span className="block text-text font-medium">Hours</span>
+                      <span className="block text-text-muted text-sm" itemProp="openingHours">{hours}</span>
+                    </span>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="glass rounded-2xl p-6 text-text-muted text-sm">
+                Prefer to talk it through? Use the form and we&rsquo;ll reach out with next steps.
+              </div>
+            )}
+          </address>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   useSEO({
@@ -187,6 +321,16 @@ export default function Home() {
           />
         </SafeSection>
       )}
+
+      {/*
+        Conversion + local-SEO floor — a working lead form + click-to-call NAP
+        with LocalBusiness microdata, on the homepage by default. Not feature-
+        gated: every generated site must ship a way to convert + a machine-
+        readable local-business signal even if only the hero was customized.
+      */}
+      <SafeSection name="contact">
+        <HomeContact />
+      </SafeSection>
     </>
   );
 }
