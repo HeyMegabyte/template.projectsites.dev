@@ -69,5 +69,8 @@
   "ABOUT_MISSION_HEADLINE": "What we believe",
   "ABOUT_MISSION_TEXT": "Buy better, buy less. Great products, fair prices, and service that treats you like a person, not an order number.",
   "ABOUT_META_DESCRIPTION": "Quality goods at honest prices with free shipping over $50 and easy 30-day returns. Shop new arrivals and best sellers.",
-  "SERVICES_META_DESCRIPTION": "Shop our collections: new arrivals, best sellers, essentials, seasonal picks, gifts, and sale items."
+  "SERVICES_META_DESCRIPTION": "Shop our collections: new arrivals, best sellers, essentials, seasonal picks, gifts, and sale items.",
+  "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1546213290-e1b492ab3eee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBib3V0aXF1ZSUyMHJldGFpbCUyMHN0b3JlfGVufDF8MHx8fDE3ODc1ODU2NTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzdHlsaXNoJTIwY2xvdGhpbmclMjBkaXNwbGF5fGVufDF8MHx8fDE3ODc1ODU2NTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_ALT": "clothing boutique interior with hanging racks"
 }

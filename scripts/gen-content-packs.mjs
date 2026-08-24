@@ -173,6 +173,23 @@ const V = {
   },
 };
 
+// Per-vertical hero + about photos (real, relevant, allowlisted images.unsplash.com
+// URLs fetched from the Unsplash API). Baked into the packs so a generated site has
+// real imagery even when the orchestrator's image pipeline crashes. Refresh with:
+//   UNSPLASH_KEY=$(get-secret UNSPLASH_ACCESS_KEY) node scripts/fetch-vertical-images.mjs
+const IMG = {
+  "medical": { hero: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUxfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1606811842243-af7e16970c1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwZGVudGlzdCUyMHdpdGglMjBwYXRpZW50fGVufDF8MHx8fDE3ODc1ODU2NTF8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "man in white dress shirt sitting on black office rolling chair" },
+  "wellness": { hero: "https://images.unsplash.com/photo-1676496962536-d8ef110ff6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJlbmUlMjB5b2dhJTIwc3R1ZGlvJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc4NzU4NTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHByYWN0aWNpbmclMjB5b2dhfGVufDF8MHx8fDE3ODc1ODU2NTN8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "silhouette photography of woman doing yoga" },
+  "legal": { hero: "https://images.unsplash.com/photo-1781136230118-3272607eb34c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsYXclMjBvZmZpY2UlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1662104935883-e9dd0619eaba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBwb3J0cmFpdHxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "a woman in a black suit" },
+  "restaurant": { hero: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3YXJtJTIwcmVzdGF1cmFudCUyMGludGVyaW9yJTIwZGluaW5nfGVufDF8MHx8fDE3ODc1ODU2NTR8MA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjaGVmJTIwcGxhdGluZyUyMGdvdXJtZXQlMjBmb29kfGVufDF8MHx8fDE3ODc1ODU2NTV8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "person putting food on plate" },
+  "local-service": { hero: "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwbHVtYmVyJTIwcmVwYWlyaW5nJTIwcGlwZXN8ZW58MXwwfHx8MTc4NzU4NTY1NXww&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJ2aWNlJTIwdGVjaG5pY2lhbiUyMHRvb2xzfGVufDF8MHx8fDE3ODc1ODU2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "red and silver hand tool" },
+  "nonprofit": { hero: "https://images.unsplash.com/photo-1628717341663-0007b0ee2597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwaGVscGluZ3xlbnwxfDB8fHwxNzg3NTg1NjU2fDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1618521715147-29e4b97e2ebd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxncm91cCUyMG9mJTIwdm9sdW50ZWVycyUyMHNtaWxpbmd8ZW58MXwwfHx8MTc4NzU4NTY1Nnww&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "group of people standing on brown soil during daytime" },
+  "retail": { hero: "https://images.unsplash.com/photo-1546213290-e1b492ab3eee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBib3V0aXF1ZSUyMHJldGFpbCUyMHN0b3JlfGVufDF8MHx8fDE3ODc1ODU2NTd8MA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzdHlsaXNoJTIwY2xvdGhpbmclMjBkaXNwbGF5fGVufDF8MHx8fDE3ODc1ODU2NTd8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "clothing boutique interior with hanging racks" },
+  "saas": { hero: "https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMHRlYW0lMjB3b3JraW5nJTIwbGFwdG9wcyUyMG9mZmljZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB0ZWNoJTIwc3RhcnR1cCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "group of people using laptop computer" },
+  "agency": { hero: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHRlYW0lMjBtZWV0aW5nfGVufDF8MHx8fDE3ODc1ODU2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMHdvcmtzcGFjZSUyMGRlc2t8ZW58MXwwfHx8MTc4NzU4NTY1OXww&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "MacBook Pro on table beside white iMac and Magic Mouse" },
+  "portfolio": { hero: "https://images.unsplash.com/photo-1752650736252-dff5244c8a7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHBob3RvZ3JhcGhlciUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjYwfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1650783756107-739513b38177?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxhcnRpc3QlMjB3b3JraW5nJTIwc3R1ZGlvfGVufDF8MHx8fDE3ODc1ODU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "a person with a red hat writing on a laptop" },
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -191,6 +208,12 @@ function pack(v) {
   o.CTA_HEADLINE = s.cta[0]; o.CTA_DESCRIPTION = s.cta[1]; o.CTA_BUTTON = s.cta[2];
   o.ABOUT_HEADLINE = s.about[0]; o.ABOUT_DESCRIPTION = s.about[1]; o.ABOUT_MISSION_HEADLINE = s.about[2]; o.ABOUT_MISSION_TEXT = s.about[3];
   o.ABOUT_META_DESCRIPTION = s.meta[0]; o.SERVICES_META_DESCRIPTION = s.meta[1];
+  const img = IMG[v];
+  if (img) {
+    o.HERO_IMAGE_URL = img.hero;
+    o.ABOUT_IMAGE_URL = img.about;
+    o.ABOUT_IMAGE_ALT = img.aboutAlt;
+  }
   return o;
 }
 

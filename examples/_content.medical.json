@@ -69,5 +69,8 @@
   "ABOUT_MISSION_HEADLINE": "Our promise to you",
   "ABOUT_MISSION_TEXT": "Honest recommendations, gentle hands, and a healthy smile that lasts. That is the standard we hold on every single visit.",
   "ABOUT_META_DESCRIPTION": "A friendly family dental practice offering gentle cleanings, crowns, whitening, implants, and same-day emergency care.",
-  "SERVICES_META_DESCRIPTION": "Explore our dental services: cleanings, fillings, crowns, whitening, Invisalign, implants, and emergency care."
+  "SERVICES_META_DESCRIPTION": "Explore our dental services: cleanings, fillings, crowns, whitening, Invisalign, implants, and emergency care.",
+  "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1606811842243-af7e16970c1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwZGVudGlzdCUyMHdpdGglMjBwYXRpZW50fGVufDF8MHx8fDE3ODc1ODU2NTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_ALT": "man in white dress shirt sitting on black office rolling chair"
 }

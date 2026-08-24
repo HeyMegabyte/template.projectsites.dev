@@ -69,5 +69,8 @@
   "ABOUT_MISSION_HEADLINE": "Why we teach",
   "ABOUT_MISSION_TEXT": "We believe a steady practice changes lives, one breath at a time. Our mission is to make that practice feel like home.",
   "ABOUT_META_DESCRIPTION": "A welcoming yoga and wellness studio with classes for every level: flow, restorative, power, meditation, and Pilates.",
-  "SERVICES_META_DESCRIPTION": "Browse our classes: vinyasa flow, restorative, power yoga, meditation, Pilates, and private sessions for all levels."
+  "SERVICES_META_DESCRIPTION": "Browse our classes: vinyasa flow, restorative, power yoga, meditation, Pilates, and private sessions for all levels.",
+  "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1676496962536-d8ef110ff6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJlbmUlMjB5b2dhJTIwc3R1ZGlvJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc4NzU4NTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHByYWN0aWNpbmclMjB5b2dhfGVufDF8MHx8fDE3ODc1ODU2NTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_ALT": "silhouette photography of woman doing yoga"
 }

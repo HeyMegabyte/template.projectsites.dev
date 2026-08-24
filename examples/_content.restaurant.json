@@ -69,5 +69,8 @@
   "ABOUT_MISSION_HEADLINE": "Our kitchen philosophy",
   "ABOUT_MISSION_TEXT": "Fresh over frozen, local over far away, and made from scratch every single day. Great food should taste like someone cared, because we do.",
   "ABOUT_META_DESCRIPTION": "A neighborhood restaurant serving fresh, made-from-scratch food from local ingredients, with catering and private events.",
-  "SERVICES_META_DESCRIPTION": "See our menu: chef specials, brunch, dinner, desserts, plus catering and private events for any occasion."
+  "SERVICES_META_DESCRIPTION": "See our menu: chef specials, brunch, dinner, desserts, plus catering and private events for any occasion.",
+  "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3YXJtJTIwcmVzdGF1cmFudCUyMGludGVyaW9yJTIwZGluaW5nfGVufDF8MHx8fDE3ODc1ODU2NTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjaGVmJTIwcGxhdGluZyUyMGdvdXJtZXQlMjBmb29kfGVufDF8MHx8fDE3ODc1ODU2NTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_ALT": "person putting food on plate"
 }

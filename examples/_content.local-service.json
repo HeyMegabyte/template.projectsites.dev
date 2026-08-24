@@ -69,5 +69,8 @@
   "ABOUT_MISSION_HEADLINE": "How we work",
   "ABOUT_MISSION_TEXT": "Straight answers, upfront pricing, and quality that lasts. We treat your home the way we would treat our own.",
   "ABOUT_META_DESCRIPTION": "Licensed, insured local pros offering fast repairs, installations, maintenance, and same-day emergency service.",
-  "SERVICES_META_DESCRIPTION": "Our services: repairs, installations, maintenance plans, emergency service, upgrades, and inspections."
+  "SERVICES_META_DESCRIPTION": "Our services: repairs, installations, maintenance plans, emergency service, upgrades, and inspections.",
+  "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwbHVtYmVyJTIwcmVwYWlyaW5nJTIwcGlwZXN8ZW58MXwwfHx8MTc4NzU4NTY1NXww&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJ2aWNlJTIwdGVjaG5pY2lhbiUyMHRvb2xzfGVufDF8MHx8fDE3ODc1ODU2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "ABOUT_IMAGE_ALT": "red and silver hand tool"
 }
