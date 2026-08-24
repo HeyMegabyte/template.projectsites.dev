@@ -190,6 +190,20 @@ const IMG = {
   "portfolio": { hero: "https://images.unsplash.com/photo-1752650736252-dff5244c8a7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHBob3RvZ3JhcGhlciUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjYwfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1650783756107-739513b38177?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxhcnRpc3QlMjB3b3JraW5nJTIwc3R1ZGlvfGVufDF8MHx8fDE3ODc1ODU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "a person with a red hat writing on a laptop" },
 };
 
+// Short, clean alt text for the hero photo per vertical (a11y).
+const HERO_ALT = {
+  medical: 'Bright, welcoming modern dental office',
+  wellness: 'Calm, sunlit yoga and wellness studio',
+  legal: 'Professional modern law office interior',
+  restaurant: 'Warm, inviting restaurant dining room',
+  'local-service': 'Skilled service technician on the job',
+  nonprofit: 'Volunteers serving the local community',
+  retail: 'Bright, modern retail store interior',
+  saas: 'Team collaborating in a modern office',
+  agency: 'Creative team working together',
+  portfolio: 'Creative studio workspace',
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -211,6 +225,7 @@ function pack(v) {
   const img = IMG[v];
   if (img) {
     o.HERO_IMAGE_URL = img.hero;
+    o.HERO_IMAGE_ALT = HERO_ALT[v] || 'A welcoming, professional space';
     o.ABOUT_IMAGE_URL = img.about;
     o.ABOUT_IMAGE_ALT = img.aboutAlt;
   }

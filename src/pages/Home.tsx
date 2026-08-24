@@ -7,7 +7,7 @@ import { brand, featureOn } from '@/brand';
 import { buildBusinessJsonLd, type BusinessClass } from '@/lib/businessSchema';
 
 import {
-  HeroCenter,
+  HeroSplit,
   BentoGrid,
   Stats,
   FeatureSplit,
@@ -231,12 +231,13 @@ export default function Home() {
       */}
       {featureOn('hero') && (
         <SafeSection name="hero">
-          <HeroCenter
+          <HeroSplit
             eyebrow={brand.business.tagline}
             headline="{HERO_HEADLINE}"
             subheadline="{HERO_SUBHEADLINE}"
             primary={{ label: '{HERO_CTA}', href: '/contact' }}
             secondary={{ label: '{HERO_SECONDARY_CTA}', href: '/services' }}
+            image={{ src: '{HERO_IMAGE_URL}', alt: '{HERO_IMAGE_ALT}' }}
             trustBadges={[
               { icon: 'star',   label: '{TRUST_BADGE_1}' },
               { icon: 'shield', label: '{TRUST_BADGE_2}' },

@@ -71,6 +71,7 @@
   "ABOUT_META_DESCRIPTION": "An independent designer and maker crafting thoughtful design, photography, branding, and web projects. Available now.",
   "SERVICES_META_DESCRIPTION": "What I offer: design, photography, branding, web projects, consulting, and collaborations. Currently available.",
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1752650736252-dff5244c8a7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHBob3RvZ3JhcGhlciUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "HERO_IMAGE_ALT": "Creative studio workspace",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1650783756107-739513b38177?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxhcnRpc3QlMjB3b3JraW5nJTIwc3R1ZGlvfGVufDF8MHx8fDE3ODc1ODU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "ABOUT_IMAGE_ALT": "a person with a red hat writing on a laptop"
 }

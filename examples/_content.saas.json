@@ -71,6 +71,7 @@
   "ABOUT_META_DESCRIPTION": "A platform that automates busywork so your team ships faster. Free 14-day trial, no credit card, cancel anytime.",
   "SERVICES_META_DESCRIPTION": "Explore features: workflow automation, collaboration, analytics, integrations, access controls, and a developer API.",
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMHRlYW0lMjB3b3JraW5nJTIwbGFwdG9wcyUyMG9mZmljZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "HERO_IMAGE_ALT": "Team collaborating in a modern office",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB0ZWNoJTIwc3RhcnR1cCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "ABOUT_IMAGE_ALT": "group of people using laptop computer"
 }

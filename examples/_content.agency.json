@@ -71,6 +71,7 @@
   "ABOUT_META_DESCRIPTION": "A results-driven creative agency offering brand identity, web design, marketing campaigns, content, and SEO.",
   "SERVICES_META_DESCRIPTION": "Our services: brand identity, web design, marketing campaigns, content and social, SEO, and creative direction.",
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHRlYW0lMjBtZWV0aW5nfGVufDF8MHx8fDE3ODc1ODU2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "HERO_IMAGE_ALT": "Creative team working together",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMHdvcmtzcGFjZSUyMGRlc2t8ZW58MXwwfHx8MTc4NzU4NTY1OXww&ixlib=rb-4.1.0&q=80&w=1080",
   "ABOUT_IMAGE_ALT": "MacBook Pro on table beside white iMac and Magic Mouse"
 }
