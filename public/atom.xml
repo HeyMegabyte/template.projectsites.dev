@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
-  <title>ProjectSites</title>
-  <subtitle>Cinematic site templates</subtitle>
-  <link href="https://template.projectsites.dev/atom.xml" rel="self" type="application/atom+xml" />
-  <link href="https://template.projectsites.dev" />
-  <id>https://template.projectsites.dev/</id>
-  <updated>2026-05-22T01:39:37.367Z</updated>
-  <author><name>ProjectSites</name><email>hey@megabyte.space</email></author>
+  <title>{BUSINESS_NAME}</title>
+  <subtitle>{BUSINESS_TAGLINE}</subtitle>
+  <link href="{BUSINESS_URL}/atom.xml" rel="self" type="application/atom+xml" />
+  <link href="{BUSINESS_URL}" />
+  <id>{BUSINESS_URL}/</id>
+  <updated>2026-08-24T03:03:33.751Z</updated>
+  <author><name>{BUSINESS_NAME}</name><email>hey@megabyte.space</email></author>
   <entry>
     <title>How we made 9 demo sites from one prompt</title>
-    <link href="https://template.projectsites.dev/blog/nine-demo-sites-one-prompt" />
-    <id>https://template.projectsites.dev/blog/nine-demo-sites-one-prompt</id>
+    <link href="{BUSINESS_URL}/blog/nine-demo-sites-one-prompt" />
+    <id>{BUSINESS_URL}/blog/nine-demo-sites-one-prompt</id>
     <updated>2026-05-15T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
     <title>Why we picked OKLCH over HSL for brand tokens</title>
-    <link href="https://template.projectsites.dev/blog/oklch-over-hsl" />
-    <id>https://template.projectsites.dev/blog/oklch-over-hsl</id>
+    <link href="{BUSINESS_URL}/blog/oklch-over-hsl" />
+    <id>{BUSINESS_URL}/blog/oklch-over-hsl</id>
     <updated>2026-04-28T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
     <title>Cinematic websites in 2026: 12 native browser APIs nobody uses yet</title>
-    <link href="https://template.projectsites.dev/blog/cinematic-apis-2026" />
-    <id>https://template.projectsites.dev/blog/cinematic-apis-2026</id>
+    <link href="{BUSINESS_URL}/blog/cinematic-apis-2026" />
+    <id>{BUSINESS_URL}/blog/cinematic-apis-2026</id>
     <updated>2026-04-10T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
     <title>Latch SaaS — 4 hours from prompt to deploy</title>
-    <link href="https://template.projectsites.dev/blog/latch-saas-landing" />
-    <id>https://template.projectsites.dev/blog/latch-saas-landing</id>
-    <updated>2026-05-22T00:00:00.000Z</updated>
+    <link href="{BUSINESS_URL}/blog/latch-saas-landing" />
+    <id>{BUSINESS_URL}/blog/latch-saas-landing</id>
+    <updated>2026-08-24T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
     <title>Northern Lights Bakery — local SEO that brought 73% more bookings</title>
-    <link href="https://template.projectsites.dev/blog/northern-lights-bakery" />
-    <id>https://template.projectsites.dev/blog/northern-lights-bakery</id>
-    <updated>2026-05-22T00:00:00.000Z</updated>
+    <link href="{BUSINESS_URL}/blog/northern-lights-bakery" />
+    <id>{BUSINESS_URL}/blog/northern-lights-bakery</id>
+    <updated>2026-08-24T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
     <title>Doe Law — WCAG 2.2 AA in one sprint</title>
-    <link href="https://template.projectsites.dev/blog/doe-law-wcag" />
-    <id>https://template.projectsites.dev/blog/doe-law-wcag</id>
-    <updated>2026-05-22T00:00:00.000Z</updated>
+    <link href="{BUSINESS_URL}/blog/doe-law-wcag" />
+    <id>{BUSINESS_URL}/blog/doe-law-wcag</id>
+    <updated>2026-08-24T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
 </feed>

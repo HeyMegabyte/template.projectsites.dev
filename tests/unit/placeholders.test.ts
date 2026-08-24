@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   isPlaceholder,
+  isLeakedPlanText,
   scrubText,
   scrubList,
   hasRealImage,
@@ -43,6 +44,47 @@ describe('isPlaceholder', () => {
     expect(isPlaceholder(null)).toBe(false);
     expect(isPlaceholder(42)).toBe(false);
   });
+
+  it('flags leaked generation-plan / instruction prose as a placeholder', () => {
+    // The exact string that shipped on the 2.2/10 build (truncated mid-word).
+    expect(isPlaceholder('Sections: Hero, About our roastery, Services (espresso bar, whol')).toBe(
+      true,
+    );
+    expect(isPlaceholder('# System\nYou are an elite web designer')).toBe(true);
+  });
+});
+
+describe('isLeakedPlanText', () => {
+  it('catches the tells of a leaked section plan / prompt scaffold', () => {
+    for (const s of [
+      'Sections: Hero, About our roastery, Services (espresso bar, whol',
+      'The site will have the following sections: hero, about, contact',
+      'Here is the content for the homepage',
+      '## User\nBusiness Profile',
+      'You are an elite web designer who creates gorgeous sites',
+      'As an AI language model, I cannot',
+      'This website will include a hero, services, and a contact form',
+    ]) {
+      expect(isLeakedPlanText(s)).toBe(true);
+    }
+  });
+
+  it('passes real marketing copy through untouched', () => {
+    for (const s of [
+      'Small-batch coffee roasted in Asheville since 2009',
+      'We serve espresso, pour-over, and whole-bean coffee',
+      'Fresh sourdough, baked daily on Pearl Street',
+      'Book a consultation with our team',
+    ]) {
+      expect(isLeakedPlanText(s)).toBe(false);
+    }
+  });
+
+  it('is false for empty / non-string', () => {
+    expect(isLeakedPlanText('')).toBe(false);
+    expect(isLeakedPlanText(undefined)).toBe(false);
+    expect(isLeakedPlanText(null)).toBe(false);
+  });
 });
 
 describe('scrubText', () => {
@@ -60,6 +102,14 @@ describe('scrubText', () => {
   it('returns trimmed real content untouched', () => {
     expect(scrubText('  Real copy  ')).toBe('Real copy');
     expect(scrubText('Fresh sourdough')).toBe('Fresh sourdough');
+  });
+
+  it('drops leaked plan prose to the fallback (hero never shows the plan)', () => {
+    expect(
+      scrubText('Sections: Hero, About our roastery, Services (espresso bar, whol', 'Asheville Roasters'),
+    ).toBe('Asheville Roasters');
+    // No fallback → empties so the caller guard hides the element.
+    expect(scrubText('# System\nYou are an elite web designer')).toBe('');
   });
 });
 

@@ -1,58 +1,58 @@
 {
   "version": "https://jsonfeed.org/version/1.1",
-  "title": "ProjectSites",
-  "description": "Cinematic site templates",
-  "home_page_url": "https://template.projectsites.dev",
-  "feed_url": "https://template.projectsites.dev/feed.json",
+  "title": "{BUSINESS_NAME}",
+  "description": "{BUSINESS_TAGLINE}",
+  "home_page_url": "{BUSINESS_URL}",
+  "feed_url": "{BUSINESS_URL}/feed.json",
   "language": "en-US",
   "authors": [
     {
-      "name": "ProjectSites",
-      "url": "https://template.projectsites.dev"
+      "name": "{BUSINESS_NAME}",
+      "url": "{BUSINESS_URL}"
     }
   ],
   "items": [
     {
-      "id": "https://template.projectsites.dev/blog/nine-demo-sites-one-prompt",
-      "url": "https://template.projectsites.dev/blog/nine-demo-sites-one-prompt",
+      "id": "{BUSINESS_URL}/blog/nine-demo-sites-one-prompt",
+      "url": "{BUSINESS_URL}/blog/nine-demo-sites-one-prompt",
       "title": "How we made 9 demo sites from one prompt",
       "summary": "",
       "date_published": "2026-05-15T00:00:00.000Z"
     },
     {
-      "id": "https://template.projectsites.dev/blog/oklch-over-hsl",
-      "url": "https://template.projectsites.dev/blog/oklch-over-hsl",
+      "id": "{BUSINESS_URL}/blog/oklch-over-hsl",
+      "url": "{BUSINESS_URL}/blog/oklch-over-hsl",
       "title": "Why we picked OKLCH over HSL for brand tokens",
       "summary": "",
       "date_published": "2026-04-28T00:00:00.000Z"
     },
     {
-      "id": "https://template.projectsites.dev/blog/cinematic-apis-2026",
-      "url": "https://template.projectsites.dev/blog/cinematic-apis-2026",
+      "id": "{BUSINESS_URL}/blog/cinematic-apis-2026",
+      "url": "{BUSINESS_URL}/blog/cinematic-apis-2026",
       "title": "Cinematic websites in 2026: 12 native browser APIs nobody uses yet",
       "summary": "",
       "date_published": "2026-04-10T00:00:00.000Z"
     },
     {
-      "id": "https://template.projectsites.dev/blog/latch-saas-landing",
-      "url": "https://template.projectsites.dev/blog/latch-saas-landing",
+      "id": "{BUSINESS_URL}/blog/latch-saas-landing",
+      "url": "{BUSINESS_URL}/blog/latch-saas-landing",
       "title": "Latch SaaS — 4 hours from prompt to deploy",
       "summary": "",
-      "date_published": "2026-05-22T00:00:00.000Z"
+      "date_published": "2026-08-24T00:00:00.000Z"
     },
     {
-      "id": "https://template.projectsites.dev/blog/northern-lights-bakery",
-      "url": "https://template.projectsites.dev/blog/northern-lights-bakery",
+      "id": "{BUSINESS_URL}/blog/northern-lights-bakery",
+      "url": "{BUSINESS_URL}/blog/northern-lights-bakery",
       "title": "Northern Lights Bakery — local SEO that brought 73% more bookings",
       "summary": "",
-      "date_published": "2026-05-22T00:00:00.000Z"
+      "date_published": "2026-08-24T00:00:00.000Z"
     },
     {
-      "id": "https://template.projectsites.dev/blog/doe-law-wcag",
-      "url": "https://template.projectsites.dev/blog/doe-law-wcag",
+      "id": "{BUSINESS_URL}/blog/doe-law-wcag",
+      "url": "{BUSINESS_URL}/blog/doe-law-wcag",
       "title": "Doe Law — WCAG 2.2 AA in one sprint",
       "summary": "",
-      "date_published": "2026-05-22T00:00:00.000Z"
+      "date_published": "2026-08-24T00:00:00.000Z"
     }
   ]
 }

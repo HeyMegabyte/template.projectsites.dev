@@ -42,27 +42,78 @@
 const PLACEHOLDER_RE = /\{[A-Za-z][A-Za-z0-9_.]*\}/;
 
 /**
- * True when a value is an unresolved generation placeholder that must not reach
- * the DOM.
+ * Leaked GENERATION-PLAN / INSTRUCTION prose — the second class of junk that
+ * must never reach the DOM. Distinct from a `{TOKEN}`: this is real-looking
+ * English that is actually the model's own section plan or prompt scaffolding
+ * bleeding into user copy.
  *
- * A value is a placeholder when it is a string that is EITHER exactly a single
- * token (optionally surrounded by whitespace) OR contains a token anywhere.
- * `null`/`undefined`/non-strings are not placeholders (callers pass those
- * through to their own defaults).
+ * @remarks
+ * A whole build shipped with the raw section plan as its hero paragraph AND its
+ * `<meta description>`, truncated mid-word: "…Sections: Hero, About our
+ * roastery, Services (espresso bar, whol" (journey 2026-08-21, scored 2.2/10).
+ * The `{TOKEN}` scrubber missed it because leaked-plan text has no braces — it
+ * is ordinary prose. These patterns catch the tells of a plan/instruction leak
+ * so the hero falls back to the business name and the meta/subline hide instead.
+ *
+ * Deliberately narrow — each pattern targets a structural tell of generation
+ * scaffolding (a "Sections:" list, "# System"/"# User" prompt headers, "As an
+ * AI"/"language model" refusals, a bare "Here is/are the …" preamble), NOT
+ * ordinary marketing copy. A real business sentence never opens with these.
+ */
+const LEAKED_PLAN_RES: readonly RegExp[] = [
+  // "Sections: Hero, About, Services…" — the exact leak that shipped.
+  /\bsections?\s*:\s*(?:hero|about|services|home|contact|the\b)/i,
+  // A plan/outline preamble: "The site will have the following sections", "Here are the sections".
+  /\b(?:following|these)\s+sections\b/i,
+  /\bhere\s+(?:is|are)\s+the\s+(?:sections?|pages?|plan|content|outline|website|copy)\b/i,
+  // Prompt-scaffolding headers that leak from the .prompt.md format.
+  /(?:^|\n)\s*#{1,3}\s*(?:system|user|assistant|task|instructions?|output)\b/i,
+  /\b(?:you\s+are\s+an?\s+(?:elite|expert|ai|assistant)|as\s+an\s+ai|language\s+model)\b/i,
+  // A meta narration of the build rather than the business.
+  /\b(?:this\s+(?:website|site|page)\s+(?:will|should)\s+(?:have|include|contain|feature))\b/i,
+];
+
+/**
+ * True when a value looks like leaked generation-plan / prompt-instruction prose
+ * (see {@link LEAKED_PLAN_RES}). Used alongside the `{TOKEN}` check so both
+ * classes of junk are firewalled at the same boundary.
  *
  * @param value - the candidate string (any type accepted for ergonomics)
- * @returns whether the value is (or contains) an unresolved `{TOKEN}`
+ * @returns whether the value reads as a leaked plan / instruction
+ *
+ * @example
+ * isLeakedPlanText('Sections: Hero, About our roastery, Services (espresso') // → true
+ * isLeakedPlanText('# System\nYou are an elite web designer')                 // → true
+ * isLeakedPlanText('Small-batch coffee roasted in Asheville since 2009')      // → false
+ */
+export function isLeakedPlanText(value: unknown): boolean {
+  if (typeof value !== 'string') return false;
+  return LEAKED_PLAN_RES.some((re) => re.test(value));
+}
+
+/**
+ * True when a value is an unresolved generation placeholder that must not reach
+ * the DOM — EITHER a `{TOKEN}` OR leaked generation-plan / instruction prose.
+ *
+ * A value is a placeholder when it is a string that is EITHER exactly a single
+ * token (optionally surrounded by whitespace) OR contains a token anywhere OR
+ * reads as leaked plan/instruction text. `null`/`undefined`/non-strings are not
+ * placeholders (callers pass those through to their own defaults).
+ *
+ * @param value - the candidate string (any type accepted for ergonomics)
+ * @returns whether the value is (or contains) an unresolved `{TOKEN}` or leaked plan text
  *
  * @example
  * isPlaceholder('{ABOUT_HEADLINE}')            // → true
  * isPlaceholder('https://{ABOUT_IMAGE_URL}')   // → true (embedded)
+ * isPlaceholder('Sections: Hero, About, Serv') // → true (leaked plan)
  * isPlaceholder('Fresh sourdough, daily')      // → false
  * isPlaceholder('')                            // → false (empty, not a token)
  * isPlaceholder(undefined)                     // → false
  */
 export function isPlaceholder(value: unknown): boolean {
   if (typeof value !== 'string') return false;
-  return PLACEHOLDER_RE.test(value);
+  return PLACEHOLDER_RE.test(value) || isLeakedPlanText(value);
 }
 
 /**
