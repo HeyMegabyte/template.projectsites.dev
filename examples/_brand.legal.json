@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
-  "$description": "Legal / law firm preset — navy, light serif, services + team + FAQ.",
+  "$description": "Legal / law firm / finance preset — LIGHT, elegant deep-navy with warm gold, editorial serif. Formal 'old-money' mood: tight radii, restrained ink shadows, Cormorant Garamond display over Lora body. Accountants/advisors map here.",
 
   "business": {
     "name":          { "$value": "Doe Law" },
     "shortName":     { "$value": "Doe Law" },
     "tagline":       { "$value": "Estate planning · Anchorage AK" },
-    "description":   { "$value": "Estate planning attorney in Anchorage, AK. 20 years preparing wills, trusts, and estate plans for Alaska families." },
+    "description":   { "$value": "Estate planning attorney in Anchorage, AK. Twenty years preparing wills, trusts, and estate plans that protect Alaska families and their legacies." },
     "url":           { "$value": "https://doelaw.example" },
     "businessClass": { "$value": "legal" },
     "email":         { "$value": "jane@doelaw.example" },
@@ -16,23 +16,23 @@
   },
 
   "color": {
-    "brandHue":    { "$value": "220" },
-    "brandChroma": { "$value": "0.10" },
-    "primary":     { "$value": "oklch(0.40 {color.brandChroma} {color.brandHue})" },
-    "primaryHover":{ "$value": "oklch(0.34 {color.brandChroma} {color.brandHue})" },
-    "accent":      { "$value": "oklch(0.55 0.14 50)" },
-    "accentHover": { "$value": "oklch(0.48 0.14 50)" },
-    "background":  { "$value": "oklch(0.99 0.005 {color.brandHue})" },
-    "surface":     { "$value": "oklch(0.97 0.01 {color.brandHue})" },
-    "surfaceElevated":{ "$value": "oklch(0.94 0.01 {color.brandHue})" },
-    "border":      { "$value": "oklch(0.88 0.02 {color.brandHue})" },
-    "text":        { "$value": "oklch(0.18 0.02 {color.brandHue})" },
-    "textMuted":   { "$value": "oklch(0.42 0.01 {color.brandHue})" },
-    "textSubtle":  { "$value": "oklch(0.58 0.01 {color.brandHue})" },
-    "success":     { "$value": "oklch(0.55 0.16 152)" },
-    "warning":     { "$value": "oklch(0.65 0.16 85)" },
-    "danger":      { "$value": "oklch(0.55 0.22 28)" },
-    "info":        { "$value": "oklch(0.55 0.15 235)" }
+    "brandHue":    { "$value": "245" },
+    "brandChroma": { "$value": "0.09" },
+    "primary":     { "$value": "oklch(0.34 0.09 245)" },
+    "primaryHover":{ "$value": "oklch(0.28 0.09 245)" },
+    "accent":      { "$value": "oklch(0.80 0.13 85)" },
+    "accentHover": { "$value": "oklch(0.73 0.14 82)" },
+    "background":  { "$value": "oklch(0.985 0.008 90)" },
+    "surface":     { "$value": "oklch(0.965 0.012 90)" },
+    "surfaceElevated":{ "$value": "oklch(1 0 0)" },
+    "border":      { "$value": "oklch(0.87 0.02 245)" },
+    "text":        { "$value": "oklch(0.22 0.03 245)" },
+    "textMuted":   { "$value": "oklch(0.44 0.02 245)" },
+    "textSubtle":  { "$value": "oklch(0.58 0.015 245)" },
+    "success":     { "$value": "oklch(0.52 0.14 150)" },
+    "warning":     { "$value": "oklch(0.66 0.15 80)" },
+    "danger":      { "$value": "oklch(0.52 0.20 25)" },
+    "info":        { "$value": "oklch(0.45 0.11 245)" }
   },
 
   "colorScheme": { "$value": "light" },
@@ -45,11 +45,11 @@
     "fluidScale":{ "$value": "clamp" }
   },
 
-  "radius":  { "sm": { "$value": "0.25rem" }, "md": { "$value": "0.5rem" }, "lg": { "$value": "0.75rem" }, "xl": { "$value": "1rem" }, "2xl": { "$value": "1.5rem" }, "full": { "$value": "9999px" } },
+  "radius":  { "sm": { "$value": "0.125rem" }, "md": { "$value": "0.25rem" }, "lg": { "$value": "0.5rem" }, "xl": { "$value": "0.75rem" }, "2xl": { "$value": "1rem" }, "full": { "$value": "9999px" } },
   "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
-  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.05)" }, "md": { "$value": "0 8px 24px -8px oklch(0 0 0 / 0.15)" }, "lg": { "$value": "0 16px 48px -12px oklch(0 0 0 / 0.20)" }, "glow": { "$value": "0 0 40px -8px {color.primary}" } },
-  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)" }, "duration": { "fast": { "$value": "150ms" }, "base": { "$value": "250ms" }, "slow": { "$value": "450ms" }, "scroll": { "$value": "1200ms" } } },
-  "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0.22 0.03 245 / 0.08)" }, "md": { "$value": "0 12px 28px -14px oklch(0.22 0.03 245 / 0.22)" }, "lg": { "$value": "0 24px 56px -18px oklch(0.22 0.03 245 / 0.30)" }, "glow": { "$value": "0 0 40px -10px oklch(0.80 0.13 85 / 0.45)" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)" }, "duration": { "fast": { "$value": "140ms" }, "base": { "$value": "240ms" }, "slow": { "$value": "440ms" }, "scroll": { "$value": "1200ms" } } },
+  "layout":  { "containerWide": { "$value": "78rem" }, "containerNormal": { "$value": "62rem" }, "containerProse": { "$value": "40rem" } },
   "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
 
   "features": {

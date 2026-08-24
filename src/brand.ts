@@ -305,6 +305,12 @@ export function applyBrand(root: HTMLElement = document.documentElement): void {
       if (typeof v === 'string') root.style.setProperty(`--color-${kebab(k)}`, v);
     }
 
+    // On-accent ink: dark text on a LIGHT accent, white on a DARK accent.
+    // Keeps `text-[var(--color-on-accent)]` legible whatever the vertical's
+    // accent lightness is. Falls back to dark ink (accents ship light).
+    const accent = typeof c.accent === 'string' ? c.accent : '';
+    root.style.setProperty('--color-on-accent', onAccentInk(accent));
+
     root.style.setProperty('--brand-hue', String(c.brandHue ?? 240));
     root.style.setProperty('--brand-chroma', String(c.brandChroma ?? 0.18));
 
@@ -342,6 +348,48 @@ export function applyBrand(root: HTMLElement = document.documentElement): void {
 
 function kebab(s: string): string {
   return s.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+/**
+ * Pick a legible ink color to render ON TOP OF an accent swatch.
+ *
+ * OKLCH's first component IS perceptual lightness (0–1), so a light accent
+ * (L ≳ 0.62) gets dark ink and a dark accent gets near-white — matching WCAG
+ * contrast intent without a full contrast solve. Non-OKLCH inputs (hex/rgb) use
+ * a quick relative-luminance estimate. Empty/unparseable → dark ink (accents
+ * ship light across the presets).
+ *
+ * @example onAccentInk('oklch(0.86 0.13 190)') // → 'oklch(0.18 0.02 190)' (dark)
+ * @example onAccentInk('oklch(0.34 0.09 245)') // → 'oklch(0.98 0 0)'       (white)
+ */
+export function onAccentInk(accent: string): string {
+  const DARK = 'oklch(0.16 0.02 var(--brand-hue))';
+  const LIGHT = 'oklch(0.98 0 0)';
+  const a = (accent || '').trim();
+  if (!a) return DARK;
+
+  const oklch = a.match(/oklch\(\s*([0-9]*\.?[0-9]+)/i);
+  if (oklch) {
+    const L = Number(oklch[1]);
+    return Number.isFinite(L) && L >= 0.62 ? DARK : LIGHT;
+  }
+
+  const hex = a.match(/^#?([0-9a-f]{6})$/i);
+  if (hex) {
+    const n = parseInt(hex[1], 16);
+    const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    return lum >= 0.55 ? DARK : LIGHT;
+  }
+
+  const rgb = a.match(/rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/i);
+  if (rgb) {
+    const [r, g, b] = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+    const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+    return lum >= 0.55 ? DARK : LIGHT;
+  }
+
+  return DARK;
 }
 
 export function featureOn(key: keyof Brand['features']): boolean {

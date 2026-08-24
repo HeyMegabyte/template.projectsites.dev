@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
-  "$description": "SaaS / B2B software preset — indigo, dark, pricing + bento + logoCloud + blog + caseStudies enabled.",
+  "$description": "SaaS / B2B software / startup preset — DARK, modern violet→indigo gradient with a vivid cyan accent. Product-launch 'Linear/Vercel' mood: crisp radii, layered violet-tinted glow shadows, Inter Tight display. Pricing + bento + logoCloud + caseStudies on.",
 
   "business": {
     "name":          { "$value": "Linearity",                              "$type": "string" },
     "shortName":     { "$value": "Linearity",                              "$type": "string" },
     "tagline":       { "$value": "Built for engineers",                    "$type": "string" },
-    "description":   { "$value": "The fastest issue tracker for teams who ship. Free until $10K MRR. SOC 2. 50ms p99.", "$type": "string" },
+    "description":   { "$value": "The fastest issue tracker for teams who ship. Free until $10K MRR, SOC 2 compliant, and a blistering 50ms p99 everywhere.", "$type": "string" },
     "url":           { "$value": "https://linearity.example",              "$type": "string" },
     "businessClass": { "$value": "saas",                                   "$type": "string" },
     "email":         { "$value": "hello@linearity.example",                "$type": "string" },
@@ -16,23 +16,23 @@
   },
 
   "color": {
-    "brandHue":        { "$value": "260", "$type": "number" },
+    "brandHue":        { "$value": "275", "$type": "number" },
     "brandChroma":     { "$value": "0.20", "$type": "number" },
-    "primary":         { "$value": "oklch(0.62 {color.brandChroma} {color.brandHue})", "$type": "color" },
-    "primaryHover":    { "$value": "oklch(0.56 {color.brandChroma} {color.brandHue})", "$type": "color" },
-    "accent":          { "$value": "oklch(0.82 0.18 165)",                              "$type": "color" },
-    "accentHover":     { "$value": "oklch(0.74 0.18 165)",                              "$type": "color" },
-    "background":      { "$value": "oklch(0.08 0.02 {color.brandHue})", "$type": "color" },
-    "surface":         { "$value": "oklch(0.12 0.02 {color.brandHue})", "$type": "color" },
-    "surfaceElevated": { "$value": "oklch(0.16 0.02 {color.brandHue})", "$type": "color" },
-    "border":          { "$value": "oklch(0.22 0.02 {color.brandHue})", "$type": "color" },
-    "text":            { "$value": "oklch(0.97 0.005 {color.brandHue})", "$type": "color" },
-    "textMuted":       { "$value": "oklch(0.65 0.01 {color.brandHue})",  "$type": "color" },
-    "textSubtle":      { "$value": "oklch(0.45 0.01 {color.brandHue})",  "$type": "color" },
-    "success":         { "$value": "oklch(0.74 0.16 152)", "$type": "color" },
+    "primary":         { "$value": "oklch(0.60 0.22 285)", "$type": "color" },
+    "primaryHover":    { "$value": "oklch(0.54 0.22 285)", "$type": "color" },
+    "accent":          { "$value": "oklch(0.84 0.15 200)",                              "$type": "color" },
+    "accentHover":     { "$value": "oklch(0.78 0.16 200)",                              "$type": "color" },
+    "background":      { "$value": "oklch(0.10 0.028 285)", "$type": "color" },
+    "surface":         { "$value": "oklch(0.145 0.03 285)", "$type": "color" },
+    "surfaceElevated": { "$value": "oklch(0.19 0.032 285)", "$type": "color" },
+    "border":          { "$value": "oklch(0.27 0.03 285)", "$type": "color" },
+    "text":            { "$value": "oklch(0.97 0.008 285)", "$type": "color" },
+    "textMuted":       { "$value": "oklch(0.72 0.02 285)",  "$type": "color" },
+    "textSubtle":      { "$value": "oklch(0.54 0.02 285)",  "$type": "color" },
+    "success":         { "$value": "oklch(0.76 0.17 155)", "$type": "color" },
     "warning":         { "$value": "oklch(0.82 0.16 85)",  "$type": "color" },
-    "danger":          { "$value": "oklch(0.66 0.22 28)",  "$type": "color" },
-    "info":            { "$value": "oklch(0.72 0.15 235)", "$type": "color" }
+    "danger":          { "$value": "oklch(0.66 0.24 20)",  "$type": "color" },
+    "info":            { "$value": "oklch(0.74 0.15 235)", "$type": "color" }
   },
 
   "colorScheme": { "$value": "dark", "$type": "string" },
@@ -45,9 +45,9 @@
     "fluidScale":{ "$value": "clamp", "$type": "string" }
   },
 
-  "radius":  { "sm": { "$value": "0.375rem", "$type": "dimension" }, "md": { "$value": "0.5rem", "$type": "dimension" }, "lg": { "$value": "0.75rem", "$type": "dimension" }, "xl": { "$value": "1rem", "$type": "dimension" }, "2xl": { "$value": "1.5rem", "$type": "dimension" }, "full": { "$value": "9999px", "$type": "dimension" } },
+  "radius":  { "sm": { "$value": "0.375rem", "$type": "dimension" }, "md": { "$value": "0.625rem", "$type": "dimension" }, "lg": { "$value": "0.875rem", "$type": "dimension" }, "xl": { "$value": "1.25rem", "$type": "dimension" }, "2xl": { "$value": "1.75rem", "$type": "dimension" }, "full": { "$value": "9999px", "$type": "dimension" } },
   "spacing": { "0": { "$value": "0", "$type": "dimension" }, "1": { "$value": "0.25rem", "$type": "dimension" }, "2": { "$value": "0.5rem", "$type": "dimension" }, "3": { "$value": "0.75rem", "$type": "dimension" }, "4": { "$value": "1rem", "$type": "dimension" }, "6": { "$value": "1.5rem", "$type": "dimension" }, "8": { "$value": "2rem", "$type": "dimension" }, "12": { "$value": "3rem", "$type": "dimension" }, "16": { "$value": "4rem", "$type": "dimension" }, "24": { "$value": "6rem", "$type": "dimension" }, "32": { "$value": "8rem", "$type": "dimension" } },
-  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.05)", "$type": "shadow" }, "md": { "$value": "0 8px 24px -8px oklch(0 0 0 / 0.40)", "$type": "shadow" }, "lg": { "$value": "0 16px 48px -12px oklch(0 0 0 / 0.55)", "$type": "shadow" }, "glow": { "$value": "0 0 40px -8px {color.primary}", "$type": "shadow" } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.30)", "$type": "shadow" }, "md": { "$value": "0 10px 30px -10px oklch(0.60 0.22 285 / 0.35), 0 2px 8px -4px oklch(0 0 0 / 0.40)", "$type": "shadow" }, "lg": { "$value": "0 24px 60px -14px oklch(0.60 0.22 285 / 0.45), 0 6px 16px -8px oklch(0 0 0 / 0.55)", "$type": "shadow" }, "glow": { "$value": "0 0 56px -8px oklch(0.84 0.15 200 / 0.55)", "$type": "shadow" } },
   "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)", "$type": "cubicBezier" }, "duration": { "fast": { "$value": "150ms", "$type": "duration" }, "base": { "$value": "250ms", "$type": "duration" }, "slow": { "$value": "450ms", "$type": "duration" }, "scroll": { "$value": "1200ms", "$type": "duration" } } },
   "layout":  { "containerWide": { "$value": "80rem", "$type": "dimension" }, "containerNormal": { "$value": "64rem", "$type": "dimension" }, "containerProse": { "$value": "42rem", "$type": "dimension" } },
   "social":  { "facebook": { "$value": "", "$type": "string" }, "instagram": { "$value": "", "$type": "string" }, "linkedin": { "$value": "", "$type": "string" }, "twitter": { "$value": "", "$type": "string" }, "youtube": { "$value": "", "$type": "string" }, "tiktok": { "$value": "", "$type": "string" }, "github": { "$value": "", "$type": "string" } },

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.designtokens.org/2025-10",
+  "$description": "Wellness / yoga / spa / studio preset — LIGHT, calm & airy sage-eucalyptus on warm off-white with a soft clay accent. Breathe 'quiet studio' mood: very generous pill radii, feather-soft diffuse shadows, Fraunces display over Nunito Sans. Yoga, pilates, massage, meditation, spa map here.",
+
+  "business": {
+    "name":          { "$value": "Still Point Studio" },
+    "shortName":     { "$value": "Still Point" },
+    "tagline":       { "$value": "Breathe. Move. Restore." },
+    "description":   { "$value": "Neighborhood yoga and movement studio in Portland, OR. Small heated and unheated classes, beginner-friendly teachers, and a calm space to slow down." },
+    "url":           { "$value": "https://stillpoint.example" },
+    "businessClass": { "$value": "salon" },
+    "email":         { "$value": "hello@stillpoint.example" },
+    "phone":         { "$value": "+15035550100" },
+    "address":       { "$value": "412 SE Belmont Street, Portland, OR 97214" },
+    "hours":         { "$value": "Mon–Fri 6am–8pm · Sat–Sun 8am–2pm" }
+  },
+
+  "color": {
+    "brandHue":    { "$value": "165" },
+    "brandChroma": { "$value": "0.06" },
+    "primary":     { "$value": "oklch(0.52 0.07 165)" },
+    "primaryHover":{ "$value": "oklch(0.45 0.07 165)" },
+    "accent":      { "$value": "oklch(0.82 0.09 55)" },
+    "accentHover": { "$value": "oklch(0.75 0.10 52)" },
+    "background":  { "$value": "oklch(0.98 0.012 95)" },
+    "surface":     { "$value": "oklch(0.965 0.016 120)" },
+    "surfaceElevated":{ "$value": "oklch(0.995 0.008 95)" },
+    "border":      { "$value": "oklch(0.89 0.02 140)" },
+    "text":        { "$value": "oklch(0.30 0.03 165)" },
+    "textMuted":   { "$value": "oklch(0.48 0.02 165)" },
+    "textSubtle":  { "$value": "oklch(0.62 0.015 165)" },
+    "success":     { "$value": "oklch(0.55 0.13 150)" },
+    "warning":     { "$value": "oklch(0.70 0.13 80)" },
+    "danger":      { "$value": "oklch(0.56 0.18 28)" },
+    "info":        { "$value": "oklch(0.56 0.10 220)" }
+  },
+
+  "colorScheme": { "$value": "light" },
+
+  "font": {
+    "heading":   { "$value": "Fraunces" },
+    "body":      { "$value": "Nunito Sans" },
+    "mono":      { "$value": "JetBrains Mono" },
+    "weights":   { "$value": [400,500,600,700] },
+    "fluidScale":{ "$value": "clamp" }
+  },
+
+  "radius":  { "sm": { "$value": "0.625rem" }, "md": { "$value": "1rem" }, "lg": { "$value": "1.5rem" }, "xl": { "$value": "2rem" }, "2xl": { "$value": "2.75rem" }, "full": { "$value": "9999px" } },
+  "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
+  "shadow":  { "sm": { "$value": "0 1px 3px 0 oklch(0.45 0.06 150 / 0.06)" }, "md": { "$value": "0 14px 40px -16px oklch(0.45 0.06 150 / 0.18), 0 3px 10px -6px oklch(0.45 0.06 150 / 0.10)" }, "lg": { "$value": "0 30px 72px -20px oklch(0.45 0.06 150 / 0.24), 0 8px 20px -10px oklch(0.45 0.06 150 / 0.12)" }, "glow": { "$value": "0 0 56px -12px oklch(0.82 0.09 55 / 0.45)" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.33, 1, 0.68, 1)" }, "duration": { "fast": { "$value": "200ms" }, "base": { "$value": "340ms" }, "slow": { "$value": "620ms" }, "scroll": { "$value": "1400ms" } } },
+  "layout":  { "containerWide": { "$value": "78rem" }, "containerNormal": { "$value": "62rem" }, "containerProse": { "$value": "40rem" } },
+  "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
+
+  "features": {
+    "hero":         { "$value": true },
+    "bento":        { "$value": true },
+    "stats":        { "$value": false },
+    "services":     { "$value": true },
+    "process":      { "$value": false },
+    "testimonials": { "$value": true },
+    "logoCloud":    { "$value": false },
+    "pricing":      { "$value": true },
+    "faq":          { "$value": true },
+    "blog":         { "$value": true },
+    "team":         { "$value": true },
+    "caseStudies":  { "$value": false },
+    "newsletter":   { "$value": true },
+    "cta":          { "$value": true }
+  }
+}

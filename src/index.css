@@ -93,6 +93,39 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   ON-ACCENT INK — text/icon color to sit ON TOP OF --color-accent.
+   `applyBrand()` overwrites this at boot with the WCAG-correct value
+   (dark ink on a light accent, white on a dark accent). The literal below
+   is a safe default for the dark-first fallback (accents ship light).
+   ─────────────────────────────────────────────────────────────────────── */
+:root { --color-on-accent: oklch(0.16 0.02 var(--brand-hue)); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LIGHT-THEME RENDER SAFETY NET
+   The default component tree is token-driven and adapts to light themes for
+   free. A handful of opt-in `local/*` components still hardcode white-alpha
+   utilities (`bg-white/5`, `text-white`, `border-white/10`) that assume a dark
+   canvas — invisible on a light background. When a light-theme build enables
+   those, retarget the compiled utilities to ink-alpha so they stay legible.
+   Higher specificity than Tailwind's single-class rules, so these win.
+   ─────────────────────────────────────────────────────────────────────── */
+:root[data-theme='light'] .text-white { color: var(--color-text); }
+:root[data-theme='light'] .text-white\/70 { color: var(--color-text-muted); }
+:root[data-theme='light'] .text-white\/60 { color: var(--color-text-muted); }
+:root[data-theme='light'] .text-white\/40 { color: var(--color-text-subtle); }
+:root[data-theme='light'] .text-white\/30 { color: var(--color-text-subtle); }
+:root[data-theme='light'] .placeholder\:text-white\/40::placeholder { color: var(--color-text-subtle); }
+:root[data-theme='light'] .placeholder\:text-white\/30::placeholder { color: var(--color-text-subtle); }
+:root[data-theme='light'] .bg-white\/5 { background-color: color-mix(in oklch, var(--color-text) 4%, transparent); }
+:root[data-theme='light'] .bg-white\/10 { background-color: color-mix(in oklch, var(--color-text) 7%, transparent); }
+:root[data-theme='light'] .bg-white\/\[0\.02\] { background-color: color-mix(in oklch, var(--color-text) 3%, transparent); }
+:root[data-theme='light'] .border-white\/5 { border-color: color-mix(in oklch, var(--color-text) 8%, transparent); }
+:root[data-theme='light'] .border-white\/10 { border-color: color-mix(in oklch, var(--color-text) 12%, transparent); }
+:root[data-theme='light'] .border-white\/20 { border-color: color-mix(in oklch, var(--color-text) 18%, transparent); }
+:root[data-theme='light'] .hover\:bg-white\/10:hover { background-color: color-mix(in oklch, var(--color-text) 7%, transparent); }
+:root[data-theme='light'] .hover\:bg-white\/5:hover { background-color: color-mix(in oklch, var(--color-text) 4%, transparent); }
+
+/* ─────────────────────────────────────────────────────────────────────────
    BASE
    ─────────────────────────────────────────────────────────────────────── */
 html {

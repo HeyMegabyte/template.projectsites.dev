@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
-  "$description": "Portfolio / personal site preset — violet, dark, caseStudies + team + process.",
+  "$description": "Portfolio / personal / creative preset — DARK, refined violet-on-ink with a warm champagne-gold accent. Gallery 'editorial' mood: crisp small radii, deep soft shadows, expressive Cabinet Grotesk display over Satoshi. caseStudies + process + team on.",
 
   "business": {
     "name":          { "$value": "Maria Chen" },
     "shortName":     { "$value": "Maria" },
     "tagline":       { "$value": "Designer · Developer · Toronto" },
-    "description":   { "$value": "Independent product designer. 8 years building marketing sites for SaaS and B2B teams." },
+    "description":   { "$value": "Independent product designer with eight years building conversion-focused marketing sites for SaaS and B2B teams that need to look world-class." },
     "url":           { "$value": "https://maria.example" },
     "businessClass": { "$value": "portfolio" },
     "email":         { "$value": "hi@maria.example" },
@@ -16,19 +16,19 @@
   },
 
   "color": {
-    "brandHue":    { "$value": "270" },
-    "brandChroma": { "$value": "0.16" },
-    "primary":     { "$value": "oklch(0.62 {color.brandChroma} {color.brandHue})" },
-    "primaryHover":{ "$value": "oklch(0.56 {color.brandChroma} {color.brandHue})" },
-    "accent":      { "$value": "oklch(0.88 0.18 195)" },
-    "accentHover": { "$value": "oklch(0.80 0.18 195)" },
-    "background":  { "$value": "oklch(0.08 0.02 {color.brandHue})" },
-    "surface":     { "$value": "oklch(0.12 0.02 {color.brandHue})" },
-    "surfaceElevated":{ "$value": "oklch(0.16 0.02 {color.brandHue})" },
-    "border":      { "$value": "oklch(0.22 0.02 {color.brandHue})" },
-    "text":        { "$value": "oklch(0.97 0.005 {color.brandHue})" },
-    "textMuted":   { "$value": "oklch(0.65 0.01 {color.brandHue})" },
-    "textSubtle":  { "$value": "oklch(0.45 0.01 {color.brandHue})" },
+    "brandHue":    { "$value": "285" },
+    "brandChroma": { "$value": "0.17" },
+    "primary":     { "$value": "oklch(0.64 0.19 290)" },
+    "primaryHover":{ "$value": "oklch(0.58 0.19 290)" },
+    "accent":      { "$value": "oklch(0.86 0.11 90)" },
+    "accentHover": { "$value": "oklch(0.79 0.12 88)" },
+    "background":  { "$value": "oklch(0.14 0.018 285)" },
+    "surface":     { "$value": "oklch(0.185 0.02 285)" },
+    "surfaceElevated":{ "$value": "oklch(0.23 0.022 285)" },
+    "border":      { "$value": "oklch(0.30 0.022 285)" },
+    "text":        { "$value": "oklch(0.97 0.006 285)" },
+    "textMuted":   { "$value": "oklch(0.72 0.015 285)" },
+    "textSubtle":  { "$value": "oklch(0.54 0.012 285)" },
     "success":     { "$value": "oklch(0.74 0.16 152)" },
     "warning":     { "$value": "oklch(0.82 0.16 85)" },
     "danger":      { "$value": "oklch(0.66 0.22 28)" },
@@ -45,11 +45,11 @@
     "fluidScale":{ "$value": "clamp" }
   },
 
-  "radius":  { "sm": { "$value": "0.25rem" }, "md": { "$value": "0.5rem" }, "lg": { "$value": "0.75rem" }, "xl": { "$value": "1rem" }, "2xl": { "$value": "1.5rem" }, "full": { "$value": "9999px" } },
+  "radius":  { "sm": { "$value": "0.25rem" }, "md": { "$value": "0.5rem" }, "lg": { "$value": "0.75rem" }, "xl": { "$value": "1.125rem" }, "2xl": { "$value": "1.625rem" }, "full": { "$value": "9999px" } },
   "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
-  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.05)" }, "md": { "$value": "0 8px 24px -8px oklch(0 0 0 / 0.40)" }, "lg": { "$value": "0 16px 48px -12px oklch(0 0 0 / 0.55)" }, "glow": { "$value": "0 0 40px -8px {color.primary}" } },
-  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)" }, "duration": { "fast": { "$value": "150ms" }, "base": { "$value": "250ms" }, "slow": { "$value": "450ms" }, "scroll": { "$value": "1200ms" } } },
-  "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.35)" }, "md": { "$value": "0 12px 32px -10px oklch(0 0 0 / 0.55), 0 2px 8px -4px oklch(0.64 0.19 290 / 0.25)" }, "lg": { "$value": "0 28px 68px -16px oklch(0 0 0 / 0.65), 0 6px 16px -8px oklch(0.64 0.19 290 / 0.30)" }, "glow": { "$value": "0 0 56px -8px oklch(0.86 0.11 90 / 0.50)" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)" }, "duration": { "fast": { "$value": "160ms" }, "base": { "$value": "280ms" }, "slow": { "$value": "520ms" }, "scroll": { "$value": "1300ms" } } },
+  "layout":  { "containerWide": { "$value": "78rem" }, "containerNormal": { "$value": "62rem" }, "containerProse": { "$value": "40rem" } },
   "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
 
   "features": {

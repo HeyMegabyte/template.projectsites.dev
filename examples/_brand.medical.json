@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
-  "$description": "Medical / dental clinic preset — calming blue, light, services + FAQ + team.",
+  "$description": "Medical / dental / clinic preset — LIGHT, clean white with cyan-teal, trustworthy and airy. Soft-rounded 'calm-clinic' mood: generous radii, gentle tinted shadows, warm sans headings. Dentists map here.",
 
   "business": {
     "name":          { "$value": "Chen Family Dentistry" },
     "shortName":     { "$value": "Chen Dental" },
     "tagline":       { "$value": "Gentle care since 2003" },
-    "description":   { "$value": "Family dentistry in Anchorage, AK. Accepting new patients. Most insurance accepted. Sat hours." },
+    "description":   { "$value": "Family and cosmetic dentistry in Anchorage, AK. Accepting new patients, most insurance accepted, and Saturday hours for busy families." },
     "url":           { "$value": "https://chendental.example" },
     "businessClass": { "$value": "medical" },
     "email":         { "$value": "hello@chendental.example" },
@@ -16,39 +16,39 @@
   },
 
   "color": {
-    "brandHue":    { "$value": "200" },
-    "brandChroma": { "$value": "0.12" },
-    "primary":     { "$value": "oklch(0.55 {color.brandChroma} {color.brandHue})" },
-    "primaryHover":{ "$value": "oklch(0.48 {color.brandChroma} {color.brandHue})" },
-    "accent":      { "$value": "oklch(0.62 0.16 150)" },
-    "accentHover": { "$value": "oklch(0.55 0.16 150)" },
-    "background":  { "$value": "oklch(0.99 0.005 {color.brandHue})" },
-    "surface":     { "$value": "oklch(0.97 0.01 {color.brandHue})" },
-    "surfaceElevated":{ "$value": "oklch(0.94 0.01 {color.brandHue})" },
-    "border":      { "$value": "oklch(0.88 0.02 {color.brandHue})" },
-    "text":        { "$value": "oklch(0.18 0.02 {color.brandHue})" },
-    "textMuted":   { "$value": "oklch(0.42 0.01 {color.brandHue})" },
-    "textSubtle":  { "$value": "oklch(0.58 0.01 {color.brandHue})" },
-    "success":     { "$value": "oklch(0.55 0.16 152)" },
-    "warning":     { "$value": "oklch(0.65 0.16 85)" },
-    "danger":      { "$value": "oklch(0.55 0.22 28)" },
-    "info":        { "$value": "oklch(0.55 0.15 235)" }
+    "brandHue":    { "$value": "195" },
+    "brandChroma": { "$value": "0.11" },
+    "primary":     { "$value": "oklch(0.52 0.13 195)" },
+    "primaryHover":{ "$value": "oklch(0.45 0.13 195)" },
+    "accent":      { "$value": "oklch(0.86 0.13 190)" },
+    "accentHover": { "$value": "oklch(0.80 0.14 190)" },
+    "background":  { "$value": "oklch(0.995 0.006 195)" },
+    "surface":     { "$value": "oklch(0.975 0.012 195)" },
+    "surfaceElevated":{ "$value": "oklch(1 0 0)" },
+    "border":      { "$value": "oklch(0.90 0.02 195)" },
+    "text":        { "$value": "oklch(0.24 0.03 220)" },
+    "textMuted":   { "$value": "oklch(0.46 0.02 220)" },
+    "textSubtle":  { "$value": "oklch(0.60 0.015 220)" },
+    "success":     { "$value": "oklch(0.55 0.15 155)" },
+    "warning":     { "$value": "oklch(0.68 0.15 80)" },
+    "danger":      { "$value": "oklch(0.55 0.20 25)" },
+    "info":        { "$value": "oklch(0.55 0.13 220)" }
   },
 
   "colorScheme": { "$value": "light" },
 
   "font": {
-    "heading":   { "$value": "Lora" },
+    "heading":   { "$value": "Poppins" },
     "body":      { "$value": "Inter" },
     "mono":      { "$value": "JetBrains Mono" },
     "weights":   { "$value": [400,500,600,700] },
     "fluidScale":{ "$value": "clamp" }
   },
 
-  "radius":  { "sm": { "$value": "0.375rem" }, "md": { "$value": "0.75rem" }, "lg": { "$value": "1rem" }, "xl": { "$value": "1.5rem" }, "2xl": { "$value": "2rem" }, "full": { "$value": "9999px" } },
+  "radius":  { "sm": { "$value": "0.5rem" }, "md": { "$value": "0.875rem" }, "lg": { "$value": "1.25rem" }, "xl": { "$value": "1.75rem" }, "2xl": { "$value": "2.25rem" }, "full": { "$value": "9999px" } },
   "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
-  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.05)" }, "md": { "$value": "0 8px 24px -8px oklch(0 0 0 / 0.15)" }, "lg": { "$value": "0 16px 48px -12px oklch(0 0 0 / 0.20)" }, "glow": { "$value": "0 0 40px -8px {color.primary}" } },
-  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)" }, "duration": { "fast": { "$value": "150ms" }, "base": { "$value": "250ms" }, "slow": { "$value": "450ms" }, "scroll": { "$value": "1200ms" } } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0.52 0.13 195 / 0.06)" }, "md": { "$value": "0 10px 30px -12px oklch(0.52 0.13 195 / 0.20), 0 2px 8px -4px oklch(0.52 0.13 195 / 0.10)" }, "lg": { "$value": "0 24px 60px -16px oklch(0.52 0.13 195 / 0.28), 0 6px 16px -8px oklch(0.52 0.13 195 / 0.14)" }, "glow": { "$value": "0 0 48px -10px oklch(0.86 0.13 190 / 0.55)" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.22, 1, 0.36, 1)" }, "duration": { "fast": { "$value": "160ms" }, "base": { "$value": "260ms" }, "slow": { "$value": "480ms" }, "scroll": { "$value": "1200ms" } } },
   "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
   "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
 

@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
-  "$description": "Agency / studio preset — bold red, dark, caseStudies + team + logoCloud + process.",
+  "$description": "Agency / studio / creative-shop preset — DARK, bold brutalist near-black with an electric magenta primary and acid-yellow accent. Award-show 'loud studio' mood: zero radii (hard corners), heavy black shadows, oversized Archivo Black display. caseStudies + team + logoCloud + process.",
 
   "business": {
     "name":          { "$value": "Field Studio" },
     "shortName":     { "$value": "Field" },
     "tagline":       { "$value": "Brand · Web · Product" },
-    "description":   { "$value": "Independent studio of 8. Brooklyn + Lisbon. Brand systems and marketing sites for founders and CMOs." },
+    "description":   { "$value": "Independent studio of eight, split between Brooklyn and Lisbon, building brand systems and marketing sites for founders and CMOs who refuse to blend in." },
     "url":           { "$value": "https://field.example" },
     "businessClass": { "$value": "organization" },
     "email":         { "$value": "hello@field.example" },
@@ -16,23 +16,23 @@
   },
 
   "color": {
-    "brandHue":    { "$value": "0" },
-    "brandChroma": { "$value": "0.22" },
-    "primary":     { "$value": "oklch(0.62 {color.brandChroma} {color.brandHue})" },
-    "primaryHover":{ "$value": "oklch(0.56 {color.brandChroma} {color.brandHue})" },
-    "accent":      { "$value": "oklch(0.85 0.18 60)" },
-    "accentHover": { "$value": "oklch(0.78 0.18 60)" },
-    "background":  { "$value": "oklch(0.08 0.02 {color.brandHue})" },
-    "surface":     { "$value": "oklch(0.12 0.02 {color.brandHue})" },
-    "surfaceElevated":{ "$value": "oklch(0.16 0.02 {color.brandHue})" },
-    "border":      { "$value": "oklch(0.22 0.02 {color.brandHue})" },
-    "text":        { "$value": "oklch(0.97 0.005 {color.brandHue})" },
-    "textMuted":   { "$value": "oklch(0.65 0.01 {color.brandHue})" },
-    "textSubtle":  { "$value": "oklch(0.45 0.01 {color.brandHue})" },
-    "success":     { "$value": "oklch(0.74 0.16 152)" },
-    "warning":     { "$value": "oklch(0.82 0.16 85)" },
-    "danger":      { "$value": "oklch(0.66 0.22 28)" },
-    "info":        { "$value": "oklch(0.72 0.15 235)" }
+    "brandHue":    { "$value": "330" },
+    "brandChroma": { "$value": "0.24" },
+    "primary":     { "$value": "oklch(0.62 0.26 340)" },
+    "primaryHover":{ "$value": "oklch(0.56 0.26 340)" },
+    "accent":      { "$value": "oklch(0.90 0.19 100)" },
+    "accentHover": { "$value": "oklch(0.84 0.20 100)" },
+    "background":  { "$value": "oklch(0.13 0.012 330)" },
+    "surface":     { "$value": "oklch(0.17 0.016 330)" },
+    "surfaceElevated":{ "$value": "oklch(0.21 0.018 330)" },
+    "border":      { "$value": "oklch(0.30 0.02 330)" },
+    "text":        { "$value": "oklch(0.98 0.006 330)" },
+    "textMuted":   { "$value": "oklch(0.74 0.015 330)" },
+    "textSubtle":  { "$value": "oklch(0.56 0.012 330)" },
+    "success":     { "$value": "oklch(0.76 0.17 150)" },
+    "warning":     { "$value": "oklch(0.84 0.16 90)" },
+    "danger":      { "$value": "oklch(0.66 0.24 25)" },
+    "info":        { "$value": "oklch(0.74 0.15 235)" }
   },
 
   "colorScheme": { "$value": "dark" },
@@ -45,11 +45,11 @@
     "fluidScale":{ "$value": "clamp" }
   },
 
-  "radius":  { "sm": { "$value": "0px" }, "md": { "$value": "0px" }, "lg": { "$value": "0px" }, "xl": { "$value": "0.25rem" }, "2xl": { "$value": "0.5rem" }, "full": { "$value": "9999px" } },
+  "radius":  { "sm": { "$value": "0px" }, "md": { "$value": "0px" }, "lg": { "$value": "0px" }, "xl": { "$value": "0.125rem" }, "2xl": { "$value": "0.25rem" }, "full": { "$value": "9999px" } },
   "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
-  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.05)" }, "md": { "$value": "0 8px 24px -8px oklch(0 0 0 / 0.40)" }, "lg": { "$value": "0 16px 48px -12px oklch(0 0 0 / 0.55)" }, "glow": { "$value": "0 0 40px -8px {color.primary}" } },
+  "shadow":  { "sm": { "$value": "2px 2px 0 0 oklch(0 0 0 / 0.60)" }, "md": { "$value": "6px 6px 0 0 oklch(0 0 0 / 0.55), 0 10px 24px -8px oklch(0 0 0 / 0.60)" }, "lg": { "$value": "10px 10px 0 0 oklch(0 0 0 / 0.55), 0 24px 52px -12px oklch(0 0 0 / 0.70)" }, "glow": { "$value": "0 0 52px -6px oklch(0.90 0.19 100 / 0.55)" } },
   "motion":  { "easing": { "$value": "cubic-bezier(0.4, 0, 0, 1)" }, "duration": { "fast": { "$value": "100ms" }, "base": { "$value": "200ms" }, "slow": { "$value": "350ms" }, "scroll": { "$value": "1000ms" } } },
-  "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
+  "layout":  { "containerWide": { "$value": "84rem" }, "containerNormal": { "$value": "66rem" }, "containerProse": { "$value": "42rem" } },
   "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
 
   "features": {
