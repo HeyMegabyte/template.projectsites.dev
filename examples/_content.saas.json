@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMHRlYW0lMjB3b3JraW5nJTIwbGFwdG9wcyUyMG9mZmljZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Team collaborating in a modern office",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB0ZWNoJTIwc3RhcnR1cCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "group of people using laptop computer"
+  "ABOUT_IMAGE_ALT": "group of people using laptop computer",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwc29mdHdhcmUlMjB0ZWFtJTIwb2ZmaWNlfGVufDF8MHx8fDE3ODc1OTYzOTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHx0ZWNobm9sb2d5JTIwc29mdHdhcmUlMjB0ZWFtJTIwb2ZmaWNlfGVufDF8MHx8fDE3ODc1OTYzOTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1556761175-b413da4baf72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHx0ZWNobm9sb2d5JTIwc29mdHdhcmUlMjB0ZWFtJTIwb2ZmaWNlfGVufDF8MHx8fDE3ODc1OTYzOTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHx0ZWNobm9sb2d5JTIwc29mdHdhcmUlMjB0ZWFtJTIwb2ZmaWNlfGVufDF8MHx8fDE3ODc1OTYzOTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1519241047957-be31d7379a5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx0ZWNobm9sb2d5JTIwc29mdHdhcmUlMjB0ZWFtJTIwb2ZmaWNlfGVufDF8MHx8fDE3ODc1OTYzOTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx0ZWNobm9sb2d5JTIwc29mdHdhcmUlMjB0ZWFtJTIwb2ZmaWNlfGVufDF8MHx8fDE3ODc1OTYzOTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
 }

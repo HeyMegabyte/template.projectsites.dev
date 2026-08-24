@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHRlYW0lMjBtZWV0aW5nfGVufDF8MHx8fDE3ODc1ODU2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Creative team working together",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMHdvcmtzcGFjZSUyMGRlc2t8ZW58MXwwfHx8MTc4NzU4NTY1OXww&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "MacBook Pro on table beside white iMac and Magic Mouse"
+  "ABOUT_IMAGE_ALT": "MacBook Pro on table beside white iMac and Magic Mouse",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1537861295351-76bb831ece99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1716471330463-f475b00f0506?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1548094990-c16ca90f1f0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1523837157348-ffbdaccfc7de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1710799885122-428e63eff691?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1487523117656-d5d117ad47c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080"
 }

@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1752650736252-dff5244c8a7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHBob3RvZ3JhcGhlciUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Creative studio workspace",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1650783756107-739513b38177?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxhcnRpc3QlMjB3b3JraW5nJTIwc3R1ZGlvfGVufDF8MHx8fDE3ODc1ODU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "a person with a red hat writing on a laptop"
+  "ABOUT_IMAGE_ALT": "a person with a red hat writing on a laptop",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1768471125958-78556538fadc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHByb2Zlc3Npb25hbCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTk2NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1760780567530-389d8a3fba75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxjcmVhdGl2ZSUyMHByb2Zlc3Npb25hbCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTk2NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1758876021151-3b76cb4f81cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjcmVhdGl2ZSUyMHByb2Zlc3Npb25hbCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTk2NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1758876202699-abeb827f35b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMHByb2Zlc3Npb25hbCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTk2NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1758874572628-8a63fb0c9851?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjcmVhdGl2ZSUyMHByb2Zlc3Npb25hbCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTk2NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1763568258266-3794097e5837?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjcmVhdGl2ZSUyMHByb2Zlc3Npb25hbCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTk2NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080"
 }

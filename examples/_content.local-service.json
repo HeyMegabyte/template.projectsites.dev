@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwbHVtYmVyJTIwcmVwYWlyaW5nJTIwcGlwZXN8ZW58MXwwfHx8MTc4NzU4NTY1NXww&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Skilled service technician on the job",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJ2aWNlJTIwdGVjaG5pY2lhbiUyMHRvb2xzfGVufDF8MHx8fDE3ODc1ODU2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "red and silver hand tool"
+  "ABOUT_IMAGE_ALT": "red and silver hand tool",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1505798577917-a65157d3320a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1461938337379-4b537cd2db74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1618090584176-7132b9911657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1646640381839-02748ae8ddf0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1774977863604-59f4e6d37a90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1629010336114-8206b071be71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080"
 }

@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3YXJtJTIwcmVzdGF1cmFudCUyMGludGVyaW9yJTIwZGluaW5nfGVufDF8MHx8fDE3ODc1ODU2NTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Warm, inviting restaurant dining room",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjaGVmJTIwcGxhdGluZyUyMGdvdXJtZXQlMjBmb29kfGVufDF8MHx8fDE3ODc1ODU2NTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "person putting food on plate"
+  "ABOUT_IMAGE_ALT": "person putting food on plate",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwZm9vZCUyMGRpbmluZ3xlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxyZXN0YXVyYW50JTIwZm9vZCUyMGRpbmluZ3xlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1565895405140-6b9830a88c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxyZXN0YXVyYW50JTIwZm9vZCUyMGRpbmluZ3xlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1564759224907-65b945ff0e84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxyZXN0YXVyYW50JTIwZm9vZCUyMGRpbmluZ3xlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1565895405227-31cffbe0cf86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxyZXN0YXVyYW50JTIwZm9vZCUyMGRpbmluZ3xlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1565895405137-3ca0cc5088c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxyZXN0YXVyYW50JTIwZm9vZCUyMGRpbmluZ3xlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080"
 }

@@ -9,6 +9,13 @@ import { fileURLToPath } from 'node:url';
 
 const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'examples');
 
+// 6 relevant per-vertical background photos for the feature bento tiles (real
+// images.unsplash.com URLs). Refresh with fetch-vertical-images.mjs-style query
+// (per_page=6). Committed so the generator stays reproducible + self-contained.
+const FEATURE_IMG = JSON.parse(
+  fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'vertical-feature-images.json'), 'utf8'),
+);
+
 // Per-vertical spec. Arrays are positional; the mapper below flattens them to tokens.
 const V = {
   medical: {
@@ -229,6 +236,8 @@ function pack(v) {
     o.ABOUT_IMAGE_URL = img.about;
     o.ABOUT_IMAGE_ALT = img.aboutAlt;
   }
+  const feats = FEATURE_IMG[v] || [];
+  for (let i = 0; i < 6; i++) if (feats[i]) o[`FEATURE_${i + 1}_IMAGE_URL`] = feats[i];
   return o;
 }
 

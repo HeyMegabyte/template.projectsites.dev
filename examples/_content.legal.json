@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1781136230118-3272607eb34c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsYXclMjBvZmZpY2UlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Professional modern law office interior",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1662104935883-e9dd0619eaba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBwb3J0cmFpdHxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "a woman in a black suit"
+  "ABOUT_IMAGE_ALT": "a woman in a black suit",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1758518731462-d091b0b4ed0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1758310999515-645097b709db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1778873750399-338b94f7feda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1775144657626-29ff0a46ca90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1775144657610-9a6f171e522f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1775144657566-e5b093073baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080"
 }

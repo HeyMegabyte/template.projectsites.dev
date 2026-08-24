@@ -25,12 +25,12 @@ import {
 } from '@/components/sections';
 
 const bentoTiles: BentoTile[] = [
-  { id: 't1', title: '{FEATURE_1_TITLE}', description: '{FEATURE_1_DESCRIPTION}', icon: <Shield size={24} />, span: 'lg', tall: true, accent: true },
-  { id: 't2', title: '{FEATURE_2_TITLE}', description: '{FEATURE_2_DESCRIPTION}', icon: <Zap size={24} />, span: 'sm' },
-  { id: 't3', title: '{FEATURE_3_TITLE}', description: '{FEATURE_3_DESCRIPTION}', icon: <Users size={24} />, span: 'sm' },
-  { id: 't4', title: '{FEATURE_4_TITLE}', description: '{FEATURE_4_DESCRIPTION}', icon: <Target size={24} />, span: 'sm' },
-  { id: 't5', title: '{FEATURE_5_TITLE}', description: '{FEATURE_5_DESCRIPTION}', icon: <Award size={24} />, span: 'md' },
-  { id: 't6', title: '{FEATURE_6_TITLE}', description: '{FEATURE_6_DESCRIPTION}', icon: <Star size={24} />, span: 'md' },
+  { id: 't1', title: '{FEATURE_1_TITLE}', description: '{FEATURE_1_DESCRIPTION}', icon: <Shield size={24} />, image: '{FEATURE_1_IMAGE_URL}', imageAlt: '', span: 'lg', tall: true, accent: true },
+  { id: 't2', title: '{FEATURE_2_TITLE}', description: '{FEATURE_2_DESCRIPTION}', icon: <Zap size={24} />, image: '{FEATURE_2_IMAGE_URL}', imageAlt: '', span: 'sm' },
+  { id: 't3', title: '{FEATURE_3_TITLE}', description: '{FEATURE_3_DESCRIPTION}', icon: <Users size={24} />, image: '{FEATURE_3_IMAGE_URL}', imageAlt: '', span: 'sm' },
+  { id: 't4', title: '{FEATURE_4_TITLE}', description: '{FEATURE_4_DESCRIPTION}', icon: <Target size={24} />, image: '{FEATURE_4_IMAGE_URL}', imageAlt: '', span: 'sm' },
+  { id: 't5', title: '{FEATURE_5_TITLE}', description: '{FEATURE_5_DESCRIPTION}', icon: <Award size={24} />, image: '{FEATURE_5_IMAGE_URL}', imageAlt: '', span: 'md' },
+  { id: 't6', title: '{FEATURE_6_TITLE}', description: '{FEATURE_6_DESCRIPTION}', icon: <Star size={24} />, image: '{FEATURE_6_IMAGE_URL}', imageAlt: '', span: 'md' },
 ];
 
 const stats: Stat[] = [

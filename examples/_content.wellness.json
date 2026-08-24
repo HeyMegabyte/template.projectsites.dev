@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1676496962536-d8ef110ff6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJlbmUlMjB5b2dhJTIwc3R1ZGlvJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc4NzU4NTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Calm, sunlit yoga and wellness studio",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHByYWN0aWNpbmclMjB5b2dhfGVufDF8MHx8fDE3ODc1ODU2NTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "silhouette photography of woman doing yoga"
+  "ABOUT_IMAGE_ALT": "silhouette photography of woman doing yoga",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1676496962536-d8ef110ff6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1599447421321-1c96150f0f6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1761971975973-cbb3e59263de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1761971975962-9cc397e2ba2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1761971975651-4fdd4abc200f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1599447421416-3414500d18a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080"
 }

@@ -73,5 +73,11 @@
   "HERO_IMAGE_URL": "https://images.unsplash.com/photo-1628717341663-0007b0ee2597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwaGVscGluZ3xlbnwxfDB8fHwxNzg3NTg1NjU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "HERO_IMAGE_ALT": "Volunteers serving the local community",
   "ABOUT_IMAGE_URL": "https://images.unsplash.com/photo-1618521715147-29e4b97e2ebd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxncm91cCUyMG9mJTIwdm9sdW50ZWVycyUyMHNtaWxpbmd8ZW58MXwwfHx8MTc4NzU4NTY1Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-  "ABOUT_IMAGE_ALT": "group of people standing on brown soil during daytime"
+  "ABOUT_IMAGE_ALT": "group of people standing on brown soil during daytime",
+  "FEATURE_1_IMAGE_URL": "https://images.unsplash.com/photo-1628717341663-0007b0ee2597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_2_IMAGE_URL": "https://images.unsplash.com/photo-1559027615-cd4628902d4a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1593113616828-6f22bca04804?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1557660559-42497f78035b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1560220604-1985ebfe28b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1758599669406-d5179ccefcb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080"
 }
