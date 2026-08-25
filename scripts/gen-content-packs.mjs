@@ -231,6 +231,153 @@ const GALLERY_HEADLINE = {
   portfolio: 'Featured work',
 };
 
+// Sub-page body content the homepage packs didn't cover: About-page intro
+// paragraphs + FAQ-page billing/support Q&A (journey 2026-08-25 — Brian: "every
+// page full of relevant content that guesses ahead"). Name-agnostic, Flesch >= 60,
+// no slop, no fabricated people.
+const SUBPAGE = {
+  medical: {
+    aboutP: [
+      'Our practice began with a simple goal: make going to the dentist something you never dread. From the moment you walk in, you are greeted by name, listened to, and treated with patience. We take time to explain what we see and why it matters, so you always leave knowing exactly where your health stands.',
+      'Over the years we have grown, but our approach has not changed. We invest in gentle, modern technology, keep our pricing clear, and welcome patients of every age. Whether it is a routine cleaning or an unexpected emergency, you can count on honest advice and a comfortable visit every time.',
+    ],
+    faqBill: [
+      ['Do you accept insurance and payment plans?', 'We accept most major dental plans and file the claims for you. For treatments not fully covered, we offer flexible payment options so cost never stands between you and a healthy smile.'],
+      ['Will I know the cost before treatment?', 'Always. We review the full cost and your insurance estimate with you before any work begins, so there are never surprises on your bill.'],
+    ],
+    faqSup: [
+      ['What are your office hours?', 'We offer appointments throughout the week, including early and evening slots for busy schedules. Call or book online and we will find a time that works for you.'],
+      ['How do I schedule my first visit?', 'Booking is easy. Use the contact form or give us a call, and our friendly front desk will get you scheduled and answer any questions before you arrive.'],
+    ],
+  },
+  wellness: {
+    aboutP: [
+      'We opened our doors to create a space where anyone could move, breathe, and feel a little more at home in their body. No cliques, no competition, just steady practice and a community that cheers each other on. Every class is a chance to slow down and reconnect.',
+      'Our certified instructors meet you exactly where you are, offering options for every level and every body. Whether you are here to build strength, ease stress, or simply carve out an hour for yourself, you will find a warm welcome and plenty of encouragement on the mat.',
+    ],
+    faqBill: [
+      ['What membership and class options do you offer?', 'We keep it flexible with drop-ins, class packs, and monthly memberships. Choose what fits your schedule and your budget, and change it anytime as your practice grows.'],
+      ['Is there a cost for my first class?', 'Your first class is on us. Come try the studio, meet an instructor, and see how it feels before you commit to anything.'],
+    ],
+    faqSup: [
+      ['What should I bring and wear?', 'Just comfortable clothes you can move in and a bottle of water. We provide mats and props, so you can arrive with nothing but an open mind.'],
+      ['How do I reserve a spot?', 'Reserve your mat online in under a minute, and we will send a friendly reminder before class. Walk-ins are welcome too, based on space.'],
+    ],
+  },
+  legal: {
+    aboutP: [
+      'Our firm was built on a belief that everyone deserves clear guidance and a strong advocate, especially in stressful moments. We take time to understand your situation, explain your options in plain language, and stand beside you from the first meeting to the final resolution.',
+      'When you work with us, a senior attorney handles your case directly. You are never passed down the hall or left wondering what comes next. We keep you informed, return your calls, and fight for the outcome you deserve with honesty and care.',
+    ],
+    faqBill: [
+      ['How do your fees work?', 'It depends on your matter. Many cases are handled on a flat fee or contingency basis, and we explain the full structure clearly before you sign anything, so you always know what to expect.'],
+      ['Is the first consultation really free?', 'Yes. Your initial consultation is free and confidential. We will review your situation, answer your questions, and outline your options with no obligation.'],
+    ],
+    faqSup: [
+      ['How quickly will you respond?', 'We know timing often matters. We answer questions promptly and keep you updated at every step, so you are never left waiting in the dark.'],
+      ['How do I get started?', 'Reach out through the contact form or give us a call to schedule your free consultation. We will handle the details from there.'],
+    ],
+  },
+  restaurant: {
+    aboutP: [
+      'We started with a simple idea: cook honest food from local ingredients and treat every guest like family. From the first cup of coffee to the last bite of dessert, everything is made in house, from scratch, with care you can taste.',
+      'Our menu changes with the seasons because the best flavors come from what is fresh and nearby. Whether you are here for a quiet dinner, a weekend brunch, or a celebration with friends, we save you a warm seat and a plate worth savoring.',
+    ],
+    faqBill: [
+      ['Do you take reservations, and is there a deposit?', 'You can book a table online or by phone at no charge. For large parties and private events we may ask for a small deposit, which goes toward your final bill.'],
+      ['Do you offer gift cards?', 'We do. Gift cards are a favorite for birthdays and holidays, and you can pick one up in person or ask us about ordering one.'],
+    ],
+    faqSup: [
+      ['What are your hours?', 'We serve lunch and dinner through the week with brunch on weekends. Check the top of the page for today’s hours, or give us a call anytime.'],
+      ['Can you handle dietary needs?', 'Absolutely. Our menu marks vegetarian and gluten-free dishes, and our kitchen is always happy to accommodate allergies and preferences. Just let your server know.'],
+    ],
+  },
+  'local-service': {
+    aboutP: [
+      'We built our reputation the hard way, one honest job at a time. When you call, you reach people who actually show up when they say they will, charge a fair price, and treat your home with respect. No runaround, no surprise fees, just dependable work.',
+      'Our team is fully licensed and insured, and every job is backed by our workmanship guarantee. From a small repair to a major upgrade, we take time to do it right the first time and leave your home cleaner than we found it.',
+    ],
+    faqBill: [
+      ['Are estimates really free?', 'Yes. We provide a clear, no-obligation quote before any work begins, so you can decide with full information and zero pressure.'],
+      ['How and when do I pay?', 'You approve the price up front and pay once the work is complete and you are satisfied. We accept convenient payment options and never add surprise charges.'],
+    ],
+    faqSup: [
+      ['Do you offer same-day or emergency service?', 'We do. For urgent problems that cannot wait, we reserve same-day and after-hours slots to get your home back to normal fast.'],
+      ['What areas do you serve?', 'We proudly serve our local community and the surrounding area. Give us a call and we will confirm we cover your neighborhood.'],
+    ],
+  },
+  nonprofit: {
+    aboutP: [
+      'We are a community of donors, volunteers, and staff united by one belief: everyone deserves care and a real chance. What began as a small effort to help a few neighbors has grown into a mission that reaches families across our community every single week.',
+      'Because we are powered by volunteers and guided by careful stewardship, the large majority of every gift goes straight to the people we serve. We share our impact openly, so you can give and serve with full confidence that your support truly makes a difference.',
+    ],
+    faqBill: [
+      ['Is my donation tax-deductible?', 'Yes. We are a registered nonprofit, and we send a receipt for every gift so you have what you need at tax time.'],
+      ['How is my donation used?', 'The large majority of every dollar funds our programs directly. We share our results openly so you can see exactly how your generosity turns into real help.'],
+    ],
+    faqSup: [
+      ['How can I volunteer?', 'We welcome volunteers of all backgrounds and schedules. Reach out and we will match you with a role that fits your time and talents.'],
+      ['How can my company or group help?', 'We partner with local businesses and groups on giving, sponsorships, and team volunteer days. Contact us and we will find a meaningful way to get involved.'],
+    ],
+  },
+  retail: {
+    aboutP: [
+      'We got tired of flimsy products and inflated prices, so we built a shop around quality and straight talk. Every item we carry has earned its place, chosen by people who actually use what they sell and want you to love what you buy.',
+      'Our promise is simple: great products, fair prices, and service that treats you like a person, not an order number. If something is not right, we make it easy to return, because your trust matters far more than any single sale.',
+    ],
+    faqBill: [
+      ['How much does shipping cost?', 'Shipping is free on orders over the listed threshold, and smaller orders ship at a flat, fair rate. You will see the exact cost before you check out.'],
+      ['Is checkout secure?', 'Yes. Our checkout is fast and fully protected, so you can shop with total confidence that your information is safe.'],
+    ],
+    faqSup: [
+      ['What is your return policy?', 'If it is not right, send it back within 30 days for a refund or exchange. No hassle and no hard questions.'],
+      ['How do I track my order?', 'Once your order ships, we send tracking so you can follow it to your door. Reach out anytime and we will help you check on it.'],
+    ],
+  },
+  saas: {
+    aboutP: [
+      'We build tools that get out of the way. Instead of adding one more dashboard to check, we automate the tedious work you never wanted to do by hand, so your team can spend its energy on the things that actually move the business forward.',
+      'From your first user to your millionth, our platform stays fast, secure, and simple to use. We are honest about pricing, quick to help when you need us, and relentlessly focused on saving you time. Great software should feel like a teammate, not a chore.',
+    ],
+    faqBill: [
+      ['How does pricing work?', 'We offer clear, flat plans with no hidden fees. Start on the free trial, then choose the plan that fits your team. You can upgrade, downgrade, or cancel anytime.'],
+      ['Do I need a credit card to try it?', 'No. Your 14-day trial requires no credit card, so you can explore everything risk-free before you decide.'],
+    ],
+    faqSup: [
+      ['How do I get help if I am stuck?', 'Real people answer fast. Reach our support team by chat or email and we will get you unblocked quickly, with no phone trees or canned replies.'],
+      ['How long does setup take?', 'Most teams are up and running in minutes. Connect your existing tools, invite your team, and you are ready to go.'],
+    ],
+  },
+  agency: {
+    aboutP: [
+      'We are a small team of senior designers, strategists, and marketers who care about outcomes as much as aesthetics. We started this studio because beautiful work that does not perform is just decoration, and our clients deserve both.',
+      'When you hire us, experienced people do your work directly, from the first idea to the final launch. We start with your goals, tie every creative choice to results, and hit our deadlines. We win when you win, and we treat your business like our own.',
+    ],
+    faqBill: [
+      ['How much will a project cost?', 'Every engagement has a clear, fixed price agreed up front, based on your scope and goals. No surprise invoices, ever.'],
+      ['What does the payment schedule look like?', 'We typically split projects into a few simple milestones, so payments line up with progress and you always know what you are paying for.'],
+    ],
+    faqSup: [
+      ['Who will I actually work with?', 'Senior specialists handle your project directly. There are no junior handoffs behind the scenes, so you always speak with the people doing the work.'],
+      ['How do we get started?', 'Tell us about your goals through the contact form or a quick call. We will map a plan, share a clear quote, and get moving.'],
+    ],
+  },
+  portfolio: {
+    aboutP: [
+      'I am an independent maker who cares deeply about craft and the people I work with. I take on a handful of projects at a time so each one gets my full attention, and I sweat the small details so the final work feels effortless.',
+      'Every project starts from your goals, never a canned formula. I keep communication clear and easy, hit my deadlines, and build work that holds up long after launch day. My favorite part of the job is a client who is genuinely thrilled with the result.',
+    ],
+    faqBill: [
+      ['How do you price your work?', 'I scope each project individually and give you a clear, fixed quote before we begin, so you know exactly what to expect.'],
+      ['What is your payment schedule?', 'I usually work in a couple of simple milestones, with a deposit to start and the balance on delivery. I am always happy to talk through what works for you.'],
+    ],
+    faqSup: [
+      ['Are you available for new projects?', 'Yes, I am currently taking on new work. Reach out and let us find a time to talk about what you have in mind.'],
+      ['Do you work remotely?', 'Absolutely. I work with clients anywhere and keep communication clear and simple from start to finish.'],
+    ],
+  },
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -249,6 +396,17 @@ function pack(v) {
   o.CTA_HEADLINE = s.cta[0]; o.CTA_DESCRIPTION = s.cta[1]; o.CTA_BUTTON = s.cta[2];
   o.ABOUT_HEADLINE = s.about[0]; o.ABOUT_DESCRIPTION = s.about[1]; o.ABOUT_MISSION_HEADLINE = s.about[2]; o.ABOUT_MISSION_TEXT = s.about[3];
   o.ABOUT_META_DESCRIPTION = s.meta[0]; o.SERVICES_META_DESCRIPTION = s.meta[1];
+  // Sub-page fill so /about and /faq are never empty: About-page intro paragraphs +
+  // stats (stats reuse the homepage stats), FAQ page (general reuses the homepage
+  // faqs; billing + support from SUBPAGE). journey 2026-08-25 — Brian: every page full.
+  s.faqs.slice(0, 3).forEach(([q, a], i) => { o[`FAQ_GEN_${i + 1}_Q`] = q; o[`FAQ_GEN_${i + 1}_A`] = a; });
+  s.stats.slice(0, 3).forEach(([val, lbl], i) => { o[`ABOUT_STAT_${i + 1}_VALUE`] = val; o[`ABOUT_STAT_${i + 1}_LABEL`] = lbl; });
+  const sp = SUBPAGE[v];
+  if (sp) {
+    o.ABOUT_PARAGRAPH_1 = sp.aboutP[0]; o.ABOUT_PARAGRAPH_2 = sp.aboutP[1];
+    sp.faqBill.forEach(([q, a], i) => { o[`FAQ_BILL_${i + 1}_Q`] = q; o[`FAQ_BILL_${i + 1}_A`] = a; });
+    sp.faqSup.forEach(([q, a], i) => { o[`FAQ_SUP_${i + 1}_Q`] = q; o[`FAQ_SUP_${i + 1}_A`] = a; });
+  }
   const img = IMG[v];
   if (img) {
     o.HERO_IMAGE_URL = img.hero;

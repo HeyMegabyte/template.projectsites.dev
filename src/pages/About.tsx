@@ -32,10 +32,10 @@ export default function About() {
 
           <AnimatedSection delay="0.1s">
             <div className="glass rounded-2xl p-8 md:p-12 mb-12">
-              <p className="text-white/60 text-lg leading-relaxed mb-6">
+              <p className="text-text-muted text-lg leading-relaxed mb-6">
                 {'{ABOUT_PARAGRAPH_1}'}
               </p>
-              <p className="text-white/50 leading-relaxed">
+              <p className="text-text-subtle leading-relaxed">
                 {'{ABOUT_PARAGRAPH_2}'}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function About() {
             <h2 className="text-2xl md:text-3xl font-bold font-heading mb-8">
               {'{ABOUT_MISSION_HEADLINE}'}
             </h2>
-            <p className="text-white/50 leading-relaxed mb-12">
+            <p className="text-text-subtle leading-relaxed mb-12">
               {'{ABOUT_MISSION_TEXT}'}
             </p>
           </AnimatedSection>
@@ -56,19 +56,19 @@ export default function About() {
                 <p className="text-3xl font-bold text-[var(--color-accent)] font-heading mb-2">
                   {'{ABOUT_STAT_1_VALUE}'}
                 </p>
-                <p className="text-white/50 text-sm">{'{ABOUT_STAT_1_LABEL}'}</p>
+                <p className="text-text-subtle text-sm">{'{ABOUT_STAT_1_LABEL}'}</p>
               </div>
               <div className="glass rounded-2xl p-6 text-center">
                 <p className="text-3xl font-bold text-purple-400 font-heading mb-2">
                   {'{ABOUT_STAT_2_VALUE}'}
                 </p>
-                <p className="text-white/50 text-sm">{'{ABOUT_STAT_2_LABEL}'}</p>
+                <p className="text-text-subtle text-sm">{'{ABOUT_STAT_2_LABEL}'}</p>
               </div>
               <div className="glass rounded-2xl p-6 text-center">
                 <p className="text-3xl font-bold text-blue-400 font-heading mb-2">
                   {'{ABOUT_STAT_3_VALUE}'}
                 </p>
-                <p className="text-white/50 text-sm">{'{ABOUT_STAT_3_LABEL}'}</p>
+                <p className="text-text-subtle text-sm">{'{ABOUT_STAT_3_LABEL}'}</p>
               </div>
             </div>
           </AnimatedSection>
