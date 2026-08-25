@@ -10,14 +10,21 @@ interface Props {
 /**
  * Count-up that triggers when scrolled into view.
  *
- * Respects `prefers-reduced-motion` (renders the final value immediately) and
- * falls back to the final value when `IntersectionObserver` is unavailable.
- * The suffix is rendered with `aria-hidden` so screen readers announce the
- * number cleanly.
+ * Preserves the source precision (a 4.9 rating stays 4.9, never rounds up to 5)
+ * and adds locale thousands separators (25000 → 25,000). Respects
+ * `prefers-reduced-motion` (renders the final value immediately) and falls back
+ * to the final value when `IntersectionObserver` is unavailable. The suffix is
+ * rendered with `aria-hidden` so screen readers announce the number cleanly.
  */
 export function AnimatedNumber({ value, suffix = '', durationMs = 1600, className }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const [n, setN] = useState(0);
+
+  // Match the decimal precision the source value carries so a rating like 4.9
+  // doesn't render as 5, and format with locale separators for big numbers.
+  const decimals = Number.isInteger(value) ? 0 : (value.toString().split('.')[1]?.length ?? 1);
+  const format = (x: number) =>
+    x.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -41,7 +48,9 @@ export function AnimatedNumber({ value, suffix = '', durationMs = 1600, classNam
         const ease = (t: number) => 1 - Math.pow(1 - t, 3);
         const tick = (now: number) => {
           const t = Math.min(1, (now - start) / durationMs);
-          setN(Math.round(ease(t) * value));
+          // Keep the float while counting; snap to the exact value at the end
+          // so precision never drifts (e.g. 4.8999… → 4.9).
+          setN(t < 1 ? ease(t) * value : value);
           if (t < 1) raf = requestAnimationFrame(tick);
         };
         raf = requestAnimationFrame(tick);
@@ -58,7 +67,7 @@ export function AnimatedNumber({ value, suffix = '', durationMs = 1600, classNam
 
   return (
     <span ref={ref} className={className}>
-      {n}
+      {format(n)}
       <span aria-hidden="true">{suffix}</span>
     </span>
   );

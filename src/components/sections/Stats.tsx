@@ -63,6 +63,10 @@ export function Stats({ stats, eyebrow, headline, columns, className }: Props) {
               >
                 <AnimatedNumber value={s.value} suffix={s.suffix} />
               </span>
+              <span
+                aria-hidden="true"
+                className="stat-underline mx-auto mt-3 block h-0.5 w-10 rounded-full bg-gradient-to-r from-accent to-transparent"
+              />
               <span className="mt-2 text-text font-medium block">{s.label}</span>
               {s.caption && <span className="mt-1 text-sm text-text-subtle block">{s.caption}</span>}
             </dd>

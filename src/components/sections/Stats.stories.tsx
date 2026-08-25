@@ -35,3 +35,16 @@ export const TwoColumn: Story = {
     ],
   },
 };
+
+/** Locks in decimal precision (4.9 never rounds to 5) + locale thousands separators. */
+export const PrecisionAndSeparators: Story = {
+  args: {
+    eyebrow: 'Precision check',
+    headline: 'Decimals and big numbers render correctly',
+    stats: [
+      { value: 4.9, label: 'Average rating' },
+      { value: 1250000, suffix: '+', label: 'Meals served' },
+      { value: 99.9, suffix: '%', label: 'Uptime' },
+    ],
+  },
+};
