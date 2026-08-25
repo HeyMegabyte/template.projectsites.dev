@@ -541,6 +541,26 @@ p          { text-wrap: pretty; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   KEN-BURNS HERO — the TTFR-safe "video hero": a slow scale+pan on the hero
+   photo for a cinematic, living feel with none of a <video>'s LCP penalty.
+   Motion-gated (static for reduced-motion) and disabled under Save-Data.
+   ─────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-kenburns {
+    animation: hero-kenburns 26s ease-in-out infinite alternate;
+    will-change: transform;
+    transform-origin: center center;
+  }
+  @keyframes hero-kenburns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.09) translate(-1.5%, -1.2%); }
+  }
+}
+@media (prefers-reduced-data: reduce) {
+  .hero-kenburns { animation: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    STARTING-STYLE (idea #5)
    Native entry animations from display:none without JS timing hacks.
    ─────────────────────────────────────────────────────────────────────── */

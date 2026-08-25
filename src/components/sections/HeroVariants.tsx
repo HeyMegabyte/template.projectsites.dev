@@ -162,7 +162,8 @@ export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, 
                 alt={safeImage.alt}
                 loading="eager"
                 fetchPriority="high"
-                className="h-full w-full object-cover"
+                data-no-zoom
+                className="h-full w-full object-cover hero-kenburns"
               />
             </div>
             <div aria-hidden="true" className="absolute inset-0 -z-10 blur-3xl bg-accent/10 rounded-full" />
