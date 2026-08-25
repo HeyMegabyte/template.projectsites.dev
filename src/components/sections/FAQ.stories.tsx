@@ -2,8 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FAQ } from './FAQ';
 
 /**
- * `FAQ` — accessible disclosure widgets that also emit FAQPage JSON-LD.
- * `exclusive` toggles single-open accordion vs multi-open disclosure.
+ * `FAQ` — accessible disclosure widgets that also emit FAQPage JSON-LD. Answers
+ * slide open via a `grid-rows` 0fr↔1fr transition and the `+` icon rotates 45°
+ * to a `×` (both motion-gated). `exclusive` toggles single-open vs multi-open.
  */
 const meta = {
   title: 'Sections/FAQ',

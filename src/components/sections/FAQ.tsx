@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { JsonLd } from '@/components/JsonLd';
 import { cn } from '@/lib/utils';
 import { scrubText } from '@/lib/placeholders';
@@ -87,15 +87,22 @@ export function FAQ({
                   {it.question}
                 </span>
                 <span className="shrink-0 h-8 w-8 rounded-full border border-border flex items-center justify-center text-accent">
-                  {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                  <Plus
+                    size={16}
+                    className={cn('transition-transform duration-300 motion-reduce:transition-none', isOpen && 'rotate-45')}
+                  />
                 </span>
               </button>
               <div
                 id={`faq-panel-${i}`}
-                hidden={!isOpen}
-                className="pb-6 text-text-muted leading-relaxed"
+                className={cn(
+                  'grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none',
+                  isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                )}
               >
-                {it.answer}
+                <div className="overflow-hidden">
+                  <p className="pb-6 text-text-muted leading-relaxed">{it.answer}</p>
+                </div>
               </div>
             </li>
           );
