@@ -4,7 +4,7 @@ import { SafeSection } from '@/components/SafeSection';
 import { ContactForm } from '@/components/ContactForm';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
-import { buildBusinessJsonLd, type BusinessClass } from '@/lib/businessSchema';
+import { buildSiteJsonLd, type BusinessClass } from '@/lib/businessSchema';
 import { GalleryGrid } from '@/components/local';
 import { hasRealImage } from '@/lib/placeholders';
 
@@ -224,7 +224,7 @@ export default function Home() {
   return (
     <>
       <JsonLd
-        data={buildBusinessJsonLd({
+        data={buildSiteJsonLd({
           name: brand.business.name,
           description: brand.business.description,
           url: brand.business.url,

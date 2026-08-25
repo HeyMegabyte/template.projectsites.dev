@@ -43,10 +43,15 @@ export function ProcessSteps({ steps, eyebrow = 'How it works', headline, descri
       </div>
 
       <ol className="relative grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {/* Connector line linking the steps into a flow (md+ horizontal row). */}
+        <span
+          aria-hidden="true"
+          className="hidden md:block absolute top-8 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent"
+        />
         {safeSteps.map((step, i) => (
           <li
             key={step.title}
-            className="relative card-tactile p-6 md:p-8 reveal-on-view"
+            className="relative card-tactile p-6 md:p-8 reveal-on-view transition-transform duration-300 hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             <span
               aria-hidden="true"

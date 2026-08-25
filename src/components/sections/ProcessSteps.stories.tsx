@@ -3,7 +3,8 @@ import { CalendarCheck, Stethoscope, Smile } from 'lucide-react';
 import { ProcessSteps } from './ProcessSteps';
 
 /**
- * `ProcessSteps` — numbered flow with connector line. Steps may carry an
+ * `ProcessSteps` — numbered flow joined by a gradient connector line (md+
+ * horizontal row); cards lift on hover (motion-gated). Steps may carry an
  * optional icon. Three-or-more steps lay out horizontally on md+.
  */
 const meta = {
