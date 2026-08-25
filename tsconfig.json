@@ -29,5 +29,9 @@
   "include": [
     "src",
     "_brand.json"
+  ],
+  "exclude": [
+    "src/**/*.stories.tsx",
+    "src/**/*.stories.ts"
   ]
 }

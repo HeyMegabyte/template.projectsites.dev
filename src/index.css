@@ -573,6 +573,16 @@ p          { text-wrap: pretty; }
   .hero-kenburns { animation: none !important; }
 }
 
+/* Pricing — the amount fades+rises when the monthly/yearly toggle flips (the
+   span is keyed on the period, so React remounts it and replays this). */
+@media (prefers-reduced-motion: no-preference) {
+  .price-swap { animation: price-swap-fade 0.35s ease both; }
+  @keyframes price-swap-fade {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
 /* ─────────────────────────────────────────────────────────────────────────
    STARTING-STYLE (idea #5)
    Native entry animations from display:none without JS timing hacks.

@@ -116,10 +116,10 @@ export function Pricing({
           <div
             key={t.id}
             className={cn(
-              'relative rounded-xl border p-8 flex flex-col reveal-on-view',
+              'relative rounded-xl border p-8 flex flex-col reveal-on-view transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:shadow-glow motion-reduce:transition-none motion-reduce:hover:translate-y-0',
               t.featured
-                ? 'border-accent bg-gradient-to-b from-accent/10 to-transparent shadow-glow'
-                : 'border-border bg-surface'
+                ? 'border-accent bg-gradient-to-b from-accent/10 to-transparent shadow-glow ring-1 ring-accent/20'
+                : 'border-border bg-surface hover:border-accent/50'
             )}
           >
             {badge && (
@@ -131,7 +131,10 @@ export function Pricing({
             <h3 className="text-xl font-bold font-heading text-text">{t.name}</h3>
             {t.description && <p className="text-text-muted text-sm mt-2 min-h-[3em]">{t.description}</p>}
             <div className="mt-6 flex items-baseline gap-1">
-              <span className="text-4xl md:text-5xl font-bold font-heading text-text">
+              <span
+                key={annual ? 'yr' : 'mo'}
+                className="text-4xl md:text-5xl font-bold font-heading text-text tabular-nums price-swap"
+              >
                 {symbol}
                 {annual ? t.yearly : t.monthly}
               </span>
