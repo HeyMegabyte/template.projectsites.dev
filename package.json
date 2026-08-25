@@ -33,7 +33,9 @@
     "hue-rotate": "node scripts/hue-rotate.mjs",
     "validate:all": "npm run validate:brand && npm run typecheck && npm run test && npm run prompt-evals && npm run build && npm run perf-budget",
     "validate": "node scripts/build_validators.mjs dist",
-    "prerender": "node scripts/prerender-spa.mjs"
+    "prerender": "node scripts/prerender-spa.mjs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -66,11 +68,15 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
     "@playwright/test": "^1.49.0",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@vitest/coverage-v8": "^2.1.8",
     "@vitest/ui": "^2.1.8",
     "jsdom": "^26.0.0",
+    "storybook": "^8.6.14",
     "vitest": "^2.1.8"
   }
 }
