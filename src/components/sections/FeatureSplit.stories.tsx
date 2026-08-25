@@ -4,8 +4,9 @@ import { FeatureSplit } from './FeatureSplit';
 
 /**
  * `FeatureSplit` — image-left / image-right feature block with optional
- * bullet list and CTA. The CTA renders a `react-router-dom` `<Link>`, so
- * stories wrap it in a `MemoryRouter`.
+ * bullet list and CTA. Bullets render as check-in-accent-circle markers; the
+ * image zooms + gains a depth scrim on hover (motion-reduce safe). The CTA
+ * renders a `react-router-dom` `<Link>`, so stories wrap it in a `MemoryRouter`.
  */
 const meta = {
   title: 'Sections/FeatureSplit',
