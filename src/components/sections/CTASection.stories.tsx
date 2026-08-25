@@ -3,9 +3,10 @@ import { MemoryRouter } from 'react-router-dom';
 import { CTASection } from './CTASection';
 
 /**
- * `CTASection` — conversion anchor. `tone='emphatic'` uses a gradient + grain
- * background; `tone='quiet'` uses a tactile card. Buttons render
- * `react-router-dom` `<Link>`s, so stories wrap it in a `MemoryRouter`.
+ * `CTASection` — conversion anchor. `tone='emphatic'` layers a gradient + grain
+ * plus two motion-gated aurora glows that slowly drift behind the content;
+ * `tone='quiet'` uses a tactile card. Buttons render `react-router-dom`
+ * `<Link>`s, so stories wrap it in a `MemoryRouter`.
  */
 const meta = {
   title: 'Sections/CTASection',

@@ -583,6 +583,20 @@ p          { text-wrap: pretty; }
   }
 }
 
+/* CTASection — two soft aurora glows drift behind the emphatic closing CTA. */
+@media (prefers-reduced-motion: no-preference) {
+  .cta-glow-1 { animation: cta-glow-drift-a 16s ease-in-out infinite alternate; will-change: transform; }
+  .cta-glow-2 { animation: cta-glow-drift-b 20s ease-in-out infinite alternate; will-change: transform; }
+  @keyframes cta-glow-drift-a {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(14%, 10%, 0) scale(1.18); }
+  }
+  @keyframes cta-glow-drift-b {
+    from { transform: translate3d(0, 0, 0) scale(1.12); }
+    to   { transform: translate3d(-12%, -8%, 0) scale(0.94); }
+  }
+}
+
 /* ─────────────────────────────────────────────────────────────────────────
    STARTING-STYLE (idea #5)
    Native entry animations from display:none without JS timing hacks.
