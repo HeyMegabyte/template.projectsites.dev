@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1643660526741-094639fbe53a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBkZW50aXN0cnklMjBjbGluaWN8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1681939282781-341ac4f61996?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBkZW50aXN0cnklMjBjbGluaWN8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1616391182219-e080b4d1043a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxtb2Rlcm4lMjBkZW50aXN0cnklMjBjbGluaWN8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1681939278218-a755fb2bf2d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxtb2Rlcm4lMjBkZW50aXN0cnklMjBjbGluaWN8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1681939278218-a755fb2bf2d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxtb2Rlcm4lMjBkZW50aXN0cnklMjBjbGluaWN8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "A look inside our practice",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "long black haired woman smiling close-up photography",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "a close up of a woman's mouth with white teeth",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1663755489920-5e09f66d011a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "A dentist in blue gloves examining a man's teeth in a dental office",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1663182234283-28941e7612da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "a close up of a person's mouth",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1675526607070-f5cbd71dde92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "a close up of a woman with a smile on her face",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1663755787934-3742b0f5983a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "a man smiling at another man"
 }

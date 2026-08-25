@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1618090584176-7132b9911657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1646640381839-02748ae8ddf0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1774977863604-59f4e6d37a90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1629010336114-8206b071be71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1629010336114-8206b071be71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxob21lJTIwcmVwYWlyJTIwc2VydmljZSUyMHdvcmtlcnxlbnwxfDB8fHwxNzg3NTk2Mzk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "Our work in the field",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1779636489740-6077a4198be6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx0ZWNobmljaWFuJTIwY3VzdG9tZXIlMjBob21lJTIwc2VydmljZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "Two men mowing and trimming a residential lawn",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1758523670564-d1d6a734dc0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHx0ZWNobmljaWFuJTIwY3VzdG9tZXIlMjBob21lJTIwc2VydmljZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "Couple signing for a package delivery at the door",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1782613064276-750c3a3ccdec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHx0ZWNobmljaWFuJTIwY3VzdG9tZXIlMjBob21lJTIwc2VydmljZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "A man mows a lawn with a push mower",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1758524055910-c69ce14d6078?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHx0ZWNobmljaWFuJTIwY3VzdG9tZXIlMjBob21lJTIwc2VydmljZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "Woman in apron talking to customer in greenhouse",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1774977863604-59f4e6d37a90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx0ZWNobmljaWFuJTIwY3VzdG9tZXIlMjBob21lJTIwc2VydmljZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "Man on ladder working on ceiling access panel",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1758524055761-2d0c14766743?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx0ZWNobmljaWFuJTIwY3VzdG9tZXIlMjBob21lJTIwc2VydmljZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "Man handing a paper bag to a woman in greenhouse"
 }

@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1778873750399-338b94f7feda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1775144657626-29ff0a46ca90?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1775144657610-9a6f171e522f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1775144657566-e5b093073baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1775144657566-e5b093073baf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxsYXclMjBvZmZpY2UlMjBwcm9mZXNzaW9uYWx8ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "Our firm at work",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1672380135241-c024f7fbfa13?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc4NzYxODAxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "two people shaking hands in front of a laptop",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1638262052640-82e94d64664a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc4NzYxODAxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "two people shaking hands over a wooden table",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1521791136064-7986c2920216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc4NzYxODAxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "two people shaking hands",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1686771416282-3888ddaf249b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc4NzYxODAxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "a man and a woman shaking hands in front of a laptop",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1681505531034-8d67054e07f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc4NzYxODAxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "two people shaking hands over a piece of paper",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1591453214154-c95db71dbd83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMGhhbmRzaGFrZSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc4NzYxODAxMnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "man and woman holding hands"
 }

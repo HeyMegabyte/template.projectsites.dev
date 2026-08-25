@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1548094990-c16ca90f1f0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1523837157348-ffbdaccfc7de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1710799885122-428e63eff691?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1487523117656-d5d117ad47c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1487523117656-d5d117ad47c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMGFnZW5jeSUyMHN0dWRpb3xlbnwxfDB8fHwxNzg3NTk2Mzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "Selected work",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "man wearing gray polo shirt beside dry-erase board",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1598520106830-8c45c2035460?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "person writing on glass whiteboard with diagrams",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1590402494587-44b71d7772f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "Two people collaborating on a project plan using yellow sticky notes on a glass ",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1532622785990-d2c36a76f5a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "two people drawing on whiteboard",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "three men sitting while using laptops and watching man beside whiteboard",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1596496181871-9681eacf9764?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "woman in white and red polka dot long sleeve shirt"
 }

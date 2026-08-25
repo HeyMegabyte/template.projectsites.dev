@@ -16,6 +16,12 @@ const FEATURE_IMG = JSON.parse(
   fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'vertical-feature-images.json'), 'utf8'),
 );
 
+// 6 people/results-focused per-vertical photos for the Home gallery (masonry +
+// lightbox), distinct from the environment-focused feature/bento set. {src,alt}.
+const GALLERY_IMG = JSON.parse(
+  fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'vertical-gallery-images.json'), 'utf8'),
+);
+
 // Per-vertical spec. Arrays are positional; the mapper below flattens them to tokens.
 const V = {
   medical: {
@@ -211,6 +217,20 @@ const HERO_ALT = {
   portfolio: 'Creative studio workspace',
 };
 
+// Per-vertical heading for the Home gallery section.
+const GALLERY_HEADLINE = {
+  medical: 'A look inside our practice',
+  wellness: 'Inside the studio',
+  legal: 'Our firm at work',
+  restaurant: 'From our kitchen',
+  'local-service': 'Our work in the field',
+  nonprofit: 'Our impact in pictures',
+  retail: 'The collection',
+  saas: 'The product in action',
+  agency: 'Selected work',
+  portfolio: 'Featured work',
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -238,6 +258,12 @@ function pack(v) {
   }
   const feats = FEATURE_IMG[v] || [];
   for (let i = 0; i < 6; i++) if (feats[i]) o[`FEATURE_${i + 1}_IMAGE_URL`] = feats[i];
+  const gal = GALLERY_IMG[v] || [];
+  if (gal.length) o.GALLERY_HEADLINE = GALLERY_HEADLINE[v] || 'Gallery';
+  for (let i = 0; i < 6; i++) if (gal[i]) {
+    o[`GALLERY_${i + 1}_IMAGE_URL`] = gal[i].src;
+    o[`GALLERY_${i + 1}_IMAGE_ALT`] = gal[i].alt;
+  }
   return o;
 }
 

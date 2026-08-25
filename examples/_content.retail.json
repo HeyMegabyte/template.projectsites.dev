@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxyZXRhaWwlMjBib3V0aXF1ZSUyMHNob3BwaW5nfGVufDF8MHx8fDE3ODc1OTYzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxyZXRhaWwlMjBib3V0aXF1ZSUyMHNob3BwaW5nfGVufDF8MHx8fDE3ODc1OTYzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1546213290-e1b492ab3eee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxyZXRhaWwlMjBib3V0aXF1ZSUyMHNob3BwaW5nfGVufDF8MHx8fDE3ODc1OTYzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxyZXRhaWwlMjBib3V0aXF1ZSUyMHNob3BwaW5nfGVufDF8MHx8fDE3ODc1OTYzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxyZXRhaWwlMjBib3V0aXF1ZSUyMHNob3BwaW5nfGVufDF8MHx8fDE3ODc1OTYzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "The collection",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1525562723836-dca67a71d5f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjdXN0b21lciUyMHNob3BwaW5nJTIwYm91dGlxdWUlMjBzdG9yZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "woman standing selecting clothes",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1546213290-e1b492ab3eee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHxjdXN0b21lciUyMHNob3BwaW5nJTIwYm91dGlxdWUlMjBzdG9yZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "woman standing inside clothing area",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1758520387687-38a92a7ee42f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjdXN0b21lciUyMHNob3BwaW5nJTIwYm91dGlxdWUlMjBzdG9yZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "Two smiling women holding shopping bags in a mall",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1591085686350-798c0f9faa7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjdXN0b21lciUyMHNob3BwaW5nJTIwYm91dGlxdWUlMjBzdG9yZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "woman in black long sleeve shirt standing in front of clothes",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1555529669-26f9d103abdd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjdXN0b21lciUyMHNob3BwaW5nJTIwYm91dGlxdWUlMjBzdG9yZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "hanger of cloth lot",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1567958451986-2de427a4a0be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjdXN0b21lciUyMHNob3BwaW5nJTIwYm91dGlxdWUlMjBzdG9yZXxlbnwxfDB8fHwxNzg3NjE4MDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "photo of store"
 }

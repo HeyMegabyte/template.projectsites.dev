@@ -5,6 +5,8 @@ import { ContactForm } from '@/components/ContactForm';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
 import { buildBusinessJsonLd, type BusinessClass } from '@/lib/businessSchema';
+import { GalleryGrid } from '@/components/local';
+import { hasRealImage } from '@/lib/placeholders';
 
 import {
   HeroSplit,
@@ -45,6 +47,17 @@ const process: ProcessStep[] = [
   { title: '{PROCESS_2_TITLE}', description: '{PROCESS_2_DESCRIPTION}', icon: <Sparkles size={20} /> },
   { title: '{PROCESS_3_TITLE}', description: '{PROCESS_3_DESCRIPTION}', icon: <Rocket size={20} /> },
   { title: '{PROCESS_4_TITLE}', description: '{PROCESS_4_DESCRIPTION}', icon: <Award size={20} /> },
+];
+
+// Home photo gallery (masonry + lightbox). Placeholder srcs are filtered out at
+// render so the section self-hides when a build has no gallery images.
+const galleryImages = [
+  { src: '{GALLERY_1_IMAGE_URL}', alt: '{GALLERY_1_IMAGE_ALT}' },
+  { src: '{GALLERY_2_IMAGE_URL}', alt: '{GALLERY_2_IMAGE_ALT}' },
+  { src: '{GALLERY_3_IMAGE_URL}', alt: '{GALLERY_3_IMAGE_ALT}' },
+  { src: '{GALLERY_4_IMAGE_URL}', alt: '{GALLERY_4_IMAGE_ALT}' },
+  { src: '{GALLERY_5_IMAGE_URL}', alt: '{GALLERY_5_IMAGE_ALT}' },
+  { src: '{GALLERY_6_IMAGE_URL}', alt: '{GALLERY_6_IMAGE_ALT}' },
 ];
 
 const tiers: PricingTier[] = [
@@ -280,6 +293,15 @@ export default function Home() {
           image={{ src: '{ABOUT_IMAGE_URL}', alt: '{ABOUT_IMAGE_ALT}' }}
         />
       </SafeSection>
+
+      {galleryImages.filter((g) => hasRealImage(g.src)).length > 0 && (
+        <SafeSection name="gallery">
+          <GalleryGrid
+            images={galleryImages.filter((g) => hasRealImage(g.src))}
+            heading="{GALLERY_HEADLINE}"
+          />
+        </SafeSection>
+      )}
 
       {featureOn('process') && (
         <SafeSection name="process">

@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1593113616828-6f22bca04804?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1557660559-42497f78035b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1560220604-1985ebfe28b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1758599669406-d5179ccefcb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1758599669406-d5179ccefcb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwY2hhcml0eXxlbnwxfDB8fHwxNzg3NTk2Mzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "Our impact in pictures",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1758599668299-beebedfabf7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNvbW11bml0eSUyMG91dGRvb3J8ZW58MXwwfHx8MTc4NzYxODAxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "Volunteers cleaning up a forest with blue trash bags",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1758599668356-c8c919e24dda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNvbW11bml0eSUyMG91dGRvb3J8ZW58MXwwfHx8MTc4NzYxODAxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "Man with arms crossed in a forest cleanup",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1758599668178-d9716bbda9d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNvbW11bml0eSUyMG91dGRvb3J8ZW58MXwwfHx8MTc4NzYxODAxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "Woman smiling while people clean forest trash",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1758599668209-783bd3691ec8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNvbW11bml0eSUyMG91dGRvb3J8ZW58MXwwfHx8MTc4NzYxODAxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "Young woman smiles while volunteers clean forest",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1758599669199-a858720a9689?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNvbW11bml0eSUyMG91dGRvb3J8ZW58MXwwfHx8MTc4NzYxODAxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "Young woman with volunteers cleaning beach with blue bags",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1758599669062-13f35df6b3ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx2b2x1bnRlZXJzJTIwaGVscGluZyUyMGNvbW11bml0eSUyMG91dGRvb3J8ZW58MXwwfHx8MTc4NzYxODAxM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "Woman smiling holding trash bags by lake"
 }

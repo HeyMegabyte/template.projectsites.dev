@@ -79,5 +79,18 @@
   "FEATURE_3_IMAGE_URL": "https://images.unsplash.com/photo-1761971975973-cbb3e59263de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_4_IMAGE_URL": "https://images.unsplash.com/photo-1761971975962-9cc397e2ba2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
   "FEATURE_5_IMAGE_URL": "https://images.unsplash.com/photo-1761971975651-4fdd4abc200f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1599447421416-3414500d18a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080"
+  "FEATURE_6_IMAGE_URL": "https://images.unsplash.com/photo-1599447421416-3414500d18a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx5b2dhJTIwd2VsbG5lc3MlMjBzdHVkaW98ZW58MXwwfHx8MTc4NzU5NjM5Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_HEADLINE": "Inside the studio",
+  "GALLERY_1_IMAGE_URL": "https://images.unsplash.com/photo-1588286840104-8957b019727f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_1_IMAGE_ALT": "woman in white tank top and pink leggings doing yoga",
+  "GALLERY_2_IMAGE_URL": "https://images.unsplash.com/photo-1677741447985-da1d90c00742?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwyfHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_2_IMAGE_ALT": "a group of women doing yoga in a room",
+  "GALLERY_3_IMAGE_URL": "https://images.unsplash.com/photo-1648638810954-281a6439675b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwzfHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_3_IMAGE_ALT": "a group of hands holding a child's hand",
+  "GALLERY_4_IMAGE_URL": "https://images.unsplash.com/photo-1758274535230-3641d0632878?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw0fHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_4_IMAGE_ALT": "People practicing yoga in a park at sunset",
+  "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1763379456950-1cc7b6274c4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_5_IMAGE_ALT": "Man and woman doing upward-facing dog yoga pose",
+  "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1671581084718-c4c04fc00250?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  "GALLERY_6_IMAGE_ALT": "a group of people sitting and standing around each other"
 }
