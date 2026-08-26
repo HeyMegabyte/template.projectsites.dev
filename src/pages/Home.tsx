@@ -2,6 +2,7 @@ import { Shield, Zap, Users, Target, Award, Star, Rocket, Sparkles, MessageSquar
 import { JsonLd } from '@/components/JsonLd';
 import { SafeSection } from '@/components/SafeSection';
 import { ContactForm } from '@/components/ContactForm';
+import { TrustBar } from '@/components/TrustBar';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
 import { buildSiteJsonLd, type BusinessClass } from '@/lib/businessSchema';
@@ -249,7 +250,7 @@ export default function Home() {
             eyebrow={seoTagline}
             headline="{HERO_HEADLINE}"
             subheadline="{HERO_SUBHEADLINE}"
-            primary={{ label: '{HERO_CTA}', href: '/contact' }}
+            primary={{ label: '{HERO_CTA}', href: featureOn('quote') ? '/quote' : '/contact' }}
             secondary={{ label: '{HERO_SECONDARY_CTA}', href: '/services' }}
             image={{ src: '{HERO_IMAGE_URL}', alt: '{HERO_IMAGE_ALT}' }}
             trustBadges={[
@@ -260,6 +261,12 @@ export default function Home() {
           />
         </SafeSection>
       )}
+
+      {/* Full-width trust strip directly under the hero — wordless credibility above
+          the fold. Vertical-aware, promise-based, never fabricated numbers. */}
+      <SafeSection name="trustbar">
+        <TrustBar />
+      </SafeSection>
 
       {featureOn('logoCloud') && (
         <SafeSection name="logoCloud">

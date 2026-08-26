@@ -11,6 +11,7 @@ import Gallery from './pages/Gallery';
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const Pricing = lazy(() => import('./pages/Pricing'));
+const Quote = lazy(() => import('./pages/Quote'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
@@ -48,6 +49,7 @@ export default function App() {
             <Route path="/about"         element={<About />} />
             <Route path="/services"      element={<Services />} />
             <Route path="/pricing"       element={<Pricing />} />
+            <Route path="/quote"         element={<Quote />} />
             <Route path="/faq"           element={<FAQ />} />
             <Route path="/blog"          element={<Blog />} />
             <Route path="/blog/:slug"    element={<BlogPost />} />

@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu, X, Command as CommandIcon } from 'lucide-react';
-import { brand } from '@/brand';
+import { brand, featureOn } from '@/brand';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavLink {
@@ -15,19 +15,38 @@ interface Props {
   ctaHref?: string;
 }
 
-const DEFAULT_LINKS: NavLink[] = [
-  { to: '/',         label: 'Home' },
-  { to: '/about',    label: 'About' },
-  { to: '/services', label: 'Services' },
-  { to: '/pricing',  label: 'Pricing' },
-  { to: '/contact',  label: 'Contact' },
-];
+/**
+ * The primary "offer" nav entry is vertical-aware: service businesses
+ * (contractors, HVAC, roofing, agencies) request a custom quote — a fixed
+ * price list would mislead — while product/SaaS/wellness businesses show
+ * pricing. Verticals with neither flag (medical, nonprofit, restaurant) omit
+ * it entirely and lean on the Contact CTA. Driven by `featureOn('quote')` /
+ * `featureOn('pricing')` from the resolved brand.
+ */
+function offerLink(): NavLink | null {
+  if (featureOn('quote')) return { to: '/quote', label: 'Get a Quote' };
+  if (featureOn('pricing')) return { to: '/pricing', label: 'Pricing' };
+  return null;
+}
 
-export default function Header({
-  links = DEFAULT_LINKS,
-  ctaLabel = 'Get in Touch',
-  ctaHref = '/contact',
-}: Props) {
+function defaultLinks(): NavLink[] {
+  const offer = offerLink();
+  return [
+    { to: '/',         label: 'Home' },
+    { to: '/about',    label: 'About' },
+    { to: '/services', label: 'Services' },
+    ...(offer ? [offer] : []),
+    { to: '/contact',  label: 'Contact' },
+  ];
+}
+
+export default function Header({ links, ctaLabel, ctaHref }: Props) {
+  const navLinks = links ?? defaultLinks();
+  // A single dominant, verb-first CTA converts best; for quote verticals it
+  // points straight at the quote form.
+  const cta = featureOn('quote')
+    ? { label: ctaLabel ?? 'Get a Free Quote', href: ctaHref ?? '/quote' }
+    : { label: ctaLabel ?? 'Get in Touch', href: ctaHref ?? '/contact' };
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
@@ -69,7 +88,7 @@ export default function Header({
         </Link>
 
         <div className="hidden md:flex gap-6 items-center">
-          {links.map((l) => {
+          {navLinks.map((l) => {
             const isActive = pathname === l.to;
             return (
               <Link
@@ -99,10 +118,10 @@ export default function Header({
           </button>
           <ThemeToggle />
           <Link
-            to={ctaHref}
+            to={cta.href}
             className="bg-accent hover:bg-accent-hover text-background font-bold text-sm px-5 py-2.5 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-glow"
           >
-            {ctaLabel}
+            {cta.label}
           </Link>
         </div>
 
@@ -120,7 +139,7 @@ export default function Header({
 
       {open && (
         <div id="mobile-menu" className="md:hidden glass border-t border-border px-6 py-4 space-y-1">
-          {links.map((l) => {
+          {navLinks.map((l) => {
             const isActive = pathname === l.to;
             return (
               <Link
@@ -141,11 +160,11 @@ export default function Header({
           <div className="flex items-center justify-between pt-3">
             <ThemeToggle />
             <Link
-              to={ctaHref}
+              to={cta.href}
               className="bg-accent text-background font-bold text-sm px-5 py-3 rounded-lg"
               onClick={() => setOpen(false)}
             >
-              {ctaLabel}
+              {cta.label}
             </Link>
           </div>
         </div>

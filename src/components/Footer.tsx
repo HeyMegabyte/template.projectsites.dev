@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
-import { brand } from '@/brand';
+import { brand, featureOn } from '@/brand';
 
 interface NavRoute {
   to: string;
@@ -12,17 +12,27 @@ interface Props {
   socials?: { label: string; href: string }[];
 }
 
-const DEFAULT_ROUTES: NavRoute[] = [
-  { to: '/',         label: 'Home' },
-  { to: '/about',    label: 'About' },
-  { to: '/services', label: 'Services' },
-  { to: '/pricing',  label: 'Pricing' },
-  { to: '/blog',     label: 'Blog' },
-  { to: '/faq',      label: 'FAQ' },
-  { to: '/contact',  label: 'Contact' },
-];
+// Footer nav mirrors the header's vertical-aware "offer" entry: quote for
+// service businesses, pricing for product/SaaS, neither for the rest.
+function defaultRoutes(): NavRoute[] {
+  const offer: NavRoute | null = featureOn('quote')
+    ? { to: '/quote', label: 'Get a Quote' }
+    : featureOn('pricing')
+      ? { to: '/pricing', label: 'Pricing' }
+      : null;
+  return [
+    { to: '/',         label: 'Home' },
+    { to: '/about',    label: 'About' },
+    { to: '/services', label: 'Services' },
+    ...(offer ? [offer] : []),
+    { to: '/blog',     label: 'Blog' },
+    { to: '/faq',      label: 'FAQ' },
+    { to: '/contact',  label: 'Contact' },
+  ];
+}
 
-export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props) {
+export default function Footer({ routes, socials = [] }: Props) {
+  const navRoutes = routes ?? defaultRoutes();
   const business = brand.business;
   const address = business.address;
   const phone = business.phone;
@@ -77,7 +87,7 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
               Navigation
             </h3>
             <ul className="space-y-3 text-sm">
-              {routes.map((r) => (
+              {navRoutes.map((r) => (
                 <li key={r.to}>
                   <Link
                     to={r.to}

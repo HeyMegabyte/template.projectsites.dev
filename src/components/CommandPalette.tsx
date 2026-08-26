@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useMemo, type KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, Hash, Sparkles } from 'lucide-react';
+import { featureOn } from '@/brand';
 
 export interface PaletteAction {
   id: string;
@@ -18,21 +19,32 @@ interface Props {
   extra?: PaletteAction[];
 }
 
-const DEFAULT_ACTIONS: PaletteAction[] = [
-  { id: 'home',     label: 'Home',          group: 'Pages', href: '/' },
-  { id: 'about',    label: 'About',         group: 'Pages', href: '/about' },
-  { id: 'services', label: 'Services',      group: 'Pages', href: '/services' },
-  { id: 'pricing',  label: 'Pricing',       group: 'Pages', href: '/pricing' },
-  { id: 'blog',     label: 'Blog',          group: 'Pages', href: '/blog' },
-  { id: 'faq',      label: 'FAQ',           group: 'Pages', href: '/faq' },
-  { id: 'contact',  label: 'Contact',       group: 'Pages', href: '/contact' },
-  { id: 'theme',    label: 'Toggle theme',  group: 'Settings', keywords: ['dark', 'light'],
-    onSelect: () => {
-      const root = document.documentElement;
-      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    }
-  },
-];
+/**
+ * The catalog only advertises routes that actually resolve for this vertical:
+ * quote OR pricing (never a dead-end to a page the nav hid). Keeps ⌘K honest.
+ */
+function defaultActions(): PaletteAction[] {
+  const offer: PaletteAction | null = featureOn('quote')
+    ? { id: 'quote', label: 'Get a Quote', group: 'Pages', href: '/quote', keywords: ['estimate', 'price'] }
+    : featureOn('pricing')
+      ? { id: 'pricing', label: 'Pricing', group: 'Pages', href: '/pricing', keywords: ['cost', 'plans'] }
+      : null;
+  return [
+    { id: 'home',     label: 'Home',          group: 'Pages', href: '/' },
+    { id: 'about',    label: 'About',         group: 'Pages', href: '/about' },
+    { id: 'services', label: 'Services',      group: 'Pages', href: '/services' },
+    ...(offer ? [offer] : []),
+    { id: 'blog',     label: 'Blog',          group: 'Pages', href: '/blog' },
+    { id: 'faq',      label: 'FAQ',           group: 'Pages', href: '/faq' },
+    { id: 'contact',  label: 'Contact',       group: 'Pages', href: '/contact' },
+    { id: 'theme',    label: 'Toggle theme',  group: 'Settings', keywords: ['dark', 'light'],
+      onSelect: () => {
+        const root = document.documentElement;
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      }
+    },
+  ];
+}
 
 /**
  * Universal Cmd+K / Ctrl+K command palette.
@@ -51,7 +63,7 @@ export function CommandPalette({ extra = [] }: Props) {
   const triggerRef = useRef<HTMLElement | null>(null);
   const navigate = useNavigate();
 
-  const allActions = useMemo(() => [...DEFAULT_ACTIONS, ...extra], [extra]);
+  const allActions = useMemo(() => [...defaultActions(), ...extra], [extra]);
 
   useEffect(() => {
     function onKey(e: globalThis.KeyboardEvent) {

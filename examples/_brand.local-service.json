@@ -1,71 +1,283 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
   "$description": "Local service / trades preset (plumber / electrician / HVAC / roofer / cleaner) — LIGHT, dependable deep-blue on cool white with a high-visibility safety-orange accent. Work-truck 'licensed & bonded' mood: tight industrial radii, layered blue shadows, condensed Bebas Neue display. services + stickyPhone + FAQ.",
-
   "business": {
-    "name":          { "$value": "Anchor Plumbing" },
-    "shortName":     { "$value": "Anchor Plumbing" },
-    "tagline":       { "$value": "24/7 emergency · Anchorage" },
-    "description":   { "$value": "Licensed Alaska plumber serving Anchorage, Eagle River, and Wasilla with same-day service and true 24/7 emergency response. License AK #12345." },
-    "url":           { "$value": "https://anchorplumbing.example" },
-    "businessClass": { "$value": "storefront" },
-    "email":         { "$value": "dispatch@anchorplumbing.example" },
-    "phone":         { "$value": "+19075550100" },
-    "address":       { "$value": "5678 C Street, Anchorage, AK 99503" },
-    "hours":         { "$value": "Mon–Sat 8am–6pm · 24/7 emergency" }
+    "name": {
+      "$value": "Anchor Plumbing"
+    },
+    "shortName": {
+      "$value": "Anchor Plumbing"
+    },
+    "tagline": {
+      "$value": "24/7 emergency · Anchorage"
+    },
+    "description": {
+      "$value": "Licensed Alaska plumber serving Anchorage, Eagle River, and Wasilla with same-day service and true 24/7 emergency response. License AK #12345."
+    },
+    "url": {
+      "$value": "https://anchorplumbing.example"
+    },
+    "businessClass": {
+      "$value": "storefront"
+    },
+    "email": {
+      "$value": "dispatch@anchorplumbing.example"
+    },
+    "phone": {
+      "$value": "+19075550100"
+    },
+    "address": {
+      "$value": "5678 C Street, Anchorage, AK 99503"
+    },
+    "hours": {
+      "$value": "Mon–Sat 8am–6pm · 24/7 emergency"
+    }
   },
-
   "color": {
-    "brandHue":    { "$value": "225" },
-    "brandChroma": { "$value": "0.16" },
-    "primary":     { "$value": "oklch(0.46 0.16 245)" },
-    "primaryHover":{ "$value": "oklch(0.39 0.16 245)" },
-    "accent":      { "$value": "oklch(0.75 0.18 55)" },
-    "accentHover": { "$value": "oklch(0.68 0.19 52)" },
-    "background":  { "$value": "oklch(0.985 0.006 235)" },
-    "surface":     { "$value": "oklch(0.965 0.012 235)" },
-    "surfaceElevated":{ "$value": "oklch(1 0 0)" },
-    "border":      { "$value": "oklch(0.88 0.02 235)" },
-    "text":        { "$value": "oklch(0.22 0.03 245)" },
-    "textMuted":   { "$value": "oklch(0.44 0.02 245)" },
-    "textSubtle":  { "$value": "oklch(0.58 0.015 245)" },
-    "success":     { "$value": "oklch(0.54 0.15 150)" },
-    "warning":     { "$value": "oklch(0.68 0.16 75)" },
-    "danger":      { "$value": "oklch(0.55 0.22 28)" },
-    "info":        { "$value": "oklch(0.50 0.14 245)" }
+    "brandHue": {
+      "$value": "225"
+    },
+    "brandChroma": {
+      "$value": "0.16"
+    },
+    "primary": {
+      "$value": "oklch(0.46 0.16 245)"
+    },
+    "primaryHover": {
+      "$value": "oklch(0.39 0.16 245)"
+    },
+    "accent": {
+      "$value": "oklch(0.75 0.18 55)"
+    },
+    "accentHover": {
+      "$value": "oklch(0.68 0.19 52)"
+    },
+    "background": {
+      "$value": "oklch(0.985 0.006 235)"
+    },
+    "surface": {
+      "$value": "oklch(0.965 0.012 235)"
+    },
+    "surfaceElevated": {
+      "$value": "oklch(1 0 0)"
+    },
+    "border": {
+      "$value": "oklch(0.88 0.02 235)"
+    },
+    "text": {
+      "$value": "oklch(0.22 0.03 245)"
+    },
+    "textMuted": {
+      "$value": "oklch(0.44 0.02 245)"
+    },
+    "textSubtle": {
+      "$value": "oklch(0.58 0.015 245)"
+    },
+    "success": {
+      "$value": "oklch(0.54 0.15 150)"
+    },
+    "warning": {
+      "$value": "oklch(0.68 0.16 75)"
+    },
+    "danger": {
+      "$value": "oklch(0.55 0.22 28)"
+    },
+    "info": {
+      "$value": "oklch(0.50 0.14 245)"
+    }
   },
-
-  "colorScheme": { "$value": "light" },
-
+  "colorScheme": {
+    "$value": "light"
+  },
   "font": {
-    "heading":   { "$value": "Bebas Neue" },
-    "body":      { "$value": "Inter" },
-    "mono":      { "$value": "JetBrains Mono" },
-    "weights":   { "$value": [400,500,600,700] },
-    "fluidScale":{ "$value": "clamp" }
+    "heading": {
+      "$value": "Bebas Neue"
+    },
+    "body": {
+      "$value": "Inter"
+    },
+    "mono": {
+      "$value": "JetBrains Mono"
+    },
+    "weights": {
+      "$value": [
+        400,
+        500,
+        600,
+        700
+      ]
+    },
+    "fluidScale": {
+      "$value": "clamp"
+    }
   },
-
-  "radius":  { "sm": { "$value": "0.1875rem" }, "md": { "$value": "0.375rem" }, "lg": { "$value": "0.625rem" }, "xl": { "$value": "0.875rem" }, "2xl": { "$value": "1.25rem" }, "full": { "$value": "9999px" } },
-  "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
-  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0.46 0.16 245 / 0.10)" }, "md": { "$value": "0 10px 26px -10px oklch(0.46 0.16 245 / 0.24), 0 2px 6px -3px oklch(0.46 0.16 245 / 0.14)" }, "lg": { "$value": "0 22px 52px -14px oklch(0.46 0.16 245 / 0.30), 0 6px 14px -6px oklch(0.46 0.16 245 / 0.18)" }, "glow": { "$value": "0 0 44px -8px oklch(0.75 0.18 55 / 0.55)" } },
-  "motion":  { "easing": { "$value": "cubic-bezier(0.4, 0, 0, 1)" }, "duration": { "fast": { "$value": "120ms" }, "base": { "$value": "200ms" }, "slow": { "$value": "350ms" }, "scroll": { "$value": "1000ms" } } },
-  "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
-  "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
-
+  "radius": {
+    "sm": {
+      "$value": "0.1875rem"
+    },
+    "md": {
+      "$value": "0.375rem"
+    },
+    "lg": {
+      "$value": "0.625rem"
+    },
+    "xl": {
+      "$value": "0.875rem"
+    },
+    "2xl": {
+      "$value": "1.25rem"
+    },
+    "full": {
+      "$value": "9999px"
+    }
+  },
+  "spacing": {
+    "0": {
+      "$value": "0"
+    },
+    "1": {
+      "$value": "0.25rem"
+    },
+    "2": {
+      "$value": "0.5rem"
+    },
+    "3": {
+      "$value": "0.75rem"
+    },
+    "4": {
+      "$value": "1rem"
+    },
+    "6": {
+      "$value": "1.5rem"
+    },
+    "8": {
+      "$value": "2rem"
+    },
+    "12": {
+      "$value": "3rem"
+    },
+    "16": {
+      "$value": "4rem"
+    },
+    "24": {
+      "$value": "6rem"
+    },
+    "32": {
+      "$value": "8rem"
+    }
+  },
+  "shadow": {
+    "sm": {
+      "$value": "0 1px 2px 0 oklch(0.46 0.16 245 / 0.10)"
+    },
+    "md": {
+      "$value": "0 10px 26px -10px oklch(0.46 0.16 245 / 0.24), 0 2px 6px -3px oklch(0.46 0.16 245 / 0.14)"
+    },
+    "lg": {
+      "$value": "0 22px 52px -14px oklch(0.46 0.16 245 / 0.30), 0 6px 14px -6px oklch(0.46 0.16 245 / 0.18)"
+    },
+    "glow": {
+      "$value": "0 0 44px -8px oklch(0.75 0.18 55 / 0.55)"
+    }
+  },
+  "motion": {
+    "easing": {
+      "$value": "cubic-bezier(0.4, 0, 0, 1)"
+    },
+    "duration": {
+      "fast": {
+        "$value": "120ms"
+      },
+      "base": {
+        "$value": "200ms"
+      },
+      "slow": {
+        "$value": "350ms"
+      },
+      "scroll": {
+        "$value": "1000ms"
+      }
+    }
+  },
+  "layout": {
+    "containerWide": {
+      "$value": "80rem"
+    },
+    "containerNormal": {
+      "$value": "64rem"
+    },
+    "containerProse": {
+      "$value": "42rem"
+    }
+  },
+  "social": {
+    "facebook": {
+      "$value": ""
+    },
+    "instagram": {
+      "$value": ""
+    },
+    "linkedin": {
+      "$value": ""
+    },
+    "twitter": {
+      "$value": ""
+    },
+    "youtube": {
+      "$value": ""
+    },
+    "tiktok": {
+      "$value": ""
+    },
+    "github": {
+      "$value": ""
+    }
+  },
   "features": {
-    "hero":         { "$value": true },
-    "bento":        { "$value": false },
-    "stats":        { "$value": true },
-    "services":     { "$value": true },
-    "process":      { "$value": true },
-    "testimonials": { "$value": true },
-    "logoCloud":    { "$value": true },
-    "pricing":      { "$value": false },
-    "faq":          { "$value": true },
-    "blog":         { "$value": false },
-    "team":         { "$value": false },
-    "caseStudies":  { "$value": true },
-    "newsletter":   { "$value": false },
-    "cta":          { "$value": true }
+    "hero": {
+      "$value": true
+    },
+    "bento": {
+      "$value": false
+    },
+    "stats": {
+      "$value": true
+    },
+    "services": {
+      "$value": true
+    },
+    "process": {
+      "$value": true
+    },
+    "testimonials": {
+      "$value": true
+    },
+    "logoCloud": {
+      "$value": true
+    },
+    "pricing": {
+      "$value": false
+    },
+    "faq": {
+      "$value": true
+    },
+    "blog": {
+      "$value": false
+    },
+    "team": {
+      "$value": false
+    },
+    "caseStudies": {
+      "$value": true
+    },
+    "newsletter": {
+      "$value": false
+    },
+    "cta": {
+      "$value": true
+    },
+    "quote": {
+      "$value": true
+    }
   }
 }

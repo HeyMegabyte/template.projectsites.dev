@@ -7,6 +7,7 @@ import { CommandPalette } from './CommandPalette';
 import { DevA11yBadge } from './DevA11yBadge';
 import { ScrollProgress } from './ScrollProgress';
 import { PWAInstallPrompt } from './PWAInstallPrompt';
+import { StickyActionBar } from './StickyActionBar';
 
 interface Props {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ export default function Layout({ children }: Props) {
       <Lightbox />
       <CommandPalette />
       <PWAInstallPrompt />
+      <StickyActionBar />
       <DevA11yBadge />
     </>
   );

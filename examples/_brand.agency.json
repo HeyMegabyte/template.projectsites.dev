@@ -1,71 +1,285 @@
 {
   "$schema": "https://schemas.designtokens.org/2025-10",
   "$description": "Agency / studio / creative-shop preset — DARK, bold brutalist near-black with an electric magenta primary and acid-yellow accent. Award-show 'loud studio' mood: zero radii (hard corners), heavy black shadows, oversized Archivo Black display. caseStudies + team + logoCloud + process.",
-
   "business": {
-    "name":          { "$value": "Field Studio" },
-    "shortName":     { "$value": "Field" },
-    "tagline":       { "$value": "Brand · Web · Product" },
-    "description":   { "$value": "Independent studio of eight, split between Brooklyn and Lisbon, building brand systems and marketing sites for founders and CMOs who refuse to blend in." },
-    "url":           { "$value": "https://field.example" },
-    "businessClass": { "$value": "organization" },
-    "email":         { "$value": "hello@field.example" },
-    "phone":         { "$value": "" },
-    "address":       { "$value": "Brooklyn, NY · Lisbon, PT" },
-    "hours":         { "$value": "" }
+    "name": {
+      "$value": "Field Studio"
+    },
+    "shortName": {
+      "$value": "Field"
+    },
+    "tagline": {
+      "$value": "Brand · Web · Product"
+    },
+    "description": {
+      "$value": "Independent studio of eight, split between Brooklyn and Lisbon, building brand systems and marketing sites for founders and CMOs who refuse to blend in."
+    },
+    "url": {
+      "$value": "https://field.example"
+    },
+    "businessClass": {
+      "$value": "organization"
+    },
+    "email": {
+      "$value": "hello@field.example"
+    },
+    "phone": {
+      "$value": ""
+    },
+    "address": {
+      "$value": "Brooklyn, NY · Lisbon, PT"
+    },
+    "hours": {
+      "$value": ""
+    }
   },
-
   "color": {
-    "brandHue":    { "$value": "330" },
-    "brandChroma": { "$value": "0.24" },
-    "primary":     { "$value": "oklch(0.62 0.26 340)" },
-    "primaryHover":{ "$value": "oklch(0.56 0.26 340)" },
-    "accent":      { "$value": "oklch(0.90 0.19 100)" },
-    "accentHover": { "$value": "oklch(0.84 0.20 100)" },
-    "background":  { "$value": "oklch(0.13 0.012 330)" },
-    "surface":     { "$value": "oklch(0.17 0.016 330)" },
-    "surfaceElevated":{ "$value": "oklch(0.21 0.018 330)" },
-    "border":      { "$value": "oklch(0.30 0.02 330)" },
-    "text":        { "$value": "oklch(0.98 0.006 330)" },
-    "textMuted":   { "$value": "oklch(0.74 0.015 330)" },
-    "textSubtle":  { "$value": "oklch(0.56 0.012 330)" },
-    "success":     { "$value": "oklch(0.76 0.17 150)" },
-    "warning":     { "$value": "oklch(0.84 0.16 90)" },
-    "danger":      { "$value": "oklch(0.66 0.24 25)" },
-    "info":        { "$value": "oklch(0.74 0.15 235)" }
+    "brandHue": {
+      "$value": "330"
+    },
+    "brandChroma": {
+      "$value": "0.24"
+    },
+    "primary": {
+      "$value": "oklch(0.62 0.26 340)"
+    },
+    "primaryHover": {
+      "$value": "oklch(0.56 0.26 340)"
+    },
+    "accent": {
+      "$value": "oklch(0.90 0.19 100)"
+    },
+    "accentHover": {
+      "$value": "oklch(0.84 0.20 100)"
+    },
+    "background": {
+      "$value": "oklch(0.13 0.012 330)"
+    },
+    "surface": {
+      "$value": "oklch(0.17 0.016 330)"
+    },
+    "surfaceElevated": {
+      "$value": "oklch(0.21 0.018 330)"
+    },
+    "border": {
+      "$value": "oklch(0.30 0.02 330)"
+    },
+    "text": {
+      "$value": "oklch(0.98 0.006 330)"
+    },
+    "textMuted": {
+      "$value": "oklch(0.74 0.015 330)"
+    },
+    "textSubtle": {
+      "$value": "oklch(0.56 0.012 330)"
+    },
+    "success": {
+      "$value": "oklch(0.76 0.17 150)"
+    },
+    "warning": {
+      "$value": "oklch(0.84 0.16 90)"
+    },
+    "danger": {
+      "$value": "oklch(0.66 0.24 25)"
+    },
+    "info": {
+      "$value": "oklch(0.74 0.15 235)"
+    }
   },
-
-  "colorScheme": { "$value": "dark" },
-
+  "colorScheme": {
+    "$value": "dark"
+  },
   "font": {
-    "heading":   { "$value": "Archivo Black" },
-    "body":      { "$value": "Archivo" },
-    "mono":      { "$value": "JetBrains Mono" },
-    "weights":   { "$value": [400,500,600,700,800,900] },
-    "fluidScale":{ "$value": "clamp" }
+    "heading": {
+      "$value": "Archivo Black"
+    },
+    "body": {
+      "$value": "Archivo"
+    },
+    "mono": {
+      "$value": "JetBrains Mono"
+    },
+    "weights": {
+      "$value": [
+        400,
+        500,
+        600,
+        700,
+        800,
+        900
+      ]
+    },
+    "fluidScale": {
+      "$value": "clamp"
+    }
   },
-
-  "radius":  { "sm": { "$value": "0px" }, "md": { "$value": "0px" }, "lg": { "$value": "0px" }, "xl": { "$value": "0.125rem" }, "2xl": { "$value": "0.25rem" }, "full": { "$value": "9999px" } },
-  "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
-  "shadow":  { "sm": { "$value": "2px 2px 0 0 oklch(0 0 0 / 0.60)" }, "md": { "$value": "6px 6px 0 0 oklch(0 0 0 / 0.55), 0 10px 24px -8px oklch(0 0 0 / 0.60)" }, "lg": { "$value": "10px 10px 0 0 oklch(0 0 0 / 0.55), 0 24px 52px -12px oklch(0 0 0 / 0.70)" }, "glow": { "$value": "0 0 52px -6px oklch(0.90 0.19 100 / 0.55)" } },
-  "motion":  { "easing": { "$value": "cubic-bezier(0.4, 0, 0, 1)" }, "duration": { "fast": { "$value": "100ms" }, "base": { "$value": "200ms" }, "slow": { "$value": "350ms" }, "scroll": { "$value": "1000ms" } } },
-  "layout":  { "containerWide": { "$value": "84rem" }, "containerNormal": { "$value": "66rem" }, "containerProse": { "$value": "42rem" } },
-  "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
-
+  "radius": {
+    "sm": {
+      "$value": "0px"
+    },
+    "md": {
+      "$value": "0px"
+    },
+    "lg": {
+      "$value": "0px"
+    },
+    "xl": {
+      "$value": "0.125rem"
+    },
+    "2xl": {
+      "$value": "0.25rem"
+    },
+    "full": {
+      "$value": "9999px"
+    }
+  },
+  "spacing": {
+    "0": {
+      "$value": "0"
+    },
+    "1": {
+      "$value": "0.25rem"
+    },
+    "2": {
+      "$value": "0.5rem"
+    },
+    "3": {
+      "$value": "0.75rem"
+    },
+    "4": {
+      "$value": "1rem"
+    },
+    "6": {
+      "$value": "1.5rem"
+    },
+    "8": {
+      "$value": "2rem"
+    },
+    "12": {
+      "$value": "3rem"
+    },
+    "16": {
+      "$value": "4rem"
+    },
+    "24": {
+      "$value": "6rem"
+    },
+    "32": {
+      "$value": "8rem"
+    }
+  },
+  "shadow": {
+    "sm": {
+      "$value": "2px 2px 0 0 oklch(0 0 0 / 0.60)"
+    },
+    "md": {
+      "$value": "6px 6px 0 0 oklch(0 0 0 / 0.55), 0 10px 24px -8px oklch(0 0 0 / 0.60)"
+    },
+    "lg": {
+      "$value": "10px 10px 0 0 oklch(0 0 0 / 0.55), 0 24px 52px -12px oklch(0 0 0 / 0.70)"
+    },
+    "glow": {
+      "$value": "0 0 52px -6px oklch(0.90 0.19 100 / 0.55)"
+    }
+  },
+  "motion": {
+    "easing": {
+      "$value": "cubic-bezier(0.4, 0, 0, 1)"
+    },
+    "duration": {
+      "fast": {
+        "$value": "100ms"
+      },
+      "base": {
+        "$value": "200ms"
+      },
+      "slow": {
+        "$value": "350ms"
+      },
+      "scroll": {
+        "$value": "1000ms"
+      }
+    }
+  },
+  "layout": {
+    "containerWide": {
+      "$value": "84rem"
+    },
+    "containerNormal": {
+      "$value": "66rem"
+    },
+    "containerProse": {
+      "$value": "42rem"
+    }
+  },
+  "social": {
+    "facebook": {
+      "$value": ""
+    },
+    "instagram": {
+      "$value": ""
+    },
+    "linkedin": {
+      "$value": ""
+    },
+    "twitter": {
+      "$value": ""
+    },
+    "youtube": {
+      "$value": ""
+    },
+    "tiktok": {
+      "$value": ""
+    },
+    "github": {
+      "$value": ""
+    }
+  },
   "features": {
-    "hero":         { "$value": true },
-    "bento":        { "$value": false },
-    "stats":        { "$value": true },
-    "services":     { "$value": true },
-    "process":      { "$value": true },
-    "testimonials": { "$value": true },
-    "logoCloud":    { "$value": true },
-    "pricing":      { "$value": false },
-    "faq":          { "$value": true },
-    "blog":         { "$value": true },
-    "team":         { "$value": true },
-    "caseStudies":  { "$value": true },
-    "newsletter":   { "$value": false },
-    "cta":          { "$value": true }
+    "hero": {
+      "$value": true
+    },
+    "bento": {
+      "$value": false
+    },
+    "stats": {
+      "$value": true
+    },
+    "services": {
+      "$value": true
+    },
+    "process": {
+      "$value": true
+    },
+    "testimonials": {
+      "$value": true
+    },
+    "logoCloud": {
+      "$value": true
+    },
+    "pricing": {
+      "$value": false
+    },
+    "faq": {
+      "$value": true
+    },
+    "blog": {
+      "$value": true
+    },
+    "team": {
+      "$value": true
+    },
+    "caseStudies": {
+      "$value": true
+    },
+    "newsletter": {
+      "$value": false
+    },
+    "cta": {
+      "$value": true
+    },
+    "quote": {
+      "$value": true
+    }
   }
 }
