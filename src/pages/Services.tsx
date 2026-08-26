@@ -1,17 +1,25 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight, Zap, Check } from 'lucide-react';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { useSEO } from '@/hooks/useSEO';
 import { JsonLd } from '@/components/JsonLd';
 import { Button } from '@/components/ui/button';
 
+// Each card renders the ~80-word LONG description (emitted by the content pack for
+// all 10 verticals) so /services ships 500+ words across several sections.
 const services = [
-  { title: '{SERVICE_1_TITLE}', description: '{SERVICE_1_FULL_DESCRIPTION}' },
-  { title: '{SERVICE_2_TITLE}', description: '{SERVICE_2_FULL_DESCRIPTION}' },
-  { title: '{SERVICE_3_TITLE}', description: '{SERVICE_3_FULL_DESCRIPTION}' },
-  { title: '{SERVICE_4_TITLE}', description: '{SERVICE_4_FULL_DESCRIPTION}' },
-  { title: '{SERVICE_5_TITLE}', description: '{SERVICE_5_FULL_DESCRIPTION}' },
-  { title: '{SERVICE_6_TITLE}', description: '{SERVICE_6_FULL_DESCRIPTION}' },
+  { title: '{SERVICE_1_TITLE}', description: '{SERVICE_1_LONG_DESCRIPTION}' },
+  { title: '{SERVICE_2_TITLE}', description: '{SERVICE_2_LONG_DESCRIPTION}' },
+  { title: '{SERVICE_3_TITLE}', description: '{SERVICE_3_LONG_DESCRIPTION}' },
+  { title: '{SERVICE_4_TITLE}', description: '{SERVICE_4_LONG_DESCRIPTION}' },
+  { title: '{SERVICE_5_TITLE}', description: '{SERVICE_5_LONG_DESCRIPTION}' },
+  { title: '{SERVICE_6_TITLE}', description: '{SERVICE_6_LONG_DESCRIPTION}' },
+];
+
+const whyUs = [
+  { title: '{SERVICES_WHY_1_TITLE}', desc: '{SERVICES_WHY_1_DESC}' },
+  { title: '{SERVICES_WHY_2_TITLE}', desc: '{SERVICES_WHY_2_DESC}' },
+  { title: '{SERVICES_WHY_3_TITLE}', desc: '{SERVICES_WHY_3_DESC}' },
 ];
 
 export default function Services() {
@@ -31,9 +39,9 @@ export default function Services() {
         }}
       />
 
-      <section className="pt-32 pb-20">
+      <section className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-16">
+          <AnimatedSection className="text-center mb-10">
             <span className="text-[var(--color-accent)] text-sm font-mono tracking-widest uppercase">
               Our Services
             </span>
@@ -45,6 +53,16 @@ export default function Services() {
             </p>
           </AnimatedSection>
 
+          {/* Intro paragraph */}
+          <AnimatedSection className="mb-16">
+            <div className="glass rounded-2xl p-8 md:p-10 max-w-3xl mx-auto">
+              <p className="text-text-muted leading-relaxed text-center">
+                {'{SERVICES_INTRO}'}
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Service cards — full write-ups */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
               <AnimatedSection key={i} delay={`${i * 0.1}s`}>
@@ -62,8 +80,40 @@ export default function Services() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
 
-          <AnimatedSection className="text-center mt-16">
+      {/* Why choose us band */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection className="text-center mb-10">
+            <span className="text-[var(--color-accent)] text-sm font-mono tracking-widest uppercase">
+              Why choose us
+            </span>
+            <h2 className="text-2xl md:text-4xl font-bold font-heading text-text mt-3">
+              What you can count on
+            </h2>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6">
+            {whyUs.map((item, i) => (
+              <AnimatedSection key={i} delay={`${i * 0.1}s`}>
+                <div className="glass rounded-2xl p-8 h-full">
+                  <div className="h-11 w-11 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center mb-5">
+                    <Check className="h-5 w-5 text-[var(--color-accent)]" />
+                  </div>
+                  <h3 className="text-lg font-bold font-heading text-text mb-2">{item.title}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 pb-28">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimatedSection className="text-center">
             <div className="glass rounded-3xl p-12 max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold font-heading mb-4">
                 {'{SERVICES_CTA_HEADLINE}'}

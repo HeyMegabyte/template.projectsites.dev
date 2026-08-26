@@ -34,6 +34,13 @@ export default function Contact() {
             </p>
           </AnimatedSection>
 
+          {/* Intro — reassuring, guess-ahead copy so the page is more than a form. */}
+          <AnimatedSection className="mb-12">
+            <p className="text-text-muted leading-relaxed max-w-3xl mx-auto text-center">
+              {'{CONTACT_INTRO}'}
+            </p>
+          </AnimatedSection>
+
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <AnimatedSection animation="animate-slideInLeft">
@@ -151,7 +158,9 @@ export default function Contact() {
               always reach a real person who knows our work and genuinely wants to help. We read every
               message, answer your questions honestly, and never put you through an automated runaround
               or a high-pressure pitch. Most inquiries get a thoughtful, personal reply within one
-              business day.
+              business day, and often much sooner. There are no silly questions and no wrong reasons to
+              reach out &mdash; if we can help, we will, and if we cannot, we will happily point you in
+              the right direction.
             </p>
             <ol className="grid sm:grid-cols-3 gap-6 mt-8">
               {[
@@ -172,6 +181,49 @@ export default function Contact() {
               Prefer to talk right away? Call or email us directly using the details above &mdash;
               we&rsquo;re glad to help however works best for you.
             </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Ways to reach us — reassurance paragraph + 3 routed points. Every token is
+          emitted by the content pack for all 10 verticals; theme tokens only. */}
+      <section className="pb-28">
+        <div className="max-w-container-wide mx-auto px-6">
+          <AnimatedSection className="text-center mb-10">
+            <span className="text-[var(--color-accent)] text-sm font-mono tracking-widest uppercase">
+              However works for you
+            </span>
+            <h2 className="text-2xl md:text-4xl font-bold font-heading text-text mt-3 mb-4">
+              A few ways to reach us
+            </h2>
+            <p className="text-text-muted leading-relaxed max-w-3xl mx-auto">
+              {'{CONTACT_REASSURE}'}
+            </p>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { title: '{CONTACT_POINT_1_TITLE}', desc: '{CONTACT_POINT_1_DESC}' },
+              { title: '{CONTACT_POINT_2_TITLE}', desc: '{CONTACT_POINT_2_DESC}' },
+              { title: '{CONTACT_POINT_3_TITLE}', desc: '{CONTACT_POINT_3_DESC}' },
+            ].map((p, i) => (
+              <AnimatedSection key={i} delay={`${i * 0.1}s`}>
+                <div className="glass rounded-2xl p-8 h-full">
+                  <h3 className="text-lg font-bold font-heading text-text mb-2">{p.title}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{p.desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection className="mt-12">
+            <div className="glass rounded-2xl p-8 md:p-12 max-w-3xl mx-auto text-center">
+              <h3 className="text-xl md:text-2xl font-bold font-heading text-text mb-4">
+                {'{CONTACT_HELP_TITLE}'}
+              </h3>
+              <p className="text-text-muted leading-relaxed">
+                {'{CONTACT_HELP_TEXT}'}
+              </p>
+            </div>
           </AnimatedSection>
         </div>
       </section>

@@ -410,6 +410,486 @@ const SUBPAGE = {
   },
 };
 
+// Deep sub-page content (journey 2026-08-26 — Brian: EVERY page /about /services
+// /faq /contact must render 500+ words across SEVERAL sections, not one thin block).
+// Per vertical:
+//   aboutP34   — two more About body paragraphs (history + what-to-expect)
+//   values     — 3× {title, desc} for the "What we stand for" grid
+//   approach   — [title, text] for the "How we work" band
+//   servicesIntro — intro paragraph above the Services grid
+//   serviceLong — 6 ~70-90-word expansions (Services page uses these, not the short homepage ones)
+//   why        — 3× {title, desc} for the Services "Why choose us" band
+//   contactIntro — reassuring intro paragraph above the Contact form
+//   faqMore    — 4 extra Q&A (40-60-word answers) → FAQ page reaches 10-12 items
+// Name-agnostic (no {TOKEN} inside values), Flesch-friendly, no slop, no fabricated people.
+const SUB2 = {
+  medical: {
+    aboutP34: [
+      'What sets us apart is the time we take. We never rush you out the door or push treatment you do not need. Instead, we walk you through every finding on the screen, answer questions in plain language, and build a plan around your priorities, your comfort, and your budget. Many of our patients have been with us for a decade or more, and their children now sit in the same chairs.',
+      'Behind the warm welcome is a genuinely modern practice. Digital X-rays cut radiation and show you exactly what we see. Intraoral cameras turn "trust me" into "look here." Quieter tools and gentle numbing keep visits calm, and online booking with automatic reminders means you spend less time on the phone and more time smiling.',
+    ],
+    values: [
+      ['Comfort without compromise', 'Sedation options, gentle technique, and a team that checks in often. If anything feels off, we stop and adjust. Your ease matters as much as your teeth.'],
+      ['Honesty you can feel', 'We only recommend what we would choose for our own family. You get clear options, real costs, and the freedom to say not right now.'],
+      ['Care for every age', 'Toddlers, teens, parents, and grandparents share one trusted office. We grow with your family and keep every history in one place.'],
+    ],
+    approach: ['A visit built around you', 'From the first hello, we listen before we look. We examine gently, explain what we find, and lay out simple choices with honest pricing. You decide the pace. We handle the insurance paperwork, send reminders so nothing slips, and follow up after bigger treatments to make sure you heal comfortably.'],
+    servicesIntro: 'Great oral health is more than a bright smile; it is comfortable chewing, fresh breath, and catching small issues before they become painful, costly ones. Our services span prevention, restoration, and cosmetics, so whatever brings you in, you are cared for under one roof by a team that already knows your history.',
+    serviceLong: [
+      'Routine cleanings and exams are the foundation of a healthy mouth. We remove plaque and tartar the toothbrush cannot reach, screen for cavities and gum disease, and check for early signs of bigger problems, from grinding to oral cancer. You leave with a clean, polished smile and a plain-language summary of exactly where your health stands and what, if anything, to watch.',
+      'When a tooth is damaged or decayed, we restore it with tooth-colored fillings and durable crowns that blend right in. Most are completed in one or two comfortable visits. We match the shade to your natural teeth, check your bite so nothing feels high, and protect the tooth so you can eat and smile without a second thought.',
+      'Professional whitening lifts years of coffee, tea, and wine stains far beyond what store strips achieve. We protect your gums, brighten safely in the chair, and send you home with custom trays to keep the results fresh. It is one of the simplest, most satisfying ways to feel more confident about your smile.',
+      'Clear aligners straighten teeth discreetly, with no metal brackets and no food restrictions. We map your entire plan before you start, so you can preview the finished result and know the timeline up front. Removable trays make brushing easy and let you eat what you love throughout treatment.',
+      'Dental implants are the gold standard for replacing missing teeth. Anchored securely in the jaw, they restore full chewing power and a natural look that does not slip or click. We plan each case carefully with 3D imaging and guide you through every step, from placement to the final, lifelike crown.',
+      'Dental emergencies never happen at a convenient time. A cracked tooth, sudden swelling, or throbbing pain deserves fast attention, so we hold same-day slots for urgent visits. Call us and we will get you seen, ease the pain, and lay out a clear plan to fix the problem for good.',
+    ],
+    why: [
+      ['Same-day emergency care', 'Pain, chips, and swelling do not wait, so we do not make you wait either. Reserved daily slots mean fast relief from a team that already knows you.'],
+      ['Most insurance accepted', 'We take the major plans and file the claims for you. You see your estimate before we begin, so the only surprise is how easy it was.'],
+      ['A calm, modern office', 'Quiet tools, gentle numbing, and a friendly team turn a dreaded chore into an easy appointment, even for the most nervous patients.'],
+    ],
+    contactIntro: 'Whether you are a new patient booking a first cleaning, a current patient with a question about a bill, or someone in pain who needs to be seen today, we are glad you reached out. Fill out the form or call us directly and a friendly member of our front desk, not a machine, will help you find a time and answer anything you need before you arrive.',
+    faqMore: [
+      ['How often should I come in for a checkup?', 'For most people, twice a year keeps teeth clean and catches problems early. If you are prone to cavities or gum issues, we may suggest more frequent visits. We will recommend a schedule that fits your mouth, not a one-size-fits-all rule.'],
+      ['Do you treat children, and at what age should they start?', 'Yes, we care for every age. We recommend a first visit for little ones around their first birthday or when the first tooth appears. Early, positive visits help kids feel at ease and set the stage for a lifetime of healthy habits.'],
+      ['I have not been to a dentist in years. Will you judge me?', 'Never. Life gets busy and dental anxiety is common. We meet you where you are, with zero lectures, and build a gentle, realistic plan to get your smile back on track at a pace that feels comfortable for you.'],
+      ['What can I do about a dental emergency after hours?', 'Call our main number and follow the prompts for urgent care. For severe swelling, trouble breathing, or trauma, seek emergency medical help first. For most dental emergencies, we will get you seen the same day or first thing the next morning.'],
+    ],
+  },
+  wellness: {
+    aboutP34: [
+      'Over the years, this studio has become far more than a room with mats. It is where beginners discover they are stronger than they thought, where busy parents steal an hour of quiet, and where lifelong practitioners keep growing. We have kept classes small on purpose, so every teacher can offer real attention and every student feels seen, not lost in a crowd.',
+      'Everything here is designed to help you exhale the moment you arrive: soft light, clean floors, a calm scent, and props already set out for you. We believe wellness should feel welcoming, not intimidating, so we leave the ego and the mirrors at the door and focus on how you feel, not how you look.',
+    ],
+    values: [
+      ['Every body belongs', 'No flexibility required, no experience needed. Our teachers offer options for every pose so you can practice safely and proudly, exactly as you are today.'],
+      ['Presence over performance', 'This is not a competition. We measure a good class by how grounded you feel walking out, not by how deep you fold or how long you hold.'],
+      ['Community that lifts', 'You will learn names, make friends, and feel genuinely missed when you skip a week. A steady practice is easier when people are cheering you on.'],
+    ],
+    approach: ['How a class flows', 'Reserve your mat online in under a minute and arrive whenever suits you; we have props and mats ready. Your teacher greets you, learns any injuries or goals, and guides a class that meets the room where it is. You move at your own pace, rest whenever you need, and leave lighter than you came, week after week.'],
+    servicesIntro: 'A good practice meets you where you are on any given day, whether you crave a strong sweat, a slow stretch, or a quiet mind. Our classes span the full range, taught by certified instructors who adjust for every level, so you can build strength, ease stress, and find calm without ever feeling out of place.',
+    serviceLong: [
+      'Vinyasa flow links breath to movement in a smooth, energizing sequence that builds heat, strength, and focus. Expect to move, sweat a little, and leave clear-headed. Teachers cue options throughout, so newcomers can take it gently while seasoned students challenge their balance and stamina. It is a favorite for anyone who likes their calm with a side of energy.',
+      'Gentle and restorative classes are a soft landing for a hard week. Supported by bolsters and blankets, you settle into slow, deeply relaxing poses held long enough to release real tension. The nervous system quiets, the mind unwinds, and you leave feeling restored. No experience or flexibility needed, just a willingness to slow down.',
+      'Power yoga is a stronger, faster practice that builds serious heat and stamina. It is athletic and invigorating, yet every pose has a modification, so you set the intensity. If you want a workout that also steadies your mind, this class delivers strength, sweat, and a satisfying sense of accomplishment.',
+      'Meditation and breathwork sessions teach simple, practical tools to steady your breath and quiet a racing mind. No incense-and-mystery required, just clear guidance you can carry into a stressful commute or a sleepless night. Even ten minutes can shift your whole day, and beginners are especially welcome here.',
+      'Pilates and core classes build a strong, stable center with low-impact, precise movement. Better posture, less back strain, and real functional strength are the payoff. It pairs beautifully with any yoga practice and suits every level, from first-timers to athletes looking to shore up their foundation.',
+      'Private sessions offer one-on-one guidance tailored entirely to you. Whether you are working around an injury, preparing for an event, or simply want focused attention, your instructor designs each session around your body, goals, and pace. It is the fastest way to build confidence, deepen your understanding, and refine your practice, and it is a wonderful complement to group classes whenever you want a little extra care.',
+    ],
+    why: [
+      ['Your first class is on us', 'Try the studio with zero risk. Meet a teacher, feel the space, and see how good it feels to slow down before you commit to anything.'],
+      ['Certified, caring instructors', 'Every teacher is trained to guide you safely and adjust for your body, so you can push a little or rest a lot with total confidence.'],
+      ['Schedules that fit real life', 'Morning, midday, and evening classes mean you can practice around work and family, not the other way around.'],
+    ],
+    contactIntro: 'New to the studio and not sure where to start? Curious about memberships, or want to book a private session? We would love to hear from you. Send a message or give us a call and a real person from our team will help you find the right class, answer any questions, and make your very first visit feel easy and welcoming.',
+    faqMore: [
+      ['I am not flexible at all. Can I still do yoga?', 'Absolutely, and you are exactly who yoga helps most. Flexibility is a result of practice, not a requirement to begin. Our teachers offer props and easy options for every pose, so you build strength and range safely, at your own pace.'],
+      ['How often should I practice to see benefits?', 'Even one class a week makes a real difference in how you feel. Two or three builds noticeable strength and calm. We suggest starting with what is realistic for your schedule; consistency matters far more than intensity when it comes to lasting benefits.'],
+      ['What is the difference between your class styles?', 'Flow and power classes build heat and strength; restorative and gentle classes release tension and calm the mind; meditation steadies your breath; Pilates strengthens your core. Not sure which fits? Tell us how you want to feel and we will point you to the right class.'],
+      ['Do I need to buy a membership to attend?', 'Not at all. We offer drop-ins and class packs alongside monthly memberships, so you can practice entirely on your own terms. Start with a single class, and choose a plan later only if the studio becomes part of your routine.'],
+    ],
+  },
+  legal: {
+    aboutP34: [
+      'Legal problems rarely arrive alone; they come tangled with stress, uncertainty, and a lot at stake. Our firm was built to be the steady hand in those moments. We take time to understand not just the facts of your case but what matters most to you, then we chart a clear path and walk it beside you, keeping you informed at every turn.',
+      'We have handled hundreds of matters for families and businesses in this community, and that experience shows in the details: anticipating the other side’s moves, spotting risks early, and knowing when to negotiate and when to stand firm. You will always work directly with a senior attorney who knows your case, returns your calls, and treats your matter with the seriousness it deserves.',
+    ],
+    values: [
+      ['Plain-language counsel', 'The law is full of jargon; your lawyer should not be. We explain your options in clear terms so you can make confident, informed decisions about your own future.'],
+      ['Senior attention, always', 'Your case is handled by an experienced attorney, never quietly passed to a junior associate. The person you meet is the person who does the work.'],
+      ['Discretion by default', 'Your matter stays private. We handle sensitive situations with the care, confidentiality, and respect you would expect for your own family.'],
+    ],
+    approach: ['What working with us looks like', 'It starts with a free, confidential consultation where we listen and give you an honest read on your options. If we move forward, we map a clear strategy, explain the likely timeline and costs, and handle the filings, negotiations, and hard conversations. Throughout, we keep you updated in real time, so you are never left guessing about what happens next.'],
+    servicesIntro: 'When life or business takes an unexpected turn, the right counsel makes all the difference. Our attorneys bring focused experience across the matters people face most, from protecting a family through divorce to closing a real estate deal to pursuing fair compensation after an injury. Whatever your situation, you get straight advice and a determined advocate in your corner.',
+    serviceLong: [
+      'Family law matters, from divorce and custody to child and spousal support, are among the most personal a person can face. We handle them with discretion, compassion, and a firm focus on protecting what matters most to you: your children, your finances, and your peace of mind. Where we can resolve things amicably we will, and where we must fight, we fight hard.',
+      'Thoughtful estate planning spares your loved ones confusion and conflict during an already painful time. We prepare wills, trusts, and powers of attorney tailored to your wishes, so your assets pass exactly the way you intend and your family has clear guidance. It is one of the most caring things you can do for the people you love.',
+      'If you were hurt because of someone else’s carelessness, you deserve full and fair compensation for your medical bills, lost income, and pain. We handle personal injury cases on a contingency basis, meaning no fee unless we win. We deal with the insurance companies so you can focus on healing, not haggling.',
+      'Businesses need sound legal footing to grow with confidence. We handle formation, contracts, and disputes so you can run your company without nasty surprises. From a solid operating agreement to a tough negotiation, we protect your interests and translate legal risk into clear, practical decisions you can actually act on.',
+      'Real estate transactions involve large sums and dense paperwork where small errors get expensive. We guide buyers, sellers, and owners through clear contracts and smooth closings, catching issues before they become problems. Whether it is your first home or a commercial deal, you get careful review and confident guidance start to finish.',
+      'Probate and the settling of an estate can feel overwhelming while you are grieving. We guide executors and families through the process with patience and clarity, handling the court requirements, creditor claims, and distributions so you can focus on what matters. Our goal is to lighten the load and honor the wishes of your loved one faithfully.',
+    ],
+    why: [
+      ['Free, honest consultation', 'Come in, tell us your situation, and get a clear read on your options with no obligation. You will leave knowing where you stand, whether or not you hire us.'],
+      ['Fees explained up front', 'Flat fee, contingency, or hourly, you know the structure before you sign. No surprise bills, no meter running on every phone call.'],
+      ['A record clients rely on', 'Decades of combined experience and hundreds of resolved matters mean you get seasoned judgment, not on-the-job training, when the stakes are high.'],
+    ],
+    contactIntro: 'The hardest part is often just reaching out. Whether you are facing a difficult family matter, planning for the future, or dealing with an injury or dispute, we are here to help and there is no cost to talk. Send us a message or call to schedule your free, confidential consultation, and a member of our team will get back to you promptly with clear next steps.',
+    faqMore: [
+      ['Do I really need a lawyer for this, or can I handle it myself?', 'Some matters are simple enough to handle alone; many are not, and mistakes can be costly or permanent. The honest answer depends on your situation. Come in for a free consultation and we will tell you plainly whether you need us, even if the answer is no.'],
+      ['How long does a typical case take to resolve?', 'It varies widely by matter and complexity. A straightforward will might take days; a contested case can take months. What we promise is a realistic timeline early on and regular updates, so you are never left wondering where things stand or what comes next.'],
+      ['What should I bring to my first consultation?', 'Bring any documents related to your matter: contracts, letters, court papers, or notes on what happened and when. Do not worry if you are missing something; just bring what you have. The more we can review, the more specific our guidance can be from the very first meeting.'],
+      ['Will everything I tell you stay confidential?', 'Yes. Attorney-client privilege protects your communications from the moment you consult us, even if you decide not to hire the firm. You can speak freely and completely, knowing your private matters remain private and are handled with the utmost discretion.'],
+    ],
+  },
+  restaurant: {
+    aboutP34: [
+      'Everything starts in the kitchen, where our cooks show up early to prep from scratch: stocks simmering, bread proofing, sauces built by hand rather than poured from a jar. We source from nearby farms and makers we actually know, so the menu shifts with the seasons and the flavors taste like they came from somewhere, because they did.',
+      'Out front, we want the room to feel like the best kind of gathering: warm light, easy conversation, and a team that remembers your name and your usual. Whether it is a quiet dinner for two, a boisterous family celebration, or a solo seat at the bar, you are family the moment you walk in, and we treat every plate like it is going to someone we love.',
+    ],
+    values: [
+      ['Made from scratch, daily', 'From the sauces to the desserts, we cook it here, by hand, every day. No shortcuts, no freezer-to-fryer, just real food that tastes like someone cared.'],
+      ['Local and seasonal', 'We buy from nearby farms and makers, so the menu changes with what is fresh. Better flavor, a smaller footprint, and a community we are proud to support.'],
+      ['Everyone at the table', 'Vegetarian, gluten-free, or feeding a picky kid, we have got you. Tell us what you need and our kitchen will happily make it work.'],
+    ],
+    approach: ['From our kitchen to your table', 'Reserve online or by phone, or simply walk in and we will find you a seat when we can. Settle in, let our team guide you to the dishes we are most excited about today, and enjoy plates made fresh to order. Planning something bigger? Ask about catering and private events, and we will build a menu around your occasion.'],
+    servicesIntro: 'Good food brings people together, and we take that seriously. From weekend brunch to a special dinner, from a crowd-pleasing catering spread to an intimate private event, everything we serve is made from scratch with local ingredients. Explore what is on the menu, and know that whatever the occasion, we are ready to make it delicious.',
+    serviceLong: [
+      'Our chef specials are where the kitchen gets to play. Each week we build a handful of seasonal plates around the best local finds, from just-picked produce to the day’s fresh catch. Ask your server what is new; these dishes change often and rarely last, so they are the perfect way to taste what our cooks are most excited about right now.',
+      'Weekend brunch is a beloved ritual here, from fluffy pancakes and golden waffles to savory hash and eggs done just right, all with bottomless coffee to ease you into the day. It is relaxed, generous, and made for lingering, whether you are recovering from a big night or gathering the family for a slow, happy morning.',
+      'Dinner is the heart of what we do: hearty mains, shareable plates, and flavors built from scratch to gather around. Whether you are here for a special occasion or a well-earned weeknight treat, there is something for every appetite, paired with a thoughtful drink list and served by a team that genuinely wants you to leave happy.',
+      'Our catering brings the same fresh, made-to-order food to your event, delivered on time and ready to impress. From office lunches to birthday parties to holiday gatherings, we handle the menu, the quantities, and the details so you can focus on your guests. Tell us the crowd and the vibe, and we will build a spread everyone remembers.',
+      'Host your celebration in our space and let us handle the rest. For private events we craft a menu built around your occasion, whether it is an anniversary dinner, a rehearsal, or a company milestone. You get a warm room, attentive service, and food worth gathering for, without any of the stress of hosting at home.',
+      'Save room, because our desserts are made in house and worth it. Baked fresh daily, from rich classics to seasonal surprises, they are the sweet ending every great meal deserves. Ask about the day’s selection, or take one home; they have a way of turning an ordinary evening into a small celebration.',
+    ],
+    why: [
+      ['A scratch kitchen', 'We cook everything in house, every day, from local ingredients. It takes more work, and you can taste the difference in every single bite.'],
+      ['Reservations or walk-in', 'Book ahead online or just drop by; we welcome both. Planning a party? Ask about catering and private events and we will make it easy.'],
+      ['Made for every guest', 'Vegetarian and gluten-free dishes are marked on the menu, and our kitchen happily accommodates allergies and preferences. Everyone leaves the table satisfied.'],
+    ],
+    contactIntro: 'Have a question about the menu, want to book a table, or planning a party or catered event? We would love to hear from you. Send a message or give us a call and a member of our team will help you sort out the details, from dietary needs to private dining, so your next meal with us is exactly what you hoped for.',
+    faqMore: [
+      ['Do you have options for kids and picky eaters?', 'We do. Alongside our regular menu, we are always happy to keep things simple for younger guests or anyone who prefers plainer plates. Just let your server know; our kitchen would much rather make something everyone enjoys than see a plate go back untouched.'],
+      ['Can you accommodate large groups and celebrations?', 'Absolutely. We regularly host birthdays, anniversaries, and get-togethers, and we can arrange group menus or a private space depending on the size. Reach out ahead of time and we will help you plan the details so your gathering is relaxed and memorable.'],
+      ['Do you offer takeout or delivery?', 'Yes, many of our dishes travel beautifully, and we package them with care so they arrive just right. Call to place an order or ask about the easiest way to get your favorites to go. Catering is also available for larger orders and events.'],
+      ['Where do you source your ingredients?', 'We buy from local farms, makers, and suppliers whenever we can, which is why the menu shifts with the seasons. Fresher ingredients simply taste better, and supporting our neighbors keeps our community strong. Ask us what is in season and we will happily tell you the story behind the plate.'],
+    ],
+  },
+  'local-service': {
+    aboutP34: [
+      'We started this company with a simple frustration: too many home services show up late, quote one price and charge another, and leave a mess behind. So we built the opposite. When you call, you reach people who arrive in the window we promise, quote the real price before we start, and treat your home with the respect we would want in our own.',
+      'Every technician on our team is fully licensed, insured, and background-checked, and every job is backed by our workmanship guarantee. We invest in training and the right tools so we can diagnose honestly and fix it right the first time, whether it is a quick repair or a major upgrade. Do it well, do it once, and stand behind it; that is the whole philosophy.',
+    ],
+    values: [
+      ['On time, as promised', 'We show up when we say we will and respect your schedule. No all-day windows, no waiting around, no wondering whether we are actually coming.'],
+      ['One honest price', 'You approve the cost before we lift a tool, and that is the price you pay. No surprise add-ons, no upselling, no fine print at the bottom of the invoice.'],
+      ['Respect for your home', 'We protect your floors, clean up when we finish, and leave your space better than we found it. Your home is not a job site to us; it is your home.'],
+    ],
+    approach: ['How we get your problem solved', 'Call or book online and tell us what is going on; we will schedule a visit fast, often the same day for urgent issues. We assess the situation, explain what we found in plain terms, and give you a clear, upfront price. Once you approve, we do the work cleanly and correctly, then back it in writing so you can relax knowing it is truly handled.'],
+    servicesIntro: 'Your home is one of your biggest investments, and keeping it running smoothly should not be a gamble. From urgent repairs to planned upgrades and routine maintenance, our licensed team handles it all with honest pricing and quality that lasts. Whatever the job, big or small, you get dependable work from people who actually stand behind it.',
+    serviceLong: [
+      'When something breaks, you want it fixed fast and fixed right, not patched to fail again next month. Our technicians diagnose the real problem honestly, explain your options, and make lasting repairs with quality parts. We show up prepared, work cleanly, and back every fix with our guarantee, so a repair is one less thing on your mind, not a recurring headache.',
+      'A proper installation is the difference between equipment that lasts for years and one that causes trouble from day one. We install new fixtures and systems to code, sized right for your home and built to last. We take the time to do it correctly, test everything before we leave, and make sure you know how it all works.',
+      'Small problems are cheaper to prevent than to repair. Our maintenance plans keep your equipment tuned, catch wear before it becomes a breakdown, and extend the life of the systems you rely on. Scheduled visits mean fewer surprises, lower bills, and the peace of mind that comes from knowing everything is in good hands.',
+      'When something fails after hours or on a weekend, you cannot always wait until Monday. We offer same-day and emergency service for the urgent problems that just cannot wait, arriving fast to get your home back to normal. One call and a real person answers, ready to help when you need it most.',
+      'Modern upgrades do more than look good; they lower your bills and make your home more comfortable and efficient. We help you choose the right improvements for your budget and install them cleanly, so you start seeing the benefits right away. It is a smart investment that pays you back month after month.',
+      'A thorough inspection tells you exactly where you stand, with no guesswork and no scare tactics. We check carefully, document what we find, and give you a clear report and honest recommendations. Whether you are buying a home, selling one, or just want peace of mind, you will know the real condition and what, if anything, needs attention.',
+    ],
+    why: [
+      ['Licensed and insured', 'Fully credentialed, background-checked pros protect your home and your peace of mind on every single job. Your investment is safe with us.'],
+      ['Free, upfront quotes', 'Know the price before any work begins, with no obligation and no pressure. What we quote is what you pay, every time.'],
+      ['Guaranteed workmanship', 'If it is not right, we make it right, no argument. Every job is backed in writing, because we stand behind our work completely.'],
+    ],
+    contactIntro: 'Got a problem that needs fixing, a project in mind, or just want a straight answer and a fair quote? Reach out. Send us a message or give us a call, and a real person, not an answering service, will help you get scheduled. For urgent issues, ask about same-day service; we keep slots open for the problems that simply cannot wait.',
+    faqMore: [
+      ['How quickly can you come out for an urgent problem?', 'For genuine emergencies, we aim for same-day service and keep slots open specifically for urgent calls. When you call, tell us what is happening and how bad it is, and we will give you a realistic arrival time and, when possible, tips to limit any damage until we get there.'],
+      ['Do you charge for a quote or estimate?', 'No. We provide a clear, no-obligation quote before any work begins, so you can make an informed decision with zero pressure. You will know the full scope and the real price up front, and the choice to move forward is always entirely yours.'],
+      ['What happens if something goes wrong after the work is done?', 'Just call us. Every job is backed by our workmanship guarantee, so if something is not right, we come back and fix it, no argument and no extra charge for our workmanship. Standing behind our work is not a marketing line; it is how we keep your trust.'],
+      ['What areas do you serve?', 'We proudly serve our local community and the surrounding neighborhoods. If you are not sure whether you are in our service area, just give us a call with your address and we will confirm right away, along with the soonest time we could get to you.'],
+    ],
+  },
+  nonprofit: {
+    aboutP34: [
+      'What began as a handful of neighbors helping neighbors has grown into a mission that reaches families across our community every week. The need is real and it is local, and so is every ounce of the response. Your support does not disappear into a distant headquarters; it stays right here, turning into meals, mentoring, and a helping hand for people who live down the street.',
+      'We are powered by volunteers and guided by careful, transparent stewardship, which means the large majority of every gift goes straight to the people we serve. We publish our impact openly and welcome your questions, because trust is earned. When you give or volunteer with us, you are not a line item; you are part of a community choosing to show up for one another.',
+    ],
+    values: [
+      ['Local impact you can see', 'Every dollar and every hour stays in our community and helps neighbors who need it most. This is not charity from afar; it is change you can watch happen.'],
+      ['Honest stewardship', 'We publish where funds go and welcome your questions. The large majority of every gift funds programs directly, and we are proud to show exactly how.'],
+      ['Powered by people', 'Caring volunteers, not overhead, drive the work. When you give your time or your gift, you join a real community making a real difference together.'],
+    ],
+    approach: ['How your support becomes impact', 'It is simple: you give or you volunteer, and that support joins the efforts of others to fund real programs. Volunteers turn dollars into hands-on help, meals into full plates, and good intentions into lasting change for our neighbors. We track our results carefully and share them openly, so you can see the difference your generosity makes, week after week.'],
+    servicesIntro: 'Real change happens through practical, caring work that meets people where they are. Our programs address the needs we see most in our community, from food and essentials to youth mentoring to emergency support in a crisis. Explore the work your gifts and volunteer hours make possible, and see how much a community can do when it decides to show up.',
+    serviceLong: [
+      'No one in our community should go hungry or without basic necessities. Our food and essentials program provides meals, groceries, and everyday items to families facing hard times, always with dignity and warmth. We meet immediate needs today while connecting people with the resources to find steadier ground tomorrow, treating everyone who comes to us as the neighbor they are.',
+      'Every young person deserves a safe place to grow, learn, and be encouraged. Our youth programs offer mentoring, enrichment, and a caring community that helps kids build confidence and reach their potential. By investing in young people now, with steady adults and real opportunities, we help write a brighter future for them and for the whole community.',
+      'We go where the need is, meeting people where they are and connecting them with the help they need. Our community outreach builds relationships, breaks down barriers, and ensures that support reaches those who might otherwise fall through the cracks. Sometimes the most powerful thing we offer is simply showing up, consistently, with open hands and open hearts.',
+      'When crisis strikes, families need help fast. Our emergency support provides swift assistance to neighbors facing a sudden setback, whether it is a lost job, an unexpected bill, or a disaster. We move quickly and compassionately to stabilize the situation, so a temporary hardship does not become a lasting one for the people we serve.',
+      'Our work runs on the generosity of volunteers, and there is a place for everyone. Whether you have an hour or a whole day, specialized skills or simply a willing heart, we will match you with a role that fits. Volunteering is hands-on, deeply rewarding, and the surest way to see your impact firsthand, right alongside neighbors who care as much as you do.',
+      'Lasting change requires more than direct service; it requires awareness and voice. Through education and advocacy, we raise understanding of the challenges our neighbors face and speak up for the people we serve. By shining a light on real needs and real solutions, we help build a community that cares for all of its members, not just some.',
+    ],
+    why: [
+      ['Every gift matters', 'Large or small, every donation moves the mission forward. You do not need deep pockets to change a life for the better right here at home.'],
+      ['Volunteers always welcome', 'Whatever your schedule or skills, there is a meaningful way to help. Roll up your sleeves and see your impact firsthand, alongside a caring community.'],
+      ['Transparent by design', 'We share our impact and our finances openly, so you can give with full confidence that your support truly reaches the people who need it.'],
+    ],
+    contactIntro: 'Want to get involved, ask about our programs, or explore how your business or group can partner with us? We would be glad to hear from you. Send a message or give us a call, and a member of our team will follow up personally. Whether you are hoping to give, volunteer, or simply learn more, there is a place for you here.',
+    faqMore: [
+      ['How do I know my donation is making a real difference?', 'We publish our impact and finances openly, and the large majority of every gift funds programs directly. Beyond the numbers, we share stories and results so you can see the meals served, the students mentored, and the families helped. Your generosity does not disappear; it shows up in our community every week.'],
+      ['Can I volunteer if I only have a little time?', 'Yes, and every hour counts. We have opportunities that fit almost any schedule, from one-time events to occasional shifts to ongoing roles. Tell us how much time you have and what you enjoy, and we will match you with a way to help that feels genuinely worthwhile.'],
+      ['Do you offer ways for kids and families to get involved?', 'We do. Volunteering together is a wonderful way for families to give back and for children to learn the value of service. We can suggest age-appropriate, family-friendly ways to help, so everyone from grandparents to grade-schoolers can be part of the work.'],
+      ['How can my company support your mission?', 'We partner with local businesses on giving, sponsorships, matching gifts, and team volunteer days. Corporate support goes a long way, and it is a meaningful way to engage your employees in the community. Reach out and we will find a partnership that fits the values and goals of your company.'],
+    ],
+  },
+  retail: {
+    aboutP34: [
+      'We got into this because we were tired of buying things that fell apart, from flimsy goods to inflated prices to service that treated us like an order number. So we built the shop we wished existed: a tightly curated selection of products that actually last, chosen by people who use them, at prices that are simply fair. No gimmicks, no clutter, no pressure.',
+      'Every item on our shelves has earned its place. We test what we sell, we talk to the makers, and we skip anything we would not recommend to a friend. When you shop with us, you get honest guidance, fast and free shipping on qualifying orders, and returns so easy you can buy with total confidence. Your trust matters far more to us than any single sale.',
+    ],
+    values: [
+      ['Quality over quantity', 'We stock fewer things, chosen better. Every product earns its spot by being genuinely good, durable, and worth your money, so you can buy with confidence.'],
+      ['Honest, fair prices', 'No inflated tags marked down to look like deals. Just fair prices on things you actually want, with no gimmicks and no games at checkout.'],
+      ['Service like a person', 'Real recommendations from a team that uses what we sell, plus easy returns if it is not right. You are a person to us, never an order number.'],
+    ],
+    approach: ['A better way to shop', 'Browse our curated collections, chosen for quality rather than clutter. Every product page gives you honest details, so you know exactly what you are getting. Check out fast and secure, and enjoy free shipping on qualifying orders. If anything is not quite right, our easy 30-day returns make it painless. Love it or send it back; no hassle either way.'],
+    servicesIntro: 'Shopping should be simple and satisfying, not a gamble on quality or a battle at checkout. Our collections are curated with care, from fresh arrivals to proven best sellers to everyday essentials, all backed by fast, free shipping and easy returns. Whatever you are looking for, you will find goods worth owning and a team happy to help you choose.',
+    serviceLong: [
+      'Our new arrivals are the latest pieces to hit the shelves, hand-picked for quality and freshly stocked. Be the first to grab the drop before it sells out. We are always hunting for goods that meet our standards, so checking in on what is new is the best way to discover your next favorite thing before everyone else does.',
+      'Our best sellers have earned their status the honest way: customers keep coming back for them. Proven, popular, and reliably good, these are the pieces we recommend when you want a sure thing. If you are not sure where to start, start here, with the goods our community has already put to the test and loved.',
+      'Everyday essentials are the staples that never let you down, the reliable basics you reach for again and again. We stock the versions done right, built to last and priced fairly, so you can stock up with confidence. These are the quiet workhorses of a well-chosen collection, and getting them right makes all the difference.',
+      'Our seasonal picks are chosen for the moment, here for a limited time to match what you need right now. Whether it is a warm-weather must-have or a cold-season comfort, these curated pieces capture the season at its best. When they are gone, they are gone, so grab what catches your eye while it lasts.',
+      'Stuck on what to give? Our gifts collection gathers thoughtful, crowd-pleasing finds for everyone on your list, ready to give and sure to delight. From the person who has everything to the one who is impossible to shop for, we have picked options that feel personal and land well, taking the stress out of gifting.',
+      'Great gear at even better prices, our sale section is where quality meets a bargain. These are real products at genuinely reduced prices, not clearance junk, available while supplies last. It is the perfect place to try something new or stock up on a favorite, so check back often; the best deals do not stick around.',
+    ],
+    why: [
+      ['Free shipping over the threshold', 'Qualifying orders ship free and arrive fast, with tracking every step of the way. Smaller orders ship at a flat, fair rate you see before checkout.'],
+      ['Easy 30-day returns', 'Changed your mind? Send it back within 30 days for a refund or exchange, no hassle and no hard questions. Shop with total confidence.'],
+      ['Quality you can trust', 'We use what we sell and only stock what we would recommend to a friend. Every product is chosen to last and backed by our guarantee.'],
+    ],
+    contactIntro: 'Question about an order, need a recommendation, or wondering when something will be back in stock? We are happy to help. Send us a message or reach out anytime, and a real member of our team, not a bot, will get back to you quickly. We want you to love what you buy, and we are here to make shopping with us easy from cart to doorstep.',
+    faqMore: [
+      ['How do I choose the right product if I am not sure?', 'Start with our best sellers, which are proven favorites, or reach out and tell us what you are looking for. Our team actually uses what we sell, so we can give you honest, specific recommendations rather than a generic sales pitch. We would rather help you buy the right thing once than the wrong thing twice.'],
+      ['Can I change or cancel my order after I place it?', 'If your order has not shipped yet, we can usually help you change or cancel it, so reach out as soon as possible. Once it is on its way, our easy 30-day returns have you covered, so you are never stuck with something that is not right for you.'],
+      ['Do you offer gift cards or gift wrapping?', 'We do offer gift cards, which make a great choice when you are not sure what someone would like. Ask us about gift options and wrapping when you order, and we will help make your gift feel special and land well with whoever is lucky enough to receive it.'],
+      ['What if my item arrives damaged?', 'We are sorry, and we will make it right quickly. Reach out with your order details and a photo if you can, and we will arrange a replacement or refund right away. We pack orders with care to prevent this, but when it happens, sorting it out fast is our job, not yours.'],
+    ],
+  },
+  saas: {
+    aboutP34: [
+      'We built this platform because we were drowning in the same busywork you are: the copy-paste between tools, the manual status updates, the reports nobody had time to run. So we made software that quietly handles the tedious parts, freeing teams to spend their energy on the work that actually moves the business forward. Less clicking, more shipping; that has been the goal from day one.',
+      'From your first user to your millionth, the platform stays fast, secure, and genuinely simple to use. We are honest about pricing, quick to help when you get stuck, and relentlessly focused on saving you time rather than adding another dashboard to babysit. Great software should feel like a reliable teammate who never drops the ball, not one more chore on the pile.',
+    ],
+    values: [
+      ['Time is the point', 'Every feature earns its place by saving you effort. We automate the work you never wanted to do by hand, so your team can focus on what actually matters.'],
+      ['Secure and steady', 'Encryption, access controls, and audit logs come standard, and performance holds as you grow. You get enterprise-grade reliability without the enterprise-grade headache.'],
+      ['Honest and human', 'Clear pricing with no hidden fees, and real people who answer fast when you need help. No phone trees, no canned replies, no surprises on the invoice.'],
+    ],
+    approach: ['From sign-up to shipping', 'Getting started takes minutes, not weeks. Create your account free with no credit card, connect the tools you already use in a few clicks, and set up automated flows that run the busywork for you. From there, watch your team move faster with less friction, and lean on real human support whenever you need a hand along the way.'],
+    servicesIntro: 'Everything you need to move faster lives in one place. From automating repetitive tasks to keeping your team aligned to surfacing the numbers that matter, the platform replaces scattered tools and manual effort with reliable, connected workflows. Explore what you can do, and picture the hours your team gets back every single week.',
+    serviceLong: [
+      'Workflow automation turns the manual, repetitive tasks that eat your week into reliable flows that just run. No code required; you set the rules once and the platform handles the rest, from routing requests to updating records to triggering the next step. Teams routinely save hours a week, and those hours go straight back into the work that actually matters.',
+      'Team collaboration keeps everyone aligned without the endless status meetings. Shared views, inline comments, and real-time updates mean your whole team sees the same picture and moves in the same direction. No more digging through inboxes or wondering who is doing what; the work, and the context around it, lives in one clear, always-current place.',
+      'Analytics and reporting turn your data into decisions anyone can act on. Clean dashboards surface the numbers that matter in plain terms, so you spend time acting on insights instead of assembling spreadsheets. Whether it is a quick pulse check or a deep dive, the answers are a glance away, and they are answers your whole team can actually read.',
+      'Integrations connect the tools you already rely on, so your data flows in one direction: forward. Instead of copy-pasting between apps, let the platform sync everything automatically and keep it in step. Your existing stack keeps working, only smoother, with fewer gaps, fewer errors, and a lot less tedious manual upkeep across the board.',
+      'Access controls give the right people the right access, and no more. With roles and granular permissions, you decide who can see and do what, keeping sensitive work secure without slowing anyone down. It scales cleanly as your team grows, so onboarding a new hire or a whole department is a matter of a few clicks, not a security scramble.',
+      'Our API and webhooks let you build on top of the platform however you need. Clean, well-documented endpoints mean your developers can extend, integrate, and automate with confidence, wiring the platform into your own systems and workflows. Whatever you want to build, the foundation is solid, predictable, and ready for you to grow on.',
+    ],
+    why: [
+      ['Free 14-day trial', 'Try everything with no credit card and no risk. Explore the full platform, invite your team, and see the time savings before you ever pay a cent.'],
+      ['Live in minutes', 'Most teams are up and running the same day. Connect your tools, set up your first flows, and start replacing busywork right away, no lengthy onboarding required.'],
+      ['Support that responds', 'Real humans answer fast by chat or email, with no phone trees and no canned scripts. When you need a hand, you get one, quickly.'],
+    ],
+    contactIntro: 'Curious whether the platform fits your team, want a guided demo, or have a question about pricing or security? We are happy to help. Send a message or reach out and a real member of our team will get back to you fast, no pushy sales tactics. Or skip ahead and start your free trial; there is no credit card required and nothing to lose.',
+    faqMore: [
+      ['Will this work with the tools we already use?', 'Very likely, yes. The platform integrates with the common tools most teams rely on, syncing your data automatically so nothing has to be rekeyed. Tell us your stack and we will confirm the fit, and our clean API means anything not supported out of the box can usually be connected with a little setup.'],
+      ['How hard is it to get my team on board?', 'Not hard at all; that is by design. Setup takes minutes, the interface is genuinely intuitive, and roles and permissions make onboarding new people quick. Most teams find that once colleagues see the busywork disappear, adoption takes care of itself. And if anyone gets stuck, our support team is fast and friendly.'],
+      ['Is my data safe with you?', 'Security is built in, not bolted on. Encryption, access controls, and audit logs come standard on every plan, and we hold performance and reliability to a high bar as you grow. Your data is protected, your access is yours to control, and we are transparent about how it all works.'],
+      ['What if I outgrow my plan, or need to scale back?', 'You are never locked in. Upgrade, downgrade, or cancel anytime as your needs change; the platform scales smoothly from a small team to a large one and back. We would rather earn your business every month than trap you in a contract, so you always stay in control of your plan.'],
+    ],
+  },
+  agency: {
+    aboutP34: [
+      'We started this studio on a stubborn belief: beautiful work that does not perform is just decoration. Too many agencies chase awards or bill hours while the client’s actual goals gather dust. So we built a small, senior team that treats your outcomes as seriously as our craft, tying every design choice and every campaign to results you can measure. Strategy first, always, and creative that earns its keep.',
+      'When you hire us, experienced people do your work directly, from the first idea to the final launch; there are no junior handoffs happening quietly behind the scenes. We start with your goals, share a clear scope and timeline, and hit our deadlines. We act like an extension of your team, not a distant vendor, because we genuinely win only when you win.',
+    ],
+    values: [
+      ['Strategy before style', 'We start with your goals, your audience, and your market, not a template. The prettiest work in the world fails if it is aimed at the wrong target.'],
+      ['Senior hands only', 'Experienced specialists do your work directly, start to finish. No junior handoffs, no learning on your dime; just seasoned people who know how to deliver.'],
+      ['Accountable to results', 'We tie creative to outcomes and report on what actually moves. Beautiful is the baseline; effective is the point, and we hold ourselves to it.'],
+    ],
+    approach: ['How we work together', 'It starts with discovery: we dig into your goals, your audience, and your market until we understand what success really looks like. Then we design strategy and creative built to perform, ship polished work on time and on scope, and measure the results. From there, we refine what works and keep pushing, acting as a true partner in your growth rather than a one-and-done vendor.'],
+    servicesIntro: 'Great brands are built, not stumbled into, and they are built through strategy, design, and campaigns that work together. From a distinctive identity to a site that converts to full-funnel marketing that actually moves the needle, our services connect into one coherent effort aimed at your goals. Explore what we do, and imagine what focused, senior craft could do for your growth.',
+    serviceLong: [
+      'Your brand identity is how the world recognizes and remembers you, so we build it to last rather than to chase a trend. From logos and visual systems to voice and messaging, we craft an identity that is unmistakably yours and works everywhere you show up. The result is a brand that feels cohesive, confident, and genuinely distinct from the crowd.',
+      'A website is often your hardest-working salesperson, so we design and build sites that turn visitors into customers. Fast, beautiful, and built to convert, every page is shaped around your goals and the needs of your audience. We sweat the details that drive results, from the first impression to the final call to action, and we build on a foundation that scales as you grow.',
+      'Marketing campaigns get attention and, more importantly, drive action. We plan and run full-funnel campaigns across the channels that matter to your audience, from awareness to conversion, all tied to clear goals. Every dollar is aimed at an outcome, and we report honestly on what is working so we can double down on what drives real growth.',
+      'Content and social keep your brand present, relevant, and worth following. We plan and produce content people actually want, from the strategy down to the posts, so you grow an audience rather than shout into the void. Consistent, on-brand, and genuinely useful, it builds the kind of trust that turns followers into customers over time.',
+      'Sustainable growth is built on real search demand, not shortcuts that stop working the moment the algorithm shifts. Our SEO and growth work targets the terms your customers actually search, improves the technical foundation, and earns lasting visibility. It is a long game played well, compounding over time into a dependable stream of the right kind of traffic.',
+      'Creative direction is the guiding vision that keeps every piece sharp, consistent, and on brand. Across a campaign, a website, or an entire identity, we provide the through-line that ties the work together and holds it to a high standard. It is the difference between a scattered set of assets and a brand that speaks with one confident voice.',
+    ],
+    why: [
+      ['Senior team on every project', 'Experienced specialists handle your work directly, from first idea to final launch. No junior handoffs, ever, so you always get seasoned judgment.'],
+      ['Clear, fixed scopes', 'Every engagement has a defined scope, timeline, and price agreed up front. No surprise invoices, no scope creep, no meter running on every call.'],
+      ['Built to perform', 'We tie creative to outcomes and measure what moves. You get work that is beautiful, yes, and effective, which is the whole point.'],
+    ],
+    contactIntro: 'Have a project in mind, a goal you are chasing, or a brand that needs a refresh? Tell us about it. Send a message or reach out and a senior member of our team, the same people who would do the work, will get back to you promptly. We will listen, ask sharp questions, and map a clear plan to hit the goals that matter to you.',
+    faqMore: [
+      ['What size clients do you usually work with?', 'We work with a range, from ambitious startups to established companies, and we scope each engagement to fit. What our clients share is a real goal and a willingness to invest in doing it right. Tell us where you are and what you want to achieve, and we will be honest about whether we are the right partner.'],
+      ['Can you work with our existing brand and team?', 'Absolutely. We often plug into an existing brand and collaborate closely with in-house teams, acting as an extension rather than a replacement. We respect what you have built, bring senior firepower where you need it, and hand off cleanly, with documentation, so your team can carry the work forward with confidence.'],
+      ['How do you measure the success of your work?', 'We define success with you at the start, tied to your actual goals, whether that is conversions, qualified leads, brand awareness, or growth. Then we track those metrics and report honestly, so you always know what is working. Beautiful work is the baseline; measurable results are how we judge whether we have truly delivered.'],
+      ['What is your typical timeline and process?', 'It depends on scope, but most brand and web projects run from a few weeks to a couple of months, and we share a realistic timeline before we start. Our process moves through discovery, design, launch, and measurement, with clear milestones so you always know where things stand and what comes next.'],
+    ],
+  },
+  portfolio: {
+    aboutP34: [
+      'I take on a handful of projects at a time, on purpose. It means every client gets my full attention and every detail gets the care it deserves. I would rather do a few things exceptionally than many things adequately, so I keep my roster small, my communication clear, and my focus squarely on making work I am genuinely proud to put my name on.',
+      'Every project starts from your goals, never a canned formula. I listen first, map a clear scope and timeline, and keep you posted at every step, with no jargon and no surprises. I hit my deadlines, sweat the small stuff so the final work feels effortless, and build things that hold up long after launch day. My favorite part of the job is a client who is truly thrilled with the result.',
+    ],
+    values: [
+      ['Craft over hype', 'I sweat the details other people skip, so the finished work feels effortless. Quality is not a buzzword to me; it is the whole reason I do this.'],
+      ['Clear from start to finish', 'You always know where a project stands and what comes next. Straight talk, quick replies, and zero ego make working together genuinely easy.'],
+      ['Made to last', 'I build work that holds up long after launch day, not just work that photographs well on day one. Longevity is part of good design.'],
+    ],
+    approach: ['How we will work together', 'It starts with a conversation: tell me about your project, your goals, and what success looks like to you. I map a clear scope, timeline, and fixed price, so there are no surprises. Then I do the work with care, keeping you posted along the way, and deliver polished, ready-to-use results. Throughout, I keep communication easy, because good collaboration makes for better work.'],
+    servicesIntro: 'I offer a focused set of things I do genuinely well, rather than a little of everything done adequately. Whether you need thoughtful design, striking photography, a memorable brand, or a fast, elegant website, you get the same care and craft on every project. Take a look at what I make, and let us talk about bringing your idea to life.',
+    serviceLong: [
+      'Good design is clear before it is clever. I create clean, purposeful work that communicates your message and looks the part, always with the goal guiding the form. Whether it is a layout, an interface, or a set of materials, I focus on making something that works beautifully and feels considered down to the smallest detail, never decoration for its own sake.',
+      'Photography is about capturing the real thing, beautifully. I shoot striking, story-driven images that feel authentic rather than staged, whether it is for a brand, a product, or a moment worth remembering. Good light, honest composition, and an eye for the telling detail turn a simple photo into something that genuinely connects with the people who see it.',
+      'A brand is a point of view, not just a logo. I build identities with real character, designed to be recognized and remembered across everything you do. From the mark to the palette to the voice, I craft a cohesive system that feels unmistakably yours, so your brand shows up with confidence wherever it appears.',
+      'A great website should feel as good as it looks. I design and build fast, elegant sites that are a pleasure to use, shaped around your goals and your visitors. Clean, considered, and built to perform, every page is crafted with care, so the finished site works smoothly, loads quickly, and represents you exactly the way you want.',
+      'Sometimes you just need a second set of expert eyes. Through consulting, I help sharpen your work and your direction, offering honest feedback and practical guidance drawn from years of hands-on craft. Whether you are stuck, second-guessing, or simply want a knowledgeable sounding board, I will help you see the path forward more clearly.',
+      'I love teaming up with good people on ambitious projects. Collaborations are where great work often happens, and I bring my craft, reliability, and easygoing communication to every partnership. If you have got a project that needs an extra hand or a fresh perspective, let us make something genuinely good together.',
+    ],
+    why: [
+      ['Available for new work', 'I am currently taking on projects and would love to hear about yours. Reach out and let us find a time to talk about what you have in mind.'],
+      ['A clear, fixed quote', 'I scope each project individually and give you a fixed price before we begin, so you know exactly what to expect, with no surprises down the line.'],
+      ['Detail-obsessed delivery', 'I sweat the small stuff and hit my deadlines, so you get polished, ready-to-use work, on time, that you will be genuinely proud to show off.'],
+    ],
+    contactIntro: 'Have a project in mind, or just want to see if we are a good fit? I would love to hear from you. Send a message or reach out directly, and I will get back to you personally, usually within a day. Tell me a bit about what you are working on and what you are hoping to achieve, and I will let you know how I can help.',
+    faqMore: [
+      ['What kinds of projects do you take on?', 'I focus on design, photography, branding, and web work, and I am happiest on projects where craft and care make a real difference. If you are not sure whether your idea is a fit, just ask; I will give you an honest answer and, if it is not right for me, I am glad to point you somewhere that is.'],
+      ['How involved will I be in the process?', 'As involved as you would like to be. I keep communication clear and check in at the key moments, so you always know where things stand. Some clients want to weigh in on every detail; others prefer to set the direction and let me run with it. Either way works well, and I will adapt to your style.'],
+      ['What do you need from me to get started?', 'Mostly just a clear sense of your goals and any materials you already have, like brand assets, examples you love, or notes on what you are picturing. Do not worry about having everything figured out; part of my job is helping you shape the idea. We will fill in the gaps together as we go.'],
+      ['Do you offer revisions?', 'Yes. Thoughtful revisions are a normal part of getting the work right, and I build a reasonable round or two into every project so we can refine the details together. My goal is always a result you are genuinely thrilled with, so we will keep polishing until it truly feels right.'],
+    ],
+  },
+};
+
+// About-page closing band (headline + paragraph) — the human, forward-looking sign-off
+// that pushes every /about page comfortably past 500 words across its sections.
+const ABOUT_CLOSE = {
+  medical: ['We would love to meet you', 'Whether it has been six months or six years since your last visit, there is a warm welcome and a clean, comfortable chair waiting for you. New patients are always welcome, and we make the first visit easy, from paperwork to insurance. Come see what gentle, honest dental care feels like, and let us help you keep your smile healthy for years to come.'],
+  wellness: ['Come find your place on the mat', 'You do not need to be flexible, fit, or experienced to belong here; you just need to show up. Your first class is on us, so come as you are, meet a teacher, and see how good it feels to slow down and breathe. Whenever you are ready, we will be here, and we would be honored to practice alongside you.'],
+  legal: ['Let us help you move forward', 'Facing a legal matter is stressful, but you do not have to face it alone or unsure of your options. Reach out for a free, confidential consultation and get honest guidance from an experienced advocate who will treat your matter with the seriousness and care it deserves. Whatever you are dealing with, the first step is simply a conversation.'],
+  restaurant: ['We saved you a seat', 'Good food and good company are what we are all about, and there is always a warm welcome waiting when you walk through our doors. Whether it is a quiet dinner, a weekend brunch, or a big celebration with everyone you love, come hungry and leave happy. We cannot wait to cook for you and to make you feel right at home.'],
+  'local-service': ['Trusted work is one call away', 'When you need something fixed, installed, or maintained, you deserve a team that shows up on time, charges fairly, and stands behind the work. That is exactly what we do, on every job, for every neighbor. Give us a call or request a free quote, and let us show you what dependable, honest service really looks like.'],
+  nonprofit: ['Join us and see the difference', 'Real change happens when people decide to show up for one another, and there is a place for you in this work. Whether you give, volunteer, or simply spread the word, your support becomes meals, mentoring, and hope for neighbors who need it. Together we can do far more than any of us could alone, so we hope you will join us.'],
+  retail: ['Shop with total confidence', 'We built this shop for people who are tired of flimsy products and pushy service, and we would love for you to give us a try. Every item is chosen with care, backed by easy returns, and shipped fast, so you can buy exactly what you want without a second thought. Browse the collections, and discover goods actually worth owning.'],
+  saas: ['Get your time back, starting today', 'Your team has better things to do than the same repetitive tasks, week after week. We built this platform to hand those hours back, so you can focus on the work that actually matters. Start your free trial with no credit card, connect your tools in minutes, and see for yourself how much lighter the week feels when the busywork runs itself.'],
+  agency: ['Let us build something that works', 'The best partnerships start with a clear goal and a shared commitment to hitting it. If you have a brand to build, a site to launch, or a campaign that needs to perform, we would love to hear about it. Tell us where you want to go, and we will map a plan to get you there, with senior craft and a genuine stake in your success.'],
+  portfolio: ['Let us make something great together', 'I take on a handful of projects at a time so each one gets my full attention, and I would love for yours to be one of them. If you care about craft as much as I do and have an idea worth doing right, reach out. Tell me what you are picturing, and let us talk about how to bring it to life, beautifully.'],
+};
+
+// About-page promise band (headline + paragraph) — a concrete commitment that lifts
+// every /about page to a comfortable 500+ words. Name-agnostic, no slop.
+const ABOUT_PROMISE = {
+  medical: ['Our promise to every patient', 'We promise to treat you the way we would want our own family treated: with patience, honesty, and a genuinely gentle touch. That means no lectures, no pressure, and no treatment you do not need. It means clear pricing, careful explanations, and a team that remembers you between visits. Above all, it means you can walk in nervous and walk out relieved, knowing your smile is in caring, capable hands.'],
+  wellness: ['Our promise to you', 'We promise a space with no ego and no judgment, where your practice is measured by how you feel, not how you look. We promise teachers who watch out for your safety, options for every body, and a community that is genuinely glad you came. Whether you are here for strength, stress relief, or a quiet hour to yourself, we promise to meet you exactly where you are, every single time.'],
+  legal: ['Our promise as your advocate', 'We promise honest counsel, even when it is not what you hoped to hear, because you deserve the truth about your options. We promise a senior attorney who knows your case, returns your calls, and treats your matter with real urgency. And we promise to fight for the best outcome we can achieve, keeping you informed and in control every step of the way. Your trust is something we work hard to earn.'],
+  restaurant: ['Our promise at every table', 'We promise food made from scratch with real ingredients, never shortcuts, because you can taste the difference and you deserve it. We promise a warm welcome, attentive service, and a room that feels like the best kind of gathering. And we promise to treat every guest like family, whether it is your first visit or your fiftieth. Great food should taste like someone cared, and here, someone always does.'],
+  'local-service': ['Our promise on every job', 'We promise to show up when we say we will, quote the real price before we start, and treat your home with the respect it deserves. We promise fully licensed, insured technicians and quality work backed in writing. And if something is ever not right, we promise to make it right, no argument and no excuses. Dependable, honest service is not a slogan for us; it is the standard we hold on every single visit.'],
+  nonprofit: ['Our promise to this community', 'We promise that the large majority of every gift goes straight to the people we serve, and that we will share our impact openly so you can see it. We promise to treat everyone who comes to us with dignity and warmth, and everyone who gives with genuine gratitude. Your generosity is a trust, and we promise to honor it by putting it to work where it matters most, right here at home.'],
+  retail: ['Our promise on everything we sell', 'We promise to stock only what we would recommend to a friend, at prices that are simply fair, with no gimmicks at checkout. We promise fast, free shipping on qualifying orders and returns so easy you can buy with total confidence. And we promise to treat you like a person, not an order number, whenever you need a hand. Buy better, buy less, and love what you own; that is the whole idea.'],
+  saas: ['Our promise to your team', 'We promise software that saves you time instead of adding another chore, and pricing that is clear with no hidden fees. We promise security built in from the start and performance that holds as you grow. And we promise real human support that answers fast, with no phone trees or canned replies. Great software should feel like a reliable teammate who never drops the ball, and that is exactly what we set out to build.'],
+  agency: ['Our promise to every client', 'We promise strategy before style and creative that is accountable to real results, because beautiful work that does not perform is just decoration. We promise senior specialists on your project from start to finish, with no junior handoffs behind the scenes. And we promise clear scopes, honest timelines, and no surprise invoices. We treat your business like our own, because we only truly win when you win. That is the partnership we offer.'],
+  portfolio: ['My promise on every project', 'I promise to take on only what I can give my full attention, so your work never gets rushed or phoned in. I promise clear communication, honest timelines, and a fixed price agreed up front, with no surprises. And I promise to sweat the details other people skip, so the finished work feels effortless and holds up long after launch. Your trust means everything to me, and I work hard on every project to earn it.'],
+};
+
+// Contact-page closing help band (headline + paragraph) — a warm, practical sign-off
+// that pushes every /contact page past 500 words across its sections.
+const CONTACT_HELP = {
+  medical: ['We are here whenever you need us', 'There is no wrong reason to reach out. Maybe you are overdue for a cleaning, comparing dentists for your family, worried about a specific tooth, or simply want to know if we take your insurance. Whatever it is, we would rather answer your questions now than have you put off the care you need. Send a message or pick up the phone, and let us make your next visit an easy one.'],
+  wellness: ['We would love to hear from you', 'Maybe you have practiced for years, or maybe you have never set foot in a studio and the whole idea feels a little intimidating. Either way, you are exactly who we built this space for, and we are happy to answer any question, big or small. Reach out about classes, memberships, or your very first visit, and we will help you feel at home before you ever step on the mat.'],
+  legal: ['Reach out and take the first step', 'Legal questions have a way of keeping you up at night, and the uncertainty is often the hardest part. You do not have to carry it alone. Reach out for a free, confidential conversation and get an honest read on where you stand, with no cost and no obligation. Whether you end up needing us or not, you will leave the call with more clarity than you had before, and that is a good place to start.'],
+  restaurant: ['Let us help you plan something great', 'Whether you are booking a quiet table for two, planning a big celebration, or arranging catering for an event, we are happy to help you get every detail right. Have a food allergy, a special request, or a question about the menu? Just ask. We would rather hear from you ahead of time and make your experience perfect than leave anything to chance. Reach out however is easiest, and let us take care of the rest.'],
+  'local-service': ['Reach out and get it handled', 'A problem at home has a way of nagging at you until it is fixed, and putting it off usually just makes it worse. Let us take it off your plate. Reach out with what is going on, and we will give you a straight answer, a fair quote, and a real plan to solve it, often the same day for urgent issues. One call is all it takes to get dependable help on the way.'],
+  nonprofit: ['Every message moves the mission', 'Whether you want to give, lend a hand, or simply learn more about the work we do, reaching out is the first step, and it matters more than you might think. Every volunteer, every gift, and every partnership starts with a single conversation. We read each message personally and would be glad to help you find the right way to get involved. Together, we can do far more than any of us could alone.'],
+  retail: ['We are here to help, always', 'Great products deserve great service, and we take that seriously long after you check out. Whether you need help choosing the right item, have a question about an order, or want to arrange a return, we are here and happy to sort it out quickly. Reach out anytime and a real member of our team will get back to you fast. We want you to love what you buy, no exceptions.'],
+  saas: ['Let us help you get started', 'Whether you are just kicking the tires, setting things up, or weighing whether the platform fits your team, we are glad to help, and we promise no pushy sales tactics. Reach out with any question and a real person will get back to you fast, or book a quick demo tailored to what you need. Better yet, start your free trial right now; there is no credit card required and nothing to lose.'],
+  agency: ['Tell us what you are building', 'The best work starts with a good conversation, so do not worry about having a polished brief. Whether you have a clear goal or just a rough idea, reach out and a senior member of our team, the same people who would do the work, will get back to you promptly. We will listen, ask the right questions, and map a clear plan to hit the goals that matter most to you. Let us build something that works.'],
+  portfolio: ['Let us start a conversation', 'Whether you have a fully-formed project in mind or just a spark of an idea, I would genuinely love to hear about it. Reach out and tell me a bit about what you are working on and what you are hoping to achieve, and I will reply personally, usually within a day. I will give you my honest thoughts on how I can help, and whether I am the right person for the job. No pressure, just a good conversation.'],
+};
+
+// Two more general FAQ items per vertical → the FAQ page reaches 12-13 questions
+// and clears 500+ words comfortably. 40-60-word answers, guess-ahead, no slop.
+const FAQ_MORE2 = {
+  medical: [
+    ['Will my visit hurt?', 'We work hard to keep every visit comfortable, with gentle technique, effective numbing, and sedation options when you want them. Most patients are surprised by how easy it is. If anything ever feels off, just raise a hand and we stop and adjust right away. Your comfort guides the pace, always.'],
+    ['Can I bring my whole family to one practice?', 'Yes, and many families do. We care for every age, from a toddler’s first checkup to a grandparent’s crown, and we keep everyone’s history in one place. It means fewer offices to juggle, one team who knows you all, and appointments you can often schedule back to back.'],
+  ],
+  wellness: [
+    ['What if I cannot keep up with the class?', 'You never have to. Every class is built around going at your own pace, and resting whenever you need to is not just allowed, it is encouraged. Our teachers offer easy options for every pose, so you can dial the effort up or down. There is no keeping up here, only showing up.'],
+    ['How do I know which class is right for me?', 'Tell us how you want to feel and we will point you to the right class. Craving energy and a sweat? Try flow or power. Need to unwind? Restorative or gentle. Want a calmer mind? Meditation. If you are still unsure, come try an intro class and we will help you find your fit.'],
+  ],
+  legal: [
+    ['What happens during the free consultation?', 'We listen to your situation, ask a few questions, and give you an honest read on your options and likely next steps, all in plain language. There is no cost and no obligation. You will leave knowing where you stand and what we could do, whether or not you decide to hire the firm.'],
+    ['Do you handle cases like mine?', 'We focus on the matters families and businesses face most, and we are honest about fit. When you reach out, tell us briefly what is going on, and we will let you know right away whether we can help, or point you toward someone who can. You will never be strung along.'],
+  ],
+  restaurant: [
+    ['Is the restaurant good for a special occasion?', 'Absolutely. From anniversaries to birthdays to celebrations of every kind, we love helping make a night memorable. Let us know it is a special occasion when you book, and we will do our best to make it feel that way, whether that means a quiet table or a little something extra.'],
+    ['Do you have a bar or drink menu?', 'We do. We keep a thoughtful list of wine, beer, and house cocktails chosen to pair well with the menu, so there is something to complement whatever you order. Ask your server for a recommendation; they are happy to suggest the perfect match for your meal or your mood.'],
+  ],
+  'local-service': [
+    ['How long will the work take?', 'It depends on the job, but we will give you a realistic estimate up front, before we begin, so you can plan your day. We show up prepared to work efficiently and cleanly, and we will keep you posted if anything changes. Our goal is to do it right the first time, without dragging it out.'],
+    ['Will you clean up when the job is done?', 'Every time. We protect your floors and surfaces while we work and tidy up thoroughly when we finish, so your home is left as clean as we found it, if not cleaner. To us, respecting your space is just as important as doing quality work, and both come standard on every job.'],
+  ],
+  nonprofit: [
+    ['Where does my donation actually go?', 'Straight to our programs and the neighbors they serve. Because we are powered by volunteers and careful stewardship, the large majority of every gift funds direct help: meals, mentoring, and emergency support. We publish our impact openly, so you can always see exactly how your generosity turns into real, local change.'],
+    ['Can I give in memory or honor of someone?', 'Yes, and it is a meaningful way to give. Tribute gifts let you honor a loved one or celebrate a special occasion while supporting our mission. Just let us know when you donate, and we will make sure it is handled thoughtfully. Reach out and we will walk you through the options.'],
+  ],
+  retail: [
+    ['Do you ship quickly?', 'We do. Most orders ship within a business day and arrive quickly, with tracking so you can follow along every step of the way. Qualifying orders ship free, and smaller orders ship at a flat, fair rate you will see before you check out. No long waits and no surprise fees.'],
+    ['Will you restock items that sell out?', 'Often, yes. Popular pieces do sell out, but many come back. Sign up for a restock alert on any sold-out product and we will email you the moment it returns. If you are ever unsure whether something is coming back, just ask us and we will let you know what we can.'],
+  ],
+  saas: [
+    ['Can I try it before I commit?', 'Yes. Your 14-day free trial requires no credit card, so you can explore the full platform, connect your tools, and invite your team with zero risk. See the time savings for yourself first, and only choose a paid plan if it earns its place. There is genuinely nothing to lose.'],
+    ['What if my team needs help getting set up?', 'We are here for exactly that. Setup usually takes minutes, but if you get stuck, our support team answers fast by chat or email, with real humans and no canned replies. We can also walk you through a guided setup so your whole team is up and running smoothly from day one.'],
+  ],
+  agency: [
+    ['How do we get started with you?', 'Just reach out and tell us about your goals, in as much or as little detail as you have. A senior member of our team will get back to you promptly, and from there we map a clear scope, timeline, and fixed price. Once you approve, we get to work, keeping you in the loop throughout.'],
+    ['What makes you different from other agencies?', 'Senior people do your work directly, start to finish, with no junior handoffs, and we tie every creative choice to real results rather than awards. We keep scopes clear and fixed, hit our deadlines, and act like an extension of your team. In short, we care about your outcomes as much as our craft.'],
+  ],
+  portfolio: [
+    ['How far in advance should I book you?', 'It depends on my current roster, since I take on just a few projects at a time to keep the quality high. The best move is to reach out early with your timeline, and I will let you know honestly when I could start. If I am booked, I am always glad to suggest the next best step.'],
+    ['What if I am not totally sure what I need yet?', 'That is completely fine, and more common than you would think. Part of my job is helping you shape a rough idea into a clear plan. Reach out with whatever you have got, and we will figure out the details together. You do not need everything sorted before we start the conversation.'],
+  ],
+};
+
+// Contact-page extras: a reassurance paragraph + 3 "ways to reach us" points, so the
+// /contact page ships several real sections instead of a bare form.
+const CONTACT_EXTRA = {
+  medical: {
+    reassure: 'We know that calling a dental office can feel like a chore, or even a little nerve-wracking. It should not be. Our front desk is friendly, patient, and genuinely helpful, whether you are booking a routine cleaning, asking about a treatment, or dealing with a sudden toothache. Reach out however is easiest for you, and we will take care of the rest with the same gentle approach we bring to every visit.',
+    points: [['New patients', 'Booking your first visit is simple. Send a message or call, and we will walk you through paperwork, insurance, and scheduling before you ever arrive.'], ['In pain today?', 'Call us right away and mention it is urgent. We hold same-day slots for emergencies and will do everything we can to get you seen and out of pain fast.'], ['Billing questions', 'Have a question about a bill or your coverage? Reach out and a real person will explain everything clearly, with no runaround and no jargon.']],
+  },
+  wellness: {
+    reassure: 'We want the studio to feel welcoming from the very first hello, long before you ever roll out a mat. If you have questions about which class to try, how memberships work, or what to expect as a total beginner, please do not hesitate to reach out. There are no silly questions here, and a real person from our team will happily help you feel at home before your first visit.',
+    points: [['First-timers', 'Not sure where to begin? Tell us how you want to feel and we will recommend the perfect class, plus everything you need to know before you arrive.'], ['Memberships and packs', 'Curious about pricing or which option fits your schedule? Reach out and we will help you choose, with no pressure and no commitment required.'], ['Private sessions', 'Interested in one-on-one guidance? Send a message and we will match you with an instructor and a time that works for your goals and your calendar.']],
+  },
+  legal: {
+    reassure: 'Reaching out to a lawyer is often the hardest part, especially when you are stressed and unsure. We make it easy and pressure-free. Your initial consultation is free and completely confidential, and a member of our team will respond promptly with clear, practical next steps. You can speak freely, ask anything, and get an honest read on your options, whether or not you decide to work with us.',
+    points: [['Free consultation', 'Tell us your situation in confidence and get an honest read on your options at no cost. There is no obligation, just clear guidance to help you decide.'], ['Urgent matters', 'Facing a deadline or an emergency? Let us know it is time-sensitive and we will prioritize getting back to you quickly with the guidance you need.'], ['General questions', 'Not sure whether you even need a lawyer? Reach out and we will tell you plainly, and point you in the right direction either way.']],
+  },
+  restaurant: {
+    reassure: 'Whether you are planning a special night out, organizing a party, or just curious about the menu, we are always happy to hear from you. A real member of our team will help you with reservations, dietary questions, catering, or private events, so your experience with us is exactly what you are hoping for. Reach out however is easiest, and let us help you plan something delicious.',
+    points: [['Reservations', 'Book a table online or give us a call. Planning for a big group? Let us know the size and we will make sure there is room for everyone.'], ['Catering and events', 'Hosting something special? Reach out and we will build a menu around your occasion, handle the details, and deliver food your guests will remember.'], ['Dietary needs', 'Have an allergy or a preference? Tell us ahead of time and our kitchen will happily accommodate, so everyone at your table can enjoy the meal.']],
+  },
+  'local-service': {
+    reassure: 'When something in your home needs attention, the last thing you want is a runaround. Reach out and you will get a real person, a straight answer, and a fair, upfront quote, with no pressure and no surprise fees. Whether it is an urgent repair or a project you have been planning, we make getting help simple, and we treat your home and your time with the respect they deserve.',
+    points: [['Free quotes', 'Tell us what is going on and we will provide a clear, no-obligation quote before any work starts. What we quote is what you pay, period.'], ['Emergencies', 'Got an urgent problem that cannot wait? Call and mention it is an emergency. We keep same-day slots open to get your home back to normal fast.'], ['Service area', 'Not sure if we cover your neighborhood? Give us your address and we will confirm right away, along with the soonest time we could come out.']],
+  },
+  nonprofit: {
+    reassure: 'Every message we receive is a chance to do more good together, and we read each one personally. Whether you want to give, volunteer, ask about our programs, or explore a partnership for your business or group, we would love to hear from you. A real member of our team will follow up, because the people who reach out are the reason this mission works, and we never take that for granted.',
+    points: [['Volunteer', 'Ready to lend a hand? Tell us your availability and interests, and we will match you with a meaningful role that fits your schedule and skills.'], ['Give', 'Want to support our work? Reach out with any questions about donating, and we will make giving simple and show you exactly where it goes.'], ['Partnerships', 'Interested in getting your company or group involved? Contact us and we will find a partnership that fits your values and makes a real impact.']],
+  },
+  retail: {
+    reassure: 'Great products deserve great service, so if you have a question about an order, a product, or a return, we are here and happy to help. Reach out anytime and a real member of our team, not an automated bot, will get back to you quickly. We want you to love what you buy, and we will do whatever it takes to make your experience with us easy and worry-free.',
+    points: [['Order help', 'Question about an order or need to make a change? Reach out as soon as you can and we will do our best to sort it out quickly for you.'], ['Recommendations', 'Not sure what to buy? Tell us what you are after and our team, who actually use what we sell, will point you to the right pick.'], ['Returns', 'Something not right? Our easy 30-day returns have you covered. Get in touch and we will make the refund or exchange painless.']],
+  },
+  saas: {
+    reassure: 'Whether you are evaluating the platform, setting it up, or just have a quick question, we are glad to help, and there are no pushy sales tactics here. Reach out and a real member of our team will get back to you fast, by chat or email, with a clear answer or a hands-on demo. Or skip ahead and start your free trial; there is no credit card required and nothing to lose.',
+    points: [['Book a demo', 'Want to see it in action first? Reach out and we will set up a quick, tailored walkthrough focused on exactly what your team needs.'], ['Sales questions', 'Curious about pricing, plans, or whether we fit your stack? Send a message and we will give you straight answers, with no pressure to buy.'], ['Get support', 'Already using the platform and need a hand? Our support team responds fast by chat or email, with real humans and no canned replies.']],
+  },
+  agency: {
+    reassure: 'The best work starts with a good conversation, so tell us what you are trying to achieve. Whether you have a fully-formed brief or just a rough idea, a senior member of our team, the same people who would do the work, will get back to you promptly. We will listen, ask sharp questions, and map a clear plan to hit your goals, with no jargon and no junior handoffs behind the scenes.',
+    points: [['Start a project', 'Have something in mind? Tell us your goals and timeline, and we will map a clear scope and a plan to hit them, with a fixed price up front.'], ['Explore a fit', 'Not sure if we are the right partner? Reach out and we will be honest about whether we can help, and point you elsewhere if we cannot.'], ['Work with our team', 'Already have an in-house team? We plug in as an extension, bringing senior firepower exactly where you need it, and hand off cleanly.']],
+  },
+  portfolio: {
+    reassure: 'I read and reply to every message personally, usually within a day. Whether you have a detailed project in mind or just want to see if we are a good fit, I would genuinely love to hear from you. Tell me a bit about what you are working on and what you are hoping to achieve, and I will let you know honestly how I can help, and whether I am the right person for the job.',
+    points: [['New projects', 'Have a project in mind? Tell me your goals and I will share a clear scope, timeline, and fixed quote, so you know exactly what to expect.'], ['Just exploring', 'Not sure yet? That is fine. Reach out with your idea and I will give you honest thoughts, even if it turns out I am not the right fit.'], ['How I work', 'Curious about my process or availability? Ask away, and I will walk you through how we would collaborate from first hello to final delivery.']],
+  },
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -441,6 +921,42 @@ function pack(v) {
     sp.faqBill.forEach(([q, a], i) => { o[`FAQ_BILL_${i + 1}_Q`] = q; o[`FAQ_BILL_${i + 1}_A`] = a; });
     sp.faqSup.forEach(([q, a], i) => { o[`FAQ_SUP_${i + 1}_Q`] = q; o[`FAQ_SUP_${i + 1}_A`] = a; });
   }
+  // Deep sub-page fill (journey 2026-08-26): 500+ words + several sections on
+  // /about, /services, /contact, /faq for EVERY vertical. All tokens below are
+  // rendered by the page components, so each MUST be emitted (distUnfilledTokens gate).
+  const d = SUB2[v];
+  if (d) {
+    // About page — two more paragraphs, a 3-card values grid, an approach band.
+    o.ABOUT_PARAGRAPH_3 = d.aboutP34[0];
+    o.ABOUT_PARAGRAPH_4 = d.aboutP34[1];
+    d.values.forEach(([t, x], i) => { o[`ABOUT_VALUE_${i + 1}_TITLE`] = t; o[`ABOUT_VALUE_${i + 1}_DESC`] = x; });
+    o.ABOUT_APPROACH_TITLE = d.approach[0];
+    o.ABOUT_APPROACH_TEXT = d.approach[1];
+    // Services page — intro, six ~80-word service write-ups, a 3-card why-us band.
+    o.SERVICES_INTRO = d.servicesIntro;
+    d.serviceLong.forEach((txt, i) => { o[`SERVICE_${i + 1}_LONG_DESCRIPTION`] = txt; });
+    d.why.forEach(([t, x], i) => { o[`SERVICES_WHY_${i + 1}_TITLE`] = t; o[`SERVICES_WHY_${i + 1}_DESC`] = x; });
+    // Contact page — a reassuring intro paragraph above the form.
+    o.CONTACT_INTRO = d.contactIntro;
+    // FAQ page — four extra general Q&A (→ 10-12 total items with the existing sets).
+    d.faqMore.forEach(([q, a], i) => { o[`FAQ_MORE_${i + 1}_Q`] = q; o[`FAQ_MORE_${i + 1}_A`] = a; });
+  }
+  // About page — promise band + closing sign-off band to clear 500+ words.
+  const ap = ABOUT_PROMISE[v];
+  if (ap) { o.ABOUT_PROMISE_TITLE = ap[0]; o.ABOUT_PROMISE_TEXT = ap[1]; }
+  const ac = ABOUT_CLOSE[v];
+  if (ac) { o.ABOUT_CLOSING_HEADLINE = ac[0]; o.ABOUT_CLOSING_TEXT = ac[1]; }
+  // Contact page — reassurance paragraph + 3 "ways to reach us" cards + closing help band.
+  const ce = CONTACT_EXTRA[v];
+  if (ce) {
+    o.CONTACT_REASSURE = ce.reassure;
+    ce.points.forEach(([t, x], i) => { o[`CONTACT_POINT_${i + 1}_TITLE`] = t; o[`CONTACT_POINT_${i + 1}_DESC`] = x; });
+  }
+  const ch = CONTACT_HELP[v];
+  if (ch) { o.CONTACT_HELP_TITLE = ch[0]; o.CONTACT_HELP_TEXT = ch[1]; }
+  // FAQ page — two more general Q&A (→ 12-13 items total, 500+ words).
+  const fm2 = FAQ_MORE2[v];
+  if (fm2) fm2.forEach(([q, a], i) => { o[`FAQ_MORE_${i + 5}_Q`] = q; o[`FAQ_MORE_${i + 5}_A`] = a; });
   const img = IMG[v];
   if (img) {
     o.HERO_IMAGE_URL = img.hero;

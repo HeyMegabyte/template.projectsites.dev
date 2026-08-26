@@ -5,27 +5,48 @@
   <link href="{BUSINESS_URL}/atom.xml" rel="self" type="application/atom+xml" />
   <link href="{BUSINESS_URL}" />
   <id>{BUSINESS_URL}/</id>
-  <updated>2026-08-26T05:00:13.105Z</updated>
+  <updated>2026-08-26T06:34:06.683Z</updated>
   <author><name>{BUSINESS_NAME}</name><email>hey@megabyte.space</email></author>
   <entry>
-    <title>How we made 9 demo sites from one prompt</title>
-    <link href="{BUSINESS_URL}/blog/nine-demo-sites-one-prompt" />
-    <id>{BUSINESS_URL}/blog/nine-demo-sites-one-prompt</id>
-    <updated>2026-05-15T00:00:00.000Z</updated>
+    <title>Dental implants cost in 2026: what a single tooth to a full mouth really runs</title>
+    <link href="{BUSINESS_URL}/blog/dental-implants-cost-2026" />
+    <id>{BUSINESS_URL}/blog/dental-implants-cost-2026</id>
+    <updated>2026-08-12T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
-    <title>Why we picked OKLCH over HSL for brand tokens</title>
-    <link href="{BUSINESS_URL}/blog/oklch-over-hsl" />
-    <id>{BUSINESS_URL}/blog/oklch-over-hsl</id>
-    <updated>2026-04-28T00:00:00.000Z</updated>
+    <title>When to replace your HVAC system in 2026 (and when a repair still makes sense)</title>
+    <link href="{BUSINESS_URL}/blog/when-to-replace-hvac-system-2026" />
+    <id>{BUSINESS_URL}/blog/when-to-replace-hvac-system-2026</id>
+    <updated>2026-08-05T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
-    <title>Cinematic websites in 2026: 12 native browser APIs nobody uses yet</title>
-    <link href="{BUSINESS_URL}/blog/cinematic-apis-2026" />
-    <id>{BUSINESS_URL}/blog/cinematic-apis-2026</id>
-    <updated>2026-04-10T00:00:00.000Z</updated>
+    <title>Your 2026 estate planning checklist: the 5 documents (and 3 tasks) most people miss</title>
+    <link href="{BUSINESS_URL}/blog/estate-planning-checklist-2026" />
+    <id>{BUSINESS_URL}/blog/estate-planning-checklist-2026</id>
+    <updated>2026-07-28T00:00:00.000Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Direct online ordering vs delivery apps in 2026: the two-channel strategy that protects your margin</title>
+    <link href="{BUSINESS_URL}/blog/restaurant-direct-online-ordering-vs-delivery-apps-2026" />
+    <id>{BUSINESS_URL}/blog/restaurant-direct-online-ordering-vs-delivery-apps-2026</id>
+    <updated>2026-07-20T00:00:00.000Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Monthly donors are your best fundraising bet in 2026 — here is the retention data</title>
+    <link href="{BUSINESS_URL}/blog/nonprofit-monthly-donor-retention-2026" />
+    <id>{BUSINESS_URL}/blog/nonprofit-monthly-donor-retention-2026</id>
+    <updated>2026-07-14T00:00:00.000Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>How small businesses rank in Google AI Overviews in 2026</title>
+    <link href="{BUSINESS_URL}/blog/google-ai-overviews-seo-small-business-2026" />
+    <id>{BUSINESS_URL}/blog/google-ai-overviews-seo-small-business-2026</id>
+    <updated>2026-07-08T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>

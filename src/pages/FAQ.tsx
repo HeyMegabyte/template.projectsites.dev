@@ -3,10 +3,22 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { FAQ as FAQSection, CTASection, type FAQItem } from '@/components/sections';
 import { brand } from '@/brand';
 
+// 11 Q&A across four categories (each token emitted by the content pack for all
+// 10 verticals): 3 general + 4 "good to know" + 2 billing + 2 support. Answers run
+// 40-60 words, so the FAQ page ships 500+ words of specific, guess-ahead copy.
 const general: FAQItem[] = [
   { question: '{FAQ_GEN_1_Q}', answer: '{FAQ_GEN_1_A}' },
   { question: '{FAQ_GEN_2_Q}', answer: '{FAQ_GEN_2_A}' },
   { question: '{FAQ_GEN_3_Q}', answer: '{FAQ_GEN_3_A}' },
+];
+
+const more: FAQItem[] = [
+  { question: '{FAQ_MORE_1_Q}', answer: '{FAQ_MORE_1_A}' },
+  { question: '{FAQ_MORE_2_Q}', answer: '{FAQ_MORE_2_A}' },
+  { question: '{FAQ_MORE_3_Q}', answer: '{FAQ_MORE_3_A}' },
+  { question: '{FAQ_MORE_4_Q}', answer: '{FAQ_MORE_4_A}' },
+  { question: '{FAQ_MORE_5_Q}', answer: '{FAQ_MORE_5_A}' },
+  { question: '{FAQ_MORE_6_Q}', answer: '{FAQ_MORE_6_A}' },
 ];
 
 const billing: FAQItem[] = [
@@ -34,6 +46,7 @@ export default function FAQPage() {
         headline="Frequently asked questions"
         description="Can't find what you're looking for? Press ⌘+K or use the search above."
       />
+      <FAQSection items={more} eyebrow="Good to know" headline="A few more answers" />
       <FAQSection items={billing} eyebrow="Billing" headline="Billing & subscriptions" />
       <FAQSection items={support} eyebrow="Support" headline="Help & support" />
       <CTASection

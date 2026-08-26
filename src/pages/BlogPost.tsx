@@ -1,41 +1,58 @@
 import { useParams, Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { JsonLd } from '@/components/JsonLd';
 import { CTASection } from '@/components/sections';
 import { brand } from '@/brand';
+import { posts } from '@/data/content';
 
 /**
- * BlogPost detail page. Reads `:slug` from the route. In the generated site,
- * Claude swaps the `POST` map below with the real content (or loads from a
- * Markdown index). The placeholder structure stays so consumers don't refactor.
+ * BlogPost detail. Looks the post up by `:slug` in `src/data/content.ts` and
+ * renders its Markdown `body` (headings, bullet lists, bold). This is the
+ * deterministic path — the article always has a full body — replacing the old
+ * single hardcoded `{POST_PARAGRAPH_N}` token map that ignored the slug.
  */
 
-interface PostContent {
-  title: string;
-  excerpt: string;
-  date: string;
-  author: string;
-  category: string;
-  cover: string;
-  body: string[];
+/** Split a line into text + **bold** runs (no external markdown dep). */
+function inline(text: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="text-text font-semibold">{part.slice(2, -2)}</strong>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
 }
 
-const POST: PostContent = {
-  title: '{POST_TITLE}',
-  excerpt: '{POST_EXCERPT}',
-  date: '{POST_DATE}',
-  author: '{POST_AUTHOR}',
-  category: '{POST_CATEGORY}',
-  cover: '{POST_COVER}',
-  body: ['{POST_PARAGRAPH_1}', '{POST_PARAGRAPH_2}', '{POST_PARAGRAPH_3}', '{POST_PARAGRAPH_4}'],
-};
+/** Render a Markdown body string into headings / lists / paragraphs. */
+function renderBody(body: string): ReactNode[] {
+  return body
+    .split(/\n{2,}/)
+    .map((b) => b.trim())
+    .filter(Boolean)
+    .map((block, i) => {
+      if (block.startsWith('### ')) return <h3 key={i} className="text-xl font-bold font-heading text-text mt-8 mb-3">{inline(block.slice(4))}</h3>;
+      if (block.startsWith('## ')) return <h2 key={i} className="text-2xl font-bold font-heading text-text mt-10 mb-4">{inline(block.slice(3))}</h2>;
+      if (/^[-*] /.test(block)) {
+        const items = block.split(/\n/).map((l) => l.replace(/^[-*]\s+/, '').trim()).filter(Boolean);
+        return (
+          <ul key={i} className="list-disc pl-6 space-y-2 marker:text-accent">
+            {items.map((it, j) => <li key={j}>{inline(it)}</li>)}
+          </ul>
+        );
+      }
+      return <p key={i}>{inline(block)}</p>;
+    });
+}
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
+  const post = posts.find((p) => p.slug === slug) ?? posts[0];
+
   useSEO({
-    title: `${POST.title} — ${brand.business.name}`,
-    description: POST.excerpt,
+    title: `${post.title} — ${brand.business.name}`,
+    description: post.excerpt,
   });
 
   return (
@@ -44,47 +61,46 @@ export default function BlogPost() {
         data={{
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',
-          headline: POST.title,
-          description: POST.excerpt,
-          image: POST.cover,
-          datePublished: POST.date,
-          author: { '@type': 'Person', name: POST.author },
-          publisher: {
-            '@type': 'Organization',
-            name: brand.business.name,
-            url: brand.business.url,
-          },
-          mainEntityOfPage: `${brand.business.url}/blog/${slug ?? ''}`,
+          headline: post.title,
+          description: post.excerpt,
+          ...(post.cover ? { image: post.cover } : {}),
+          datePublished: post.date,
+          author: { '@type': 'Person', name: post.author ?? brand.business.name },
+          publisher: { '@type': 'Organization', name: brand.business.name, url: brand.business.url },
+          mainEntityOfPage: `${brand.business.url}/blog/${post.slug}`,
         }}
       />
 
       <Breadcrumbs
         baseUrl={brand.business.url}
-        trail={[{ label: 'Home', to: '/' }, { label: 'Blog', to: '/blog' }, { label: POST.title }]}
+        trail={[{ label: 'Home', to: '/' }, { label: 'Blog', to: '/blog' }, { label: post.title }]}
       />
 
       <article className="max-w-container-prose mx-auto px-6 pt-8 pb-24">
         <header className="mb-12 reveal-on-view">
-          <Link to="/blog" className="text-accent font-mono text-sm uppercase tracking-widest hover:underline">
-            ← {POST.category}
-          </Link>
+          {post.category && (
+            <Link to="/blog" className="text-accent font-mono text-sm uppercase tracking-widest hover:underline">
+              ← {post.category}
+            </Link>
+          )}
           <h1 className="mt-4 text-4xl md:text-6xl font-bold font-heading tracking-tight leading-tight gradient-text">
-            {POST.title}
+            {post.title}
           </h1>
-          <p className="mt-4 text-text-muted text-lg leading-relaxed">{POST.excerpt}</p>
+          <p className="mt-4 text-text-muted text-lg leading-relaxed">{post.excerpt}</p>
           <p className="mt-6 text-sm text-text-subtle">
-            By {POST.author} ·{' '}
-            <time dateTime={POST.date}>
-              {new Date(POST.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            {post.author ? `By ${post.author} · ` : ''}
+            <time dateTime={post.date}>
+              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </time>
+            {post.readMinutes ? ` · ${post.readMinutes} min read` : ''}
           </p>
         </header>
 
-        {POST.cover && (
+        {post.cover && (
           <div className="mb-12 card-tactile overflow-hidden rounded-2xl aspect-[16/9]">
             <img
-              src={POST.cover}
-              alt={`Cover image for ${POST.title}`}
+              src={post.cover}
+              alt={`Cover image for ${post.title}`}
               loading="eager"
               fetchPriority="high"
               className="h-full w-full object-cover"
@@ -92,10 +108,8 @@ export default function BlogPost() {
           </div>
         )}
 
-        <div className="prose prose-invert max-w-none space-y-6 text-text-muted text-lg leading-[1.75]">
-          {POST.body.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+        <div className="max-w-none space-y-6 text-text-muted text-lg leading-[1.75]">
+          {renderBody(post.body)}
         </div>
       </article>
 
