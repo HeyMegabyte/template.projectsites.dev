@@ -333,6 +333,104 @@ p          { text-wrap: pretty; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   TIMELINE — cinematic accent spine + node dots.
+   The spine (::before on `.timeline`) is a full-height accent gradient that
+   BASE-renders fully drawn (readable with JS/motion off). Where scroll-timeline
+   is supported and motion is allowed, it draws top-to-bottom as the list scrolls
+   through view. Node dots carry a soft accent settle-pulse. Theme tokens only.
+   ─────────────────────────────────────────────────────────────────────── */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.35rem; bottom: 0.35rem;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklch, var(--color-accent) 85%, transparent) 0%,
+    color-mix(in oklch, var(--color-primary) 70%, transparent) 55%,
+    color-mix(in oklch, var(--color-info) 50%, transparent) 100%
+  );
+  transform-origin: top;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline::before {
+      transform: scaleY(0);
+      animation: timeline-spine-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+    @keyframes timeline-spine-draw {
+      to { transform: scaleY(1); }
+    }
+  }
+}
+/* Node dot: soft accent halo that settles as the row enters view. The per-dot
+   offset is faked via the inline `--tl-i` index. Base state is a plain dot. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .timeline-dot {
+      animation: timeline-dot-pulse linear both;
+      animation-timeline: view();
+      animation-range: entry calc(4% + var(--tl-i, 0) * 4%) cover 34%;
+    }
+    @keyframes timeline-dot-pulse {
+      from { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 0%, transparent); }
+      55%  { box-shadow: 0 0 16px 2px color-mix(in oklch, var(--color-accent) 55%, transparent); }
+      to   { box-shadow: 0 0 10px -1px color-mix(in oklch, var(--color-accent) 38%, transparent); }
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   STAT ROLLUP — glowing figure tiles with a draw-in accent tick.
+   The figure carries a persistent OKLCH accent glow; the tick under each number
+   draws in on scroll; tiles stagger up (offset keyed on inline `--stat-i`). Base
+   state (JS/motion off) is fully visible, glowing, tick fully drawn.
+   ─────────────────────────────────────────────────────────────────────── */
+.stat-rollup-tile .gradient-text {
+  filter: drop-shadow(0 0 18px color-mix(in oklch, var(--color-accent) 30%, transparent));
+}
+.stat-rollup-tick {
+  position: absolute;
+  left: 15%; right: 15%; bottom: -0.4rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklch, var(--color-accent) 80%, transparent),
+    transparent
+  );
+  transform: scaleX(1);
+  transform-origin: center;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stat-rollup-tile {
+      animation: stat-rollup-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--stat-i, 0) * 7%) cover 30%;
+    }
+    @keyframes stat-rollup-rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .stat-rollup-tick {
+      transform: scaleX(0);
+      animation: stat-rollup-tick-draw linear both;
+      animation-timeline: view();
+      animation-range: entry calc(12% + var(--stat-i, 0) * 7%) cover 45%;
+    }
+    @keyframes stat-rollup-tick-draw {
+      to { transform: scaleX(1); }
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    SCROLL REVEAL — the shared `AnimatedSection` entrance (IntersectionObserver-
    driven). Visible by default; JS adds `.js-reveal-active` then, per element,
    `.in-view`. The reveal is a cinematic blur-rise: content lifts a touch, un-
