@@ -977,3 +977,146 @@ p          { text-wrap: pretty; }
   /* Keep the caption legible when motion is reduced — no slide, always shown. */
   .gallery-tile__cap { opacity: 1; transform: none; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SITE HEADER — cinematic sticky nav.
+   The bar drops in with an @starting-style slide, deepens into a stronger glass
+   panel + a hair-thin OKLCH accent underline once scrolled, active links carry
+   an accent underline that grows from center, and the mobile menu slides+fades
+   in with per-link stagger keyed on the inline `--menu-i` index. Every motion is
+   gated behind prefers-reduced-motion; base states are fully visible + legible
+   (SSR / no-JS / reduced-motion safe). Focus rings stay visible for keyboard
+   users — the nav links are real anchors.
+   ─────────────────────────────────────────────────────────────────────── */
+/* Scrolled state: a slim accent hairline hugs the bottom edge of the glass bar. */
+.site-header--scrolled { position: fixed; }
+.site-header--scrolled::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) 55%, transparent) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* @starting-style entrance for the header the first time it paints. */
+@supports (transition-behavior: allow-discrete) {
+  @media (prefers-reduced-motion: no-preference) {
+    .site-header {
+      transition:
+        background-color var(--duration-base) var(--ease),
+        box-shadow var(--duration-base) var(--ease),
+        transform var(--duration-slow) var(--ease),
+        opacity var(--duration-slow) var(--ease);
+    }
+    @starting-style {
+      .site-header {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+    }
+  }
+}
+
+/* Animated active-link underline — grows from the center on hover/focus, and
+   sits fully drawn under the current page's link. Distinct from `.underline-hover`
+   (this one is accent-colored + centre-origin, not currentColor). */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 2px; border-radius: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--duration-base) var(--ease);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link--active::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+}
+
+/* Mobile menu: slide + fade in, links stagger via `--menu-i`. */
+.site-menu { transform-origin: top; }
+@media (prefers-reduced-motion: no-preference) {
+  .site-menu { animation: site-menu-in var(--duration-base) var(--ease) both; }
+  @keyframes site-menu-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .site-menu__item { animation: site-menu-item-in var(--duration-base) var(--ease) both; }
+  @keyframes site-menu-item-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .site-menu__item { animation-delay: calc(60ms + var(--menu-i, 0) * 45ms); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   NEWSLETTER — cinematic signup panel.
+   A drifting twin-tone OKLCH accent wash sits behind the glass+grain panel, the
+   copy + form columns enter with @starting-style, the field's mail icon + border
+   flush to accent on focus, and the success/error notes settle in as pill chips.
+   All motion is gated behind prefers-reduced-motion with a fully-visible,
+   already-settled fallback. The wash is aria-hidden + pointer-events none and
+   sits behind the content, so it never captures input.
+   ─────────────────────────────────────────────────────────────────────── */
+.newsletter-wash {
+  border-radius: inherit;
+  background:
+    radial-gradient(60% 80% at 12% 0%, color-mix(in oklch, var(--color-accent) 18%, transparent) 0%, transparent 68%),
+    radial-gradient(70% 90% at 100% 100%, color-mix(in oklch, var(--color-primary) 16%, transparent) 0%, transparent 72%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .newsletter-wash {
+    animation: newsletter-wash-drift 20s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+  @keyframes newsletter-wash-drift {
+    from { transform: translate3d(0, 0, 0) scale(1);       opacity: 0.85; }
+    to   { transform: translate3d(-4%, 3%, 0) scale(1.12); opacity: 1;    }
+  }
+}
+@media (prefers-reduced-data: reduce) {
+  .newsletter-wash { animation: none !important; }
+}
+
+/* The mail icon warms to accent while the field is focused. */
+.newsletter-field:focus-within .newsletter-field__icon { color: var(--color-accent); }
+
+/* Copy + form columns enter with @starting-style, staggered by `--enter-i`.
+   Base state is fully visible; the transition only plays on first paint where
+   allow-discrete + motion are both available. */
+@supports (transition-behavior: allow-discrete) {
+  @media (prefers-reduced-motion: no-preference) {
+    .newsletter-enter {
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity var(--duration-slow) var(--ease),
+        transform var(--duration-slow) var(--ease);
+      transition-delay: calc(var(--enter-i, 0) * 90ms);
+    }
+    @starting-style {
+      .newsletter-enter {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+    }
+  }
+}
+
+/* Success / error note settles in from just below. */
+@media (prefers-reduced-motion: no-preference) {
+  .newsletter-note { animation: newsletter-note-in var(--duration-base) var(--ease) both; }
+  @keyframes newsletter-note-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

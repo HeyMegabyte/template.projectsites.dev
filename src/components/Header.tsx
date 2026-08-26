@@ -75,14 +75,15 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-base ${
-        scrolled ? 'glass-strong shadow-md' : 'bg-transparent'
+      data-scrolled={scrolled ? 'true' : 'false'}
+      className={`site-header fixed top-0 w-full z-50 transition-all duration-base ${
+        scrolled ? 'site-header--scrolled glass-strong shadow-md' : 'bg-transparent'
       }`}
     >
       <nav className="max-w-container-wide mx-auto px-6 py-4 flex justify-between items-center" aria-label="Primary">
         <Link
           to="/"
-          className="text-text font-bold text-xl font-heading tracking-tight hover:text-accent transition-colors"
+          className="site-brand text-text font-bold text-xl font-heading tracking-tight hover:text-accent transition-colors"
         >
           {business}
         </Link>
@@ -95,8 +96,9 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
                 key={l.to}
                 to={l.to}
                 aria-current={isActive ? 'page' : undefined}
-                className={`text-sm font-medium transition-colors underline-hover ${
-                  isActive ? 'text-accent' : 'text-text-muted hover:text-text'
+                data-active={isActive ? 'true' : undefined}
+                className={`nav-link text-sm font-medium transition-colors ${
+                  isActive ? 'nav-link--active text-accent' : 'text-text-muted hover:text-text'
                 }`}
               >
                 {l.label}
@@ -109,7 +111,7 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
               const ev = new KeyboardEvent('keydown', { key: 'k', metaKey: !!isMac, ctrlKey: !isMac, bubbles: true });
               window.dispatchEvent(ev);
             }}
-            className="hidden lg:flex items-center gap-2 px-3 h-10 rounded-md border border-border bg-surface text-text-muted hover:text-text transition-colors text-sm"
+            className="hidden lg:flex items-center gap-2 px-3 h-10 rounded-md border border-border bg-surface text-text-muted hover:text-text hover:border-accent/50 transition-colors text-sm"
             aria-label="Open command palette"
           >
             <CommandIcon size={14} />
@@ -138,15 +140,19 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="md:hidden glass border-t border-border px-6 py-4 space-y-1">
-          {navLinks.map((l) => {
+        <div
+          id="mobile-menu"
+          className="site-menu md:hidden glass-strong border-t border-border px-6 py-4 space-y-1"
+        >
+          {navLinks.map((l, i) => {
             const isActive = pathname === l.to;
             return (
               <Link
                 key={l.to}
                 to={l.to}
                 aria-current={isActive ? 'page' : undefined}
-                className={`block py-3 px-4 rounded-lg text-sm font-medium transition-colors ${
+                style={{ ['--menu-i' as string]: i }}
+                className={`site-menu__item block py-3 px-4 rounded-lg text-sm font-medium transition-colors ${
                   isActive
                     ? 'text-accent bg-surface'
                     : 'text-text-muted hover:text-text hover:bg-surface'
@@ -157,11 +163,14 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
               </Link>
             );
           })}
-          <div className="flex items-center justify-between pt-3">
+          <div
+            className="site-menu__item flex items-center justify-between pt-3"
+            style={{ ['--menu-i' as string]: navLinks.length }}
+          >
             <ThemeToggle />
             <Link
               to={cta.href}
-              className="bg-accent text-background font-bold text-sm px-5 py-3 rounded-lg"
+              className="bg-accent hover:bg-accent-hover text-background font-bold text-sm px-5 py-3 rounded-lg transition-all hover:-translate-y-0.5"
               onClick={() => setOpen(false)}
             >
               {cta.label}
