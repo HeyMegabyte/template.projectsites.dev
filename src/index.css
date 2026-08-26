@@ -848,3 +848,132 @@ p          { text-wrap: pretty; }
   .bento-tile { opacity: 1; transform: none; }
   .bento-tile::before { display: none; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LOGO CLOUD — cinematic "trusted by" trust strip.
+   Each logo sits desaturated + dimmed and lifts to full color + full opacity on
+   hover/focus. Grid logos stagger-reveal on scroll keyed on the inline
+   `--logo-i` index. A hair-thin OKLCH accent divider frames the strip. It stays
+   calm + tasteful — a trust strip, not a hero. Base state is fully visible +
+   legible (no-JS / reduced-motion safe).
+   ─────────────────────────────────────────────────────────────────────── */
+.logo-chip {
+  opacity: 0.5;
+  filter: grayscale(1);
+  transition:
+    opacity var(--duration-base) var(--ease),
+    filter var(--duration-base) var(--ease),
+    transform var(--duration-base) var(--ease);
+  will-change: opacity, filter;
+}
+.logo-chip:hover,
+.logo-chip:focus-within {
+  opacity: 1;
+  filter: grayscale(0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .logo-chip:hover,
+  .logo-chip:focus-within {
+    transform: translateY(-2px);
+  }
+}
+
+/* Hair-thin OKLCH accent divider framing the strip (top + bottom rules that
+   fade out toward the edges). Decorative + aria-hidden in the markup. */
+.logo-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklch, var(--color-accent) 45%, transparent) 20%,
+    color-mix(in oklch, var(--color-accent) 45%, transparent) 80%,
+    transparent
+  );
+}
+.logo-rule--top { top: 0; }
+.logo-rule--bottom { bottom: 0; }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .logo-strip .logo-chip {
+      animation: logo-chip-fade linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--logo-i, 0) * 5%) cover 26%;
+    }
+    @keyframes logo-chip-fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 0.5; transform: translateY(0); }
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   GALLERY GRID — cinematic masonry with hover zoom + accent ring + scroll
+   reveal. Tiles reveal on scroll with a per-tile stagger keyed on the inline
+   `--tile-i` index; the image zooms gently on hover/focus behind a glass-rounded
+   frame; the caption bar slides up from the base; the zoom glyph fades in.
+   Theme-token colors keep it legible on light + dark verticals. Base state is
+   fully visible (no-JS / reduced-motion safe).
+   ─────────────────────────────────────────────────────────────────────── */
+.gallery-tile {
+  transition:
+    transform var(--duration-base) var(--ease),
+    box-shadow var(--duration-base) var(--ease),
+    border-color var(--duration-base) var(--ease);
+}
+.gallery-tile__img {
+  display: block;
+  transition: transform var(--duration-slow) var(--ease);
+  will-change: transform;
+}
+.gallery-tile__cap {
+  transform: translateY(0.5rem);
+  opacity: 0;
+  transition:
+    transform var(--duration-base) var(--ease),
+    opacity var(--duration-base) var(--ease);
+}
+.gallery-tile:hover,
+.gallery-tile:focus-within {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--color-accent) 55%, var(--color-border));
+  box-shadow:
+    0 18px 44px -20px color-mix(in oklch, var(--color-accent) 45%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--color-accent) 35%, transparent);
+}
+.gallery-tile:hover .gallery-tile__zoom,
+.gallery-tile:focus-within .gallery-tile__zoom { opacity: 1; }
+.gallery-tile:hover .gallery-tile__cap,
+.gallery-tile:focus-within .gallery-tile__cap {
+  transform: translateY(0);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-tile:hover .gallery-tile__img,
+  .gallery-tile:focus-within .gallery-tile__img {
+    transform: scale(1.06);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery-tile {
+      animation: gallery-tile-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--tile-i, 0) * 4%) cover 32%;
+    }
+    @keyframes gallery-tile-rise {
+      from { opacity: 0; transform: translateY(22px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);     }
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-tile { opacity: 1; transform: none; }
+  .gallery-tile__img { transform: none; }
+  /* Keep the caption legible when motion is reduced — no slide, always shown. */
+  .gallery-tile__cap { opacity: 1; transform: none; }
+}
