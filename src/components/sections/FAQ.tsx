@@ -22,6 +22,14 @@ interface Props {
 /**
  * FAQ with FAQPage JSON-LD (highest AI-citation rate across ChatGPT /
  * Perplexity / Google AI Overviews). Renders as accessible disclosure widgets.
+ *
+ * Cinematic detail (all gated behind `prefers-reduced-motion: no-preference`
+ * via the `.faq-*` classes in `index.css`, and auto-neutralised by the global
+ * reduced-motion reset): each row rises in on scroll with a per-item stagger
+ * (`--faq-i`), the trigger lifts + reveals an accent hairline on hover/focus,
+ * the `+` badge blooms into a glowing `×` when open, and the open row gets a
+ * soft accent wash + left accent bar. The answer slides via a `grid-rows`
+ * 0fr↔1fr transition with a fade so there is no layout jank.
  */
 export function FAQ({
   items,
@@ -71,37 +79,41 @@ export function FAQ({
         <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">{safeHeadline}</h2>
         {safeDescription && <p className="text-text-muted max-w-2xl mx-auto">{safeDescription}</p>}
       </div>
-      <ul className="divide-y divide-border border-y border-border">
+      <ul className="border-y border-border">
         {safeItems.map((it, i) => {
           const isOpen = open.has(i);
           return (
-            <li key={i}>
+            <li
+              key={i}
+              className="faq-item"
+              data-faq-open={isOpen ? '' : undefined}
+              style={{ '--faq-i': i } as React.CSSProperties}
+            >
               <button
                 type="button"
                 onClick={() => toggle(i)}
                 aria-expanded={isOpen}
                 aria-controls={`faq-panel-${i}`}
-                className="flex items-center justify-between w-full py-6 text-left gap-6 hover:text-accent transition-colors min-h-[44px]"
+                className="faq-trigger flex items-center justify-between w-full py-6 pl-4 pr-1 text-left gap-6 min-h-[52px]"
               >
-                <span className="font-heading text-lg md:text-xl font-semibold text-text">
+                <span className="font-heading text-lg md:text-xl font-semibold text-text transition-colors duration-200">
                   {it.question}
                 </span>
-                <span className="shrink-0 h-8 w-8 rounded-full border border-border flex items-center justify-center text-accent">
-                  <Plus
-                    size={16}
-                    className={cn('transition-transform duration-300 motion-reduce:transition-none', isOpen && 'rotate-45')}
-                  />
+                <span className="faq-badge shrink-0 h-9 w-9 rounded-full border border-border flex items-center justify-center text-accent">
+                  <Plus size={16} className="faq-badge__icon" aria-hidden="true" />
                 </span>
               </button>
               <div
                 id={`faq-panel-${i}`}
+                role="region"
+                aria-label={it.question}
                 className={cn(
-                  'grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none',
+                  'faq-panel grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none',
                   isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
                 )}
               >
                 <div className="overflow-hidden">
-                  <p className="pb-6 text-text-muted leading-relaxed">{it.answer}</p>
+                  <p className="faq-answer pb-6 pl-4 pr-1 text-text-muted leading-relaxed">{it.answer}</p>
                 </div>
               </div>
             </li>

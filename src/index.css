@@ -1643,3 +1643,155 @@ p          { text-wrap: pretty; }
   opacity: 1;
   transform: rotate(0deg) scale(1);
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   CINEMATIC FAQ ACCORDION (src/components/sections/FAQ.tsx)
+   Every row is a `.faq-item`; the open row carries `[data-faq-open]`. All
+   motion is gated behind `prefers-reduced-motion: no-preference` (and the
+   global reduced-motion reset above additionally clamps it to instant), so
+   the un-animated base state below is the reduced-motion / no-JS experience:
+   fully legible, no offset, no hidden content. Colors are theme tokens +
+   `--color-accent` only — no hardcoded light classes (validate-site gate).
+   ─────────────────────────────────────────────────────────────────────── */
+.faq-item {
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid var(--color-border);
+  /* Accent left-bar + soft radial wash that fade in only when the row opens. */
+  --faq-glow: 0;
+}
+.faq-item:first-child { border-top: 0; }
+.faq-item::before {
+  /* Left accent bar — scales up from the vertical center when open. */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: center;
+  opacity: calc(var(--faq-glow) * 0.9);
+  z-index: -1;
+}
+.faq-item::after {
+  /* Soft accent wash behind the open row for depth. */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    120% 90% at 0% 50%,
+    color-mix(in oklch, var(--color-accent) 9%, transparent) 0%,
+    transparent 62%
+  );
+  opacity: var(--faq-glow);
+}
+.faq-item[data-faq-open] {
+  --faq-glow: 1;
+}
+.faq-item[data-faq-open]::before {
+  transform: scaleY(1);
+}
+
+/* Trigger button — hover lift, drawn hairline, keyboard-visible ring. */
+.faq-trigger {
+  position: relative;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.faq-trigger:hover .faq-badge {
+  border-color: color-mix(in oklch, var(--color-accent) 55%, var(--color-border));
+}
+.faq-trigger:hover > span:first-child,
+.faq-item[data-faq-open] .faq-trigger > span:first-child {
+  color: var(--color-accent);
+}
+.faq-trigger:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background),
+    0 0 0 4px color-mix(in oklch, var(--color-accent) 70%, transparent);
+}
+
+/* The `+` badge → glowing `×`: rotate + scale bloom, accent-tinted ring. */
+.faq-badge {
+  background: color-mix(in oklch, var(--color-accent) 0%, transparent);
+}
+.faq-badge__icon {
+  transition: transform var(--duration-base) cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.faq-item[data-faq-open] .faq-badge {
+  border-color: color-mix(in oklch, var(--color-accent) 60%, var(--color-border));
+  background: color-mix(in oklch, var(--color-accent) 14%, transparent);
+  box-shadow: 0 0 14px -2px color-mix(in oklch, var(--color-accent) 45%, transparent);
+}
+.faq-item[data-faq-open] .faq-badge__icon {
+  transform: rotate(135deg) scale(1.05);
+}
+
+/* Answer copy — small fade + rise inside the grid-rows reveal for depth. */
+.faq-answer {
+  opacity: 0.001;
+  transform: translateY(-4px);
+}
+.faq-item[data-faq-open] .faq-answer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item::before {
+    transition:
+      transform var(--duration-base) cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity var(--duration-base) var(--ease);
+  }
+  .faq-item::after {
+    transition: opacity var(--duration-slow) var(--ease);
+  }
+  .faq-trigger {
+    transition: transform var(--duration-base) var(--ease);
+  }
+  .faq-trigger:hover {
+    transform: translateX(4px);
+  }
+  .faq-badge {
+    transition:
+      border-color var(--duration-base) var(--ease),
+      background-color var(--duration-base) var(--ease),
+      box-shadow var(--duration-base) var(--ease);
+  }
+  .faq-answer {
+    transition:
+      opacity var(--duration-base) var(--ease),
+      transform var(--duration-base) var(--ease);
+  }
+
+  /* Staggered scroll-in — rows rise in sequence as the list enters view. The
+     per-item delay is faked via `animation-range` keyed on inline `--faq-i`,
+     matching the `.trust-chip` pattern above. Base state (below, outside this
+     block) is fully visible so no-JS / reduced-motion keeps every row legible. */
+  @supports (animation-timeline: view()) {
+    .faq-item {
+      animation: faq-row-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(2% + var(--faq-i, 0) * 5%) cover 26%;
+    }
+    @keyframes faq-row-rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+}
+
+/* Reduced-motion / no-timeline safety net: never leave a row hidden or the
+   answer faded out. (The open row's answer is shown by the [data-faq-open]
+   rule above; a collapsed row's grid-rows:0fr keeps it correctly clipped.) */
+@media (prefers-reduced-motion: reduce) {
+  .faq-item { opacity: 1; transform: none; }
+  .faq-item[data-faq-open]::before { transform: scaleY(1); }
+  .faq-badge__icon { transition: none; }
+  .faq-item[data-faq-open] .faq-badge__icon { transform: rotate(135deg); }
+}

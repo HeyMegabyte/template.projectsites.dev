@@ -2,9 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FAQ } from './FAQ';
 
 /**
- * `FAQ` — accessible disclosure widgets that also emit FAQPage JSON-LD. Answers
- * slide open via a `grid-rows` 0fr↔1fr transition and the `+` icon rotates 45°
- * to a `×` (both motion-gated). `exclusive` toggles single-open vs multi-open.
+ * `FAQ` — accessible disclosure widgets that also emit FAQPage JSON-LD.
+ *
+ * Cinematic behaviour (all gated behind `prefers-reduced-motion: no-preference`
+ * and auto-neutralised for reduced-motion users): rows stagger-rise as the list
+ * scrolls into view, the trigger lifts + reveals an accent hairline on
+ * hover/focus, a focus-visible ring keeps it keyboard-operable, and the `+`
+ * badge blooms into a glowing `×` while the open row gains a soft accent wash +
+ * left accent bar. The answer slides via a `grid-rows` 0fr↔1fr transition with
+ * a fade so there is zero layout jank. `exclusive` toggles single-open vs
+ * multi-open. Try the "Interactions" a11y checks and toggle a row to see it.
  */
 const meta = {
   title: 'Sections/FAQ',
@@ -40,13 +47,21 @@ export const DentalFAQ: Story = {
         answer:
           'Absolutely — we are a family practice and welcome patients of every age, from toddlers to grandparents.',
       },
+      {
+        question: 'What if I have dental anxiety?',
+        answer:
+          'Tell us at booking. We offer nitrous, noise-cancelling headphones, and unhurried appointments so nervous patients stay comfortable start to finish.',
+      },
     ],
   },
 };
 
+/** Single-open accordion mode — opening one row closes the others. */
 export const ExclusiveAccordion: Story = {
   args: {
     exclusive: true,
+    eyebrow: 'Treatment',
+    headline: 'Invisalign, answered',
     items: [
       {
         question: 'Is Invisalign painful?',
@@ -56,6 +71,24 @@ export const ExclusiveAccordion: Story = {
         question: 'How long is treatment?',
         answer: 'Simple cases finish in 6 months; complex cases take up to 18 months.',
       },
+      {
+        question: 'Can I eat with the aligners in?',
+        answer: 'Take them out to eat and drink anything but water, then brush and pop them back in — 22 hours a day is the target.',
+      },
     ],
+  },
+};
+
+/** Long list — best for feeling the staggered scroll-in entrance. */
+export const ManyQuestions: Story = {
+  args: {
+    eyebrow: 'Support',
+    headline: 'Common questions',
+    description: 'Scroll to watch each row stagger into view; hover a question for the accent lift.',
+    items: Array.from({ length: 8 }, (_, i) => ({
+      question: `Question number ${i + 1} — what should I expect?`,
+      answer:
+        'A clear, jargon-free answer that resolves the concern in a sentence or two, written the way a real front-desk teammate would explain it in person.',
+    })),
   },
 };
