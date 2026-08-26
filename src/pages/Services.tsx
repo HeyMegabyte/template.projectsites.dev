@@ -4,16 +4,21 @@ import { AnimatedSection } from '@/components/AnimatedSection';
 import { useSEO } from '@/hooks/useSEO';
 import { JsonLd } from '@/components/JsonLd';
 import { Button } from '@/components/ui/button';
+import { hasRealImage, scrubText } from '@/lib/placeholders';
 
 // Each card renders the ~80-word LONG description (emitted by the content pack for
-// all 10 verticals) so /services ships 500+ words across several sections.
+// all 10 verticals) so /services ships 500+ words across several sections. The
+// `image` reuses the build's FEATURE_N imagery (the same service photos the
+// homepage bento shows) so /services carries its own images — gated by
+// hasRealImage so a card silently drops the <img> when a build has no photo
+// (no 404 / broken box), keeping the page valid on imageless builds too.
 const services = [
-  { title: '{SERVICE_1_TITLE}', description: '{SERVICE_1_LONG_DESCRIPTION}' },
-  { title: '{SERVICE_2_TITLE}', description: '{SERVICE_2_LONG_DESCRIPTION}' },
-  { title: '{SERVICE_3_TITLE}', description: '{SERVICE_3_LONG_DESCRIPTION}' },
-  { title: '{SERVICE_4_TITLE}', description: '{SERVICE_4_LONG_DESCRIPTION}' },
-  { title: '{SERVICE_5_TITLE}', description: '{SERVICE_5_LONG_DESCRIPTION}' },
-  { title: '{SERVICE_6_TITLE}', description: '{SERVICE_6_LONG_DESCRIPTION}' },
+  { title: '{SERVICE_1_TITLE}', description: '{SERVICE_1_LONG_DESCRIPTION}', image: '{FEATURE_1_IMAGE_URL}' },
+  { title: '{SERVICE_2_TITLE}', description: '{SERVICE_2_LONG_DESCRIPTION}', image: '{FEATURE_2_IMAGE_URL}' },
+  { title: '{SERVICE_3_TITLE}', description: '{SERVICE_3_LONG_DESCRIPTION}', image: '{FEATURE_3_IMAGE_URL}' },
+  { title: '{SERVICE_4_TITLE}', description: '{SERVICE_4_LONG_DESCRIPTION}', image: '{FEATURE_4_IMAGE_URL}' },
+  { title: '{SERVICE_5_TITLE}', description: '{SERVICE_5_LONG_DESCRIPTION}', image: '{FEATURE_5_IMAGE_URL}' },
+  { title: '{SERVICE_6_TITLE}', description: '{SERVICE_6_LONG_DESCRIPTION}', image: '{FEATURE_6_IMAGE_URL}' },
 ];
 
 const whyUs = [
@@ -67,6 +72,17 @@ export default function Services() {
             {services.map((service, i) => (
               <AnimatedSection key={i} delay={`${i * 0.1}s`}>
                 <div className="group glass rounded-2xl p-8 hover:border-[var(--color-accent)]/20 transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                  {hasRealImage(service.image) && (
+                    <div className="mb-6 aspect-[16/10] overflow-hidden rounded-xl">
+                      <img
+                        src={service.image}
+                        alt={scrubText(service.title, 'Our service')}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
                   <div className="h-14 w-14 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center mb-6 group-hover:bg-[var(--color-accent)]/20 transition-colors">
                     <Zap className="h-7 w-7 text-[var(--color-accent)]" />
                   </div>

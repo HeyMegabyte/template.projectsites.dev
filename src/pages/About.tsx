@@ -1,6 +1,7 @@
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { useSEO } from '@/hooks/useSEO';
 import { JsonLd } from '@/components/JsonLd';
+import { hasRealImage, scrubText } from '@/lib/placeholders';
 
 // Guess-ahead sub-page copy: every token below is emitted by the content pack
 // (scripts/gen-content-packs.mjs) for all 10 verticals, so nothing renders as a
@@ -10,6 +11,18 @@ const values = [
   { title: '{ABOUT_VALUE_1_TITLE}', desc: '{ABOUT_VALUE_1_DESC}' },
   { title: '{ABOUT_VALUE_2_TITLE}', desc: '{ABOUT_VALUE_2_DESC}' },
   { title: '{ABOUT_VALUE_3_TITLE}', desc: '{ABOUT_VALUE_3_DESC}' },
+];
+
+// Photo band — pulls the build's real About + gallery imagery so /about carries
+// 4+ images (was text-only → 0 images, missing the per-sub-page image floor).
+// Every src is gated by hasRealImage at render, so the whole band self-hides on
+// a build with no imagery — never a 404 / broken box (same contract as Home's
+// gallery). The build fills these same tokens for the homepage bento + gallery.
+const aboutShots = [
+  { src: '{ABOUT_IMAGE_URL}', alt: '{ABOUT_IMAGE_ALT}' },
+  { src: '{GALLERY_1_IMAGE_URL}', alt: '{GALLERY_1_IMAGE_ALT}' },
+  { src: '{GALLERY_2_IMAGE_URL}', alt: '{GALLERY_2_IMAGE_ALT}' },
+  { src: '{GALLERY_3_IMAGE_URL}', alt: '{GALLERY_3_IMAGE_ALT}' },
 ];
 
 export default function About() {
@@ -59,6 +72,31 @@ export default function About() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Photo band — real build imagery (self-hides when a build has none) */}
+      {aboutShots.filter((s) => hasRealImage(s.src)).length > 0 && (
+        <section className="pb-8">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {aboutShots
+                .filter((s) => hasRealImage(s.src))
+                .map((s, i) => (
+                  <AnimatedSection key={i} delay={`${i * 0.08}s`}>
+                    <div className="aspect-[4/5] overflow-hidden rounded-2xl glass">
+                      <img
+                        src={s.src}
+                        alt={scrubText(s.alt, 'Inside our studio')}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                      />
+                    </div>
+                  </AnimatedSection>
+                ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Values — what we stand for (3-card grid) */}
       <section className="py-16">
