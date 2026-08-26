@@ -272,6 +272,30 @@ p          { text-wrap: pretty; }
     @keyframes stat-underline-draw {
       to { transform: scaleX(1); }
     }
+
+    /* Trust strip chips stagger up as the strip scrolls into view. Base state
+       (no scroll-timeline support / reduced-motion) is fully visible — the
+       chips must stay readable if JS or motion is off. The per-chip delay is
+       faked via animation-range offset keyed on the inline `--trust-i` index. */
+    .trust-chip {
+      animation: trust-chip-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--trust-i, 0) * 6%) cover 30%;
+    }
+    @keyframes trust-chip-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Icon ring gets a soft accent glow as it settles in. */
+    .trust-chip__icon {
+      animation: trust-icon-glow linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--trust-i, 0) * 6%) cover 32%;
+    }
+    @keyframes trust-icon-glow {
+      from { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 0%, transparent); }
+      to   { box-shadow: 0 0 14px -2px color-mix(in oklch, var(--color-accent) 45%, transparent); }
+    }
   }
 }
 

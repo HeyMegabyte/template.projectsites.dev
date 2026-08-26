@@ -52,11 +52,32 @@ export function TrustBar({ items }: Props) {
   const list = (items ?? defaultItems()).slice(0, 5);
   if (list.length === 0) return null;
   return (
-    <section aria-label="Why choose us" className="border-y border-border bg-surface/60">
-      <ul className="max-w-container-wide mx-auto px-6 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        {list.map((it) => (
-          <li key={it.label} className="flex items-center gap-2 text-sm text-text-muted">
-            <span className="text-accent" aria-hidden="true">{it.icon}</span>
+    <section
+      aria-label="Why choose us"
+      className="grain relative border-y border-border bg-surface/60 backdrop-blur-sm"
+    >
+      {/* Faint accent wash for cinematic depth — OKLCH, motion-agnostic, purely decorative. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          background:
+            'radial-gradient(60% 120% at 50% 0%, color-mix(in oklch, var(--color-accent) 10%, transparent) 0%, transparent 70%)',
+        }}
+      />
+      <ul className="max-w-container-wide relative z-10 mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 py-4">
+        {list.map((it, i) => (
+          <li
+            key={it.label}
+            className="trust-chip flex items-center gap-2 text-sm text-text-muted"
+            style={{ ['--trust-i' as string]: i }}
+          >
+            <span
+              className="trust-chip__icon inline-flex h-7 w-7 items-center justify-center rounded-full text-accent ring-1 ring-accent/25"
+              aria-hidden="true"
+            >
+              {it.icon}
+            </span>
             <span className="font-medium">{it.label}</span>
           </li>
         ))}
