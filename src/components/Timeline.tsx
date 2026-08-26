@@ -32,7 +32,7 @@ export default function Timeline({ events, headline, eyebrow }: Props) {
             )}
           </div>
         )}
-        <ol className="relative border-l border-white/10 pl-8 space-y-10">
+        <ol className="relative border-l border-border pl-8 space-y-10">
           {events.map((e, i) => (
             <AnimatedSection key={`${e.year}-${i}`} delay={`${i * 0.1}s`}>
               <li className="relative">
@@ -43,10 +43,10 @@ export default function Timeline({ events, headline, eyebrow }: Props) {
                 <time className="text-[var(--color-accent)] font-mono text-sm tracking-widest">
                   {e.year}
                 </time>
-                <h3 className="text-xl font-bold text-white mt-1 mb-2 font-heading">
+                <h3 className="text-xl font-bold text-text mt-1 mb-2 font-heading">
                   {e.title}
                 </h3>
-                <p className="text-white/70 leading-relaxed">{e.description}</p>
+                <p className="text-text-muted leading-relaxed">{e.description}</p>
                 {e.link && (
                   <a
                     href={e.link.href}

@@ -2,18 +2,18 @@ export default function Accessibility() {
   return (
     <main className="pt-32 pb-20">
       <div className="max-w-3xl mx-auto px-6">
-        <h1 className="text-3xl md:text-4xl font-heading font-bold text-white mb-8">
+        <h1 className="text-3xl md:text-4xl font-heading font-bold text-text mb-8">
           Accessibility Statement
         </h1>
 
-        <div className="space-y-6 text-white/70 text-sm leading-relaxed">
+        <div className="space-y-6 text-text-muted text-sm leading-relaxed">
           <p>
             {'{BUSINESS_NAME}'} is committed to ensuring digital accessibility for people with
             disabilities. We continually improve the user experience for everyone and apply the
             relevant accessibility standards.
           </p>
 
-          <h2 className="text-xl font-heading font-semibold text-white mt-8">
+          <h2 className="text-xl font-heading font-semibold text-text mt-8">
             Conformance Status
           </h2>
           <p>
@@ -22,7 +22,7 @@ export default function Accessibility() {
             with disabilities and more user-friendly for everyone.
           </p>
 
-          <h2 className="text-xl font-heading font-semibold text-white mt-8">
+          <h2 className="text-xl font-heading font-semibold text-text mt-8">
             Measures Taken
           </h2>
           <ul className="list-disc pl-6 space-y-2">
@@ -37,7 +37,7 @@ export default function Accessibility() {
             <li>The site is fully navigable via keyboard</li>
           </ul>
 
-          <h2 className="text-xl font-heading font-semibold text-white mt-8">
+          <h2 className="text-xl font-heading font-semibold text-text mt-8">
             Feedback
           </h2>
           <p>
@@ -50,7 +50,7 @@ export default function Accessibility() {
           </ul>
           <p>We aim to respond to accessibility feedback within 2 business days.</p>
 
-          <h2 className="text-xl font-heading font-semibold text-white mt-8">
+          <h2 className="text-xl font-heading font-semibold text-text mt-8">
             Compliance
           </h2>
           <p>

@@ -8,7 +8,7 @@
     "dev": "vite",
     "prebuild": "node scripts/generate-favicons.mjs",
     "build": "tsc -b && vite build",
-    "postbuild": "node scripts/build-feeds.mjs && cp public/feed.xml public/atom.xml public/feed.json public/sitemap.xml dist/ 2>/dev/null || true",
+    "postbuild": "node scripts/build-feeds.mjs && (cp public/feed.xml public/atom.xml public/feed.json public/sitemap.xml dist/ 2>/dev/null || true) && node scripts/validate-site.mjs",
     "preview": "vite preview",
     "build:feeds": "node scripts/build-feeds.mjs",
     "typecheck": "tsc -b --noEmit",
@@ -33,6 +33,7 @@
     "hue-rotate": "node scripts/hue-rotate.mjs",
     "validate:all": "npm run validate:brand && npm run typecheck && npm run test && npm run prompt-evals && npm run build && npm run perf-budget",
     "validate": "node scripts/build_validators.mjs dist",
+    "validate:site": "node scripts/validate-site.mjs",
     "prerender": "node scripts/prerender-spa.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

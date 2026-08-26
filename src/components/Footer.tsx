@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
 import { brand } from '@/brand';
 
 interface NavRoute {
@@ -27,9 +27,22 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
   const address = business.address;
   const phone = business.phone;
   const email = business.email;
+  // Derive a contact email from the business's own domain when research didn't
+  // find one (skip projectsites.dev subdomains — no mailbox there). Never
+  // fabricate a phone number.
+  const derivedEmail =
+    email ||
+    (() => {
+      try {
+        const h = new URL(business.url || '').hostname.replace(/^www\./, '');
+        return h && !h.endsWith('.projectsites.dev') ? `info@${h}` : '';
+      } catch {
+        return '';
+      }
+    })();
   const mapHref = address ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}` : '#';
   const phoneHref = phone ? `tel:${phone.replace(/[^+\d]/g, '')}` : '#';
-  const emailHref = email ? `mailto:${email}` : '#';
+  const emailHref = derivedEmail ? `mailto:${derivedEmail}` : '#';
 
   return (
     <footer className="relative bg-surface text-text-muted pt-20 pb-8 border-t border-border">
@@ -102,15 +115,23 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
                   <span>{phone}</span>
                 </a>
               )}
-              {email && (
+              {derivedEmail && (
                 <a
                   href={emailHref}
                   className="flex items-center gap-2 hover:text-accent transition-colors underline-hover break-all"
                 >
                   <Mail size={16} className="flex-shrink-0 text-text-subtle" aria-hidden="true" />
-                  <span>{email}</span>
+                  <span>{derivedEmail}</span>
                 </a>
               )}
+              {/* Always-present contact channel — the form works even when phone/email are unknown. */}
+              <Link
+                to="/contact"
+                className="flex items-center gap-2 hover:text-accent transition-colors underline-hover"
+              >
+                <MessageSquare size={16} className="flex-shrink-0 text-text-subtle" aria-hidden="true" />
+                <span>Send us a message</span>
+              </Link>
             </address>
           </div>
 
@@ -122,7 +143,7 @@ export default function Footer({ routes = DEFAULT_ROUTES, socials = [] }: Props)
               <li><Link to="/privacy"       className="hover:text-accent transition-colors underline-hover">Privacy Policy</Link></li>
               <li><Link to="/terms"         className="hover:text-accent transition-colors underline-hover">Terms of Service</Link></li>
               <li><Link to="/accessibility" className="hover:text-accent transition-colors underline-hover">Accessibility</Link></li>
-              <li><Link to="/sitemap.xml"   className="hover:text-accent transition-colors underline-hover">Sitemap</Link></li>
+              <li><a href="/sitemap.xml" className="hover:text-accent transition-colors underline-hover">Sitemap</a></li>
             </ul>
           </div>
         </div>

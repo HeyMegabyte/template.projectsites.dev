@@ -52,9 +52,9 @@ function StatTile({ stat, visible }: { stat: Stat; visible: boolean }) {
         {display.toLocaleString()}
         {stat.suffix ?? ''}
       </p>
-      <p className="text-white font-medium">{stat.label}</p>
+      <p className="text-text font-medium">{stat.label}</p>
       {stat.description && (
-        <p className="text-white/60 text-sm mt-2 leading-relaxed">{stat.description}</p>
+        <p className="text-text-muted text-sm mt-2 leading-relaxed">{stat.description}</p>
       )}
     </div>
   );

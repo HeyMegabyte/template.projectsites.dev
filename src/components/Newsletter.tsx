@@ -42,10 +42,10 @@ export default function Newsletter({
     <section className="glass rounded-2xl p-8 md:p-12">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div className="md:max-w-md">
-          <h2 className="text-2xl md:text-3xl font-bold font-heading text-white mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold font-heading text-text mb-2">
             {headline}
           </h2>
-          <p className="text-white/70 text-sm md:text-base">{description}</p>
+          <p className="text-text-muted text-sm md:text-base">{description}</p>
         </div>
         <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3 md:flex-1 md:max-w-md" noValidate>
           <label htmlFor="newsletter-email" className="sr-only">
@@ -55,7 +55,7 @@ export default function Newsletter({
             <Mail
               size={18}
               aria-hidden="true"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-text-subtle"
             />
             <input
               id="newsletter-email"
@@ -68,7 +68,7 @@ export default function Newsletter({
               placeholder="you@example.com"
               disabled={status === 'submitting'}
               aria-describedby={status === 'error' ? 'newsletter-error' : undefined}
-              className="w-full pl-11 pr-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:border-transparent transition-colors min-h-[44px]"
+              className="w-full pl-11 pr-4 py-3 rounded-lg bg-surface border border-border text-text placeholder:text-text-subtle focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:border-transparent transition-colors min-h-[44px]"
             />
           </div>
           <button

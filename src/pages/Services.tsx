@@ -40,7 +40,7 @@ export default function Services() {
             <h1 className="text-4xl md:text-6xl font-bold font-heading mt-4 mb-6">
               <span className="gradient-text">{'{SERVICES_HEADLINE}'}</span>
             </h1>
-            <p className="text-white/50 max-w-2xl mx-auto text-lg">
+            <p className="text-text-subtle max-w-2xl mx-auto text-lg">
               {'{SERVICES_SUBHEADLINE}'}
             </p>
           </AnimatedSection>
@@ -52,10 +52,10 @@ export default function Services() {
                   <div className="h-14 w-14 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center mb-6 group-hover:bg-[var(--color-accent)]/20 transition-colors">
                     <Zap className="h-7 w-7 text-[var(--color-accent)]" />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 font-heading">
+                  <h3 className="text-xl font-bold text-text mb-3 font-heading">
                     {service.title}
                   </h3>
-                  <p className="text-white/50 text-sm leading-relaxed flex-1">
+                  <p className="text-text-subtle text-sm leading-relaxed flex-1">
                     {service.description}
                   </p>
                 </div>
@@ -68,7 +68,7 @@ export default function Services() {
               <h2 className="text-2xl md:text-3xl font-bold font-heading mb-4">
                 {'{SERVICES_CTA_HEADLINE}'}
               </h2>
-              <p className="text-white/50 mb-8">
+              <p className="text-text-subtle mb-8">
                 {'{SERVICES_CTA_DESCRIPTION}'}
               </p>
               <Button asChild size="lg">

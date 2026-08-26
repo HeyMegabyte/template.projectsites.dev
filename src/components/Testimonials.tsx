@@ -64,7 +64,7 @@ export default function Testimonials({
                     />
                   ))}
                 </div>
-                <blockquote className="text-white/70 text-sm leading-relaxed mb-6 flex-1 italic">
+                <blockquote className="text-text-muted text-sm leading-relaxed mb-6 flex-1 italic">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="flex items-center gap-3">
@@ -75,12 +75,12 @@ export default function Testimonials({
                       width={40}
                       height={40}
                       loading="lazy"
-                      className="h-10 w-10 rounded-full object-cover border border-white/10"
+                      className="h-10 w-10 rounded-full object-cover border border-border"
                     />
                   )}
                   <div>
-                    <p className="text-white font-medium text-sm">{t.name}</p>
-                    <p className="text-white/50 text-xs">
+                    <p className="text-text font-medium text-sm">{t.name}</p>
+                    <p className="text-text-subtle text-xs">
                       {t.role}
                       {t.company ? ` · ${t.company}` : ''}
                     </p>

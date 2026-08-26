@@ -13,11 +13,11 @@ const buttonVariants = cva(
         primary:
           'bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl hover:-translate-y-0.5',
         outline:
-          'border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/40',
-        ghost: 'hover:bg-white/5 text-white/70 hover:text-white',
+          'border-2 border-border text-text hover:bg-surface hover:border-accent',
+        ghost: 'hover:bg-surface text-text-muted hover:text-text',
         link: 'text-[var(--color-accent)] underline-offset-4 hover:underline',
         glass:
-          'glass text-white hover:bg-white/10 hover:-translate-y-0.5',
+          'glass text-text hover:bg-surface hover:-translate-y-0.5',
       },
       size: {
         default: 'h-11 px-6 py-2',

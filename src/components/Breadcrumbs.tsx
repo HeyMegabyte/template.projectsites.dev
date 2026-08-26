@@ -47,10 +47,10 @@ export default function Breadcrumbs({ trail, baseUrl = '' }: Props) {
     <>
       <JsonLd data={itemList} />
       <nav aria-label="Breadcrumb" className="max-w-7xl mx-auto px-6 pt-24 pb-2">
-        <ol className="flex flex-wrap items-center gap-2 text-sm text-white/50">
+        <ol className="flex flex-wrap items-center gap-2 text-sm text-text-subtle">
           {crumbs.map((c, i) => (
             <li key={i} className="flex items-center gap-2">
-              {i === 0 && <Home size={14} className="text-white/40" aria-hidden="true" />}
+              {i === 0 && <Home size={14} className="text-text-subtle" aria-hidden="true" />}
               {c.to ? (
                 <Link
                   to={c.to}
@@ -59,12 +59,12 @@ export default function Breadcrumbs({ trail, baseUrl = '' }: Props) {
                   {c.label}
                 </Link>
               ) : (
-                <span aria-current="page" className="text-white/80">
+                <span aria-current="page" className="text-text-muted">
                   {c.label}
                 </span>
               )}
               {i < crumbs.length - 1 && (
-                <ChevronRight size={14} className="text-white/30" aria-hidden="true" />
+                <ChevronRight size={14} className="text-text-subtle" aria-hidden="true" />
               )}
             </li>
           ))}

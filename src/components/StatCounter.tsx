@@ -18,9 +18,9 @@ export function StatCounter({ value, suffix = '+', label, description, className
       <span className="text-5xl font-bold tracking-tight gradient-text">
         <AnimatedNumber value={value} suffix={suffix} />
       </span>
-      <span className="mt-2 text-sm uppercase tracking-widest text-white/70">{label}</span>
+      <span className="mt-2 text-sm uppercase tracking-widest text-text-muted">{label}</span>
       {description ? (
-        <span className="mt-1 text-sm text-white/60 leading-relaxed">{description}</span>
+        <span className="mt-1 text-sm text-text-muted leading-relaxed">{description}</span>
       ) : null}
     </div>
   );

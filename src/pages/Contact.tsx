@@ -29,7 +29,7 @@ export default function Contact() {
             <h1 className="text-4xl md:text-6xl font-bold font-heading mt-4 mb-6">
               <span className="gradient-text">{'{CONTACT_HEADLINE}'}</span>
             </h1>
-            <p className="text-white/50 max-w-2xl mx-auto text-lg">
+            <p className="text-text-subtle max-w-2xl mx-auto text-lg">
               {'{CONTACT_SUBHEADLINE}'}
             </p>
           </AnimatedSection>
@@ -40,43 +40,43 @@ export default function Contact() {
               <form className="glass rounded-2xl p-8 space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-white/70 text-sm font-medium mb-2">
+                    <label className="block text-text-muted text-sm font-medium mb-2">
                       Name
                     </label>
                     <input
                       type="text"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
+                      className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="block text-white/70 text-sm font-medium mb-2">
+                    <label className="block text-text-muted text-sm font-medium mb-2">
                       Email
                     </label>
                     <input
                       type="email"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
+                      className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
                       placeholder="you@example.com"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-white/70 text-sm font-medium mb-2">
+                  <label className="block text-text-muted text-sm font-medium mb-2">
                     Subject
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
+                    className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
                     placeholder="How can we help?"
                   />
                 </div>
                 <div>
-                  <label className="block text-white/70 text-sm font-medium mb-2">
+                  <label className="block text-text-muted text-sm font-medium mb-2">
                     Message
                   </label>
                   <textarea
                     rows={5}
-                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors resize-none"
+                    className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors resize-none"
                     placeholder="Tell us about your project..."
                   />
                 </div>
@@ -94,8 +94,8 @@ export default function Contact() {
                     <MapPin className="h-5 w-5 text-[var(--color-accent)]" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium mb-1">Address</h3>
-                    <p className="text-white/50 text-sm">{'{BUSINESS_ADDRESS}'}</p>
+                    <h3 className="text-text font-medium mb-1">Address</h3>
+                    <p className="text-text-subtle text-sm">{'{BUSINESS_ADDRESS}'}</p>
                   </div>
                 </div>
 
@@ -104,8 +104,8 @@ export default function Contact() {
                     <Phone className="h-5 w-5 text-purple-400" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium mb-1">Phone</h3>
-                    <p className="text-white/50 text-sm">{'{BUSINESS_PHONE}'}</p>
+                    <h3 className="text-text font-medium mb-1">Phone</h3>
+                    <p className="text-text-subtle text-sm">{'{BUSINESS_PHONE}'}</p>
                   </div>
                 </div>
 
@@ -114,8 +114,8 @@ export default function Contact() {
                     <Mail className="h-5 w-5 text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium mb-1">Email</h3>
-                    <p className="text-white/50 text-sm">{'{BUSINESS_EMAIL}'}</p>
+                    <h3 className="text-text font-medium mb-1">Email</h3>
+                    <p className="text-text-subtle text-sm">{'{BUSINESS_EMAIL}'}</p>
                   </div>
                 </div>
 
@@ -124,8 +124,8 @@ export default function Contact() {
                     <Clock className="h-5 w-5 text-green-400" />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium mb-1">Hours</h3>
-                    <p className="text-white/50 text-sm">{'{BUSINESS_HOURS}'}</p>
+                    <h3 className="text-text font-medium mb-1">Hours</h3>
+                    <p className="text-text-subtle text-sm">{'{BUSINESS_HOURS}'}</p>
                   </div>
                 </div>
               </div>
