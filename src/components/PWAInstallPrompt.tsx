@@ -7,13 +7,16 @@ import { brand } from '@/brand';
  * Floating PWA install banner.
  *
  *   - Listens for `beforeinstallprompt` and stashes the event
- *   - Renders a dismissible bottom-right card with a 1-click install CTA
+ *   - Renders a dismissible bottom-right glass card with a 1-click install CTA
+ *   - Cinematic chrome (presentation-only, in index.css `.pwa-prompt*`): glass
+ *     panel + OKLCH accent hairline, `@starting-style` slide-up entrance,
+ *     app-icon shimmer, accent-glow install button with a springy press
  *   - Dismissal persists in localStorage for 30 days
  *   - Hidden on iOS Safari (no beforeinstallprompt) — relies on
  *     `apple-mobile-web-app-capable` + Share→Add to Home Screen flow instead
  *   - WCAG 2.2 AA: 44px target, focus rings, aria-live announcement,
  *     Esc dismiss returns focus to the document body
- *   - Respects prefers-reduced-motion (animations disabled via index.css)
+ *   - Respects prefers-reduced-motion (entrance + shimmer disabled via index.css)
  */
 
 const STORAGE_KEY = 'projectsites:pwa-prompt-dismissed';
@@ -156,18 +159,17 @@ export function PWAInstallPrompt() {
       aria-labelledby="pwa-install-title"
       aria-live="polite"
       className={cn(
+        'pwa-prompt',
         'fixed z-40 bottom-4 right-4 sm:bottom-6 sm:right-6',
         'w-[min(92vw,22rem)]',
-        'card-tactile bg-surface-elevated',
-        'border border-border rounded-lg shadow-lg',
+        'glass-strong rounded-xl shadow-lg',
         'p-4 sm:p-5',
-        'animate-fadeInUp motion-reduce:animate-none',
       )}
     >
       <div className="flex items-start gap-3">
         <div
           aria-hidden="true"
-          className="h-10 w-10 shrink-0 rounded-md bg-accent/10 text-accent flex items-center justify-center"
+          className="pwa-prompt__icon h-10 w-10 shrink-0 rounded-lg text-accent flex items-center justify-center"
         >
           <Download size={18} />
         </div>
@@ -187,11 +189,11 @@ export function PWAInstallPrompt() {
               type="button"
               onClick={install}
               className={cn(
+                'pwa-prompt__install',
                 'inline-flex items-center justify-center gap-1.5',
                 'min-h-[44px] px-4 rounded-md text-sm font-bold',
                 'bg-accent text-background hover:bg-accent-hover',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-                'transition-colors',
               )}
             >
               <Download size={14} />
