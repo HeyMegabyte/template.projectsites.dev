@@ -1120,3 +1120,147 @@ p          { text-wrap: pretty; }
     to   { opacity: 1; transform: translateY(0); }
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   SITE FOOTER — cinematic close.
+   A glowing OKLCH accent hairline rides the top edge, a faint twin-tone accent
+   wash + grain give the slab depth, the four columns stagger-reveal on scroll
+   (keyed on the inline `--col-i` index), the social buttons lift + glow to
+   accent on hover/focus, and every nav/legal/contact link carries an
+   accent underline that grows from the centre. All motion is gated behind
+   prefers-reduced-motion with a fully-visible, already-settled fallback
+   (SSR / no-JS / reduced-motion safe). The wash is aria-hidden +
+   pointer-events none and sits behind the content, so it never captures input.
+   ─────────────────────────────────────────────────────────────────────── */
+/* Glowing accent hairline along the top edge of the footer. */
+.site-footer { position: relative; }
+.site-footer::before {
+  content: '';
+  position: absolute; left: 0; right: 0; top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) 60%, transparent) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+.footer-wash {
+  border-radius: inherit;
+  background:
+    radial-gradient(55% 70% at 8% 0%, color-mix(in oklch, var(--color-accent) 12%, transparent) 0%, transparent 66%),
+    radial-gradient(60% 80% at 100% 100%, color-mix(in oklch, var(--color-primary) 10%, transparent) 0%, transparent 70%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .footer-wash {
+    animation: footer-wash-drift 24s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+  @keyframes footer-wash-drift {
+    from { transform: translate3d(0, 0, 0) scale(1);      opacity: 0.8; }
+    to   { transform: translate3d(3%, -3%, 0) scale(1.1); opacity: 1;   }
+  }
+}
+@media (prefers-reduced-data: reduce) {
+  .footer-wash { animation: none !important; }
+}
+
+/* Accent underline that grows from the centre — accent-colored + centre-origin,
+   distinct from the currentColor `.underline-hover` sweep. Used on every footer
+   nav / legal / contact link. */
+.footer-link { position: relative; }
+.footer-link::after {
+  content: '';
+  position: absolute; left: 50%; right: 50%; bottom: -2px;
+  height: 1.5px; border-radius: 2px;
+  background: var(--color-accent);
+  transition: left var(--duration-base) var(--ease), right var(--duration-base) var(--ease);
+}
+.footer-link:hover::after,
+.footer-link:focus-visible::after { left: 0; right: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .footer-link::after { transition: none; }
+}
+
+/* Social buttons lift + glow to accent on hover/focus. */
+.footer-social {
+  transition:
+    color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .footer-social:hover,
+  .footer-social:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px -4px color-mix(in oklch, var(--color-accent) 55%, transparent);
+  }
+}
+
+/* Columns stagger-reveal on scroll, keyed on the inline `--col-i` index. Base
+   state (no scroll-timeline support / reduced-motion) is fully visible. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .footer-col {
+      animation: footer-col-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--col-i, 0) * 5%) cover 26%;
+    }
+    @keyframes footer-col-rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BREADCRUMBS — cinematic trail.
+   The whole trail fades in from just below on first paint via @starting-style,
+   each crumb link carries an accent underline that grows from the centre, the
+   chevron separators tint to accent, the current page reads with an accent dot
+   marker, and the leading Home icon warms to accent on hover. All motion is
+   gated behind prefers-reduced-motion with a fully-visible fallback. JSON-LD +
+   aria-current are unaffected (structure-only additions).
+   ─────────────────────────────────────────────────────────────────────── */
+@supports (transition-behavior: allow-discrete) {
+  @media (prefers-reduced-motion: no-preference) {
+    .breadcrumbs-trail {
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity var(--duration-slow) var(--ease),
+        transform var(--duration-slow) var(--ease);
+    }
+    @starting-style {
+      .breadcrumbs-trail {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+    }
+  }
+}
+/* Accent underline grows from the centre under each crumb link. */
+.crumb-link { position: relative; }
+.crumb-link::after {
+  content: '';
+  position: absolute; left: 50%; right: 50%; bottom: -2px;
+  height: 1.5px; border-radius: 2px;
+  background: var(--color-accent);
+  transition: left var(--duration-base) var(--ease), right var(--duration-base) var(--ease);
+}
+.crumb-link:hover::after,
+.crumb-link:focus-visible::after { left: 0; right: 0; }
+.crumb-link .crumb-home { transition: color var(--duration-fast) var(--ease); }
+.crumb-link:hover .crumb-home,
+.crumb-link:focus-visible .crumb-home { color: var(--color-accent); }
+@media (prefers-reduced-motion: reduce) {
+  .crumb-link::after,
+  .crumb-link .crumb-home { transition: none; }
+}
+/* Chevron separator nudges toward the crumb it precedes on group hover. */
+.crumb-sep { transition: transform var(--duration-fast) var(--ease); }
+@media (prefers-reduced-motion: no-preference) {
+  .crumb-item:hover .crumb-sep { transform: translateX(1px); }
+}

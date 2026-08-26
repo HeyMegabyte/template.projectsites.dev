@@ -31,6 +31,21 @@ function defaultRoutes(): NavRoute[] {
   ];
 }
 
+/**
+ * The site footer — present on every page. Cinematic close: a glowing OKLCH
+ * accent hairline rides the top edge, a faint drifting twin-tone accent wash +
+ * grain give the slab depth, the four columns stagger-reveal on scroll (keyed on
+ * the inline `--col-i` index), the social buttons lift + glow to accent on
+ * hover/focus, and every nav / legal / contact link carries an accent underline
+ * that grows from the centre. All motion is gated behind `prefers-reduced-motion`
+ * with a fully-visible fallback, and theme tokens only — so it reads correctly on
+ * light (healthcare/wellness) and dark (SaaS/agency) verticals alike.
+ *
+ * Contract preserved: the contact block (address / phone / email / "Send us a
+ * message"), the `/sitemap.xml` `<a href>`, the legal links, and the
+ * vertical-aware nav (quote-vs-pricing via `defaultRoutes()` / `featureOn`) are
+ * all intact.
+ */
 export default function Footer({ routes, socials = [] }: Props) {
   const navRoutes = routes ?? defaultRoutes();
   const business = brand.business;
@@ -55,14 +70,16 @@ export default function Footer({ routes, socials = [] }: Props) {
   const emailHref = derivedEmail ? `mailto:${derivedEmail}` : '#';
 
   return (
-    <footer className="relative bg-surface text-text-muted pt-20 pb-8 border-t border-border">
-      <div className="max-w-container-wide mx-auto px-6">
+    <footer className="site-footer grain relative bg-surface text-text-muted pt-20 pb-8 border-t border-border">
+      {/* Drifting twin-tone accent wash — OKLCH, decorative, behind the content. */}
+      <div aria-hidden="true" className="footer-wash pointer-events-none absolute inset-0 -z-0" />
+      <div className="max-w-container-wide relative z-10 mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
-          <div className="md:col-span-1">
-            <h3 className="text-text font-bold text-xl mb-4 font-heading">
+          <div className="footer-col md:col-span-1" style={{ ['--col-i' as string]: 0 }}>
+            <h3 className="text-text font-bold text-xl mb-4 font-heading tracking-tight">
               {business.name || 'ProjectSites'}
             </h3>
-            <p className="text-sm leading-relaxed">{business.description}</p>
+            <p className="text-sm leading-relaxed text-text-muted">{business.description}</p>
             {socials.length > 0 && (
               <ul className="flex flex-wrap gap-3 mt-6" aria-label="Social media">
                 {socials.map((s) => (
@@ -71,7 +88,7 @@ export default function Footer({ routes, socials = [] }: Props) {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-border hover:border-accent hover:text-accent transition-colors"
+                      className="footer-social inline-flex items-center justify-center h-10 w-10 rounded-full border border-border text-text-muted hover:border-accent hover:text-accent focus-visible:border-accent focus-visible:text-accent"
                       aria-label={s.label}
                     >
                       <span className="text-xs font-mono">{s.label.slice(0, 2).toUpperCase()}</span>
@@ -82,7 +99,7 @@ export default function Footer({ routes, socials = [] }: Props) {
             )}
           </div>
 
-          <nav aria-label="Footer navigation">
+          <nav className="footer-col" aria-label="Footer navigation" style={{ ['--col-i' as string]: 1 }}>
             <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
               Navigation
             </h3>
@@ -91,7 +108,7 @@ export default function Footer({ routes, socials = [] }: Props) {
                 <li key={r.to}>
                   <Link
                     to={r.to}
-                    className="hover:text-accent transition-colors underline-hover"
+                    className="footer-link inline-block text-text-muted hover:text-accent focus-visible:text-accent transition-colors"
                   >
                     {r.label}
                   </Link>
@@ -100,7 +117,7 @@ export default function Footer({ routes, socials = [] }: Props) {
             </ul>
           </nav>
 
-          <div>
+          <div className="footer-col" style={{ ['--col-i' as string]: 2 }}>
             <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
               Contact
             </h3>
@@ -110,7 +127,7 @@ export default function Footer({ routes, socials = [] }: Props) {
                   href={mapHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-2 hover:text-accent transition-colors underline-hover"
+                  className="footer-link flex items-start gap-2 text-text-muted hover:text-accent focus-visible:text-accent transition-colors"
                 >
                   <MapPin size={16} className="mt-0.5 flex-shrink-0 text-text-subtle" aria-hidden="true" />
                   <span>{address}</span>
@@ -119,7 +136,7 @@ export default function Footer({ routes, socials = [] }: Props) {
               {phone && (
                 <a
                   href={phoneHref}
-                  className="flex items-center gap-2 hover:text-accent transition-colors underline-hover"
+                  className="footer-link flex items-center gap-2 text-text-muted hover:text-accent focus-visible:text-accent transition-colors"
                 >
                   <Phone size={16} className="flex-shrink-0 text-text-subtle" aria-hidden="true" />
                   <span>{phone}</span>
@@ -128,7 +145,7 @@ export default function Footer({ routes, socials = [] }: Props) {
               {derivedEmail && (
                 <a
                   href={emailHref}
-                  className="flex items-center gap-2 hover:text-accent transition-colors underline-hover break-all"
+                  className="footer-link flex items-center gap-2 text-text-muted hover:text-accent focus-visible:text-accent transition-colors break-all"
                 >
                   <Mail size={16} className="flex-shrink-0 text-text-subtle" aria-hidden="true" />
                   <span>{derivedEmail}</span>
@@ -137,7 +154,7 @@ export default function Footer({ routes, socials = [] }: Props) {
               {/* Always-present contact channel — the form works even when phone/email are unknown. */}
               <Link
                 to="/contact"
-                className="flex items-center gap-2 hover:text-accent transition-colors underline-hover"
+                className="footer-link flex items-center gap-2 text-text-muted hover:text-accent focus-visible:text-accent transition-colors"
               >
                 <MessageSquare size={16} className="flex-shrink-0 text-text-subtle" aria-hidden="true" />
                 <span>Send us a message</span>
@@ -145,15 +162,15 @@ export default function Footer({ routes, socials = [] }: Props) {
             </address>
           </div>
 
-          <div>
+          <div className="footer-col" style={{ ['--col-i' as string]: 3 }}>
             <h3 className="text-text font-semibold text-sm uppercase tracking-wider mb-6">
               Legal
             </h3>
             <ul className="space-y-3 text-sm">
-              <li><Link to="/privacy"       className="hover:text-accent transition-colors underline-hover">Privacy Policy</Link></li>
-              <li><Link to="/terms"         className="hover:text-accent transition-colors underline-hover">Terms of Service</Link></li>
-              <li><Link to="/accessibility" className="hover:text-accent transition-colors underline-hover">Accessibility</Link></li>
-              <li><a href="/sitemap.xml" className="hover:text-accent transition-colors underline-hover">Sitemap</a></li>
+              <li><Link to="/privacy"       className="footer-link inline-block text-text-muted hover:text-accent focus-visible:text-accent transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms"         className="footer-link inline-block text-text-muted hover:text-accent focus-visible:text-accent transition-colors">Terms of Service</Link></li>
+              <li><Link to="/accessibility" className="footer-link inline-block text-text-muted hover:text-accent focus-visible:text-accent transition-colors">Accessibility</Link></li>
+              <li><a href="/sitemap.xml" className="footer-link inline-block text-text-muted hover:text-accent focus-visible:text-accent transition-colors">Sitemap</a></li>
             </ul>
           </div>
         </div>
@@ -164,7 +181,7 @@ export default function Footer({ routes, socials = [] }: Props) {
             Built with{' '}
             <a
               href="https://projectsites.dev"
-              className="text-accent hover:text-accent-hover transition-colors underline-hover"
+              className="footer-link text-accent hover:text-accent-hover focus-visible:text-accent-hover transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
