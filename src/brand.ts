@@ -130,7 +130,7 @@ const DEFAULT_NAME = 'Your Business';
 const DEFAULTS = {
   name: DEFAULT_NAME,
   shortName: DEFAULT_NAME.slice(0, 12),
-  tagline: 'Built for you',
+  tagline: '',
   description: '',
   url: '',
   businessClass: 'organization',

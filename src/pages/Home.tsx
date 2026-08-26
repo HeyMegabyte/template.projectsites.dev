@@ -212,12 +212,13 @@ function HomeContact() {
 }
 
 export default function Home() {
+  // Prefer a real business tagline; else the per-vertical SEO tagline token
+  // (content-pack-filled at build) so the <title> + hero eyebrow are always
+  // specific + ~50-60 chars instead of the generic default. Suffix the em-dash
+  // only when a tagline exists (avoids a trailing "Name — ").
+  const seoTagline = brand.business.tagline || '{SEO_TAGLINE}';
   useSEO({
-    // Trailing " — " on an empty tagline renders as "Cedar Ridge Bakeshop — "
-    // (journey 2026-08-19). Only suffix the em-dash when a tagline exists.
-    title: brand.business.tagline
-      ? `${brand.business.name} — ${brand.business.tagline}`
-      : brand.business.name,
+    title: seoTagline ? `${brand.business.name} — ${seoTagline}` : brand.business.name,
     description: brand.business.description,
   });
 
@@ -245,7 +246,7 @@ export default function Home() {
       {featureOn('hero') && (
         <SafeSection name="hero">
           <HeroSplit
-            eyebrow={brand.business.tagline}
+            eyebrow={seoTagline}
             headline="{HERO_HEADLINE}"
             subheadline="{HERO_SUBHEADLINE}"
             primary={{ label: '{HERO_CTA}', href: '/contact' }}

@@ -231,6 +231,21 @@ const GALLERY_HEADLINE = {
   portfolio: 'Featured work',
 };
 
+// Short, punchy per-vertical tagline for the SEO <title> ("Name — Tagline", ~50-60
+// chars) + the hero eyebrow. Fills brand.ts's DEFAULTS.tagline token. Name-agnostic, no slop.
+const TAGLINE = {
+  medical: 'Gentle Family Dental Care',
+  wellness: 'Find Your Calm and Strength',
+  legal: 'Trusted Counsel When It Matters',
+  restaurant: 'Fresh, Local, Made From Scratch',
+  'local-service': 'Reliable Service, Done Right',
+  nonprofit: 'Together We Do More Good',
+  retail: 'Quality Goods at Honest Prices',
+  saas: 'Ship Faster, Skip the Busywork',
+  agency: 'Ideas That Move the Needle',
+  portfolio: 'Thoughtful, Beautifully Made Work',
+};
+
 // Sub-page body content the homepage packs didn't cover: About-page intro
 // paragraphs + FAQ-page billing/support Q&A (journey 2026-08-25 — Brian: "every
 // page full of relevant content that guesses ahead"). Name-agnostic, Flesch >= 60,
@@ -396,6 +411,7 @@ function pack(v) {
   o.CTA_HEADLINE = s.cta[0]; o.CTA_DESCRIPTION = s.cta[1]; o.CTA_BUTTON = s.cta[2];
   o.ABOUT_HEADLINE = s.about[0]; o.ABOUT_DESCRIPTION = s.about[1]; o.ABOUT_MISSION_HEADLINE = s.about[2]; o.ABOUT_MISSION_TEXT = s.about[3];
   o.ABOUT_META_DESCRIPTION = s.meta[0]; o.SERVICES_META_DESCRIPTION = s.meta[1];
+  o.SEO_TAGLINE = TAGLINE[v] || '';
   // Sub-page fill so /about and /faq are never empty: About-page intro paragraphs +
   // stats (stats reuse the homepage stats), FAQ page (general reuses the homepage
   // faqs; billing + support from SUBPAGE). journey 2026-08-25 — Brian: every page full.
