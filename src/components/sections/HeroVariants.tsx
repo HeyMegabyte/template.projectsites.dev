@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { KineticHeadline } from './KineticHeadline';
 import { cn } from '@/lib/utils';
 import { brand } from '@/brand';
 import { scrubText, scrubImage } from '@/lib/placeholders';
@@ -53,11 +52,24 @@ function TrustRow({ items }: { items?: Trust[] }) {
   );
 }
 
-/** Centered cinematic hero with orbs + kinetic headline. */
+/**
+ * Centered cinematic hero — a single OKLCH radial accent AURA + conic halo bloom
+ * directly behind the headline, a fine grain wash, a `clamp()` fluid gradient
+ * headline, and a staggered `@starting-style` entrance (eyebrow → headline →
+ * subhead → CTAs → trust). CTAs lift + gain an accent glow-ring on hover, and a
+ * slim scroll cue breathes at the fold.
+ *
+ * Distinct from `HeroSplit`: this is a symmetric, centered composition with a
+ * single centered bloom (HeroSplit uses a copy-anchored twin aurora + LCP photo).
+ * This variant has NO image, so nothing here competes for the LCP element; the
+ * aura / halo / grain / grid are all decorative (aria-hidden, pointer-events
+ * none) and sit behind the z-10 content. All motion is gated behind
+ * `prefers-reduced-motion` — base states stay fully visible + legible.
+ */
 export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary, trustBadges, className }: CommonProps) {
-  // The headline is the LCP + only <h1> — it must ALWAYS render, so fall back to
-  // the real business name when the generation token is unresolved. Everything
-  // else scrubs to empty/undefined and is hidden by its own guard.
+  // The headline is the only <h1> — it must ALWAYS render, so fall back to the
+  // real business name when the generation token is unresolved. Everything else
+  // scrubs to empty/undefined and is hidden by its own guard.
   const safeHeadline = scrubText(headline, brand.business.name);
   const safeEyebrow = scrubText(eyebrow);
   const safeSubheadline = scrubText(subheadline);
@@ -65,29 +77,52 @@ export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary,
   const safeSecondary = scrubCta(secondary);
   const safeTrust = scrubTrust(trustBadges);
   return (
-    <section className={cn('relative min-h-screen flex items-center justify-center overflow-hidden', className)}>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] animate-subtleFloat" />
-        <div className="absolute -bottom-1/4 -right-1/4 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px] animate-subtleFloat" style={{ animationDelay: '3s' }} />
-      </div>
+    <section className={cn('relative min-h-screen flex items-center justify-center overflow-hidden grain', className)}>
+      {/* Centered accent bloom — a single OKLCH aura + slow conic halo behind the
+          headline. Both decorative, always behind the z-10 content, no <img> in
+          this variant so neither can become the LCP. */}
+      <div aria-hidden="true" className="hero-center-aura pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+      <div aria-hidden="true" className="hero-center-halo pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60" />
+      {/* Fine token-tinted grid — sits on border color so it reads on light + dark. */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
         aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.5]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            'linear-gradient(to right, var(--color-border) 1px, transparent 1px), linear-gradient(to bottom, var(--color-border) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 45%, #000 30%, transparent 75%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 45%, #000 30%, transparent 75%)',
         }}
       />
       <div className="relative z-10 max-w-container-wide mx-auto px-6 text-center pt-32 pb-20">
-        <KineticHeadline text={safeHeadline} eyebrow={safeEyebrow || undefined} />
+        {safeEyebrow && (
+          <span
+            className="hero-enter inline-block text-accent text-xs md:text-sm font-mono tracking-[0.3em] uppercase mb-6 px-4 py-2 rounded-full border border-accent/20 bg-accent/5"
+            style={{ ['--enter-i' as string]: 0 }}
+          >
+            {safeEyebrow}
+          </span>
+        )}
+        <h1
+          className="hero-enter hero-headline-fluid gradient-text font-heading font-extrabold mx-auto max-w-5xl"
+          style={{ ['--enter-i' as string]: 1 }}
+        >
+          {safeHeadline}
+        </h1>
         {safeSubheadline && (
-          <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto mt-8 leading-relaxed">
+          <p
+            className="hero-enter text-lg md:text-xl text-text-muted max-w-2xl mx-auto mt-8 leading-relaxed"
+            style={{ ['--enter-i' as string]: 2 }}
+          >
             {safeSubheadline}
           </p>
         )}
         {(safePrimary || safeSecondary) && (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+          <div
+            className="hero-enter hero-center-cta flex flex-col sm:flex-row gap-4 justify-center mt-12"
+            style={{ ['--enter-i' as string]: 3 }}
+          >
             {safePrimary && (
               <Button asChild size="xl">
                 <Link to={safePrimary.href}>
@@ -102,7 +137,15 @@ export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary,
             )}
           </div>
         )}
-        <TrustRow items={safeTrust} />
+        <div className="hero-enter" style={{ ['--enter-i' as string]: 4 }}>
+          <TrustRow items={safeTrust} />
+        </div>
+        {/* Tasteful scroll cue at the fold — the section is full-height. */}
+        <div aria-hidden="true" className="mt-16 hidden md:flex justify-center">
+          <span className="scroll-cue relative flex h-9 w-[22px] items-start justify-center rounded-full border border-border pt-2">
+            <span className="scroll-cue__dot h-1.5 w-1.5 rounded-full bg-accent" />
+          </span>
+        </div>
       </div>
     </section>
   );
