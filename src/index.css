@@ -157,13 +157,46 @@ p          { text-wrap: pretty; }
 
 /* ─────────────────────────────────────────────────────────────────────────
    VIEW TRANSITIONS
-   Same-document MPA + SPA. Cross-fades on every navigation.
+   Cinematic same-document cross-fade + rise on every SPA route change. The
+   React `PageTransition` wrapper drives these by committing the new route
+   inside `document.startViewTransition()` (feature-detected — unsupported
+   browsers just render, no jank). `@view-transition { navigation: auto }`
+   additionally covers true cross-document (MPA / prerendered) navigations.
+
+   Motion is gated behind `prefers-reduced-motion: no-preference` — reduced-
+   motion users get an instant swap (the global reduced-motion reset below
+   also clamps any residual VT animation to ~0ms). Only the `root` snapshot
+   animates, so per-element named groups (hero, gallery-card) stay free to
+   opt in elsewhere.
    ─────────────────────────────────────────────────────────────────────── */
 @view-transition { navigation: auto; }
-::view-transition-old(root) { animation: vt-fade-out 0.22s var(--ease); }
-::view-transition-new(root) { animation: vt-fade-in  0.22s var(--ease); }
-@keyframes vt-fade-out { to   { opacity: 0; } }
-@keyframes vt-fade-in  { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: vt-fade-out 0.28s var(--ease) both;
+  }
+  ::view-transition-new(root) {
+    animation: vt-rise-in 0.34s var(--ease) both;
+  }
+  @keyframes vt-fade-out {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-8px); }
+  }
+  @keyframes vt-rise-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+/* Reduced-motion: hold both snapshots fully opaque so the swap is instant and
+   flash-free (no fade, no slide). */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    opacity: 1;
+    mix-blend-mode: normal;
+  }
+}
 
 /* ─────────────────────────────────────────────────────────────────────────
    SURFACES (glass / bento / cards)
