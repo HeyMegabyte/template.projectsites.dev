@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.designtokens.org/2025-10",
+  "$description": "Fitness / strength & conditioning gym preset — DARK, bold near-black charcoal with a crimson primary and an energetic amber accent. High-intensity 'strength gym' mood: crisp radii, layered crimson-tinted glow shadows, Inter Tight display. Stats + bento + services + pricing on.",
+
+  "business": {
+    "name":          { "$value": "Ironworks Strength",                    "$type": "string" },
+    "shortName":     { "$value": "Ironworks",                             "$type": "string" },
+    "tagline":       { "$value": "Train Hard, Get Strong",                "$type": "string" },
+    "description":   { "$value": "A welcoming strength and conditioning gym with expert coaching, barbell training, and small-group classes for every level, from your first session to the competition platform.", "$type": "string" },
+    "url":           { "$value": "https://ironworks.example",             "$type": "string" },
+    "businessClass": { "$value": "gym",                                   "$type": "string" },
+    "email":         { "$value": "hello@ironworks.example",               "$type": "string" },
+    "phone":         { "$value": "",                                      "$type": "string" },
+    "address":       { "$value": "",                                      "$type": "string" },
+    "hours":         { "$value": "",                                      "$type": "string" }
+  },
+
+  "color": {
+    "brandHue":        { "$value": "25", "$type": "number" },
+    "brandChroma":     { "$value": "0.20", "$type": "number" },
+    "primary":         { "$value": "oklch(0.58 0.21 25)", "$type": "color" },
+    "primaryHover":    { "$value": "oklch(0.52 0.21 25)", "$type": "color" },
+    "accent":          { "$value": "oklch(0.80 0.17 65)",                              "$type": "color" },
+    "accentHover":     { "$value": "oklch(0.74 0.18 62)",                              "$type": "color" },
+    "background":      { "$value": "oklch(0.11 0.012 40)", "$type": "color" },
+    "surface":         { "$value": "oklch(0.15 0.014 40)", "$type": "color" },
+    "surfaceElevated": { "$value": "oklch(0.19 0.016 40)", "$type": "color" },
+    "border":          { "$value": "oklch(0.27 0.016 40)", "$type": "color" },
+    "text":            { "$value": "oklch(0.97 0.006 60)", "$type": "color" },
+    "textMuted":       { "$value": "oklch(0.72 0.012 55)",  "$type": "color" },
+    "textSubtle":      { "$value": "oklch(0.54 0.012 50)",  "$type": "color" },
+    "success":         { "$value": "oklch(0.76 0.17 155)", "$type": "color" },
+    "warning":         { "$value": "oklch(0.82 0.16 85)",  "$type": "color" },
+    "danger":          { "$value": "oklch(0.62 0.23 22)",  "$type": "color" },
+    "info":            { "$value": "oklch(0.74 0.15 235)", "$type": "color" }
+  },
+
+  "colorScheme": { "$value": "dark", "$type": "string" },
+
+  "font": {
+    "heading":   { "$value": "Inter Tight",   "$type": "fontFamily" },
+    "body":      { "$value": "Inter",         "$type": "fontFamily" },
+    "mono":      { "$value": "JetBrains Mono","$type": "fontFamily" },
+    "weights":   { "$value": [400,500,600,700,800], "$type": "fontWeight" },
+    "fluidScale":{ "$value": "clamp", "$type": "string" }
+  },
+
+  "radius":  { "sm": { "$value": "0.375rem", "$type": "dimension" }, "md": { "$value": "0.625rem", "$type": "dimension" }, "lg": { "$value": "0.875rem", "$type": "dimension" }, "xl": { "$value": "1.25rem", "$type": "dimension" }, "2xl": { "$value": "1.75rem", "$type": "dimension" }, "full": { "$value": "9999px", "$type": "dimension" } },
+  "spacing": { "0": { "$value": "0", "$type": "dimension" }, "1": { "$value": "0.25rem", "$type": "dimension" }, "2": { "$value": "0.5rem", "$type": "dimension" }, "3": { "$value": "0.75rem", "$type": "dimension" }, "4": { "$value": "1rem", "$type": "dimension" }, "6": { "$value": "1.5rem", "$type": "dimension" }, "8": { "$value": "2rem", "$type": "dimension" }, "12": { "$value": "3rem", "$type": "dimension" }, "16": { "$value": "4rem", "$type": "dimension" }, "24": { "$value": "6rem", "$type": "dimension" }, "32": { "$value": "8rem", "$type": "dimension" } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0 0 0 / 0.30)", "$type": "shadow" }, "md": { "$value": "0 10px 30px -10px oklch(0.58 0.21 25 / 0.35), 0 2px 8px -4px oklch(0 0 0 / 0.40)", "$type": "shadow" }, "lg": { "$value": "0 24px 60px -14px oklch(0.58 0.21 25 / 0.45), 0 6px 16px -8px oklch(0 0 0 / 0.55)", "$type": "shadow" }, "glow": { "$value": "0 0 56px -8px oklch(0.80 0.17 65 / 0.55)", "$type": "shadow" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.16, 1, 0.3, 1)", "$type": "cubicBezier" }, "duration": { "fast": { "$value": "150ms", "$type": "duration" }, "base": { "$value": "250ms", "$type": "duration" }, "slow": { "$value": "450ms", "$type": "duration" }, "scroll": { "$value": "1200ms", "$type": "duration" } } },
+  "layout":  { "containerWide": { "$value": "80rem", "$type": "dimension" }, "containerNormal": { "$value": "64rem", "$type": "dimension" }, "containerProse": { "$value": "42rem", "$type": "dimension" } },
+  "social":  { "facebook": { "$value": "", "$type": "string" }, "instagram": { "$value": "", "$type": "string" }, "linkedin": { "$value": "", "$type": "string" }, "twitter": { "$value": "", "$type": "string" }, "youtube": { "$value": "", "$type": "string" }, "tiktok": { "$value": "", "$type": "string" }, "github": { "$value": "", "$type": "string" } },
+
+  "features": {
+    "hero":         { "$value": true,  "$type": "boolean" },
+    "bento":        { "$value": true,  "$type": "boolean" },
+    "stats":        { "$value": true,  "$type": "boolean" },
+    "services":     { "$value": true,  "$type": "boolean" },
+    "process":      { "$value": true,  "$type": "boolean" },
+    "testimonials": { "$value": true,  "$type": "boolean" },
+    "logoCloud":    { "$value": false, "$type": "boolean" },
+    "pricing":      { "$value": true,  "$type": "boolean" },
+    "faq":          { "$value": true,  "$type": "boolean" },
+    "blog":         { "$value": true,  "$type": "boolean" },
+    "team":         { "$value": true,  "$type": "boolean" },
+    "caseStudies":  { "$value": false, "$type": "boolean" },
+    "newsletter":   { "$value": true,  "$type": "boolean" },
+    "cta":          { "$value": true,  "$type": "boolean" }
+  }
+}

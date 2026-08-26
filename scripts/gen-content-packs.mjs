@@ -56,6 +56,22 @@ const V = {
     about: ['A studio built for real people', 'We created a calm, welcoming space where anyone can build strength and find balance. No cliques, no pressure, just good movement and good company.', 'Why we teach', 'We believe a steady practice changes lives, one breath at a time. Our mission is to make that practice feel like home.'],
     meta: ['A welcoming yoga and wellness studio with classes for every level: flow, restorative, power, meditation, and Pilates.', 'Browse our classes: vinyasa flow, restorative, power yoga, meditation, Pilates, and private sessions for all levels.'],
   },
+  fitness: {
+    hero: ['Get stronger, one session at a time', 'A serious strength gym that still feels welcoming. Barbells, coaching, and classes for every level, with people who help you show up and get results.', 'Start training', 'View memberships'],
+    badges: ['All levels welcome', 'First session free', 'Real coaching, not just a room'],
+    features: [['Every level welcome', 'First-timers and seasoned lifters train side by side, and no one is judged for where they start.'], ['Coaching that sticks', 'Certified coaches teach real technique and keep you safe as you add weight.'], ['Strength you can measure', 'Track your lifts and watch the numbers climb, week after week.'], ['Real equipment', 'Barbells, racks, plates, and platforms built for lifting, not just cardio machines.'], ['Train on your schedule', 'Early mornings, lunch breaks, and evenings, plus a class list that fits real life.'], ['Easy sign-up', 'Book your first session online in a minute and lock in a plan that fits.']],
+    servicesHead: ['Training built around your goals', 'From your first barbell to a competition platform, there is a program for where you are now.'],
+    services: [['Strength & Barbell Training', 'Learn the squat, bench, and deadlift with coaching that builds a strong, confident base. We scale every lift to your level and add weight when you are ready.'], ['Personal Training', 'One-on-one sessions built around your goals, your schedule, and your body. Your coach writes the plan and holds you to it, session after session.'], ['Small-Group Classes', 'Coached, energetic classes that mix strength and conditioning in under an hour. Small groups mean real attention and a crew that pushes you.'], ['Powerlifting & Olympic Lifting', 'Chase a bigger total or clean up your technique with focused platform coaching. Great for first-time competitors and seasoned lifters alike.'], ['Mobility & Recovery', 'Move better and stay healthy with guided warm-ups, mobility work, and recovery sessions that keep you training pain-free for the long haul.'], ['Membership', 'Full gym access, open-gym hours, and a community that shows up. Simple month-to-month plans with no long contracts and no games.']],
+    servicesCta: ['Not sure where to start?', 'Book a free session and we will map a plan that matches your goals.'],
+    statsHead: 'A gym members stick with',
+    stats: [['10+ Years', 'coaching in the community'], ['500+ Members', 'training strong'], ['4.9 Stars', 'from our members'], ['All Levels', 'genuinely welcome']],
+    process: [['Book', 'Reserve your free first session online in under a minute.'], ['Assess', 'A coach learns your goals and checks your movement, no pressure.'], ['Train', 'You follow a clear plan and add weight as you get stronger.'], ['Progress', 'You hit new numbers, feel better, and keep the momentum going.']],
+    faqHead: ['Before your first session', 'Everything a first-timer wants to know.'],
+    faqs: [['I am out of shape. Is this gym for me?', 'Completely. Most members start exactly where you are, and our coaches scale every workout to your level. You will never be thrown into the deep end.'], ['Do I need experience with weights?', 'Not at all. We teach the lifts from the ground up, with hands-on coaching, so you build good technique and real confidence from day one.'], ['What should I bring?', 'Just training clothes, athletic shoes, and a water bottle. We provide all the equipment you need for your first session and beyond.'], ['Do you offer memberships and drop-ins?', 'Yes. We keep it flexible with month-to-month memberships, class packs, and drop-ins, so you can train on your own terms.']],
+    cta: ['Your first session is on us', 'Come lift, meet the coaches, and feel what real training does. No pressure, no commitment.', 'Claim your session'],
+    about: ['A strength gym built for everyone', 'We built a gym where beginners and lifelong lifters train under the same roof, coached by people who care about your results. No egos, no intimidation, just hard work and a crew that has your back.', 'Why we coach', 'We believe getting strong changes how you feel about everything else. Our mission is to make that strength reachable for anyone willing to show up and put in the work.'],
+    meta: ['A welcoming strength and conditioning gym with coaching, barbell training, small-group classes, and personal training for every level.', 'Explore our training: strength and barbell, personal training, small-group classes, powerlifting, mobility, and membership.'],
+  },
   legal: {
     hero: ['Trusted counsel when it matters most', 'Clear advice, steady guidance, and a team that fights for your outcome. We handle the details so you can move forward.', 'Request a consultation', 'Our practice areas'],
     badges: ['Free initial consultation', 'Decades of experience', 'Straight, honest advice'],
@@ -193,6 +209,7 @@ const V = {
 const IMG = {
   "medical": { hero: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUxfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1606811842243-af7e16970c1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwZGVudGlzdCUyMHdpdGglMjBwYXRpZW50fGVufDF8MHx8fDE3ODc1ODU2NTF8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "man in white dress shirt sitting on black office rolling chair" },
   "wellness": { hero: "https://images.unsplash.com/photo-1676496962536-d8ef110ff6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJlbmUlMjB5b2dhJTIwc3R1ZGlvJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc4NzU4NTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHByYWN0aWNpbmclMjB5b2dhfGVufDF8MHx8fDE3ODc1ODU2NTN8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "silhouette photography of woman doing yoga" },
+  "fitness": { hero: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "person lifting a loaded barbell in a gym" },
   "legal": { hero: "https://images.unsplash.com/photo-1781136230118-3272607eb34c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsYXclMjBvZmZpY2UlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1662104935883-e9dd0619eaba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBwb3J0cmFpdHxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "a woman in a black suit" },
   "restaurant": { hero: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3YXJtJTIwcmVzdGF1cmFudCUyMGludGVyaW9yJTIwZGluaW5nfGVufDF8MHx8fDE3ODc1ODU2NTR8MA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjaGVmJTIwcGxhdGluZyUyMGdvdXJtZXQlMjBmb29kfGVufDF8MHx8fDE3ODc1ODU2NTV8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "person putting food on plate" },
   "local-service": { hero: "https://images.unsplash.com/photo-1676210134188-4c05dd172f89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwbHVtYmVyJTIwcmVwYWlyaW5nJTIwcGlwZXN8ZW58MXwwfHx8MTc4NzU4NTY1NXww&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1581166397057-235af2b3c6dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJ2aWNlJTIwdGVjaG5pY2lhbiUyMHRvb2xzfGVufDF8MHx8fDE3ODc1ODU2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "red and silver hand tool" },
@@ -207,6 +224,7 @@ const IMG = {
 const HERO_ALT = {
   medical: 'Bright, welcoming modern dental office',
   wellness: 'Calm, sunlit yoga and wellness studio',
+  fitness: 'Athlete training with weights in a strength gym',
   legal: 'Professional modern law office interior',
   restaurant: 'Warm, inviting restaurant dining room',
   'local-service': 'Skilled service technician on the job',
@@ -221,6 +239,7 @@ const HERO_ALT = {
 const GALLERY_HEADLINE = {
   medical: 'A look inside our practice',
   wellness: 'Inside the studio',
+  fitness: 'Inside the gym',
   legal: 'Our firm at work',
   restaurant: 'From our kitchen',
   'local-service': 'Our work in the field',
@@ -236,6 +255,7 @@ const GALLERY_HEADLINE = {
 const TAGLINE = {
   medical: 'Gentle Family Dental Care',
   wellness: 'Find Your Calm and Strength',
+  fitness: 'Train Hard, Get Strong',
   legal: 'Trusted Counsel When It Matters',
   restaurant: 'Fresh, Local, Made From Scratch',
   'local-service': 'Reliable Service, Done Right',
@@ -253,6 +273,7 @@ const TAGLINE = {
 const DESCRIPTION = {
   medical: 'Compassionate, modern dental care for the whole family — gentle checkups, honest advice, and comfortable treatment in a welcoming, patient-first practice.',
   wellness: 'A calm, welcoming space for wellness — expert care, mindful treatments, and a personalized approach that helps you feel your best in both body and mind.',
+  fitness: 'A welcoming strength and conditioning gym with expert coaching, barbell training, and classes for every level to help you get strong and stay strong.',
   legal: 'Experienced, straight-talking legal counsel you can trust — clear guidance, responsive service, and dedicated representation for every client we serve.',
   restaurant: 'Fresh, seasonal food made from scratch in a warm, welcoming space — come for a great meal, friendly service, and flavors worth coming back for again.',
   'local-service': 'Reliable, licensed, and insured local service done right the first time — fast response, honest upfront pricing, and quality workmanship you can count on.',
@@ -294,6 +315,20 @@ const SUBPAGE = {
     faqSup: [
       ['What should I bring and wear?', 'Just comfortable clothes you can move in and a bottle of water. We provide mats and props, so you can arrive with nothing but an open mind.'],
       ['How do I reserve a spot?', 'Reserve your mat online in under a minute, and we will send a friendly reminder before class. Walk-ins are welcome too, based on space.'],
+    ],
+  },
+  fitness: {
+    aboutP: [
+      'We opened this gym to prove that getting strong does not require an intimidating room full of egos. From your very first session, a coach learns your goals, checks how you move, and builds a plan that meets you where you are. You are greeted by name, cheered on by the crew, and shown exactly how to train safely and well.',
+      'Our certified coaches care as much about your technique as your total, so you build real strength without getting hurt. Whether you want to squat your first barbell, chase a bigger deadlift, or simply feel better in daily life, you will find hands-on coaching, a clear path forward, and a community that shows up right beside you.',
+    ],
+    faqBill: [
+      ['What membership options do you offer?', 'We keep it simple with month-to-month memberships, class packs, and drop-ins. Pick what fits your schedule and budget, and change it anytime as your training grows. There are no long contracts and no hidden fees.'],
+      ['Is my first session really free?', 'Yes. Your first session is on us. Come train, meet the coaches, and see how the gym feels before you commit to anything at all.'],
+    ],
+    faqSup: [
+      ['What should I bring and wear?', 'Just training clothes, athletic shoes, and a water bottle. We provide all the equipment you need, so you can walk in and get straight to work.'],
+      ['How do I book my first session?', 'Booking takes under a minute online, or give us a call and we will get you scheduled. We will confirm a time and answer any questions before you arrive.'],
     ],
   },
   legal: {
@@ -487,6 +522,39 @@ const SUB2 = {
       ['How often should I practice to see benefits?', 'Even one class a week makes a real difference in how you feel. Two or three builds noticeable strength and calm. We suggest starting with what is realistic for your schedule; consistency matters far more than intensity when it comes to lasting benefits.'],
       ['What is the difference between your class styles?', 'Flow and power classes build heat and strength; restorative and gentle classes release tension and calm the mind; meditation steadies your breath; Pilates strengthens your core. Not sure which fits? Tell us how you want to feel and we will point you to the right class.'],
       ['Do I need to buy a membership to attend?', 'Not at all. We offer drop-ins and class packs alongside monthly memberships, so you can practice entirely on your own terms. Start with a single class, and choose a plan later only if the studio becomes part of your routine.'],
+    ],
+  },
+  fitness: {
+    aboutP34: [
+      'Over the years, this gym has become far more than a room full of iron. It is where nervous first-timers discover they are stronger than they thought, where busy people carve out an hour to feel powerful, and where seasoned lifters keep chasing new numbers. We keep our coaching hands-on and our crew tight, so every member gets real attention instead of getting lost in a crowd.',
+      'Everything here is built to help you train well: quality barbells, plenty of racks and platforms, and coaches who actually watch your lifts. We believe strength should feel welcoming, not intimidating, so we leave the ego at the door and focus on your progress. You bring the effort, we bring the plan, and together we build something you can measure.',
+    ],
+    values: [
+      ['Everyone belongs here', 'No experience required and no judgment allowed. Our coaches scale every lift to your level, so you train safely and proudly, exactly where you are today.'],
+      ['Technique before ego', 'We care how you move, not just how much you lift. Good form comes first, because it keeps you healthy and lets your strength climb for years.'],
+      ['A crew that shows up', 'You will learn names, spot each other, and get genuinely missed when you skip a week. Hard training is easier when the people around you push you.'],
+    ],
+    approach: ['How training works here', 'Book your free first session online in under a minute and arrive ready to move. A coach greets you, learns your goals and any injuries, and guides a session built for your level. You lift at your own pace, add weight when you are ready, and leave stronger and more confident, session after session, with a clear plan for what comes next.'],
+    servicesIntro: 'Good training meets you where you are, whether you want to learn the barbell lifts, chase a bigger total, or simply feel strong in everyday life. Our programs span the full range, coached by certified pros who scale every movement to your level, so you build real strength, move better, and make steady progress without ever feeling out of place.',
+    serviceLong: [
+      'Strength and barbell training teaches the squat, bench, and deadlift with hands-on coaching that builds a confident, capable base. You start at a weight that fits you and add load as your technique sharpens, so progress feels earned and safe. It is the fastest way to get genuinely strong, and it pays off in everything else you do, in the gym and out.',
+      'Personal training is one-on-one coaching built entirely around you. Your coach learns your goals, writes a plan for your body and schedule, and holds you accountable session after session. Whether you are recovering from a long break, chasing a specific number, or just want expert eyes on every rep, this is the most direct path to results, tailored start to finish.',
+      'Small-group classes mix strength and conditioning into a coached, energetic hour that never feels like a crowd. Because the groups stay small, you get real form checks and personal attention, plus a crew that pushes you a little harder than you would push yourself. It is the sweet spot between a solo program and a big, impersonal class.',
+      'Powerlifting and Olympic lifting coaching is for anyone who wants to chase a bigger total or clean up their technique on the platform. First-time competitors and seasoned lifters alike get focused programming, sharp cues, and a plan that peaks you for the day that matters. You will train smart, lift heavy, and know exactly what to do under the bar.',
+      'Mobility and recovery work keeps you training pain-free for the long haul. Guided warm-ups, targeted mobility drills, and recovery sessions help you move better, feel looser, and bounce back faster between hard days. Strength lasts only if your body does, so we treat recovery as part of the program, not an afterthought you squeeze in when something hurts.',
+      'Membership gives you full access to the gym, open-gym hours, and a community that shows up. Simple month-to-month plans mean no long contracts and no games, just a great place to train whenever it fits your life. You get the equipment, the space, and the people, all built around helping you keep getting stronger on your own schedule.',
+    ],
+    why: [
+      ['Your first session is on us', 'Try the gym with zero risk. Meet the coaches, feel the room, and see how real training feels before you commit to anything at all.'],
+      ['Certified, hands-on coaches', 'Every coach is trained to teach the lifts and keep you safe, so you can push hard or ease in with total confidence in your technique.'],
+      ['Plans that fit real life', 'Early, midday, and evening hours plus flexible memberships mean you train around work and family, not the other way around.'],
+    ],
+    contactIntro: 'New to lifting and not sure where to start? Curious about memberships, or want to book a personal training session? We would love to hear from you. Send a message or give us a call and a real member of our team will help you pick the right program, answer any questions, and make your very first session feel easy and welcoming.',
+    faqMore: [
+      ['I have never lifted before. Can I still join?', 'Absolutely, and you are exactly who we love to coach. We teach the lifts from the ground up, with hands-on guidance and weights scaled to you. You build good technique and real confidence from your very first session, at a pace that feels right for your body.'],
+      ['How often should I train to see results?', 'Even two sessions a week makes a real difference in how you feel and how you move. Three builds noticeable strength. We suggest starting with what is realistic for your schedule; consistency matters far more than intensity when it comes to lasting progress, and your coach will help you find the right frequency.'],
+      ['What is the difference between your programs?', 'Personal training is one-on-one and fully tailored; small-group classes mix strength and conditioning with a crew; barbell training focuses on the core lifts; powerlifting and Olympic coaching peak you for the platform. Not sure which fits? Tell us your goals and we will point you to the right starting place.'],
+      ['Do I need a membership to train here?', 'Not necessarily. We offer drop-ins and class packs alongside month-to-month memberships, so you can train entirely on your own terms. Start with a single session, and choose a plan later only if the gym becomes part of your routine. There is no pressure and no long contract.'],
     ],
   },
   legal: {
@@ -760,6 +828,7 @@ const SUB2 = {
 const ABOUT_CLOSE = {
   medical: ['We would love to meet you', 'Whether it has been six months or six years since your last visit, there is a warm welcome and a clean, comfortable chair waiting for you. New patients are always welcome, and we make the first visit easy, from paperwork to insurance. Come see what gentle, honest dental care feels like, and let us help you keep your smile healthy for years to come.'],
   wellness: ['Come find your place on the mat', 'You do not need to be flexible, fit, or experienced to belong here; you just need to show up. Your first class is on us, so come as you are, meet a teacher, and see how good it feels to slow down and breathe. Whenever you are ready, we will be here, and we would be honored to practice alongside you.'],
+  fitness: ['Come lift with us', 'You do not need to be fit, experienced, or fearless to belong here; you just need to show up. Your first session is on us, so come as you are, meet the coaches, and feel what real training does. Whenever you are ready to get strong, we will be here, and we would be glad to train right beside you.'],
   legal: ['Let us help you move forward', 'Facing a legal matter is stressful, but you do not have to face it alone or unsure of your options. Reach out for a free, confidential consultation and get honest guidance from an experienced advocate who will treat your matter with the seriousness and care it deserves. Whatever you are dealing with, the first step is simply a conversation.'],
   restaurant: ['We saved you a seat', 'Good food and good company are what we are all about, and there is always a warm welcome waiting when you walk through our doors. Whether it is a quiet dinner, a weekend brunch, or a big celebration with everyone you love, come hungry and leave happy. We cannot wait to cook for you and to make you feel right at home.'],
   'local-service': ['Trusted work is one call away', 'When you need something fixed, installed, or maintained, you deserve a team that shows up on time, charges fairly, and stands behind the work. That is exactly what we do, on every job, for every neighbor. Give us a call or request a free quote, and let us show you what dependable, honest service really looks like.'],
@@ -775,6 +844,7 @@ const ABOUT_CLOSE = {
 const ABOUT_PROMISE = {
   medical: ['Our promise to every patient', 'We promise to treat you the way we would want our own family treated: with patience, honesty, and a genuinely gentle touch. That means no lectures, no pressure, and no treatment you do not need. It means clear pricing, careful explanations, and a team that remembers you between visits. Above all, it means you can walk in nervous and walk out relieved, knowing your smile is in caring, capable hands.'],
   wellness: ['Our promise to you', 'We promise a space with no ego and no judgment, where your practice is measured by how you feel, not how you look. We promise teachers who watch out for your safety, options for every body, and a community that is genuinely glad you came. Whether you are here for strength, stress relief, or a quiet hour to yourself, we promise to meet you exactly where you are, every single time.'],
+  fitness: ['Our promise to every member', 'We promise a gym with no ego and no judgment, where your progress is measured by your own numbers, not by anyone else. We promise coaches who put your technique and safety first, weights scaled to every level, and a crew that is genuinely glad you showed up. Whether you are chasing your first barbell or a new personal best, we promise to meet you exactly where you are, every single session.'],
   legal: ['Our promise as your advocate', 'We promise honest counsel, even when it is not what you hoped to hear, because you deserve the truth about your options. We promise a senior attorney who knows your case, returns your calls, and treats your matter with real urgency. And we promise to fight for the best outcome we can achieve, keeping you informed and in control every step of the way. Your trust is something we work hard to earn.'],
   restaurant: ['Our promise at every table', 'We promise food made from scratch with real ingredients, never shortcuts, because you can taste the difference and you deserve it. We promise a warm welcome, attentive service, and a room that feels like the best kind of gathering. And we promise to treat every guest like family, whether it is your first visit or your fiftieth. Great food should taste like someone cared, and here, someone always does.'],
   'local-service': ['Our promise on every job', 'We promise to show up when we say we will, quote the real price before we start, and treat your home with the respect it deserves. We promise fully licensed, insured technicians and quality work backed in writing. And if something is ever not right, we promise to make it right, no argument and no excuses. Dependable, honest service is not a slogan for us; it is the standard we hold on every single visit.'],
@@ -790,6 +860,7 @@ const ABOUT_PROMISE = {
 const CONTACT_HELP = {
   medical: ['We are here whenever you need us', 'There is no wrong reason to reach out. Maybe you are overdue for a cleaning, comparing dentists for your family, worried about a specific tooth, or simply want to know if we take your insurance. Whatever it is, we would rather answer your questions now than have you put off the care you need. Send a message or pick up the phone, and let us make your next visit an easy one.'],
   wellness: ['We would love to hear from you', 'Maybe you have practiced for years, or maybe you have never set foot in a studio and the whole idea feels a little intimidating. Either way, you are exactly who we built this space for, and we are happy to answer any question, big or small. Reach out about classes, memberships, or your very first visit, and we will help you feel at home before you ever step on the mat.'],
+  fitness: ['We would love to hear from you', 'Maybe you have trained for years, or maybe you have never touched a barbell and the whole idea feels a little intimidating. Either way, you are exactly who we built this gym for, and we are happy to answer any question, big or small. Reach out about training, memberships, or your very first session, and we will help you feel at home before you ever pick up a weight.'],
   legal: ['Reach out and take the first step', 'Legal questions have a way of keeping you up at night, and the uncertainty is often the hardest part. You do not have to carry it alone. Reach out for a free, confidential conversation and get an honest read on where you stand, with no cost and no obligation. Whether you end up needing us or not, you will leave the call with more clarity than you had before, and that is a good place to start.'],
   restaurant: ['Let us help you plan something great', 'Whether you are booking a quiet table for two, planning a big celebration, or arranging catering for an event, we are happy to help you get every detail right. Have a food allergy, a special request, or a question about the menu? Just ask. We would rather hear from you ahead of time and make your experience perfect than leave anything to chance. Reach out however is easiest, and let us take care of the rest.'],
   'local-service': ['Reach out and get it handled', 'A problem at home has a way of nagging at you until it is fixed, and putting it off usually just makes it worse. Let us take it off your plate. Reach out with what is going on, and we will give you a straight answer, a fair quote, and a real plan to solve it, often the same day for urgent issues. One call is all it takes to get dependable help on the way.'],
@@ -810,6 +881,10 @@ const FAQ_MORE2 = {
   wellness: [
     ['What if I cannot keep up with the class?', 'You never have to. Every class is built around going at your own pace, and resting whenever you need to is not just allowed, it is encouraged. Our teachers offer easy options for every pose, so you can dial the effort up or down. There is no keeping up here, only showing up.'],
     ['How do I know which class is right for me?', 'Tell us how you want to feel and we will point you to the right class. Craving energy and a sweat? Try flow or power. Need to unwind? Restorative or gentle. Want a calmer mind? Meditation. If you are still unsure, come try an intro class and we will help you find your fit.'],
+  ],
+  fitness: [
+    ['What if I cannot keep up with a class?', 'You never have to. Every session scales to your level, and resting or lightening the load whenever you need to is not just allowed, it is smart training. Our coaches offer easier options for every movement, so you can push hard or ease in. There is no keeping up here, only showing up and getting better.'],
+    ['How do I know which program is right for me?', 'Tell us your goals and we will point you the right way. Want expert eyes on every rep? Personal training. Like training with a crew? Small-group classes. Chasing a bigger total? Powerlifting coaching. New to it all? Start with barbell basics. If you are unsure, book a free session and we will help you find your fit.'],
   ],
   legal: [
     ['What happens during the free consultation?', 'We listen to your situation, ask a few questions, and give you an honest read on your options and likely next steps, all in plain language. There is no cost and no obligation. You will leave knowing where you stand and what we could do, whether or not you decide to hire the firm.'],
@@ -855,6 +930,10 @@ const CONTACT_EXTRA = {
   wellness: {
     reassure: 'We want the studio to feel welcoming from the very first hello, long before you ever roll out a mat. If you have questions about which class to try, how memberships work, or what to expect as a total beginner, please do not hesitate to reach out. There are no silly questions here, and a real person from our team will happily help you feel at home before your first visit.',
     points: [['First-timers', 'Not sure where to begin? Tell us how you want to feel and we will recommend the perfect class, plus everything you need to know before you arrive.'], ['Memberships and packs', 'Curious about pricing or which option fits your schedule? Reach out and we will help you choose, with no pressure and no commitment required.'], ['Private sessions', 'Interested in one-on-one guidance? Send a message and we will match you with an instructor and a time that works for your goals and your calendar.']],
+  },
+  fitness: {
+    reassure: 'We want the gym to feel welcoming from the very first hello, long before you ever pick up a barbell. If you have questions about which program to try, how memberships work, or what to expect as a total beginner, please do not hesitate to reach out. There are no silly questions here, and a real member of our team will happily help you feel at home before your first session.',
+    points: [['First-timers', 'New to lifting? Tell us your goals and we will recommend the right program, plus everything you need to know before you walk in for your first session.'], ['Memberships and packs', 'Curious about pricing or which plan fits your schedule? Reach out and we will help you choose, with no pressure and no long contract required.'], ['Personal training', 'Want one-on-one coaching? Send a message and we will match you with a coach and a time that fit your goals, your body, and your calendar.']],
   },
   legal: {
     reassure: 'Reaching out to a lawyer is often the hardest part, especially when you are stressed and unsure. We make it easy and pressure-free. Your initial consultation is free and completely confidential, and a member of our team will respond promptly with clear, practical next steps. You can speak freely, ask anything, and get an honest read on your options, whether or not you decide to work with us.',
