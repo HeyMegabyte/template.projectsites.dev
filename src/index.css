@@ -709,3 +709,142 @@ p          { text-wrap: pretty; }
     color: contrast-color(var(--color-primary));
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   HERO-SPLIT CINEMATIC DEPTH
+   An OKLCH accent aurora drifts behind the copy; the eyebrow / headline / CTA
+   row enter with @starting-style when the section first paints. All motion is
+   gated behind prefers-reduced-motion + @supports, with a fully-visible,
+   already-drawn fallback. Decorative layers are aria-hidden + pointer-events
+   none and are ALWAYS smaller/behind the eager hero <img>, so they can never
+   become the LCP element.
+   ─────────────────────────────────────────────────────────────────────── */
+.hero-aurora {
+  /* soft twin-tone OKLCH wash — sits behind the copy column, never the photo */
+  background:
+    radial-gradient(60% 60% at 20% 25%, color-mix(in oklch, var(--color-accent) 26%, transparent) 0%, transparent 70%),
+    radial-gradient(55% 55% at 80% 70%, color-mix(in oklch, var(--color-primary) 24%, transparent) 0%, transparent 72%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-aurora {
+    animation: hero-aurora-drift 22s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+  @keyframes hero-aurora-drift {
+    from { transform: translate3d(0, 0, 0) scale(1);      opacity: 0.9; }
+    to   { transform: translate3d(4%, -3%, 0) scale(1.12); opacity: 1;   }
+  }
+}
+@media (prefers-reduced-data: reduce) {
+  .hero-aurora { animation: none !important; }
+}
+
+/* Fluid headline scale — one clamp() across the whole viewport range, so the
+   hero <h1> never wraps awkwardly between breakpoints. */
+.hero-headline-fluid {
+  font-size: clamp(2.75rem, 6vw + 0.5rem, 5.25rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+
+/* Staggered @starting-style entrance for the copy column. Base state is fully
+   visible (SSR/no-JS/reduced-motion safe); the transition only plays on first
+   paint where allow-discrete + motion are both available. */
+@supports (transition-behavior: allow-discrete) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-enter {
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity var(--duration-slow) var(--ease),
+        transform var(--duration-slow) var(--ease);
+      transition-delay: calc(var(--enter-i, 0) * 90ms);
+    }
+    @starting-style {
+      .hero-enter {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+    }
+  }
+}
+
+/* Scroll cue — a slim capsule with a dot that dips on a loop. Motion-gated; the
+   capsule + dot stay put (still a legible affordance) when motion is reduced. */
+.scroll-cue__dot { transform: translateY(0); }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue__dot {
+    animation: scroll-cue-dip 1.9s var(--ease) infinite;
+  }
+  @keyframes scroll-cue-dip {
+    0%, 100% { transform: translateY(0);   opacity: 0.4; }
+    50%      { transform: translateY(9px); opacity: 1;   }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   BENTO CINEMATIC TILES
+   Hover lift + accent ring + glass sheen + OKLCH accent wash on the promoted
+   hero cell. Tiles reveal on scroll with a per-tile stagger keyed on the inline
+   `--bento-i` index. Focus rings stay visible for keyboard users (the tile is a
+   link). Base state is fully visible so no-JS / reduced-motion never hides a
+   tile.
+   ─────────────────────────────────────────────────────────────────────── */
+.bento-tile {
+  border-radius: var(--radius-xl);
+  transition:
+    transform var(--duration-base) var(--ease),
+    box-shadow var(--duration-base) var(--ease),
+    border-color var(--duration-base) var(--ease);
+}
+.bento-tile::before {
+  /* diagonal glass sheen that sweeps across on hover */
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 30%, color-mix(in oklch, var(--color-accent) 14%, transparent) 50%, transparent 70%);
+  opacity: 0;
+  transform: translateX(-30%);
+  transition: opacity var(--duration-base) var(--ease), transform var(--duration-slow) var(--ease);
+  pointer-events: none;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bento-tile:hover::before,
+  .bento-tile:focus-within::before {
+    opacity: 1;
+    transform: translateX(30%);
+  }
+}
+.bento-tile:hover,
+.bento-tile:focus-within {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklch, var(--color-accent) 55%, var(--color-border));
+  box-shadow:
+    0 18px 44px -20px color-mix(in oklch, var(--color-accent) 45%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--color-accent) 35%, transparent);
+}
+/* Promoted hero cell carries a permanent, subtle OKLCH accent wash. */
+.bento-tile--accent {
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in oklch, var(--color-accent) 12%, transparent) 0%, transparent 55%),
+    var(--color-surface);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bento-tile {
+      animation: bento-tile-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(0% + var(--bento-i, 0) * 5%) cover 34%;
+    }
+    @keyframes bento-tile-rise {
+      from { opacity: 0; transform: translateY(22px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);     }
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-tile { opacity: 1; transform: none; }
+  .bento-tile::before { display: none; }
+}

@@ -124,20 +124,36 @@ export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, 
   // is no real image the copy column spans full width (still a valid hero).
   const safeImage = scrubImage(image);
   return (
-    <section className={cn('relative pt-32 pb-16 md:pb-24 max-w-container-wide mx-auto px-6', className)}>
+    <section className={cn('relative isolate pt-32 pb-16 md:pb-24 max-w-container-wide mx-auto px-6', className)}>
+      {/* Cinematic depth behind the COPY — a drifting OKLCH accent aurora + a
+          fine grain layer. Both are decorative (aria-hidden, pointer-events
+          none), always smaller and behind the eager hero <img>, so neither can
+          become the LCP element. Motion is gated by prefers-reduced-motion. */}
+      <div aria-hidden="true" className="hero-aurora pointer-events-none absolute -top-24 -left-24 -z-10 h-[34rem] w-[34rem] rounded-full blur-3xl opacity-70" />
+      <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 -z-10" />
       <div className={cn('grid gap-16 items-center', safeImage ? 'lg:grid-cols-2' : 'max-w-3xl mx-auto text-center')}>
-        <div>
+        <div className="relative z-10">
           {safeEyebrow && (
-            <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
+            <span className="hero-enter text-accent text-sm font-mono tracking-widest uppercase" style={{ ['--enter-i' as string]: 0 }}>
+              {safeEyebrow}
+            </span>
           )}
-          <h1 className="mt-4 text-5xl md:text-6xl lg:text-7xl font-extrabold font-heading tracking-[-0.03em] leading-[0.95]">
+          <h1
+            className="hero-enter hero-headline-fluid mt-4 font-extrabold font-heading"
+            style={{ ['--enter-i' as string]: 1 }}
+          >
             <span className="gradient-text">{safeHeadline}</span>
           </h1>
           {safeSubheadline && (
-            <p className="mt-6 text-lg md:text-xl text-text-muted leading-relaxed max-w-xl">{safeSubheadline}</p>
+            <p className="hero-enter mt-6 text-lg md:text-xl text-text-muted leading-relaxed max-w-xl" style={{ ['--enter-i' as string]: 2 }}>
+              {safeSubheadline}
+            </p>
           )}
           {(safePrimary || safeSecondary) && (
-            <div className={cn('mt-8 flex flex-col sm:flex-row gap-3', !safeImage && 'justify-center')}>
+            <div
+              className={cn('hero-enter mt-8 flex flex-col sm:flex-row gap-3', !safeImage && 'justify-center')}
+              style={{ ['--enter-i' as string]: 3 }}
+            >
               {safePrimary && (
                 <Button asChild size="lg">
                   <Link to={safePrimary.href}>
@@ -156,7 +172,9 @@ export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, 
         </div>
         {safeImage && (
           <div className="relative">
-            <div className="card-tactile overflow-hidden rounded-2xl aspect-[5/4] shadow-lg">
+            {/* Accent ring + glow framing the LCP photo (decorative, behind it). */}
+            <div aria-hidden="true" className="pointer-events-none absolute -inset-3 -z-10 rounded-[1.75rem] bg-gradient-to-br from-accent/25 via-primary/10 to-transparent blur-2xl" />
+            <div className="card-tactile relative overflow-hidden rounded-2xl aspect-[5/4] shadow-lg ring-1 ring-border">
               <img
                 src={safeImage.src}
                 alt={safeImage.alt}
@@ -165,11 +183,21 @@ export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, 
                 data-no-zoom
                 className="h-full w-full object-cover hero-kenburns"
               />
+              {/* Cinematic vignette + top sheen — pure overlay, never the LCP. */}
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-accent/10" />
             </div>
-            <div aria-hidden="true" className="absolute inset-0 -z-10 blur-3xl bg-accent/10 rounded-full" />
+            <div aria-hidden="true" className="absolute inset-0 -z-20 blur-3xl bg-accent/10 rounded-full" />
           </div>
         )}
       </div>
+      {/* Tasteful scroll cue — only when there's a full split (photo present). */}
+      {safeImage && (
+        <div aria-hidden="true" className="mt-16 hidden md:flex justify-center">
+          <span className="scroll-cue relative flex h-9 w-[22px] items-start justify-center rounded-full border border-border pt-2">
+            <span className="scroll-cue__dot h-1.5 w-1.5 rounded-full bg-accent" />
+          </span>
+        </div>
+      )}
     </section>
   );
 }

@@ -78,16 +78,22 @@ export function BentoGrid({ tiles, className, eyebrow, headline, description }: 
           const Comp: 'a' | 'div' = t.href ? 'a' : 'div';
           const span = t.span ?? (isHero ? 'lg' : 'sm');
           const tall = t.tall ?? isHero;
+          // Promoted hero cell (or an explicitly-accented tile) carries the
+          // permanent OKLCH accent wash; every tile gets the glass-sheen +
+          // hover-lift + accent-ring cinematic treatment via `.bento-tile`.
+          const accent = t.accent || isHero;
           return (
             <Comp
               key={t.id}
               {...(t.href ? { href: t.href } : {})}
+              // Per-tile stagger index drives the scroll-reveal offset in CSS.
+              style={{ ['--bento-i' as string]: i }}
               className={cn(
-                'group relative overflow-hidden card-tactile p-6 md:p-8',
-                'interactive-4 reveal-on-view',
+                'group relative overflow-hidden bg-surface border border-border p-6 md:p-8',
+                'bento-tile',
                 SPAN_CLASS[span],
                 tall && 'bento-tall',
-                t.accent && 'bg-gradient-to-br from-accent/10 to-primary/5 border-accent/30'
+                accent && 'bento-tile--accent'
               )}
             >
               {t.image && (
@@ -96,24 +102,26 @@ export function BentoGrid({ tiles, className, eyebrow, headline, description }: 
                     src={t.image}
                     alt={t.imageAlt ?? ''}
                     loading={i < 3 ? 'eager' : 'lazy'}
-                    className="h-full w-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-base"
+                    className="h-full w-full object-cover opacity-30 transition-all duration-base group-hover:opacity-55 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent" />
                 </div>
               )}
-              {t.icon && (
-                <div className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 text-accent group-hover:bg-accent/20 transition-colors">
-                  {t.icon}
-                </div>
-              )}
-              <h3 className="text-xl md:text-2xl font-bold font-heading text-text mb-2 underline-hover inline-block">
-                {t.title}
-              </h3>
-              {t.description && (
-                <p className="text-text-muted text-sm md:text-base leading-relaxed">{t.description}</p>
-              )}
+              <div className="relative z-[2]">
+                {t.icon && (
+                  <div className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 text-accent transition-colors group-hover:bg-accent/20">
+                    {t.icon}
+                  </div>
+                )}
+                <h3 className="text-xl md:text-2xl font-bold font-heading text-text mb-2 underline-hover inline-block">
+                  {t.title}
+                </h3>
+                {t.description && (
+                  <p className="text-text-muted text-sm md:text-base leading-relaxed">{t.description}</p>
+                )}
+              </div>
               {t.href && (
-                <span aria-hidden="true" className="absolute bottom-6 right-6 text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                <span aria-hidden="true" className="absolute bottom-6 right-6 z-[2] text-accent opacity-0 transition-all duration-base group-hover:opacity-100 group-hover:translate-x-1">
                   →
                 </span>
               )}
