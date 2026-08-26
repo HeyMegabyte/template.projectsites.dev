@@ -218,9 +218,18 @@ export default function Home() {
   // specific + ~50-60 chars instead of the generic default. Suffix the em-dash
   // only when a tagline exists (avoids a trailing "Name — ").
   const seoTagline = brand.business.tagline || '{SEO_TAGLINE}';
+  // A real 120-156 char meta description. The orchestrator often leaves
+  // business.description as the bare name (too short + no keywords), so fall
+  // back to the per-vertical {SEO_DESCRIPTION} token (content-pack-filled at
+  // build) whenever the provided description is missing or shorter than a real
+  // sentence. Keeps every homepage's <meta description> in the SEO sweet spot.
+  const seoDescription =
+    brand.business.description && brand.business.description.trim().length >= 80
+      ? brand.business.description
+      : '{SEO_DESCRIPTION}';
   useSEO({
     title: seoTagline ? `${brand.business.name} — ${seoTagline}` : brand.business.name,
-    description: brand.business.description,
+    description: seoDescription,
   });
 
   return (
@@ -228,7 +237,7 @@ export default function Home() {
       <JsonLd
         data={buildSiteJsonLd({
           name: brand.business.name,
-          description: brand.business.description,
+          description: seoDescription,
           url: brand.business.url,
           businessClass: (brand.business.businessClass || 'organization') as BusinessClass,
           email: brand.business.email,

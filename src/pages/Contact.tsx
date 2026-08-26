@@ -133,6 +133,48 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Supporting copy — a contact page is more than a form. Generic, true for
+          every vertical, and guarantees the page ships real, reassuring content
+          (never a bare form). Theme tokens only. */}
+      <section className="pb-24">
+        <div className="max-w-container-wide mx-auto px-6">
+          <AnimatedSection className="glass rounded-2xl p-8 md:p-12 max-w-3xl mx-auto">
+            <span className="text-[var(--color-accent)] text-sm font-mono tracking-widest uppercase">
+              What to expect
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold font-heading text-text mt-3 mb-4">
+              Here&rsquo;s what happens after you reach out
+            </h2>
+            <p className="text-text-muted leading-relaxed">
+              However you get in touch &mdash; the form, a phone call, or an email &mdash; you&rsquo;ll
+              always reach a real person who knows our work and genuinely wants to help. We read every
+              message, answer your questions honestly, and never put you through an automated runaround
+              or a high-pressure pitch. Most inquiries get a thoughtful, personal reply within one
+              business day.
+            </p>
+            <ol className="grid sm:grid-cols-3 gap-6 mt-8">
+              {[
+                { n: '01', t: 'We listen', d: 'We read your message and route it to the right person on our team — no ticket numbers, no runaround.' },
+                { n: '02', t: 'We respond', d: 'You get a clear, honest reply with answers, next steps, or a time to talk — usually within one business day.' },
+                { n: '03', t: 'We follow through', d: 'From first hello to finished work, you always deal with real people who care about getting it right.' },
+              ].map((s) => (
+                <li key={s.n} className="relative">
+                  <span aria-hidden="true" className="font-heading text-3xl font-extrabold text-[var(--color-accent)]/25">
+                    {s.n}
+                  </span>
+                  <h3 className="font-heading text-lg font-bold text-text mt-1 mb-1.5">{s.t}</h3>
+                  <p className="text-text-muted text-sm leading-relaxed">{s.d}</p>
+                </li>
+              ))}
+            </ol>
+            <p className="text-text-subtle text-sm mt-8">
+              Prefer to talk right away? Call or email us directly using the details above &mdash;
+              we&rsquo;re glad to help however works best for you.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
     </>
   );
 }

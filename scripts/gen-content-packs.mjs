@@ -246,6 +246,23 @@ const TAGLINE = {
   portfolio: 'Thoughtful, Beautifully Made Work',
 };
 
+// Per-vertical homepage META DESCRIPTION (120-156 chars) — the SEO fallback when
+// the orchestrator leaves brand.business.description as the bare name. Fills
+// {SEO_DESCRIPTION} in Home.tsx so every homepage ships a real, keyword-rich
+// description instead of just the business name. Guesses-ahead, generic-but-true.
+const DESCRIPTION = {
+  medical: 'Compassionate, modern dental care for the whole family — gentle checkups, honest advice, and comfortable treatment in a welcoming, patient-first practice.',
+  wellness: 'A calm, welcoming space for wellness — expert care, mindful treatments, and a personalized approach that helps you feel your best in both body and mind.',
+  legal: 'Experienced, straight-talking legal counsel you can trust — clear guidance, responsive service, and dedicated representation for every client we serve.',
+  restaurant: 'Fresh, seasonal food made from scratch in a warm, welcoming space — come for a great meal, friendly service, and flavors worth coming back for again.',
+  'local-service': 'Reliable, licensed, and insured local service done right the first time — fast response, honest upfront pricing, and quality workmanship you can count on.',
+  nonprofit: 'Join a community working together for real, lasting good — learn how your time, gifts, and support create measurable impact for the people we serve.',
+  retail: 'Quality goods at honest prices, chosen with care — discover a thoughtfully curated selection and friendly, no-pressure service every time you visit.',
+  saas: 'Ship faster and skip the busywork — a modern platform built to streamline your workflow, cut manual effort, and help your team do its best work.',
+  agency: 'Ideas that move the needle — strategy, design, and marketing that turn ambitious goals into measurable growth for brands ready to stand out from the rest.',
+  portfolio: 'Thoughtful, beautifully made work across every project — a portfolio built on craft, clarity, and a genuine care for the details that truly matter.',
+};
+
 // Sub-page body content the homepage packs didn't cover: About-page intro
 // paragraphs + FAQ-page billing/support Q&A (journey 2026-08-25 — Brian: "every
 // page full of relevant content that guesses ahead"). Name-agnostic, Flesch >= 60,
@@ -412,6 +429,7 @@ function pack(v) {
   o.ABOUT_HEADLINE = s.about[0]; o.ABOUT_DESCRIPTION = s.about[1]; o.ABOUT_MISSION_HEADLINE = s.about[2]; o.ABOUT_MISSION_TEXT = s.about[3];
   o.ABOUT_META_DESCRIPTION = s.meta[0]; o.SERVICES_META_DESCRIPTION = s.meta[1];
   o.SEO_TAGLINE = TAGLINE[v] || '';
+  o.SEO_DESCRIPTION = DESCRIPTION[v] || '';
   // Sub-page fill so /about and /faq are never empty: About-page intro paragraphs +
   // stats (stats reuse the homepage stats), FAQ page (general reuses the homepage
   // faqs; billing + support from SUBPAGE). journey 2026-08-25 — Brian: every page full.
