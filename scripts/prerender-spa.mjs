@@ -20,7 +20,7 @@ function discoverRoutes() {
       .filter((p) => p && p.startsWith('/') && p !== '/');
     if (locs.length) return [...new Set(locs)];
   }
-  return ['/about','/services','/contact','/pricing','/faq','/team','/gallery','/case-studies','/blog','/privacy','/terms','/accessibility'];
+  return ['/about','/services','/contact','/pricing','/quote','/faq','/team','/gallery','/case-studies','/blog','/privacy','/terms','/accessibility'];
 }
 const ROUTES = discoverRoutes();
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.ico':'image/x-icon', '.webmanifest':'application/manifest+json', '.xml':'application/xml', '.txt':'text/plain', '.woff2':'font/woff2' };
