@@ -39,6 +39,7 @@ export default function Pricing() {
         tiers={tiers}
         headline="{PRICING_HEADLINE}"
         description="{PRICING_SUBHEADLINE}"
+        as="h1"
       />
       <Comparison
         columns={compare.columns}

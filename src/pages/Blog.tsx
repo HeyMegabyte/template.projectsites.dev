@@ -20,7 +20,7 @@ export default function Blog() {
   return (
     <>
       <Breadcrumbs baseUrl={brand.business.url} />
-      <BlogList posts={posts} eyebrow="Writing" headline="Notes from the field" />
+      <BlogList posts={posts} eyebrow="Writing" headline="Notes from the field" as="h1" />
       <CTASection
         eyebrow="Newsletter"
         headline="Get monthly insights — no spam"

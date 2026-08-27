@@ -19,18 +19,22 @@ interface Props {
   className?: string;
   /** Path prefix for post links. Default `/blog`. */
   basePath?: string;
+  /** Heading level for the headline — 'h1' for the FIRST section on a section-only
+   *  page (FAQ/Pricing/Blog) so the page has exactly one h1. Default 'h2'. */
+  as?: 'h1' | 'h2';
 }
 
-export function BlogList({ posts, eyebrow, headline, className, basePath = '/blog' }: Props) {
+export function BlogList({ posts, eyebrow, headline, className, basePath = '/blog', as = 'h2' }: Props) {
   if (!posts.length) return null;
   const [hero, ...rest] = posts;
+  const Heading = as;
   return (
     <section className={cn('py-24 md:py-32 max-w-container-wide mx-auto px-6', className)}>
       {(eyebrow || headline) && (
         <div className="text-center mb-12 reveal-on-view">
           {eyebrow && <span className="text-accent text-sm font-mono tracking-widest uppercase">{eyebrow}</span>}
           {headline && (
-            <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 text-text">{headline}</h2>
+            <Heading className="text-3xl md:text-5xl font-bold font-heading mt-4 text-text">{headline}</Heading>
           )}
         </div>
       )}

@@ -26,6 +26,9 @@ interface Props {
   description?: string;
   showToggle?: boolean;
   className?: string;
+  /** Heading level for the headline — 'h1' for the FIRST section on a section-only
+   *  page (FAQ/Pricing/Blog) so the page has exactly one h1. Default 'h2'. */
+  as?: 'h1' | 'h2';
 }
 
 /**
@@ -50,6 +53,7 @@ export function Pricing({
   description,
   showToggle = true,
   className,
+  as = 'h2',
 }: Props) {
   const [annual, setAnnual] = useState(true);
   // Drop tiers whose name is an unresolved token; scrub each tier's description
@@ -68,6 +72,7 @@ export function Pricing({
   const safeDescription = scrubText(description);
   if (safeTiers.length === 0) return null;
   const symbol = safeTiers[0]?.currency ?? '$';
+  const Heading = as;
 
   const jsonLd = safeTiers.map((t) => ({
     '@context': 'https://schema.org',
@@ -87,9 +92,9 @@ export function Pricing({
       <JsonLd data={jsonLd} />
       <div className="text-center mb-12 reveal-on-view">
         <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
-        <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">
+        <Heading className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">
           {safeHeadline}
-        </h2>
+        </Heading>
         {safeDescription && <p className="text-text-muted max-w-2xl mx-auto text-lg">{safeDescription}</p>}
         {showToggle && (
           <div className="pricing-toggle inline-flex mt-8 p-1 rounded-full border border-border bg-surface">

@@ -17,6 +17,9 @@ interface Props {
   className?: string;
   /** Accordion mode (single-open) vs disclosure (multi-open). Default: disclosure. */
   exclusive?: boolean;
+  /** Heading level for the headline — 'h1' for the FIRST section on a section-only
+   *  page (FAQ/Pricing/Blog) so the page has exactly one h1. Default 'h2'. */
+  as?: 'h1' | 'h2';
 }
 
 /**
@@ -38,6 +41,7 @@ export function FAQ({
   description,
   exclusive = false,
   className,
+  as = 'h2',
 }: Props) {
   const [open, setOpen] = useState<Set<number>>(new Set([0]));
 
@@ -51,6 +55,7 @@ export function FAQ({
   const safeHeadline = scrubText(headline, 'Frequently asked questions');
   const safeDescription = scrubText(description);
   if (safeItems.length === 0) return null;
+  const Heading = as;
 
   function toggle(i: number) {
     setOpen((prev) => {
@@ -76,7 +81,7 @@ export function FAQ({
       />
       <div className="text-center mb-12 reveal-on-view">
         <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>
-        <h2 className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">{safeHeadline}</h2>
+        <Heading className="text-3xl md:text-5xl font-bold font-heading mt-4 mb-4 text-text">{safeHeadline}</Heading>
         {safeDescription && <p className="text-text-muted max-w-2xl mx-auto">{safeDescription}</p>}
       </div>
       <ul className="border-y border-border">

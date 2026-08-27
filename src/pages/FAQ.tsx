@@ -45,6 +45,7 @@ export default function FAQPage() {
         eyebrow="General"
         headline="Frequently asked questions"
         description="Can't find what you're looking for? Press ⌘+K or use the search above."
+        as="h1"
       />
       <FAQSection items={more} eyebrow="Good to know" headline="A few more answers" />
       <FAQSection items={billing} eyebrow="Billing" headline="Billing & subscriptions" />
