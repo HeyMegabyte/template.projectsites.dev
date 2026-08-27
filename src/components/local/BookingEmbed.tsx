@@ -157,7 +157,7 @@ export default function BookingEmbed({
                   value={formData.date}
                   onChange={(e) => updateField('date', e.target.value)}
                   min={new Date().toISOString().split('T')[0]}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-[var(--color-accent)]/50 transition-colors [color-scheme:dark]"
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-[var(--color-accent)]/50 transition-colors [color-scheme:light_dark]"
                 />
               </div>
 
@@ -173,9 +173,9 @@ export default function BookingEmbed({
                       onChange={(e) => updateField('service', e.target.value)}
                       className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-[var(--color-accent)]/50 transition-colors appearance-none pr-10"
                     >
-                      <option value="" className="bg-[#1a1a2e]">Select a service</option>
+                      <option value="" className="bg-surface text-text">Select a service</option>
                       {services.map((s) => (
-                        <option key={s} value={s} className="bg-[#1a1a2e]">{s}</option>
+                        <option key={s} value={s} className="bg-surface text-text">{s}</option>
                       ))}
                     </select>
                     <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none" />
