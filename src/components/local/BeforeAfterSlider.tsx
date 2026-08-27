@@ -8,6 +8,18 @@ interface BeforeAfterSliderProps {
   label?: string;
 }
 
+/**
+ * `BeforeAfterSlider` — drag (or arrow-key) the accent handle to wipe between a
+ * `before` and `after` image. Perfect for cosmetic/dental whitening + Invisalign
+ * progress, HVAC/landscaping installs, and remodels.
+ *
+ * Cinematic + theme-aware: the divider + handle are `var(--color-accent)` with a
+ * soft OKLCH glow, the frame reveals on scroll, the knob springs on hover, and a
+ * visible focus ring keeps it keyboard-operable. Colors are theme tokens ONLY
+ * (`text-text` / `bg-surface` / `border-border` / accent) so it stays legible on
+ * BOTH light and dark verticals — the old hardcoded `text-white`/`bg-black` made
+ * the labels + handle invisible on light themes (fixed here).
+ */
 export default function BeforeAfterSlider({
   beforeSrc,
   afterSrc,
@@ -27,16 +39,22 @@ export default function BeforeAfterSlider({
     setPosition((x / rect.width) * 100);
   }, []);
 
-  const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    setIsDragging(true);
-    updatePosition(e.clientX);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-  }, [updatePosition]);
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      setIsDragging(true);
+      updatePosition(e.clientX);
+      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    },
+    [updatePosition],
+  );
 
-  const handlePointerMove = useCallback((e: React.PointerEvent) => {
-    if (!isDragging) return;
-    updatePosition(e.clientX);
-  }, [isDragging, updatePosition]);
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging) return;
+      updatePosition(e.clientX);
+    },
+    [isDragging, updatePosition],
+  );
 
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);
@@ -47,16 +65,20 @@ export default function BeforeAfterSlider({
     window.posthog?.capture('before_after_view', { label });
   }, [label]);
 
+  const accentGlow = 'color-mix(in oklch, var(--color-accent) 55%, transparent)';
+
   return (
     <div className="py-12">
       <div className="max-w-4xl mx-auto px-6">
         {label && (
-          <h3 className="text-xl font-heading font-bold text-white mb-6 text-center">{label}</h3>
+          <h3 className="text-xl font-heading font-bold text-text mb-6 text-center text-balance reveal-on-view">
+            {label}
+          </h3>
         )}
 
         <div
           ref={containerRef}
-          className="relative aspect-[16/10] rounded-xl overflow-hidden border border-white/10 select-none touch-none cursor-col-resize"
+          className="reveal-on-view relative aspect-[16/10] rounded-2xl overflow-hidden border border-border bg-surface select-none touch-none cursor-col-resize focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
@@ -82,10 +104,7 @@ export default function BeforeAfterSlider({
           />
 
           {/* Before image (clipped) */}
-          <div
-            className="absolute inset-0"
-            style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-          >
+          <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
             <img
               src={beforeSrc}
               alt={beforeAlt}
@@ -96,24 +115,27 @@ export default function BeforeAfterSlider({
             />
           </div>
 
-          {/* Slider handle */}
+          {/* Accent divider + spring knob (theme-token, OKLCH glow). */}
           <div
-            className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)] motion-safe:transition-[left] motion-safe:duration-75"
-            style={{ left: `${position}%` }}
+            className="group absolute top-0 bottom-0 w-0.5 bg-accent motion-safe:transition-[left] motion-safe:duration-75"
+            style={{ left: `${position}%`, boxShadow: `0 0 10px ${accentGlow}` }}
           >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white">
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-surface/85 backdrop-blur-md border border-accent/50 text-accent transition-transform duration-200 group-hover:scale-110 group-active:scale-95 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+              style={{ boxShadow: `0 0 16px -2px ${accentGlow}` }}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M7 4L3 10L7 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M13 4L17 10L13 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           </div>
 
-          {/* Labels */}
-          <span className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-md pointer-events-none">
+          {/* Labels — glass chips on theme surface. */}
+          <span className="absolute top-3 left-3 bg-surface/80 backdrop-blur-sm text-text text-xs font-semibold px-2.5 py-1 rounded-md border border-border pointer-events-none">
             Before
           </span>
-          <span className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-md pointer-events-none">
+          <span className="absolute top-3 right-3 bg-surface/80 backdrop-blur-sm text-text text-xs font-semibold px-2.5 py-1 rounded-md border border-border pointer-events-none">
             After
           </span>
         </div>
