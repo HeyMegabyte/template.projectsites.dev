@@ -168,6 +168,22 @@ const V = {
     about: ['Software that respects your time', 'We build tools that get out of the way. Instead of adding more dashboards to check, we automate the work you never wanted to do by hand.', 'Our approach', 'Simple to start, powerful when you need it, and honest about pricing. Great software should save time, not steal it.'],
     meta: ['A platform that automates busywork so your team ships faster. Free 14-day trial, no credit card, cancel anytime.', 'Explore features: workflow automation, collaboration, analytics, integrations, access controls, and a developer API.'],
   },
+  'real-estate': {
+    hero: ['Find the home that fits your life', 'A local guide for buyers and sellers who value straight answers. We know these streets, price it right, and stay in your corner from the first tour to the closing table.', 'Browse homes', 'Book a consultation'],
+    badges: ['Local market experts', 'Buyers and sellers welcome', 'Honest, no-pressure guidance'],
+    features: [['Local market knowledge', 'We live and work here, so you get real insight on neighborhoods, schools, and true home values.'], ['Priced with real data', 'We back every number with recent sales, not guesswork, so you buy or list with confidence.'], ['Guidance at every step', 'From the first showing to the signed contract, you always know what comes next and why.'], ['A calm hand to negotiate', 'We advocate hard for your bottom line and keep the deal moving without the drama.'], ['First-time buyer friendly', 'Never bought before? We explain each step in plain language and answer every question.'], ['Connected to the pros', 'Lenders, inspectors, and contractors we trust, ready when you need a reliable referral.']],
+    servicesHead: ['Guidance for every move', 'Whether you are buying your first home or selling your last, we make the whole process clear and calm.'],
+    services: [['Buying a Home', 'We help you find the right home at the right price, from the first tour to the keys in your hand. You get honest advice on every listing and a steady guide through offers, inspections, and closing.'], ['Selling Your Home', 'We prepare, price, and market your home to sell for its true value with as little stress as possible. You get a clear plan, sharp photos, and a negotiator who protects your bottom line.'], ['Home Valuation', 'Curious what your home is worth today? We give you an honest, data-backed estimate based on recent local sales, so you can plan your next move with real numbers, not a guess.'], ['Market Analysis', 'We break down what is really happening in your neighborhood, from prices to days on market, so you can time your buy or sale with clear eyes and confidence.'], ['Staging & Prep', 'Small changes sell homes. We advise on the repairs, cleaning, and simple staging that help your home show its best and attract stronger offers, without overspending.'], ['Relocation', 'Moving to or from the area? We make a new place feel familiar fast, with neighborhood guidance, trusted referrals, and a plan that keeps your move on track.']],
+    servicesCta: ['Not sure where to start?', 'Book a friendly, no-pressure consultation and we will map your next move together.'],
+    statsHead: 'Neighbors trust our guidance',
+    stats: [['15+ Years', 'guiding local buyers and sellers'], ['500+ Homes', 'sold and settled'], ['4.9 Stars', 'from clients we have helped'], ['Local', 'expertise you can rely on']],
+    process: [['Meet', 'Tell us your goals and timeline in a relaxed, no-pressure chat.'], ['Plan', 'We map a clear strategy and honest pricing for your buy or sale.'], ['Guide', 'We handle showings, offers, and paperwork, and keep you informed.'], ['Close', 'We negotiate hard, protect your interests, and hand you the keys.']],
+    faqHead: ['Questions buyers and sellers ask', 'Straight answers about pricing, timing, and the whole process.'],
+    faqs: [['How much is my home worth?', 'We give you a free, honest valuation. It is based on recent sales near you and the real condition of your home. You get a clear number to plan around. There is no obligation and no inflated promise.'], ['How much does it cost to work with you as a buyer?', 'In most cases, buyer representation costs you nothing out of pocket, since the seller typically covers the commission. We explain exactly how it works up front, so there are no surprises.'], ['I have never bought a home before. Can you help?', 'Absolutely. We love guiding first-time buyers. We walk you through financing, showings, offers, and closing in plain language, and we answer every question along the way, however small.'], ['How long does it take to buy or sell?', 'It depends on the market and your goals, but we give you a realistic timeline from the start and keep you updated at every step, so you are never left wondering what comes next.']],
+    cta: ['Ready to make your move?', 'Whether you are buying, selling, or just exploring, book a friendly consultation and get honest local guidance you can trust.', 'Book a consultation'],
+    about: ['Local guidance you can trust', 'We are local agents who treat your move like our own. We take time to understand your goals, explain every option in plain language, and guide you calmly from the first tour to the closing table.', 'What drives us', 'Helping neighbors find the right home and sell for its true value, with honest advice and zero pressure. Your trust matters more to us than any single sale.'],
+    meta: ['A local real-estate team helping buyers and sellers with home tours, honest pricing, valuations, staging, and relocation.', 'Our services: buying a home, selling your home, home valuation, market analysis, staging and prep, and relocation.'],
+  },
   agency: {
     hero: ['Ideas that move the needle', 'We design brands and campaigns that get noticed and get results. Strategy first, beautiful work always.', 'Start a project', 'See our work'],
     badges: ['Results-driven', 'Senior team, no handoffs', 'Clear, fixed scopes'],
@@ -216,6 +232,7 @@ const IMG = {
   "nonprofit": { hero: "https://images.unsplash.com/photo-1628717341663-0007b0ee2597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjB2b2x1bnRlZXJzJTIwaGVscGluZ3xlbnwxfDB8fHwxNzg3NTg1NjU2fDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1618521715147-29e4b97e2ebd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxncm91cCUyMG9mJTIwdm9sdW50ZWVycyUyMHNtaWxpbmd8ZW58MXwwfHx8MTc4NzU4NTY1Nnww&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "group of people standing on brown soil during daytime" },
   "retail": { hero: "https://images.unsplash.com/photo-1546213290-e1b492ab3eee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBib3V0aXF1ZSUyMHJldGFpbCUyMHN0b3JlfGVufDF8MHx8fDE3ODc1ODU2NTd8MA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzdHlsaXNoJTIwY2xvdGhpbmclMjBkaXNwbGF5fGVufDF8MHx8fDE3ODc1ODU2NTd8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "clothing boutique interior with hanging racks" },
   "saas": { hero: "https://images.unsplash.com/photo-1551434678-e076c223a692?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMHRlYW0lMjB3b3JraW5nJTIwbGFwdG9wcyUyMG9mZmljZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB0ZWNoJTIwc3RhcnR1cCUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjU4fDA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "group of people using laptop computer" },
+  "real-estate": { hero: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "real-estate agent handing house keys to a happy couple" },
   "agency": { hero: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGFnZW5jeSUyMHRlYW0lMjBtZWV0aW5nfGVufDF8MHx8fDE3ODc1ODU2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxkZXNpZ25lciUyMHdvcmtzcGFjZSUyMGRlc2t8ZW58MXwwfHx8MTc4NzU4NTY1OXww&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "MacBook Pro on table beside white iMac and Magic Mouse" },
   "portfolio": { hero: "https://images.unsplash.com/photo-1752650736252-dff5244c8a7a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHBob3RvZ3JhcGhlciUyMHdvcmtzcGFjZXxlbnwxfDB8fHwxNzg3NTg1NjYwfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1650783756107-739513b38177?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxhcnRpc3QlMjB3b3JraW5nJTIwc3R1ZGlvfGVufDF8MHx8fDE3ODc1ODU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "a person with a red hat writing on a laptop" },
 };
@@ -231,6 +248,7 @@ const HERO_ALT = {
   nonprofit: 'Volunteers serving the local community',
   retail: 'Bright, modern retail store interior',
   saas: 'Team collaborating in a modern office',
+  'real-estate': 'Bright, modern home exterior at dusk',
   agency: 'Creative team working together',
   portfolio: 'Creative studio workspace',
 };
@@ -246,6 +264,7 @@ const GALLERY_HEADLINE = {
   nonprofit: 'Our impact in pictures',
   retail: 'The collection',
   saas: 'The product in action',
+  'real-estate': 'Homes we have helped sell',
   agency: 'Selected work',
   portfolio: 'Featured work',
 };
@@ -262,6 +281,7 @@ const TAGLINE = {
   nonprofit: 'Together We Do More Good',
   retail: 'Quality Goods at Honest Prices',
   saas: 'Ship Faster, Skip the Busywork',
+  'real-estate': 'Homes, Done Right',
   agency: 'Ideas That Move the Needle',
   portfolio: 'Thoughtful, Beautifully Made Work',
 };
@@ -280,6 +300,7 @@ const DESCRIPTION = {
   nonprofit: 'Join a community working together for real, lasting good — learn how your time, gifts, and support create measurable impact for the people we serve.',
   retail: 'Quality goods at honest prices, chosen with care — discover a thoughtfully curated selection and friendly, no-pressure service every time you visit.',
   saas: 'Ship faster and skip the busywork — a modern platform built to streamline your workflow, cut manual effort, and help your team do its best work.',
+  'real-estate': 'Local real-estate guidance for buyers and sellers: honest home pricing, sharp neighborhood insight, and calm support from first tour to the closing table.',
   agency: 'Ideas that move the needle — strategy, design, and marketing that turn ambitious goals into measurable growth for brands ready to stand out from the rest.',
   portfolio: 'Thoughtful, beautifully made work across every project — a portfolio built on craft, clarity, and a genuine care for the details that truly matter.',
 };
@@ -413,6 +434,20 @@ const SUBPAGE = {
     faqSup: [
       ['How do I get help if I am stuck?', 'Real people answer fast. Reach our support team by chat or email and we will get you unblocked quickly, with no phone trees or canned replies.'],
       ['How long does setup take?', 'Most teams are up and running in minutes. Connect your existing tools, invite your team, and you are ready to go.'],
+    ],
+  },
+  'real-estate': {
+    aboutP: [
+      'We started helping neighbors buy and sell homes because the process should feel guided, not overwhelming. From the first conversation, we listen to your goals, learn your timeline, and explain each step in plain language. You always know what is happening and why, so a big decision feels a lot less stressful.',
+      'We know these streets, schools, and price trends because this is our community too. Whether you are touring your first home or listing the one where you raised a family, you get honest advice, sharp pricing, and a steady advocate who keeps the deal moving all the way to the closing table.',
+    ],
+    faqBill: [
+      ['What does it cost to work with you?', 'For buyers, our help usually costs nothing out of pocket, since the seller typically covers the commission. For sellers, we explain our fee clearly before you list, so you know exactly what to expect with no surprises.'],
+      ['When do I pay any fees?', 'Commissions come out of the sale at closing, not up front, so you are never asked to write a check to get started. We walk you through every number on the closing statement well before the day itself.'],
+    ],
+    faqSup: [
+      ['How do I start a home search or listing?', 'It is easy. Send a message or give us a call, and we will set up a relaxed, no-pressure chat to learn your goals. From there we build a plan and get you touring homes or ready to list.'],
+      ['Can you recommend a lender or inspector?', 'Yes. We work with trusted local lenders, inspectors, and contractors and are glad to share referrals. You are never obligated to use them, but many clients appreciate a reliable place to start.'],
     ],
   },
   agency: {
@@ -755,6 +790,39 @@ const SUB2 = {
       ['What if I outgrow my plan, or need to scale back?', 'You are never locked in. Upgrade, downgrade, or cancel anytime as your needs change; the platform scales smoothly from a small team to a large one and back. We would rather earn your business every month than trap you in a contract, so you always stay in control of your plan.'],
     ],
   },
+  'real-estate': {
+    aboutP34: [
+      'What sets us apart is the time we take. We never rush you toward a home that is not right or a price that does not add up. Instead, we tour honestly, point out the good and the bad, and back every number with recent local sales. Many of our clients come from referrals, and plenty come back to us for their next move, because they trusted the guidance the first time.',
+      'Behind the friendly approach is real local expertise. We track neighborhood prices, days on market, and the small details that make one street more valuable than the next. That means sharper pricing when you sell, smarter offers when you buy, and a steady hand who spots problems early, so your move stays calm and on track from start to finish.',
+    ],
+    values: [
+      ['Honesty over the hard sell', 'We tell you what a home is really worth and point out the flaws along with the perks. You get straight advice, so you can decide with clear eyes and zero pressure.'],
+      ['Local knowledge that pays off', 'We know these neighborhoods, schools, and price trends inside out. That insight means sharper pricing when you sell and smarter offers when you buy.'],
+      ['In your corner start to finish', 'From the first tour to the closing table, we handle the details and keep you informed. You always know what comes next, and you are never left guessing.'],
+    ],
+    approach: ['How working with us feels', 'It starts with a relaxed conversation about your goals and timeline; there is no pressure and no obligation. If we move forward, we map a clear plan and honest pricing, then handle the showings, offers, and paperwork. We negotiate hard on your behalf, flag issues early, and keep you updated at every step, so your move stays calm and clear all the way to closing.'],
+    servicesIntro: 'Buying or selling a home is a big move, and the right guide changes everything. Our services cover the whole journey. That means honest pricing, sharp neighborhood insight, smart negotiation, and clean paperwork. First-time buyer or seasoned seller, you get clear advice and a steady advocate who puts your interests first.',
+    serviceLong: [
+      'Buying a home should feel exciting, not overwhelming, so we guide you through every step. We learn what you need, show you homes that truly fit, and give you an honest read on each one, including the flaws. When you find the right place, we help you craft a smart offer, navigate inspections, and get to closing without nasty surprises. First-time buyer or fifth, you always know what comes next.',
+      'Selling your home is about getting its true value with as little stress as possible. We start with honest, data-backed pricing, then advise on the simple prep and staging that help it show its best. Sharp photos and smart marketing bring in the right buyers, and we negotiate hard to protect your bottom line, handling the details so you can focus on your next chapter.',
+      'Wondering what your home is worth right now? Our valuation gives you an honest, data-backed estimate grounded in recent local sales and the real condition of your home. No inflated promises and no lowball guesses, just a clear number you can plan around, whether you are ready to list this month or simply weighing your options for down the road.',
+      'A good decision starts with a clear picture of the market. Our market analysis breaks down what is really happening in your neighborhood, from prices to days on market to buyer demand. We translate the data into plain language, so you can time your buy or sale wisely and move with confidence instead of second-guessing yourself.',
+      'Small, smart changes can add real dollars to your sale price. We advise on the repairs, decluttering, and light staging that help your home make a strong first impression, without overspending on things buyers will not notice. From curb appeal to the perfect showing-ready look, we help your home stand out and attract stronger, faster offers.',
+      'Moving to or from the area brings a long to-do list, and we help you carry it. Whether you are relocating for work or simply putting down roots somewhere new, we share neighborhood guidance, trusted referrals for lenders and movers, and a clear plan that keeps everything on schedule. A new place starts to feel like home a whole lot faster with a local guide by your side.',
+    ],
+    why: [
+      ['Honest, data-backed pricing', 'We price with recent local sales, not wishful thinking, so you buy or list with confidence and never overpay or leave money on the table.'],
+      ['Deep local expertise', 'We know these streets, schools, and price trends because we live here too. That insight works in your favor on every offer and every listing.'],
+      ['A steady negotiator', 'We advocate hard for your bottom line and keep the deal moving, flagging problems early so your move stays calm from first tour to closing.'],
+    ],
+    contactIntro: 'Whether you are ready to tour homes, thinking about selling, or just curious what your place is worth, we would love to hear from you. Fill out the form or give us a call and a real person, not a machine, will get back to you promptly. There is no pressure and no obligation, just honest local guidance to help you take your next step with confidence.',
+    faqMore: [
+      ['How do you decide on a listing price for my home?', 'We start with recent sales of comparable homes in your neighborhood, then adjust for your home’s condition, features, and the current market. You get an honest, data-backed price with the reasoning behind it, so you can list with confidence rather than guessing or chasing an inflated number.'],
+      ['Should I buy or sell first?', 'It depends on your finances, the market, and your comfort with timing. We walk you through the trade-offs of each path, from bridge financing to contingent offers, and help you choose the approach that fits your situation. There is no single right answer, only the right one for you.'],
+      ['How do you market a home that is for sale?', 'We prepare your home to show its best, capture sharp professional photos, and put it in front of the right buyers online and through our local network. Then we track the response, keep you updated, and adjust as needed, all aimed at a strong offer as quickly as possible.'],
+      ['What if I am just starting to think about a move?', 'That is a great time to reach out. Even if you are months away, an early conversation helps you understand your options, your home’s value, and the market. There is no pressure and no obligation; we are happy to answer questions now so you feel ready when the time comes.'],
+    ],
+  },
   agency: {
     aboutP34: [
       'We started this studio on a stubborn belief: beautiful work that does not perform is just decoration. Too many agencies chase awards or bill hours while the client’s actual goals gather dust. So we built a small, senior team that treats your outcomes as seriously as our craft, tying every design choice and every campaign to results you can measure. Strategy first, always, and creative that earns its keep.',
@@ -835,6 +903,7 @@ const ABOUT_CLOSE = {
   nonprofit: ['Join us and see the difference', 'Real change happens when people decide to show up for one another, and there is a place for you in this work. Whether you give, volunteer, or simply spread the word, your support becomes meals, mentoring, and hope for neighbors who need it. Together we can do far more than any of us could alone, so we hope you will join us.'],
   retail: ['Shop with total confidence', 'We built this shop for people who are tired of flimsy products and pushy service, and we would love for you to give us a try. Every item is chosen with care, backed by easy returns, and shipped fast, so you can buy exactly what you want without a second thought. Browse the collections, and discover goods actually worth owning.'],
   saas: ['Get your time back, starting today', 'Your team has better things to do than the same repetitive tasks, week after week. We built this platform to hand those hours back, so you can focus on the work that actually matters. Start your free trial with no credit card, connect your tools in minutes, and see for yourself how much lighter the week feels when the busywork runs itself.'],
+  'real-estate': ['Let us guide your next move', 'Whether you are buying your first home, selling the one you love, or simply curious what your place is worth, we would be glad to help. Reach out for a friendly, no-pressure conversation and get honest local guidance from an agent who treats your move like their own. Whenever you are ready, we will be here to guide you all the way home.'],
   agency: ['Let us build something that works', 'The best partnerships start with a clear goal and a shared commitment to hitting it. If you have a brand to build, a site to launch, or a campaign that needs to perform, we would love to hear about it. Tell us where you want to go, and we will map a plan to get you there, with senior craft and a genuine stake in your success.'],
   portfolio: ['Let us make something great together', 'I take on a handful of projects at a time so each one gets my full attention, and I would love for yours to be one of them. If you care about craft as much as I do and have an idea worth doing right, reach out. Tell me what you are picturing, and let us talk about how to bring it to life, beautifully.'],
 };
@@ -851,6 +920,7 @@ const ABOUT_PROMISE = {
   nonprofit: ['Our promise to this community', 'We promise that the large majority of every gift goes straight to the people we serve, and that we will share our impact openly so you can see it. We promise to treat everyone who comes to us with dignity and warmth, and everyone who gives with genuine gratitude. Your generosity is a trust, and we promise to honor it by putting it to work where it matters most, right here at home.'],
   retail: ['Our promise on everything we sell', 'We promise to stock only what we would recommend to a friend, at prices that are simply fair, with no gimmicks at checkout. We promise fast, free shipping on qualifying orders and returns so easy you can buy with total confidence. And we promise to treat you like a person, not an order number, whenever you need a hand. Buy better, buy less, and love what you own; that is the whole idea.'],
   saas: ['Our promise to your team', 'We promise software that saves you time instead of adding another chore, and pricing that is clear with no hidden fees. We promise security built in from the start and performance that holds as you grow. And we promise real human support that answers fast, with no phone trees or canned replies. Great software should feel like a reliable teammate who never drops the ball, and that is exactly what we set out to build.'],
+  'real-estate': ['Our promise to every client', 'We promise honest guidance, even when it is not what you hoped to hear, because you deserve the truth about a home’s value and condition. We promise sharp, data-backed pricing, deep local knowledge, and a negotiator who fights for your bottom line. And we promise to keep you informed at every step, from the first tour to the closing table. Your trust means more to us than any single sale, and we work to earn it every day.'],
   agency: ['Our promise to every client', 'We promise strategy before style and creative that is accountable to real results, because beautiful work that does not perform is just decoration. We promise senior specialists on your project from start to finish, with no junior handoffs behind the scenes. And we promise clear scopes, honest timelines, and no surprise invoices. We treat your business like our own, because we only truly win when you win. That is the partnership we offer.'],
   portfolio: ['My promise on every project', 'I promise to take on only what I can give my full attention, so your work never gets rushed or phoned in. I promise clear communication, honest timelines, and a fixed price agreed up front, with no surprises. And I promise to sweat the details other people skip, so the finished work feels effortless and holds up long after launch. Your trust means everything to me, and I work hard on every project to earn it.'],
 };
@@ -867,6 +937,7 @@ const CONTACT_HELP = {
   nonprofit: ['Every message moves the mission', 'Whether you want to give, lend a hand, or simply learn more about the work we do, reaching out is the first step, and it matters more than you might think. Every volunteer, every gift, and every partnership starts with a single conversation. We read each message personally and would be glad to help you find the right way to get involved. Together, we can do far more than any of us could alone.'],
   retail: ['We are here to help, always', 'Great products deserve great service, and we take that seriously long after you check out. Whether you need help choosing the right item, have a question about an order, or want to arrange a return, we are here and happy to sort it out quickly. Reach out anytime and a real member of our team will get back to you fast. We want you to love what you buy, no exceptions.'],
   saas: ['Let us help you get started', 'Whether you are just kicking the tires, setting things up, or weighing whether the platform fits your team, we are glad to help, and we promise no pushy sales tactics. Reach out with any question and a real person will get back to you fast, or book a quick demo tailored to what you need. Better yet, start your free trial right now; there is no credit card required and nothing to lose.'],
+  'real-estate': ['We would love to help you move', 'Maybe you are ready to tour homes this weekend, or maybe you are just starting to wonder what your place is worth. Either way, you are exactly who we are here for, and we are happy to answer any question, big or small. Reach out about buying, selling, or a free home valuation, and we will help you feel confident and clear before you take a single step.'],
   agency: ['Tell us what you are building', 'The best work starts with a good conversation, so do not worry about having a polished brief. Whether you have a clear goal or just a rough idea, reach out and a senior member of our team, the same people who would do the work, will get back to you promptly. We will listen, ask the right questions, and map a clear plan to hit the goals that matter most to you. Let us build something that works.'],
   portfolio: ['Let us start a conversation', 'Whether you have a fully-formed project in mind or just a spark of an idea, I would genuinely love to hear about it. Reach out and tell me a bit about what you are working on and what you are hoping to achieve, and I will reply personally, usually within a day. I will give you my honest thoughts on how I can help, and whether I am the right person for the job. No pressure, just a good conversation.'],
 };
@@ -909,6 +980,10 @@ const FAQ_MORE2 = {
   saas: [
     ['Can I try it before I commit?', 'Yes. Your 14-day free trial requires no credit card, so you can explore the full platform, connect your tools, and invite your team with zero risk. See the time savings for yourself first, and only choose a paid plan if it earns its place. There is genuinely nothing to lose.'],
     ['What if my team needs help getting set up?', 'We are here for exactly that. Setup usually takes minutes, but if you get stuck, our support team answers fast by chat or email, with real humans and no canned replies. We can also walk you through a guided setup so your whole team is up and running smoothly from day one.'],
+  ],
+  'real-estate': [
+    ['Do I need to be pre-approved before we start looking?', 'It helps a lot. A pre-approval shows what you can comfortably afford and makes your offers stronger in a competitive market. If you are not there yet, no problem; we can connect you with a trusted local lender and start touring homes to sharpen your sense of what you want.'],
+    ['What happens after my offer is accepted?', 'The fun part is just beginning. We guide you through inspections, appraisal, and financing, keep every deadline on track, and handle the paperwork. If anything comes up, we flag it early and negotiate on your behalf. Then we walk you right up to closing day and the keys to your new home.'],
   ],
   agency: [
     ['How do we get started with you?', 'Just reach out and tell us about your goals, in as much or as little detail as you have. A senior member of our team will get back to you promptly, and from there we map a clear scope, timeline, and fixed price. Once you approve, we get to work, keeping you in the loop throughout.'],
@@ -958,6 +1033,10 @@ const CONTACT_EXTRA = {
   saas: {
     reassure: 'Whether you are evaluating the platform, setting it up, or just have a quick question, we are glad to help, and there are no pushy sales tactics here. Reach out and a real member of our team will get back to you fast, by chat or email, with a clear answer or a hands-on demo. Or skip ahead and start your free trial; there is no credit card required and nothing to lose.',
     points: [['Book a demo', 'Want to see it in action first? Reach out and we will set up a quick, tailored walkthrough focused on exactly what your team needs.'], ['Sales questions', 'Curious about pricing, plans, or whether we fit your stack? Send a message and we will give you straight answers, with no pressure to buy.'], ['Get support', 'Already using the platform and need a hand? Our support team responds fast by chat or email, with real humans and no canned replies.']],
+  },
+  'real-estate': {
+    reassure: 'Reaching out about a home is a big step, and it should feel easy, not intimidating. Whether you are ready to tour listings, thinking about selling, or simply curious what your place is worth, a real person from our team will help you, not a machine. There are no silly questions and no pressure here, just honest local guidance to help you feel confident about your next move.',
+    points: [['Buying a home', 'Ready to start touring? Tell us what you are looking for and your timeline, and we will line up homes that fit and guide you every step of the way.'], ['Selling your home', 'Thinking about listing? Reach out for a free, honest valuation and a clear plan to sell for your home’s true value with as little stress as possible.'], ['Free home valuation', 'Just curious what your place is worth? Send a message and we will provide an honest, data-backed estimate based on recent sales, with no obligation.']],
   },
   agency: {
     reassure: 'The best work starts with a good conversation, so tell us what you are trying to achieve. Whether you have a fully-formed brief or just a rough idea, a senior member of our team, the same people who would do the work, will get back to you promptly. We will listen, ask sharp questions, and map a clear plan to hit your goals, with no jargon and no junior handoffs behind the scenes.',
