@@ -4,12 +4,19 @@ import { Pricing } from './Pricing';
 
 /**
  * `Pricing` — monthly/yearly toggle, featured-tier highlight, per-tier Product
- * JSON-LD. Cards lift on hover; the amount fades+rises when the toggle flips.
- * Wrapped in a router because each CTA renders a `<Link>`.
+ * JSON-LD. The featured tier stands proud (accent ring, subtle scale-up, glass
+ * wash + soft OKLCH glow + drifting aura) so the eye lands there first; every
+ * card lifts + reveals an accent hairline on hover/focus-within; the amount is
+ * fluid (`clamp()`) and fades+rises when the toggle flips; the grid staggers in
+ * on scroll. All motion is gated behind `prefers-reduced-motion` and every CTA
+ * carries a keyboard-visible accent ring. Wrapped in a router (CTAs are `<Link>`).
  */
 const meta = {
   title: 'Sections/Pricing',
   component: Pricing,
+  parameters: {
+    a11y: { config: { rules: [] } },
+  },
   decorators: [
     (Story) => (
       <MemoryRouter>
@@ -56,6 +63,48 @@ export const ThreeTier: Story = {
         yearly: 1900,
         features: ['Everything in Growth', 'Session replay', 'SSO + audit logs', 'Priority support'],
         cta: { label: 'Contact sales', href: '/contact' },
+      },
+    ],
+  },
+};
+
+/**
+ * Two-tier, no toggle — a single featured tier so the accent ring, scale-up,
+ * glass wash and aura read in isolation. Hover either card to see the lift +
+ * hairline; tab to a CTA to see the keyboard-visible ring.
+ */
+export const FeaturedHighlight: Story = {
+  args: {
+    eyebrow: 'Membership',
+    headline: 'One plan, everything included',
+    description: 'No usage tiers, no surprises — pick monthly or annual and go.',
+    showToggle: false,
+    tiers: [
+      {
+        id: 'basic',
+        name: 'Basic',
+        description: 'The essentials to get online.',
+        monthly: 19,
+        yearly: 190,
+        features: ['1 site', 'SSL + hosting', 'Email support'],
+        cta: { label: 'Get started', href: '/contact' },
+      },
+      {
+        id: 'pro',
+        name: 'Pro',
+        description: 'Everything, unlocked.',
+        monthly: 39,
+        yearly: 390,
+        features: [
+          'Unlimited sites',
+          'Priority AI generation',
+          'Custom domains',
+          'Analytics + SEO suite',
+          'White-glove support',
+        ],
+        featured: true,
+        badge: 'Best value',
+        cta: { label: 'Go Pro', href: '/contact' },
       },
     ],
   },

@@ -747,14 +747,199 @@ p          { text-wrap: pretty; }
   .hero-kenburns { animation: none !important; }
 }
 
-/* Pricing — the amount fades+rises when the monthly/yearly toggle flips (the
-   span is keyed on the period, so React remounts it and replays this). */
+/* ─────────────────────────────────────────────────────────────────────────
+   CINEMATIC PRICING (src/components/sections/Pricing.tsx)
+   Each tier is a `.pricing-card`; the featured tier carries `[data-featured]`.
+   All motion is gated behind `prefers-reduced-motion: no-preference` (and the
+   global reduced-motion reset above additionally clamps it to instant), so the
+   un-animated base state below is the reduced-motion / no-JS experience: every
+   card fully legible, no offset, the featured tier already lifted + glowing.
+   Colors are theme tokens + `--color-accent` only — no hardcoded light classes
+   (validate-site gate).
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Fluid amount — scales with the viewport, no fixed breakpoint step. */
+.pricing-amount {
+  font-size: clamp(2.25rem, 1.4rem + 3.2vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* The amount fades+rises when the monthly/yearly toggle flips (the span is
+   keyed on the period, so React remounts it and replays this). */
 @media (prefers-reduced-motion: no-preference) {
   .price-swap { animation: price-swap-fade 0.35s ease both; }
   @keyframes price-swap-fade {
     from { opacity: 0; transform: translateY(-5px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+}
+
+/* Card — base state fully settled + legible. Hover/focus-within lifts it and
+   reveals an accent hairline + soft glow; the featured tier is pre-lifted. */
+.pricing-card {
+  isolation: isolate;
+  --pricing-lift: 0;
+}
+.pricing-card::before {
+  /* Top hairline that brightens to accent on hover — a thin premium detail. */
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) calc(18% + var(--pricing-lift) * 52%), transparent) 50%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+.pricing-card:hover,
+.pricing-card:focus-within {
+  --pricing-lift: 1;
+  border-color: color-mix(in oklch, var(--color-accent) 50%, var(--color-border));
+  box-shadow:
+    var(--shadow-lg),
+    0 0 46px -14px color-mix(in oklch, var(--color-accent) 55%, transparent);
+}
+
+/* Featured tier — accent ring, subtle scale-up, glass wash + soft OKLCH glow
+   so the eye lands here first. */
+.pricing-card--featured {
+  --pricing-lift: 0.55;
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, var(--color-accent) 12%, transparent) 0%,
+      transparent 60%
+    ),
+    color-mix(in oklch, var(--color-surface) 82%, transparent);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--color-accent) 22%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--color-accent) 45%, transparent),
+    var(--shadow-lg),
+    0 22px 60px -28px color-mix(in oklch, var(--color-accent) 60%, transparent);
+}
+.pricing-card--featured:hover,
+.pricing-card--featured:focus-within {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--color-accent) 30%, transparent),
+    0 0 0 1px color-mix(in oklch, var(--color-accent) 60%, transparent),
+    var(--shadow-lg),
+    0 26px 70px -26px color-mix(in oklch, var(--color-accent) 70%, transparent);
+}
+
+/* Soft accent aura that sits behind the featured card. */
+.pricing-aura {
+  position: absolute;
+  inset: -18% -12%;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    60% 55% at 50% 30%,
+    color-mix(in oklch, var(--color-accent) 26%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(18px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* Reduced-transparency users prefer flat surfaces — drop the glass blur. */
+@media (prefers-reduced-transparency: reduce) {
+  .pricing-card--featured {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Toggle buttons + CTA — keyboard-visible accent ring. */
+.pricing-toggle__btn:focus-visible,
+.pricing-cta:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background),
+    0 0 0 4px color-mix(in oklch, var(--color-accent) 70%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pricing-card {
+    transition:
+      transform var(--duration-base) var(--ease),
+      border-color var(--duration-base) var(--ease),
+      box-shadow var(--duration-base) var(--ease);
+  }
+  /* Featured tier sits proud; hover lifts every card a touch further. */
+  .pricing-card--featured { transform: translateY(-6px) scale(1.03); }
+  .pricing-card:hover,
+  .pricing-card:focus-within { transform: translateY(-8px); }
+  .pricing-card--featured:hover,
+  .pricing-card--featured:focus-within { transform: translateY(-12px) scale(1.035); }
+
+  .pricing-card::before {
+    transition: background var(--duration-base) var(--ease);
+  }
+  .pricing-check {
+    transition: transform var(--duration-base) var(--ease);
+  }
+  .pricing-card:hover .pricing-check,
+  .pricing-card:focus-within .pricing-check { transform: scale(1.15); }
+
+  /* Badge gently pulses so the featured tier reads at a glance. */
+  .pricing-badge__icon {
+    animation: pricing-badge-pulse 2.8s var(--ease) infinite;
+    transform-origin: center;
+  }
+  @keyframes pricing-badge-pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+    50%      { transform: scale(1.22) rotate(8deg); opacity: 1; }
+  }
+
+  /* Featured aura slowly breathes. */
+  .pricing-aura {
+    animation: pricing-aura-breathe 7s ease-in-out infinite alternate;
+    will-change: opacity, transform;
+  }
+  @keyframes pricing-aura-breathe {
+    from { opacity: 0.45; transform: scale(0.96); }
+    to   { opacity: 0.7;  transform: scale(1.06); }
+  }
+
+  /* Staggered scroll-in — cards rise in sequence as the grid enters view. The
+     per-card delay is faked via `animation-range` keyed on inline `--pricing-i`,
+     matching the `.faq-item` pattern. Base state (below, outside this block) is
+     fully visible so no-JS / reduced-motion keeps every card legible. */
+  @supports (animation-timeline: view()) {
+    .pricing-card {
+      animation: pricing-card-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(2% + var(--pricing-i, 0) * 6%) cover 22%;
+    }
+    /* Preserve the featured tier's resting lift + scale as the rise settles. */
+    @keyframes pricing-card-rise {
+      from { opacity: 0; transform: translateY(26px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .pricing-card--featured {
+      animation-name: pricing-card-rise-featured;
+    }
+    @keyframes pricing-card-rise-featured {
+      from { opacity: 0; transform: translateY(26px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(-6px) scale(1.03); }
+    }
+  }
+}
+
+/* Reduced-motion / no-timeline safety net: never leave a card hidden or the
+   featured tier un-emphasised. Base states above already handle the rest. */
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card { opacity: 1; }
+  .pricing-badge__icon,
+  .pricing-aura { animation: none !important; }
 }
 
 /* CTASection — two soft aurora glows drift behind the emphatic closing CTA. */

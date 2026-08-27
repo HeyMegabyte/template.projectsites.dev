@@ -31,6 +31,17 @@ interface Props {
 /**
  * Pricing table with monthly/yearly toggle + featured-tier highlight + JSON-LD
  * Product schema per tier (each tier emits a Product node with Offer + price).
+ *
+ * Cinematic detail (all gated behind `prefers-reduced-motion: no-preference`
+ * via the `.pricing-*` classes in `index.css`, and auto-neutralised by the
+ * global reduced-motion reset): the grid rises in with a per-card stagger
+ * (`--pricing-i`), every card lifts + reveals an accent hairline + soft glow
+ * on hover/focus-within, and the featured tier stands proud — accent ring,
+ * a subtle scale-up, a soft OKLCH accent glow, a glass wash + top hairline,
+ * and a slow-drifting aura behind it — so the eye lands there first. The
+ * amount is fluid (`clamp()`) and fades+rises when the toggle flips (the span
+ * is keyed on the period, so React remounts it and replays `.price-swap`).
+ * Colors are theme tokens + `--color-accent` only (validate-site gate).
  */
 export function Pricing({
   tiers,
@@ -81,12 +92,12 @@ export function Pricing({
         </h2>
         {safeDescription && <p className="text-text-muted max-w-2xl mx-auto text-lg">{safeDescription}</p>}
         {showToggle && (
-          <div className="inline-flex mt-8 p-1 rounded-full border border-border bg-surface">
+          <div className="pricing-toggle inline-flex mt-8 p-1 rounded-full border border-border bg-surface">
             <button
               type="button"
               onClick={() => setAnnual(false)}
               className={cn(
-                'px-5 py-2 rounded-full text-sm font-medium transition-colors',
+                'pricing-toggle__btn px-5 py-2 rounded-full text-sm font-medium transition-colors',
                 !annual ? 'bg-accent text-background' : 'text-text-muted hover:text-text'
               )}
               aria-pressed={!annual}
@@ -97,7 +108,7 @@ export function Pricing({
               type="button"
               onClick={() => setAnnual(true)}
               className={cn(
-                'px-5 py-2 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2',
+                'pricing-toggle__btn px-5 py-2 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2',
                 annual ? 'bg-accent text-background' : 'text-text-muted hover:text-text'
               )}
               aria-pressed={annual}
@@ -108,23 +119,27 @@ export function Pricing({
         )}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {safeTiers.map((t) => {
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        {safeTiers.map((t, i) => {
           const badge = scrubText(t.badge);
           const ctaLabel = scrubText(t.cta?.label, 'Get started');
           return (
           <div
             key={t.id}
+            data-featured={t.featured ? '' : undefined}
+            style={{ '--pricing-i': i } as React.CSSProperties}
             className={cn(
-              'relative rounded-xl border p-8 flex flex-col reveal-on-view transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:shadow-glow motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+              'pricing-card relative rounded-xl border p-8 flex flex-col',
               t.featured
-                ? 'border-accent bg-gradient-to-b from-accent/10 to-transparent shadow-glow ring-1 ring-accent/20'
-                : 'border-border bg-surface hover:border-accent/50'
+                ? 'pricing-card--featured border-accent bg-gradient-to-b from-accent/10 to-transparent'
+                : 'border-border bg-surface'
             )}
           >
+            {/* Featured aura — soft accent glow that drifts behind the card. */}
+            {t.featured && <span aria-hidden="true" className="pricing-aura" />}
             {badge && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-background text-xs font-bold inline-flex items-center gap-1">
-                <Sparkles size={12} />
+              <div className="pricing-badge absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-background text-xs font-bold inline-flex items-center gap-1 z-10">
+                <Sparkles size={12} className="pricing-badge__icon" />
                 {badge}
               </div>
             )}
@@ -133,7 +148,7 @@ export function Pricing({
             <div className="mt-6 flex items-baseline gap-1">
               <span
                 key={annual ? 'yr' : 'mo'}
-                className="text-4xl md:text-5xl font-bold font-heading text-text tabular-nums price-swap"
+                className="pricing-amount font-bold font-heading text-text tabular-nums price-swap"
               >
                 {symbol}
                 {annual ? t.yearly : t.monthly}
@@ -143,12 +158,16 @@ export function Pricing({
             <ul className="mt-6 space-y-3 flex-1">
               {t.features.map((f) => (
                 <li key={f} className="flex gap-3 text-text-muted text-sm">
-                  <Check size={18} className="text-accent shrink-0 mt-0.5" />
+                  <Check size={18} className="pricing-check text-accent shrink-0 mt-0.5" />
                   <span>{f}</span>
                 </li>
               ))}
             </ul>
-            <Button asChild className="mt-8 w-full" variant={t.featured ? 'default' : 'outline'}>
+            <Button
+              asChild
+              className="pricing-cta mt-8 w-full"
+              variant={t.featured ? 'default' : 'outline'}
+            >
               <Link to={t.cta?.href ?? '/contact'}>{ctaLabel}</Link>
             </Button>
           </div>
