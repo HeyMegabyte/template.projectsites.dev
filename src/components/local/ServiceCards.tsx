@@ -11,11 +11,19 @@ interface ServiceCardsProps {
   heading?: string;
 }
 
+/**
+ * `ServiceCards` — a responsive grid of service tiles (image + name + optional
+ * price + "Book Now"). Theme-token + cinematic: `card-tactile` glass frames that
+ * lift to an accent border on hover, the image Ken-Burns-zooms, and the whole
+ * grid reveals on scroll. Legible on BOTH light and dark verticals — the old
+ * hardcoded `text-white`/`bg-white/5`/`border-white/10` made the copy invisible
+ * on light themes (fixed to `text-text` / `card-tactile` / `border-border`).
+ */
 export default function ServiceCards({ services, heading = 'Our Services' }: ServiceCardsProps) {
   return (
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-12 text-center text-balance">
+        <h2 className="text-3xl md:text-4xl font-heading font-bold text-text mb-12 text-center text-balance reveal-on-view">
           {heading}
         </h2>
 
@@ -23,14 +31,14 @@ export default function ServiceCards({ services, heading = 'Our Services' }: Ser
           {services.map((service) => (
             <div
               key={service.name}
-              className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden transition-all duration-300 hover:border-[var(--color-accent)]/40 hover:shadow-lg hover:shadow-[var(--color-accent)]/5"
+              className="group card-tactile reveal-on-view rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
               {service.image && (
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     loading="lazy"
                     decoding="async"
                   />
@@ -38,20 +46,20 @@ export default function ServiceCards({ services, heading = 'Our Services' }: Ser
               )}
               <div className="p-6">
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <h3 className="text-lg font-heading font-bold text-white">{service.name}</h3>
+                  <h3 className="text-lg font-heading font-bold text-text">{service.name}</h3>
                   {service.price && (
-                    <span className="text-[var(--color-accent)] font-semibold text-sm whitespace-nowrap">
+                    <span className="text-accent font-semibold text-sm whitespace-nowrap">
                       {service.price}
                     </span>
                   )}
                 </div>
-                <p className="text-white/60 text-sm leading-relaxed mb-4">{service.description}</p>
+                <p className="text-text-muted text-sm leading-relaxed mb-4">{service.description}</p>
                 {service.bookingUrl && (
                   <a
                     href={service.bookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--color-accent)] hover:text-[var(--color-accent)]/80 text-sm font-semibold transition-colors"
+                    className="inline-flex items-center gap-1 text-accent hover:text-accent/80 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
                     onClick={() => {
                       if (typeof gtag !== 'undefined') gtag('event', 'booking_click', { service: service.name });
                       if (typeof posthog !== 'undefined') posthog.capture('booking_click', { service: service.name });
