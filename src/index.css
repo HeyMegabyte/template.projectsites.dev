@@ -1167,15 +1167,24 @@ p          { text-wrap: pretty; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   BENTO CINEMATIC TILES
-   Hover lift + accent ring + glass sheen + OKLCH accent wash on the promoted
-   hero cell. Tiles reveal on scroll with a per-tile stagger keyed on the inline
-   `--bento-i` index. Focus rings stay visible for keyboard users (the tile is a
-   link). Base state is fully visible so no-JS / reduced-motion never hides a
-   tile.
+   BENTO CINEMATIC TILES  (src/components/sections/BentoGrid.tsx)
+   Hover lift + accent ring + top accent hairline + diagonal glass sheen +
+   cursor-tracked spotlight + OKLCH accent wash + grain + breathing aura on the
+   promoted hero cell. Tiles stagger-reveal on scroll keyed on the inline
+   `--bento-i` index; titles are fluid (`clamp()`). Every effect is gated behind
+   `prefers-reduced-motion: no-preference` (the global reset above additionally
+   clamps it to instant), so the resting base state below IS the reduced-motion /
+   no-JS experience — every tile fully legible, no offset, nothing hidden. Focus
+   rings stay visible for keyboard users (the tile can be a link). Colors are
+   theme tokens + `--color-accent` only (validate-site gate).
+   `--bento-lift` (0→1 on hover/focus) drives the hairline + spotlight strength;
+   `--bento-mx/--bento-my` are written per-tile by the pointer handler.
    ─────────────────────────────────────────────────────────────────────── */
 .bento-tile {
   border-radius: var(--radius-xl);
+  --bento-lift: 0;
+  --bento-mx: 50%;
+  --bento-my: 0%;
   transition:
     transform var(--duration-base) var(--ease),
     box-shadow var(--duration-base) var(--ease),
@@ -1193,26 +1202,160 @@ p          { text-wrap: pretty; }
   pointer-events: none;
   z-index: 1;
 }
+.bento-tile::after {
+  /* Top accent hairline — a thin premium detail that brightens on hover, keyed
+     on --bento-lift (matches the .pricing-card::before hairline pattern). */
+  content: '';
+  position: absolute; inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) calc(12% + var(--bento-lift) * 58%), transparent) 50%,
+    transparent 100%
+  );
+  transition: background var(--duration-base) var(--ease);
+  pointer-events: none;
+  z-index: 3;
+}
+/* Cursor-tracked accent spotlight — a soft radial that follows the pointer.
+   Off by default (fine-pointer + motion-allowed opts it in below) so touch /
+   keyboard users see the clean resting tile. */
+.bento-tile__spot {
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    22rem 22rem at var(--bento-mx) var(--bento-my),
+    color-mix(in oklch, var(--color-accent) 16%, transparent) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease);
+  pointer-events: none;
+  z-index: 1;
+}
 @media (prefers-reduced-motion: no-preference) {
   .bento-tile:hover::before,
   .bento-tile:focus-within::before {
     opacity: 1;
     transform: translateX(30%);
   }
+  @media (pointer: fine) {
+    .bento-tile:hover .bento-tile__spot,
+    .bento-tile:focus-within .bento-tile__spot { opacity: 1; }
+  }
 }
 .bento-tile:hover,
 .bento-tile:focus-within {
+  --bento-lift: 1;
   transform: translateY(-4px);
   border-color: color-mix(in oklch, var(--color-accent) 55%, var(--color-border));
   box-shadow:
     0 18px 44px -20px color-mix(in oklch, var(--color-accent) 45%, transparent),
     0 0 0 1px color-mix(in oklch, var(--color-accent) 35%, transparent);
 }
-/* Promoted hero cell carries a permanent, subtle OKLCH accent wash. */
+
+/* Fluid title — scales with the viewport, no fixed breakpoint step. */
+.bento-tile__title {
+  font-size: clamp(1.25rem, 0.9rem + 1.4vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Icon chip — springs + warms on hover/focus. */
+.bento-tile__icon {
+  transition:
+    transform var(--duration-base) var(--ease),
+    background-color var(--duration-base) var(--ease);
+}
+.bento-tile:hover .bento-tile__icon,
+.bento-tile:focus-within .bento-tile__icon {
+  background-color: color-mix(in oklch, var(--color-accent) 22%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bento-tile:hover .bento-tile__icon,
+  .bento-tile:focus-within .bento-tile__icon {
+    transform: translateY(-2px) scale(1.06) rotate(-3deg);
+  }
+}
+
+/* Background image — slow Ken-Burns drift + brighten on hover. */
+.bento-tile__img {
+  transform: scale(1);
+  transition:
+    opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
+}
+.bento-tile:hover .bento-tile__img,
+.bento-tile:focus-within .bento-tile__img { opacity: 0.55; }
+@media (prefers-reduced-motion: no-preference) {
+  .bento-tile:hover .bento-tile__img,
+  .bento-tile:focus-within .bento-tile__img { transform: scale(1.08); }
+}
+
+/* Link affordance arrow — glides in on hover/focus. */
+.bento-tile__arrow {
+  transition: opacity var(--duration-base) var(--ease), transform var(--duration-base) var(--ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bento-tile:hover .bento-tile__arrow,
+  .bento-tile:focus-within .bento-tile__arrow { transform: translateX(4px); }
+}
+
+/* Promoted hero / accented cell — permanent OKLCH accent wash + fine grain. */
 .bento-tile--accent {
   background:
     radial-gradient(120% 120% at 100% 0%, color-mix(in oklch, var(--color-accent) 12%, transparent) 0%, transparent 55%),
     var(--color-surface);
+}
+.bento-tile--accent > .bento-tile__spot {
+  /* faint grain texture layered under the spotlight for premium depth */
+  background:
+    radial-gradient(
+      22rem 22rem at var(--bento-mx) var(--bento-my),
+      color-mix(in oklch, var(--color-accent) 16%, transparent) 0%,
+      transparent 60%
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @media (pointer: fine) {
+    .bento-tile--accent:hover > .bento-tile__spot,
+    .bento-tile--accent:focus-within > .bento-tile__spot { opacity: 0.14; }
+  }
+}
+/* Soft accent aura that sits behind the accented cell (mirrors .pricing-aura). */
+.bento-tile__aura {
+  position: absolute;
+  inset: -20% -14%;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    58% 52% at 70% 20%,
+    color-mix(in oklch, var(--color-accent) 24%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(20px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bento-tile__aura {
+    animation: bento-aura-breathe 7s ease-in-out infinite alternate;
+    will-change: opacity, transform;
+  }
+  @keyframes bento-aura-breathe {
+    from { opacity: 0.4; transform: scale(0.96); }
+    to   { opacity: 0.62; transform: scale(1.06); }
+  }
+}
+
+/* Reduced-transparency users prefer flat surfaces — drop the aura blur haze. */
+@media (prefers-reduced-transparency: reduce) {
+  .bento-tile__aura { display: none; }
 }
 
 @supports (animation-timeline: view()) {
@@ -1230,7 +1373,9 @@ p          { text-wrap: pretty; }
 }
 @media (prefers-reduced-motion: reduce) {
   .bento-tile { opacity: 1; transform: none; }
-  .bento-tile::before { display: none; }
+  .bento-tile::before,
+  .bento-tile__spot { display: none; }
+  .bento-tile__aura { animation: none !important; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
