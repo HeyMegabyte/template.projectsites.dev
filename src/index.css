@@ -133,6 +133,14 @@ html {
   background-color: var(--color-background);
   /* CSS scroll-driven animations support hint (no-op on browsers that ignore it) */
   scroll-timeline-axis: block;
+  /* Clip decorative off-screen bleed (.hero-aurora / .cta-glow-2 / .footer-wash are
+     pointer-events-none absolute glows with negative offsets that extend past the
+     viewport → phantom horizontal scroll, ~80-93px on mobile). Must sit on BOTH html
+     AND body (see body rule): the overflow escapes through the #root wrapper, so
+     html-alone doesn't clip it (verified on real sites). `clip` (not `hidden`) kills
+     the sideways scroll WITHOUT creating a scroll container, so position:sticky nav +
+     intentional `.overflow-x-auto` scrollers keep working. */
+  overflow-x: clip;
 }
 
 body {
@@ -142,6 +150,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Pairs with html{overflow-x:clip} above — decorative absolute glows overflow past
+     the #root wrapper, so both root elements must clip to kill the mobile sideways
+     scroll (verified: html-alone or body-alone = ~81px; html+body = 0px). */
+  overflow-x: clip;
 }
 
 /* Native :focus-visible ring everywhere (WCAG 2.2 2.4.11). */
