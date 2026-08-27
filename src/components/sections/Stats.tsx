@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import { AnimatedNumber } from '@/components/AnimatedNumber';
 import { cn } from '@/lib/utils';
 import { scrubText } from '@/lib/placeholders';
@@ -47,7 +48,8 @@ export function Stats({ stats, eyebrow, headline, columns, className }: Props) {
         {safeStats.map((s, i) => (
           <div
             key={`${s.label}-${i}`}
-            className="text-center p-6 reveal-on-view card-tactile"
+            style={{ '--stat-i': i } as CSSProperties}
+            className="stat-tile text-center p-6 card-tactile transition-transform duration-300 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             {/*
               WCAG: <dl> direct children must only be <dt>/<dd>/<div>/<script>/<template>.

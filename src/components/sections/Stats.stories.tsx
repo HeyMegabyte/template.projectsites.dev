@@ -4,6 +4,11 @@ import { Stats } from './Stats';
 /**
  * `Stats` — animated count-up metrics in a responsive grid. Column count is
  * derived from `stats.length` (capped at 4) unless `columns` is set.
+ *
+ * Cinematic layer (all `prefers-reduced-motion`-gated, base state fully visible):
+ * each figure carries a persistent OKLCH accent glow, the accent underline draws
+ * in, and the tiles **stagger up on scroll** (offset keyed on the inline
+ * `--stat-i`) with a soft hover lift — mirrors the FAQ / Pricing / ProcessSteps bar.
  */
 const meta = {
   title: 'Sections/Stats',
