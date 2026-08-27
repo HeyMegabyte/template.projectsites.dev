@@ -36,6 +36,14 @@ function getTodayDay(): string {
   return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()];
 }
 
+/**
+ * `NAPFooter` — the Name/Address/Phone + hours + social footer with schema.org
+ * `LocalBusiness` microdata. Cinematic + theme-token: an accent hairline traces the top
+ * edge over a soft OKLCH footer wash, the three columns reveal on scroll, contact rows nudge
+ * their icon + warm to the accent on hover, today's hours glow with a live pulse dot, and the
+ * social chips lift into an accent fill. Legible on light AND dark verticals (the old
+ * hardcoded `text-white`/`bg-white/5`/`border-white/10` was invisible on light themes).
+ */
 export default function NAPFooter({
   businessName,
   address,
@@ -53,16 +61,24 @@ export default function NAPFooter({
     window.posthog?.capture(event, props);
   };
 
+  const rowClass =
+    'group flex items-center gap-3 text-text-muted hover:text-accent transition-colors text-sm rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60';
+  const iconClass =
+    'shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-accent motion-reduce:transition-none motion-reduce:group-hover:translate-x-0';
+
   return (
     <footer
-      className="bg-white/5 backdrop-blur-md border-t border-white/10 py-16"
+      className="nap-footer relative bg-surface/40 backdrop-blur-md border-t border-border py-16 overflow-hidden"
       itemScope
       itemType="https://schema.org/LocalBusiness"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="nap-rule" aria-hidden="true" />
+      <div className="nap-wash" aria-hidden="true" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Business identity */}
-          <div>
+          <div className="nap-col reveal-on-view" style={{ ['--col-i' as string]: 0 } as React.CSSProperties}>
             {logoSrc && (
               <img
                 src={logoSrc}
@@ -73,7 +89,7 @@ export default function NAPFooter({
                 itemProp="logo"
               />
             )}
-            <h2 className="text-xl font-heading font-bold text-white mb-4" itemProp="name">
+            <h2 className="text-xl font-heading font-bold text-text mb-4 text-balance" itemProp="name">
               {businessName}
             </h2>
 
@@ -82,60 +98,65 @@ export default function NAPFooter({
                 href={mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 text-white/70 hover:text-[var(--color-accent)] transition-colors text-sm"
+                className={`${rowClass} items-start`}
                 onClick={() => track('direction_click', { address })}
                 itemProp="address"
                 itemScope
                 itemType="https://schema.org/PostalAddress"
               >
-                <MapPin size={18} className="mt-0.5 shrink-0" />
+                <MapPin size={18} className={`${iconClass} mt-0.5`} />
                 <span itemProp="streetAddress">{address}</span>
               </a>
 
               <a
                 href={`tel:${phone}`}
-                className="flex items-center gap-3 text-white/70 hover:text-[var(--color-accent)] transition-colors text-sm"
+                className={rowClass}
                 onClick={() => track('phone_click', { phone })}
               >
-                <Phone size={18} className="shrink-0" />
+                <Phone size={18} className={iconClass} />
                 <span itemProp="telephone">{phone}</span>
               </a>
 
               <a
                 href={`mailto:${email}`}
-                className="flex items-center gap-3 text-white/70 hover:text-[var(--color-accent)] transition-colors text-sm"
+                className={rowClass}
                 onClick={() => track('email_click', { email })}
               >
-                <Mail size={18} className="shrink-0" />
+                <Mail size={18} className={iconClass} />
                 <span itemProp="email">{email}</span>
               </a>
             </div>
           </div>
 
           {/* Hours */}
-          <div>
-            <h3 className="text-lg font-heading font-bold text-white mb-4 flex items-center gap-2">
-              <Clock size={18} className="text-[var(--color-accent)]" />
+          <div className="nap-col reveal-on-view" style={{ ['--col-i' as string]: 1 } as React.CSSProperties}>
+            <h3 className="text-lg font-heading font-bold text-text mb-4 flex items-center gap-2">
+              <Clock size={18} className="text-accent" />
               Hours
             </h3>
             <table className="w-full text-sm">
               <tbody>
-                {Object.entries(hours).map(([day, time]) => (
-                  <tr
-                    key={day}
-                    className={day === today ? 'text-[var(--color-accent)] font-semibold' : 'text-white/60'}
-                  >
-                    <td className="py-1.5 pr-4">{day}</td>
-                    <td className="py-1.5 text-right">{time}</td>
-                  </tr>
-                ))}
+                {Object.entries(hours).map(([day, time]) => {
+                  const isToday = day === today;
+                  return (
+                    <tr key={day} className={isToday ? 'text-accent font-semibold' : 'text-text-muted'}>
+                      <td className="py-1.5 pr-4">
+                        <span className="inline-flex items-center gap-2">
+                          {isToday && <span className="nap-today-dot" aria-hidden="true" />}
+                          {day}
+                        </span>
+                      </td>
+                      <td className="py-1.5 text-right">{time}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
 
           {/* Social */}
-          <div>
-            <h3 className="text-lg font-heading font-bold text-white mb-4">Connect With Us</h3>
+          <div className="nap-col reveal-on-view" style={{ ['--col-i' as string]: 2 } as React.CSSProperties}>
+            <h3 className="text-lg font-heading font-bold text-text mb-4">Connect With Us</h3>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map(({ platform, url }) => {
                 const key = platform.toLowerCase();
@@ -146,7 +167,7 @@ export default function NAPFooter({
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 border border-white/10 text-white/70 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]/40 transition-all"
+                    className="group w-10 h-10 flex items-center justify-center rounded-lg card-tactile text-text-muted transition-all duration-200 hover:-translate-y-0.5 hover:text-[var(--color-on-accent)] hover:bg-[var(--color-accent)] hover:border-accent hover:shadow-lg hover:shadow-[var(--color-accent)]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                     aria-label={`Follow us on ${platform}`}
                     itemProp="sameAs"
                     onClick={() => track('social_click', { platform })}
@@ -163,12 +184,36 @@ export default function NAPFooter({
               })}
             </div>
 
-            <p className="text-white/30 text-xs mt-8">
+            <p className="text-xs mt-8" style={{ color: 'var(--color-text-subtle)' }}>
               &copy; {new Date().getFullYear()} {businessName}. All rights reserved.
             </p>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .nap-rule {
+          position: absolute; top: 0; left: 0; right: 0; height: 1px;
+          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 55%, transparent), transparent);
+        }
+        .nap-wash {
+          position: absolute; left: -10%; right: -10%; bottom: -60%; height: 80%;
+          background: radial-gradient(50% 100% at 50% 100%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent 70%);
+          filter: blur(44px); pointer-events: none;
+        }
+        .nap-today-dot {
+          width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent);
+          box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 60%, transparent);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          /* columns reveal on scroll via the global .reveal-on-view observer; the dot pulses */
+          .nap-today-dot { animation: napPulse 2.4s ease-in-out infinite; }
+          @keyframes napPulse {
+            0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 55%, transparent); }
+            50% { box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-accent) 0%, transparent); }
+          }
+        }
+      `}</style>
     </footer>
   );
 }
