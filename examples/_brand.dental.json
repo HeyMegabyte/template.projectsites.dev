@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.designtokens.org/2025-10",
+  "$description": "Medical / dental / clinic preset — LIGHT, clean white with cyan-teal, trustworthy and airy. Soft-rounded 'calm-clinic' mood: generous radii, gentle tinted shadows, warm sans headings. Dentists map here.",
+
+  "business": {
+    "name":          { "$value": "Chen Family Dentistry" },
+    "shortName":     { "$value": "Chen Dental" },
+    "tagline":       { "$value": "Gentle care since 2003" },
+    "description":   { "$value": "Family and cosmetic dentistry in Anchorage, AK. Accepting new patients, most insurance accepted, and Saturday hours for busy families." },
+    "url":           { "$value": "https://chendental.example" },
+    "businessClass": { "$value": "medical" },
+    "email":         { "$value": "hello@chendental.example" },
+    "phone":         { "$value": "+19075550100" },
+    "address":       { "$value": "1234 4th Avenue, Suite 200, Anchorage, AK 99501" },
+    "hours":         { "$value": "Tue–Fri 8am–5pm · Sat 9am–2pm · Closed Sun & Mon" }
+  },
+
+  "color": {
+    "brandHue":    { "$value": "195" },
+    "brandChroma": { "$value": "0.11" },
+    "primary":     { "$value": "oklch(0.52 0.13 195)" },
+    "primaryHover":{ "$value": "oklch(0.45 0.13 195)" },
+    "accent":      { "$value": "oklch(0.86 0.13 190)" },
+    "accentHover": { "$value": "oklch(0.80 0.14 190)" },
+    "background":  { "$value": "oklch(0.995 0.006 195)" },
+    "surface":     { "$value": "oklch(0.975 0.012 195)" },
+    "surfaceElevated":{ "$value": "oklch(1 0 0)" },
+    "border":      { "$value": "oklch(0.90 0.02 195)" },
+    "text":        { "$value": "oklch(0.24 0.03 220)" },
+    "textMuted":   { "$value": "oklch(0.46 0.02 220)" },
+    "textSubtle":  { "$value": "oklch(0.60 0.015 220)" },
+    "success":     { "$value": "oklch(0.55 0.15 155)" },
+    "warning":     { "$value": "oklch(0.68 0.15 80)" },
+    "danger":      { "$value": "oklch(0.55 0.20 25)" },
+    "info":        { "$value": "oklch(0.55 0.13 220)" }
+  },
+
+  "colorScheme": { "$value": "light" },
+
+  "font": {
+    "heading":   { "$value": "Poppins" },
+    "body":      { "$value": "Inter" },
+    "mono":      { "$value": "JetBrains Mono" },
+    "weights":   { "$value": [400,500,600,700] },
+    "fluidScale":{ "$value": "clamp" }
+  },
+
+  "radius":  { "sm": { "$value": "0.5rem" }, "md": { "$value": "0.875rem" }, "lg": { "$value": "1.25rem" }, "xl": { "$value": "1.75rem" }, "2xl": { "$value": "2.25rem" }, "full": { "$value": "9999px" } },
+  "spacing": { "0": { "$value": "0" }, "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" }, "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" }, "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" } },
+  "shadow":  { "sm": { "$value": "0 1px 2px 0 oklch(0.52 0.13 195 / 0.06)" }, "md": { "$value": "0 10px 30px -12px oklch(0.52 0.13 195 / 0.20), 0 2px 8px -4px oklch(0.52 0.13 195 / 0.10)" }, "lg": { "$value": "0 24px 60px -16px oklch(0.52 0.13 195 / 0.28), 0 6px 16px -8px oklch(0.52 0.13 195 / 0.14)" }, "glow": { "$value": "0 0 48px -10px oklch(0.86 0.13 190 / 0.55)" } },
+  "motion":  { "easing": { "$value": "cubic-bezier(0.22, 1, 0.36, 1)" }, "duration": { "fast": { "$value": "160ms" }, "base": { "$value": "260ms" }, "slow": { "$value": "480ms" }, "scroll": { "$value": "1200ms" } } },
+  "layout":  { "containerWide": { "$value": "80rem" }, "containerNormal": { "$value": "64rem" }, "containerProse": { "$value": "42rem" } },
+  "social":  { "facebook": { "$value": "" }, "instagram": { "$value": "" }, "linkedin": { "$value": "" }, "twitter": { "$value": "" }, "youtube": { "$value": "" }, "tiktok": { "$value": "" }, "github": { "$value": "" } },
+
+  "features": {
+    "hero":         { "$value": true },
+    "bento":        { "$value": true },
+    "stats":        { "$value": true },
+    "services":     { "$value": true },
+    "process":      { "$value": true },
+    "testimonials": { "$value": true },
+    "logoCloud":    { "$value": false },
+    "pricing":      { "$value": false },
+    "faq":          { "$value": true },
+    "blog":         { "$value": true },
+    "team":         { "$value": true },
+    "caseStudies":  { "$value": false },
+    "newsletter":   { "$value": false },
+    "cta":          { "$value": true }
+  }
+}

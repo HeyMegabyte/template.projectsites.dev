@@ -25,6 +25,22 @@ const GALLERY_IMG = JSON.parse(
 // Per-vertical spec. Arrays are positional; the mapper below flattens them to tokens.
 const V = {
   medical: {
+    hero: ['Trusted primary care for every age', 'From annual physicals to same-day sick visits, we care for your whole family with warmth and honesty. New patients are always welcome.', 'Book a visit', 'See services'],
+    badges: ['Most insurance accepted', 'Same-day sick visits', 'Care for the whole family'],
+    features: [['Same-day sick visits', 'Feeling unwell? Call in the morning and we will do our best to see you the same day.'], ['Board-certified physicians', 'Experienced family doctors who listen closely and treat the whole person, not just a symptom.'], ['Most insurance accepted', 'We take the major plans and check your benefits up front, so there are no surprises.'], ['On-site labs & diagnostics', 'Common blood work and tests happen right here, so you get answers faster.'], ['Telehealth visits', 'Handle minor concerns and follow-ups from home with a secure video visit.'], ['Care for every age', 'One trusted practice for kids, parents, and grandparents at every stage of life.']],
+    servicesHead: ['Complete care for the whole family', 'Preventive checkups and primary care for every age, all in one welcoming practice.'],
+    services: [['Annual Physicals & Wellness Exams', 'A thorough yearly checkup that reviews your health head to toe. We track key numbers, answer your questions, and help you stay well in plain language.'], ['Preventive Care & Screenings', 'Age-appropriate screenings and simple lab tests that catch issues early, when they are easiest to treat. We tailor the plan to your health and history.'], ['Chronic Disease Management', 'Steady, personal care for diabetes, blood pressure, and cholesterol. We adjust your plan, track your progress, and keep you feeling your best.'], ['Pediatric & Adolescent Care', 'Well-child visits, growth checks, and sick care for kids and teens. We build trust early so your children feel at ease in the office.'], ['Immunizations & Vaccines', 'Routine and seasonal vaccines for the whole family, from childhood shots to the annual flu vaccine, kept current and convenient.'], ['Women’s Health & Wellness', 'Well-woman visits, routine screenings, and honest guidance through every stage of life, delivered with comfort and respect.']],
+    servicesCta: ['Not sure what you need?', 'Book a wellness visit and we will build a simple, honest care plan together.'],
+    statsHead: 'Trusted by neighbors for years',
+    stats: [['25+ Years', 'caring for local families'], ['15k+ Patients', 'and still growing'], ['4.9 Stars', 'across patient reviews'], ['Same Day', 'sick appointments']],
+    process: [['Book', 'Reserve online or call, and tell us what is going on.'], ['Meet', 'We listen, examine you carefully, and explain what we find.'], ['Plan', 'You get clear options and next steps with no pressure.'], ['Care', 'We treat you comfortably and help you stay healthy for good.']],
+    faqHead: ['Questions patients ask', 'Straight answers about visits, insurance, and care.'],
+    faqs: [['Do you accept my insurance?', 'We accept most major plans and file the claims for you. Call us with your card and we will confirm your coverage.'], ['Can I be seen the same day when I am sick?', 'Very often, yes. Call us early in the day and we will do everything we can to fit you in for an urgent visit.'], ['Do you see children?', 'Yes. We care for every age, so the whole family can share one trusted practice.'], ['Can I become a new patient?', 'Absolutely. We are welcoming new patients of all ages. Reach out and we will make your first visit simple and easy.']],
+    cta: ['Ready for care you can trust?', 'New patients welcome. Book a visit today and feel the difference honest, personal care makes.', 'Book your visit'],
+    about: ['Care that treats you like family', 'Our team blends modern medicine with an old-fashioned bedside manner. We take time to listen, explain, and make every visit comfortable.', 'Our promise to you', 'Honest guidance, careful attention, and steady care you can rely on. That is the standard we hold on every single visit.'],
+    meta: ['A welcoming family medicine practice offering annual physicals, preventive care, chronic-condition management, and same-day sick visits.', 'Explore our services: annual physicals, preventive screenings, chronic disease management, pediatric care, immunizations, and women’s health.'],
+  },
+  dental: {
     hero: ['Gentle dental care for your whole family', 'From routine cleanings to same-day emergencies, we keep every smile healthy and comfortable. New patients are always welcome.', 'Book a visit', 'See services'],
     badges: ['Most insurance accepted', 'Same-day emergency visits', 'Gentle, judgment-free care'],
     features: [['Comfort-first visits', 'Numbing, sedation options, and a calm team make every appointment easy.'], ['Same-day emergencies', 'Call in pain and we will get you seen the same day whenever we can.'], ['Clear, upfront pricing', 'You see the cost and your insurance estimate before we begin.'], ['Family-friendly', 'One trusted office for kids, parents, and grandparents alike.'], ['Modern, gentle tech', 'Digital X-rays and quiet tools mean less waiting and less discomfort.'], ['Easy scheduling', 'Book online, get reminders, and reschedule in a couple of taps.']],
@@ -223,7 +239,8 @@ const V = {
 // real imagery even when the orchestrator's image pipeline crashes. Refresh with:
 //   UNSPLASH_KEY=$(get-secret UNSPLASH_ACCESS_KEY) node scripts/fetch-vertical-images.mjs
 const IMG = {
-  "medical": { hero: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUxfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1606811842243-af7e16970c1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwZGVudGlzdCUyMHdpdGglMjBwYXRpZW50fGVufDF8MHx8fDE3ODc1ODU2NTF8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "man in white dress shirt sitting on black office rolling chair" },
+  "medical": { hero: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", about: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080", aboutAlt: "friendly doctor talking with a patient in a bright clinic" },
+  "dental": { hero: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUxfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1606811842243-af7e16970c1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwZGVudGlzdCUyMHdpdGglMjBwYXRpZW50fGVufDF8MHx8fDE3ODc1ODU2NTF8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "man in white dress shirt sitting on black office rolling chair" },
   "wellness": { hero: "https://images.unsplash.com/photo-1676496962536-d8ef110ff6f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxzZXJlbmUlMjB5b2dhJTIwc3R1ZGlvJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc4NzU4NTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHByYWN0aWNpbmclMjB5b2dhfGVufDF8MHx8fDE3ODc1ODU2NTN8MA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "silhouette photography of woman doing yoga" },
   "fitness": { hero: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "person lifting a loaded barbell in a gym" },
   "legal": { hero: "https://images.unsplash.com/photo-1781136230118-3272607eb34c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsYXclMjBvZmZpY2UlMjBpbnRlcmlvcnxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080", about: "https://images.unsplash.com/photo-1662104935883-e9dd0619eaba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBwb3J0cmFpdHxlbnwxfDB8fHwxNzg3NTg1NjUzfDA&ixlib=rb-4.1.0&q=80&w=1080", aboutAlt: "a woman in a black suit" },
@@ -239,7 +256,8 @@ const IMG = {
 
 // Short, clean alt text for the hero photo per vertical (a11y).
 const HERO_ALT = {
-  medical: 'Bright, welcoming modern dental office',
+  medical: 'Bright, welcoming modern family medicine clinic',
+  dental: 'Bright, welcoming modern dental office',
   wellness: 'Calm, sunlit yoga and wellness studio',
   fitness: 'Athlete training with weights in a strength gym',
   legal: 'Professional modern law office interior',
@@ -256,6 +274,7 @@ const HERO_ALT = {
 // Per-vertical heading for the Home gallery section.
 const GALLERY_HEADLINE = {
   medical: 'A look inside our practice',
+  dental: 'A look inside our practice',
   wellness: 'Inside the studio',
   fitness: 'Inside the gym',
   legal: 'Our firm at work',
@@ -272,7 +291,8 @@ const GALLERY_HEADLINE = {
 // Short, punchy per-vertical tagline for the SEO <title> ("Name — Tagline", ~50-60
 // chars) + the hero eyebrow. Fills brand.ts's DEFAULTS.tagline token. Name-agnostic, no slop.
 const TAGLINE = {
-  medical: 'Gentle Family Dental Care',
+  medical: 'Trusted Primary Care for Every Age',
+  dental: 'Gentle Family Dental Care',
   wellness: 'Find Your Calm and Strength',
   fitness: 'Train Hard, Get Strong',
   legal: 'Trusted Counsel When It Matters',
@@ -291,7 +311,8 @@ const TAGLINE = {
 // {SEO_DESCRIPTION} in Home.tsx so every homepage ships a real, keyword-rich
 // description instead of just the business name. Guesses-ahead, generic-but-true.
 const DESCRIPTION = {
-  medical: 'Compassionate, modern dental care for the whole family — gentle checkups, honest advice, and comfortable treatment in a welcoming, patient-first practice.',
+  medical: 'A welcoming family medicine practice for the whole family — annual physicals, preventive care, chronic-condition management, same-day sick visits, and telehealth in a patient-first office.',
+  dental: 'Compassionate, modern dental care for the whole family — gentle checkups, honest advice, and comfortable treatment in a welcoming, patient-first practice.',
   wellness: 'A calm, welcoming space for wellness — expert care, mindful treatments, and a personalized approach that helps you feel your best in both body and mind.',
   fitness: 'A welcoming strength and conditioning gym with expert coaching, barbell training, and classes for every level to help you get strong and stay strong.',
   legal: 'Experienced, straight-talking legal counsel you can trust — clear guidance, responsive service, and dedicated representation for every client we serve.',
@@ -311,6 +332,20 @@ const DESCRIPTION = {
 // no slop, no fabricated people.
 const SUBPAGE = {
   medical: {
+    aboutP: [
+      'Our practice began with a simple goal: make primary care something you actually look forward to. From the moment you walk in, you are greeted by name, listened to, and treated with patience. We take time to explain what we see and why it matters, so you always leave knowing exactly where your health stands.',
+      'Over the years we have grown, but our approach has not changed. We invest in modern diagnostics, keep our pricing clear, and welcome patients of every age. Whether it is an annual physical or a sudden fever, you can count on honest advice and a comfortable visit every time.',
+    ],
+    faqBill: [
+      ['Do you accept insurance and payment plans?', 'We accept most major health plans and file the claims for you. For services not fully covered, we offer flexible payment options so cost never stands between you and good care.'],
+      ['Will I know the cost before my visit?', 'Whenever we can, yes. We check your benefits and explain any expected cost up front, so there are as few surprises as possible on your bill.'],
+    ],
+    faqSup: [
+      ['What are your office hours?', 'We offer appointments throughout the week, including early and evening slots for busy schedules. Call or book online and we will find a time that works for you.'],
+      ['How do I schedule my first visit?', 'Booking is easy. Use the contact form or give us a call, and our friendly front desk will get you scheduled and answer any questions before you arrive.'],
+    ],
+  },
+  dental: {
     aboutP: [
       'Our practice began with a simple goal: make going to the dentist something you never dread. From the moment you walk in, you are greeted by name, listened to, and treated with patience. We take time to explain what we see and why it matters, so you always leave knowing exactly where your health stands.',
       'Over the years we have grown, but our approach has not changed. We invest in gentle, modern technology, keep our pricing clear, and welcome patients of every age. Whether it is a routine cleaning or an unexpected emergency, you can count on honest advice and a comfortable visit every time.',
@@ -494,6 +529,39 @@ const SUBPAGE = {
 // Name-agnostic (no {TOKEN} inside values), Flesch-friendly, no slop, no fabricated people.
 const SUB2 = {
   medical: {
+    aboutP34: [
+      'What sets us apart is the time we take. We never rush you out the door or order tests you do not need. Instead, we walk you through every result, answer questions in plain language, and build a plan around your priorities, your health, and your budget. Many of our patients have been with us for a decade or more, and their children now come to us too.',
+      'Behind the warm welcome is a genuinely modern practice. On-site labs get you answers faster and cut the extra trips. Secure telehealth handles minor concerns and follow-ups from home. Careful screenings catch problems early, and online booking with automatic reminders means you spend less time on the phone and more time living your life.',
+    ],
+    values: [
+      ['Care without the rush', 'Real appointment time, a doctor who listens, and a team that checks in often. If something is worrying you, we make room for it. Your health matters more than the schedule.'],
+      ['Honesty you can feel', 'We only recommend what we would choose for our own family. You get clear options, real costs, and the freedom to ask questions until it makes sense.'],
+      ['Care for every age', 'Toddlers, teens, parents, and grandparents share one trusted practice. We grow with your family and keep every record in one place.'],
+    ],
+    approach: ['A visit built around you', 'From the first hello, we listen before we examine. We check you carefully, explain what we find, and lay out simple next steps with honest guidance. You decide the pace. We handle the insurance paperwork, send reminders so nothing slips, and follow up after tests to make sure you understand your results and feel cared for.'],
+    servicesIntro: 'Good health is more than the absence of illness; it is steady energy, peace of mind, and catching small issues before they become serious, costly ones. Our services span prevention, primary care, and chronic-condition management, so whatever brings you in, you are cared for in one welcoming practice by a team that already knows your history.',
+    serviceLong: [
+      'Annual physicals and wellness exams are the foundation of good health. We review your history, check your vital numbers, and screen for concerns before they grow, from blood pressure to blood sugar. You leave with a clear, plain-language picture of exactly where your health stands, a plan for staying well, and answers to every question you brought through the door.',
+      'Preventive care and screenings catch issues early, when they are easiest to treat. We recommend age-appropriate checks and simple lab tests based on your history and risk, then explain what the results mean in terms you can act on. A little prevention now spares a lot of trouble later, and we make it straightforward and stress-free.',
+      'Chronic conditions like diabetes, high blood pressure, and high cholesterol are far more manageable with steady, personal care. We track your numbers, adjust your plan as life changes, and coordinate the details so nothing falls through the cracks. Our goal is to help you feel your best and stay ahead of complications, with a partner who knows your whole story.',
+      'Pediatric and adolescent care keeps kids and teens healthy as they grow. From well-child visits and growth checks to sick care and school forms, we cover it all, and we build trust early so your children feel at ease. Caring for the whole family in one place means fewer offices to juggle and one team who truly knows your kids.',
+      'Immunizations and vaccines protect the whole family, from childhood shots to the annual flu vaccine and seasonal boosters. We keep your records current, explain what is recommended and why, and make each visit quick and comfortable. Staying up to date is one of the simplest, most powerful ways to guard your health and the health of those around you.',
+      'Women’s health and wellness care meets you at every stage of life with comfort and respect. From well-woman visits and routine screenings to honest guidance on the questions that matter most, we make sure you feel heard and well cared for. You get thorough, personal attention from a team that treats your health as the priority it is.',
+    ],
+    why: [
+      ['Same-day sick visits', 'Illness does not wait, so we do not make you wait either. We hold open slots each day for urgent visits, so you can be seen quickly by a team that already knows you.'],
+      ['Most insurance accepted', 'We take the major plans and file the claims for you. We check your benefits before your visit, so the only surprise is how easy it was.'],
+      ['A calm, modern practice', 'On-site labs, telehealth options, and a friendly team turn a stressful appointment into an easy one, even for patients who dread the doctor.'],
+    ],
+    contactIntro: 'Whether you are a new patient booking a first physical, a current patient with a question about a bill, or someone feeling unwell who needs to be seen today, we are glad you reached out. Fill out the form or call us directly and a friendly member of our front desk, not a machine, will help you find a time and answer anything you need before you arrive.',
+    faqMore: [
+      ['How often should I come in for a checkup?', 'For most healthy adults, once a year keeps you on track and catches problems early. If you are managing a condition or have specific risks, we may suggest more frequent visits. We will recommend a schedule that fits you, not a one-size-fits-all rule.'],
+      ['Do you treat children, and at what age can they start?', 'Yes, we care for every age. We see newborns, kids, and teens for well-child visits, growth checks, and sick care. Caring for the whole family in one place means early, positive visits that help children feel at ease and set the stage for a lifetime of good habits.'],
+      ['I have not seen a doctor in years. Will you judge me?', 'Never. Life gets busy and it is easy to fall behind on care. We meet you where you are, with zero lectures, and build a realistic plan to get your health back on track at a pace that feels comfortable for you.'],
+      ['What should I do about an urgent problem after hours?', 'Call our main number and follow the prompts for urgent care. For chest pain, trouble breathing, or any life-threatening emergency, call your local emergency number first. For most concerns, we will get you seen the same day or first thing the next morning.'],
+    ],
+  },
+  dental: {
     aboutP34: [
       'What sets us apart is the time we take. We never rush you out the door or push treatment you do not need. Instead, we walk you through every finding on the screen, answer questions in plain language, and build a plan around your priorities, your comfort, and your budget. Many of our patients have been with us for a decade or more, and their children now sit in the same chairs.',
       'Behind the warm welcome is a genuinely modern practice. Digital X-rays cut radiation and show you exactly what we see. Intraoral cameras turn "trust me" into "look here." Quieter tools and gentle numbing keep visits calm, and online booking with automatic reminders means you spend less time on the phone and more time smiling.',
@@ -894,7 +962,8 @@ const SUB2 = {
 // About-page closing band (headline + paragraph) — the human, forward-looking sign-off
 // that pushes every /about page comfortably past 500 words across its sections.
 const ABOUT_CLOSE = {
-  medical: ['We would love to meet you', 'Whether it has been six months or six years since your last visit, there is a warm welcome and a clean, comfortable chair waiting for you. New patients are always welcome, and we make the first visit easy, from paperwork to insurance. Come see what gentle, honest dental care feels like, and let us help you keep your smile healthy for years to come.'],
+  medical: ['We would love to meet you', 'Whether it has been six months or six years since your last checkup, there is a warm welcome and a comfortable exam room waiting for you. New patients are always welcome, and we make the first visit easy, from paperwork to insurance. Come see what honest, personal primary care feels like, and let us help you and your family stay healthy for years to come.'],
+  dental: ['We would love to meet you', 'Whether it has been six months or six years since your last visit, there is a warm welcome and a clean, comfortable chair waiting for you. New patients are always welcome, and we make the first visit easy, from paperwork to insurance. Come see what gentle, honest dental care feels like, and let us help you keep your smile healthy for years to come.'],
   wellness: ['Come find your place on the mat', 'You do not need to be flexible, fit, or experienced to belong here; you just need to show up. Your first class is on us, so come as you are, meet a teacher, and see how good it feels to slow down and breathe. Whenever you are ready, we will be here, and we would be honored to practice alongside you.'],
   fitness: ['Come lift with us', 'You do not need to be fit, experienced, or fearless to belong here; you just need to show up. Your first session is on us, so come as you are, meet the coaches, and feel what real training does. Whenever you are ready to get strong, we will be here, and we would be glad to train right beside you.'],
   legal: ['Let us help you move forward', 'Facing a legal matter is stressful, but you do not have to face it alone or unsure of your options. Reach out for a free, confidential consultation and get honest guidance from an experienced advocate who will treat your matter with the seriousness and care it deserves. Whatever you are dealing with, the first step is simply a conversation.'],
@@ -911,7 +980,8 @@ const ABOUT_CLOSE = {
 // About-page promise band (headline + paragraph) — a concrete commitment that lifts
 // every /about page to a comfortable 500+ words. Name-agnostic, no slop.
 const ABOUT_PROMISE = {
-  medical: ['Our promise to every patient', 'We promise to treat you the way we would want our own family treated: with patience, honesty, and a genuinely gentle touch. That means no lectures, no pressure, and no treatment you do not need. It means clear pricing, careful explanations, and a team that remembers you between visits. Above all, it means you can walk in nervous and walk out relieved, knowing your smile is in caring, capable hands.'],
+  medical: ['Our promise to every patient', 'We promise to treat you the way we would want our own family treated: with patience, honesty, and genuine care. That means no lectures, no pressure, and no tests you do not need. It means clear guidance, careful explanations, and a team that remembers you between visits. Above all, it means you can walk in worried and walk out reassured, knowing your health is in caring, capable hands.'],
+  dental: ['Our promise to every patient', 'We promise to treat you the way we would want our own family treated: with patience, honesty, and a genuinely gentle touch. That means no lectures, no pressure, and no treatment you do not need. It means clear pricing, careful explanations, and a team that remembers you between visits. Above all, it means you can walk in nervous and walk out relieved, knowing your smile is in caring, capable hands.'],
   wellness: ['Our promise to you', 'We promise a space with no ego and no judgment, where your practice is measured by how you feel, not how you look. We promise teachers who watch out for your safety, options for every body, and a community that is genuinely glad you came. Whether you are here for strength, stress relief, or a quiet hour to yourself, we promise to meet you exactly where you are, every single time.'],
   fitness: ['Our promise to every member', 'We promise a gym with no ego and no judgment, where your progress is measured by your own numbers, not by anyone else. We promise coaches who put your technique and safety first, weights scaled to every level, and a crew that is genuinely glad you showed up. Whether you are chasing your first barbell or a new personal best, we promise to meet you exactly where you are, every single session.'],
   legal: ['Our promise as your advocate', 'We promise honest counsel, even when it is not what you hoped to hear, because you deserve the truth about your options. We promise a senior attorney who knows your case, returns your calls, and treats your matter with real urgency. And we promise to fight for the best outcome we can achieve, keeping you informed and in control every step of the way. Your trust is something we work hard to earn.'],
@@ -928,7 +998,8 @@ const ABOUT_PROMISE = {
 // Contact-page closing help band (headline + paragraph) — a warm, practical sign-off
 // that pushes every /contact page past 500 words across its sections.
 const CONTACT_HELP = {
-  medical: ['We are here whenever you need us', 'There is no wrong reason to reach out. Maybe you are overdue for a cleaning, comparing dentists for your family, worried about a specific tooth, or simply want to know if we take your insurance. Whatever it is, we would rather answer your questions now than have you put off the care you need. Send a message or pick up the phone, and let us make your next visit an easy one.'],
+  medical: ['We are here whenever you need us', 'There is no wrong reason to reach out. Maybe you are overdue for a physical, choosing a doctor for your family, worried about a nagging symptom, or simply want to know if we take your insurance. Whatever it is, we would rather answer your questions now than have you put off the care you need. Send a message or pick up the phone, and let us make your next visit an easy one.'],
+  dental: ['We are here whenever you need us', 'There is no wrong reason to reach out. Maybe you are overdue for a cleaning, comparing dentists for your family, worried about a specific tooth, or simply want to know if we take your insurance. Whatever it is, we would rather answer your questions now than have you put off the care you need. Send a message or pick up the phone, and let us make your next visit an easy one.'],
   wellness: ['We would love to hear from you', 'Maybe you have practiced for years, or maybe you have never set foot in a studio and the whole idea feels a little intimidating. Either way, you are exactly who we built this space for, and we are happy to answer any question, big or small. Reach out about classes, memberships, or your very first visit, and we will help you feel at home before you ever step on the mat.'],
   fitness: ['We would love to hear from you', 'Maybe you have trained for years, or maybe you have never touched a barbell and the whole idea feels a little intimidating. Either way, you are exactly who we built this gym for, and we are happy to answer any question, big or small. Reach out about training, memberships, or your very first session, and we will help you feel at home before you ever pick up a weight.'],
   legal: ['Reach out and take the first step', 'Legal questions have a way of keeping you up at night, and the uncertainty is often the hardest part. You do not have to carry it alone. Reach out for a free, confidential conversation and get an honest read on where you stand, with no cost and no obligation. Whether you end up needing us or not, you will leave the call with more clarity than you had before, and that is a good place to start.'],
@@ -946,6 +1017,10 @@ const CONTACT_HELP = {
 // and clears 500+ words comfortably. 40-60-word answers, guess-ahead, no slop.
 const FAQ_MORE2 = {
   medical: [
+    ['Can I be seen the same day when I am sick?', 'Very often, yes. We hold open slots each day for urgent visits, so call us early and we will do our best to fit you in. If it is more serious, we will help you decide whether to be seen here or head to urgent care or the ER. Your health guides the pace, always.'],
+    ['Can I bring my whole family to one practice?', 'Yes, and many families do. We care for every age, from a toddler’s well-child visit to a grandparent’s blood-pressure check, and we keep everyone’s records in one place. It means fewer offices to juggle, one team who knows you all, and appointments you can often schedule back to back.'],
+  ],
+  dental: [
     ['Will my visit hurt?', 'We work hard to keep every visit comfortable, with gentle technique, effective numbing, and sedation options when you want them. Most patients are surprised by how easy it is. If anything ever feels off, just raise a hand and we stop and adjust right away. Your comfort guides the pace, always.'],
     ['Can I bring my whole family to one practice?', 'Yes, and many families do. We care for every age, from a toddler’s first checkup to a grandparent’s crown, and we keep everyone’s history in one place. It means fewer offices to juggle, one team who knows you all, and appointments you can often schedule back to back.'],
   ],
@@ -999,6 +1074,10 @@ const FAQ_MORE2 = {
 // /contact page ships several real sections instead of a bare form.
 const CONTACT_EXTRA = {
   medical: {
+    reassure: 'We know that calling a doctor’s office can feel like a chore, or even a little nerve-wracking. It should not be. Our front desk is friendly, patient, and genuinely helpful, whether you are booking a routine physical, asking about a test result, or dealing with a sudden illness. Reach out however is easiest for you, and we will take care of the rest with the same personal approach we bring to every visit.',
+    points: [['New patients', 'Booking your first visit is simple. Send a message or call, and we will walk you through paperwork, insurance, and scheduling before you ever arrive.'], ['Feeling sick today?', 'Call us early and mention it is urgent. We hold same-day slots for sick visits and will do everything we can to get you seen and on the mend fast.'], ['Billing questions', 'Have a question about a bill or your coverage? Reach out and a real person will explain everything clearly, with no runaround and no jargon.']],
+  },
+  dental: {
     reassure: 'We know that calling a dental office can feel like a chore, or even a little nerve-wracking. It should not be. Our front desk is friendly, patient, and genuinely helpful, whether you are booking a routine cleaning, asking about a treatment, or dealing with a sudden toothache. Reach out however is easiest for you, and we will take care of the rest with the same gentle approach we bring to every visit.',
     points: [['New patients', 'Booking your first visit is simple. Send a message or call, and we will walk you through paperwork, insurance, and scheduling before you ever arrive.'], ['In pain today?', 'Call us right away and mention it is urgent. We hold same-day slots for emergencies and will do everything we can to get you seen and out of pain fast.'], ['Billing questions', 'Have a question about a bill or your coverage? Reach out and a real person will explain everything clearly, with no runaround and no jargon.']],
   },
