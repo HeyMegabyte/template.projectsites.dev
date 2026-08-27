@@ -443,6 +443,21 @@ p          { text-wrap: pretty; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   FEATURE SPLIT — a soft OKLCH accent aura behind the framed About visual for
+   cinematic depth. Static (no motion — composes with the column's reveal-on-view);
+   the hover accent-ring lives on the frame via Tailwind ring utilities.
+   ─────────────────────────────────────────────────────────────────────── */
+.feature-visual-aura {
+  background: radial-gradient(
+    60% 60% at 50% 42%,
+    color-mix(in oklch, var(--color-accent) 20%, transparent),
+    transparent 72%
+  );
+  filter: blur(26px);
+  opacity: 0.65;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    STATS — the homepage "by the numbers" tiles: each figure carries a persistent
    OKLCH accent glow, and tiles stagger up on scroll (offset keyed on the inline
    `--stat-i`). Base state (no-JS / reduced-motion) is fully visible + glowing;

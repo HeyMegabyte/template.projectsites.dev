@@ -89,17 +89,24 @@ export function FeatureSplit({
           {visual ? (
             visual
           ) : safeImage ? (
-            <div className="group card-tactile overflow-hidden rounded-2xl aspect-[4/3] relative">
-              <img
-                src={safeImage.src}
-                alt={safeImage.alt}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            <div className="relative">
+              {/* Soft OKLCH accent aura for cinematic depth behind the framed image. */}
+              <span
                 aria-hidden="true"
+                className="feature-visual-aura pointer-events-none absolute -inset-5 -z-10 rounded-[2rem]"
               />
+              <div className="group card-tactile overflow-hidden rounded-2xl aspect-[4/3] relative ring-1 ring-border transition-all duration-500 hover:ring-2 hover:ring-accent/40 motion-reduce:transition-none">
+                <img
+                  src={safeImage.src}
+                  alt={safeImage.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/25 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           ) : null}
         </div>

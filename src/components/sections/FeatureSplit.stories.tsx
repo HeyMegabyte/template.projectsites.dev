@@ -5,8 +5,10 @@ import { FeatureSplit } from './FeatureSplit';
 /**
  * `FeatureSplit` — image-left / image-right feature block with optional
  * bullet list and CTA. Bullets render as check-in-accent-circle markers; the
- * image zooms + gains a depth scrim on hover (motion-reduce safe). The CTA
- * renders a `react-router-dom` `<Link>`, so stories wrap it in a `MemoryRouter`.
+ * framed image sits over a soft OKLCH accent **aura** for depth, zooms + gains
+ * a depth scrim on hover, and its border **warms to an accent ring** on hover
+ * (all motion-reduce safe). The CTA renders a `react-router-dom` `<Link>`, so
+ * stories wrap it in a `MemoryRouter`.
  */
 const meta = {
   title: 'Sections/FeatureSplit',
