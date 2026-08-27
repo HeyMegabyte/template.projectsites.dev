@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type CSSProperties, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import { scrubText } from '@/lib/placeholders';
 
@@ -43,19 +43,24 @@ export function ProcessSteps({ steps, eyebrow = 'How it works', headline, descri
       </div>
 
       <ol className="relative grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {/* Connector line linking the steps into a flow (md+ horizontal row). */}
+        {/* Connector line linking the steps into a flow (md+ horizontal row).
+            Draws left→right on scroll (process-connector); base state is fully
+            drawn so no-JS / reduced-motion renders it solid. */}
         <span
           aria-hidden="true"
-          className="hidden md:block absolute top-8 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent"
+          className="process-connector hidden md:block absolute top-8 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
         />
         {safeSteps.map((step, i) => (
           <li
             key={step.title}
+            style={{ '--step-i': i } as CSSProperties}
             className="relative card-tactile p-6 md:p-8 reveal-on-view transition-transform duration-300 hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
+            {/* Editorial ghost number — staggered scale-pop as each step enters
+                view (process-num, keyed on --step-i); persistent soft accent glow. */}
             <span
               aria-hidden="true"
-              className="absolute -top-4 -left-2 font-heading text-7xl font-extrabold text-accent/15 leading-none"
+              className="process-num absolute -top-4 -left-2 font-heading text-7xl font-extrabold text-accent/15 leading-none"
             >
               {String(i + 1).padStart(2, '0')}
             </span>

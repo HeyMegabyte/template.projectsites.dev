@@ -3,9 +3,12 @@ import { CalendarCheck, Stethoscope, Smile } from 'lucide-react';
 import { ProcessSteps } from './ProcessSteps';
 
 /**
- * `ProcessSteps` — numbered flow joined by a gradient connector line (md+
- * horizontal row); cards lift on hover (motion-gated). Steps may carry an
- * optional icon. Three-or-more steps lay out horizontally on md+.
+ * `ProcessSteps` — numbered flow joined by a connector line that DRAWS
+ * left→right as the row scrolls into view; each editorial ghost number
+ * scale-pops in, staggered per step (`--step-i`). Cards lift on hover. All
+ * motion is `prefers-reduced-motion`-gated — base state is fully drawn +
+ * visible. Steps may carry an optional icon; 3+ steps lay out horizontally
+ * on md+ (4 fill the lg row).
  */
 const meta = {
   title: 'Sections/ProcessSteps',
@@ -47,6 +50,22 @@ export const NoIcons: Story = {
       { title: 'Consultation', description: 'We listen to your goals and concerns.' },
       { title: 'Custom plan', description: 'A phased plan that fits your budget.' },
       { title: 'Ongoing care', description: 'Automated reminders keep you on track.' },
+    ],
+  },
+};
+
+/** Four steps fill the lg row — the clearest look at the connector draw + the
+ * staggered per-step number pop (`--step-i` cascade). */
+export const FourStepFlow: Story = {
+  args: {
+    eyebrow: 'How it works',
+    headline: 'From first call to closing day',
+    description: 'A clear path with no surprises, so you always know the next move.',
+    steps: [
+      { title: 'Reach out', description: 'Tell us your goals and timeline in a quick, no-pressure chat.' },
+      { title: 'Get a plan', description: 'We map pricing, neighborhoods, and a realistic timeline together.' },
+      { title: 'Go to market', description: 'We handle the listings, showings, and the hard negotiations for you.' },
+      { title: 'Close with confidence', description: 'Paperwork, inspections, and keys — we stay in your corner to the end.' },
     ],
   },
 };
