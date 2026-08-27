@@ -179,7 +179,7 @@ const DEFAULT_BRAND: Omit<Brand, 'business'> = {
     border: 'oklch(0.28 0.02 240)',
     text: 'oklch(0.97 0.005 240)',
     textMuted: 'oklch(0.75 0.01 240)',
-    textSubtle: 'oklch(0.55 0.01 240)',
+    textSubtle: 'oklch(0.60 0.01 240)',
     success: 'oklch(0.72 0.17 155)',
     warning: 'oklch(0.80 0.16 85)',
     danger: 'oklch(0.63 0.22 25)',

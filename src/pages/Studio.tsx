@@ -56,7 +56,7 @@ export default function Studio() {
     root.style.setProperty('--color-border', mode === 'light' ? `oklch(0.88 0.02 ${hue})` : `oklch(0.22 0.02 ${hue})`);
     root.style.setProperty('--color-text', mode === 'light' ? `oklch(0.18 0.02 ${hue})` : `oklch(0.97 0.005 ${hue})`);
     root.style.setProperty('--color-text-muted', mode === 'light' ? `oklch(0.42 0.01 ${hue})` : `oklch(0.65 0.01 ${hue})`);
-    root.style.setProperty('--color-text-subtle', mode === 'light' ? `oklch(0.58 0.01 ${hue})` : `oklch(0.45 0.01 ${hue})`);
+    root.style.setProperty('--color-text-subtle', mode === 'light' ? `oklch(0.49 0.01 ${hue})` : `oklch(0.60 0.01 ${hue})`);
     root.style.setProperty('--font-heading', `'${heading}', system-ui, sans-serif`);
     root.style.setProperty('--font-body', `'${body}', system-ui, sans-serif`);
     root.dataset.theme = mode;
@@ -114,7 +114,7 @@ export default function Studio() {
         border: { $value: mode === 'light' ? `oklch(0.88 0.02 {color.brandHue})` : `oklch(0.22 0.02 {color.brandHue})` },
         text: { $value: mode === 'light' ? `oklch(0.18 0.02 {color.brandHue})` : `oklch(0.97 0.005 {color.brandHue})` },
         textMuted: { $value: mode === 'light' ? `oklch(0.42 0.01 {color.brandHue})` : `oklch(0.65 0.01 {color.brandHue})` },
-        textSubtle: { $value: mode === 'light' ? `oklch(0.58 0.01 {color.brandHue})` : `oklch(0.45 0.01 {color.brandHue})` },
+        textSubtle: { $value: mode === 'light' ? `oklch(0.49 0.01 {color.brandHue})` : `oklch(0.60 0.01 {color.brandHue})` },
         success: { $value: 'oklch(0.74 0.16 152)' },
         warning: { $value: 'oklch(0.82 0.16 85)' },
         danger: { $value: 'oklch(0.66 0.22 28)' },

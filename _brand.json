@@ -31,7 +31,7 @@
 
     "text":            { "$value": "oklch(0.97 0.005 {color.brandHue})", "$type": "color" },
     "textMuted":       { "$value": "oklch(0.65 0.01 {color.brandHue})",  "$type": "color" },
-    "textSubtle":      { "$value": "oklch(0.45 0.01 {color.brandHue})",  "$type": "color" },
+    "textSubtle":      { "$value": "oklch(0.60 0.01 {color.brandHue})",  "$type": "color" },
 
     "success":         { "$value": "oklch(0.74 0.16 152)", "$type": "color" },
     "warning":         { "$value": "oklch(0.82 0.16 85)",  "$type": "color" },
