@@ -53,6 +53,39 @@ function linkResolves(link) {
 
 const CONTRAST_EXEMPT_DIR = /\/components\/local\//;
 
+// ── Empty-H1 prevention ──
+// A page that renders `{SOME_TOKEN}` inside an <h1> ships a BLANK heading on any
+// vertical whose content pack never emits that token: the fill-safety-net writes
+// "" (not a leaked `{TOKEN}`), so BOTH the {TOKEN}-leak gate (nothing leaked) AND
+// the exactly-1-H1 gate (count = 1) pass while the H1 is empty — an SEO (no
+// keyworded H1) + a11y (empty heading) defect. Ref: /contact shipped an empty
+// <h1> on every vertical until 2026-08-28. Gate: every H1 token must be emitted
+// by ≥1 content pack (feature-gated tokens like PRICING_HEADLINE are emitted by
+// their verticals' packs, so they pass). Portable: skips silently if examples/ absent.
+const PACK_TOKENS = new Set();
+const examplesDir = path.join(ROOT, 'examples');
+if (fs.existsSync(examplesDir)) {
+  for (const pf of fs.readdirSync(examplesDir).filter((n) => /^_content\..+\.json$/.test(n))) {
+    try {
+      const obj = JSON.parse(fs.readFileSync(path.join(examplesDir, pf), 'utf8'));
+      for (const [k, v] of Object.entries(obj)) if (v != null && String(v).trim() !== '') PACK_TOKENS.add(k);
+    } catch { /* a malformed pack shouldn't crash the gate */ }
+  }
+}
+function h1Tokens(src) {
+  const toks = new Set();
+  // inline <h1>…</h1> (About/Services/Contact render `{'{X_HEADLINE}'}` in a span)
+  for (const block of src.match(/<h1[\s>][\s\S]*?<\/h1>/g) || []) {
+    for (const m of block.matchAll(/\{([A-Z][A-Z0-9_]{3,})\}/g)) toks.add(m[1]);
+  }
+  // component heading marked as="h1" with a token headline (Pricing pattern)
+  for (const m of src.matchAll(/as=["']h1["']/g)) {
+    const win = src.slice(Math.max(0, m.index - 220), m.index + 220);
+    for (const hm of win.matchAll(/headline=["']\{([A-Z][A-Z0-9_]{3,})\}["']/g)) toks.add(hm[1]);
+  }
+  return toks;
+}
+
 for (const f of walk(SRC)) {
   const rel = path.relative(ROOT, f);
   const src = fs.readFileSync(f, 'utf8');
@@ -65,7 +98,16 @@ for (const f of walk(SRC)) {
     }
   }
 
-  // 2) contrast check
+  // 2) empty-H1 risk — page <h1> token must be emitted by a content pack
+  if (PACK_TOKENS.size && /\/pages\//.test(rel)) {
+    for (const tok of h1Tokens(src)) {
+      if (!PACK_TOKENS.has(tok)) {
+        violations.push({ kind: 'empty-h1-risk', file: rel, detail: `<h1> renders {${tok}} but NO content pack emits it — every vertical would ship an EMPTY <h1>. Emit ${tok} in scripts/gen-content-packs.mjs, or hardcode the heading.` });
+      }
+    }
+  }
+
+  // 3) contrast check
   if (CONTRAST_EXEMPT_DIR.test(rel)) continue;
   src.split('\n').forEach((line, i) => {
     if (/contrast-dark-ok/.test(line)) return;
@@ -83,4 +125,4 @@ if (violations.length) {
   console.error('');
   process.exit(1);
 }
-console.log(`✓ validate-site: ${routes.size} routes; internal links resolve; no light-on-light contrast`);
+console.log(`✓ validate-site: ${routes.size} routes; internal links resolve; no light-on-light contrast; every page <h1> token emitted by a pack (${PACK_TOKENS.size} pack tokens)`);
