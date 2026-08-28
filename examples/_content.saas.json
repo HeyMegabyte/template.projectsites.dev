@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1573167036629-fd1d76448ddf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxkaXZlcnNlJTIwdGVhbSUyMGNlbGVicmF0aW5nJTIwb2ZmaWNlJTIwc3VjY2Vzc3xlbnwxfDB8fHwxNzg3NjE4MDE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "greyscale photo of people inside room",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1739298061766-e2751d92e9db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxkaXZlcnNlJTIwdGVhbSUyMGNlbGVicmF0aW5nJTIwb2ZmaWNlJTIwc3VjY2Vzc3xlbnwxfDB8fHwxNzg3NjE4MDE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "A group of people standing next to each other"
+  "GALLERY_6_IMAGE_ALT": "A group of people standing next to each other",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "an analytics dashboard on a laptop screen",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "a developer working with code on a monitor"
 }

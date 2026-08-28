@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "three men sitting while using laptops and watching man beside whiteboard",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1596496181871-9681eacf9764?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxjcmVhdGl2ZSUyMHRlYW0lMjBjb2xsYWJvcmF0aW9uJTIwd2hpdGVib2FyZHxlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "woman in white and red polka dot long sleeve shirt"
+  "GALLERY_6_IMAGE_ALT": "woman in white and red polka dot long sleeve shirt",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1526378787940-576a539ba69d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "a creative team brainstorming around a table",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "designers collaborating on ideas in a studio"
 }

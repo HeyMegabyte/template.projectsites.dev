@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1699730148132-1409a3728479?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxmcmllbmRzJTIwZGluaW5nJTIwdG9nZXRoZXIlMjByZXN0YXVyYW50fGVufDF8MHx8fDE3ODc2MTgwMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "a group of people sitting around a table with food and drinks",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1516005492235-7a8d3a652dca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxmcmllbmRzJTIwZGluaW5nJTIwdG9nZXRoZXIlMjByZXN0YXVyYW50fGVufDF8MHx8fDE3ODc2MTgwMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "grayscale photography of people eating food"
+  "GALLERY_6_IMAGE_ALT": "grayscale photography of people eating food",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1565895405140-6b9830a88c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "a beautifully plated gourmet dish on a table",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "a chef plating fresh food in the kitchen"
 }

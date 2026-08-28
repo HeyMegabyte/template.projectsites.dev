@@ -1205,7 +1205,9 @@ function pack(v) {
   for (let i = 0; i < 6; i++) if (feats[i]) o[`FEATURE_${i + 1}_IMAGE_URL`] = feats[i];
   const gal = GALLERY_IMG[v] || [];
   if (gal.length) o.GALLERY_HEADLINE = GALLERY_HEADLINE[v] || 'Gallery';
-  for (let i = 0; i < 6; i++) if (gal[i]) {
+  // 8 (was 6): the Home masonry is lg:columns-4 — 6 photos left 2 empty slots,
+  // 8 fills a clean 4×2. Pairs with the 8-slot galleryImages array in Home.tsx.
+  for (let i = 0; i < 8; i++) if (gal[i]) {
     o[`GALLERY_${i + 1}_IMAGE_URL`] = gal[i].src;
     o[`GALLERY_${i + 1}_IMAGE_ALT`] = gal[i].alt;
   }

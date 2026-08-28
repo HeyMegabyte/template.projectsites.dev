@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1763379456950-1cc7b6274c4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "Man and woman doing upward-facing dog yoga pose",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1671581084718-c4c04fc00250?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHx5b2dhJTIwY2xhc3MlMjBwZW9wbGUlMjBzdHJldGNoaW5nfGVufDF8MHx8fDE3ODc2MTgwMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "a group of people sitting and standing around each other"
+  "GALLERY_6_IMAGE_ALT": "a group of people sitting and standing around each other",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1639162906614-0603b0ae95fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "a serene spa massage table with soft towels",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1519824145371-296894a0daa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "a calm spa setting with candles and stones"
 }

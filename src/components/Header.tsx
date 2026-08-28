@@ -49,6 +49,11 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
     : { label: ctaLabel ?? 'Get in Touch', href: ctaHref ?? '/contact' };
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // A logo mark ALWAYS renders in the navbar: the build-generated
+  // /apple-touch-icon.png (produced by the mandatory favicon pipeline from the
+  // extracted / Ideogram / DALL-E logo), falling back to a branded monogram badge
+  // if that asset ever fails to load.
+  const [logoOk, setLogoOk] = useState(true);
   const { pathname } = useLocation();
 
   useEffect(() => setOpen(false), [pathname]);
@@ -71,6 +76,15 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
   }, []);
 
   const business = brand.business.name || 'ProjectSites';
+  const initials =
+    business
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0])
+      .join('')
+      .toUpperCase() || 'PS';
   const isMac = typeof navigator !== 'undefined' && /mac/i.test(navigator.platform);
 
   return (
@@ -81,11 +95,27 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
       }`}
     >
       <nav className="max-w-container-wide mx-auto px-6 py-4 flex justify-between items-center" aria-label="Primary">
-        <Link
-          to="/"
-          className="site-brand text-text font-bold text-xl font-heading tracking-tight hover:text-accent transition-colors"
-        >
-          {business}
+        <Link to="/" className="site-brand group flex items-center gap-2.5" aria-label={`${business} — home`}>
+          {logoOk ? (
+            <img
+              src="/apple-touch-icon.png"
+              alt={`${business} logo`}
+              width={36}
+              height={36}
+              className="site-logo h-9 w-9 rounded-lg object-cover border border-border shadow-sm shrink-0"
+              onError={() => setLogoOk(false)}
+            />
+          ) : (
+            <span
+              className="site-logo h-9 w-9 rounded-lg grid place-items-center bg-accent text-[var(--color-on-accent)] font-heading font-extrabold text-sm shadow-sm shrink-0"
+              aria-hidden="true"
+            >
+              {initials}
+            </span>
+          )}
+          <span className="text-text font-bold text-xl font-heading tracking-tight group-hover:text-accent transition-colors">
+            {business}
+          </span>
         </Link>
 
         <div className="hidden md:flex gap-6 items-center">

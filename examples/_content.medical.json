@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "a caring doctor listening to an older patient",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1631563019676-dade0dbdb8f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "a smiling family after a wellness visit"
+  "GALLERY_6_IMAGE_ALT": "a smiling family after a wellness visit",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1638202993928-7267aad84c31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "a doctor consulting a patient in a bright clinic",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1673865641073-4479f93a7776?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "a clinician reviewing a chart in an exam room"
 }

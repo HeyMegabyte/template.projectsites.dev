@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1676285437303-744ef82a0263?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxkZXNpZ25lciUyMHBvcnRmb2xpbyUyMGNyZWF0aXZlJTIwd29ya3xlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "a keyboard, mouse, and box sitting on a desk",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1573805672213-81b449b17e8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxkZXNpZ25lciUyMHBvcnRmb2xpbyUyMGNyZWF0aXZlJTIwd29ya3xlbnwxfDB8fHwxNzg3NjE4MDE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "turned-on laptop computer"
+  "GALLERY_6_IMAGE_ALT": "turned-on laptop computer",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "a photographer working in a creative studio",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1554941829-202a0b2403b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "a designer at a workstation reviewing work"
 }

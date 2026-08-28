@@ -59,6 +59,8 @@ const galleryImages = [
   { src: '{GALLERY_4_IMAGE_URL}', alt: '{GALLERY_4_IMAGE_ALT}' },
   { src: '{GALLERY_5_IMAGE_URL}', alt: '{GALLERY_5_IMAGE_ALT}' },
   { src: '{GALLERY_6_IMAGE_URL}', alt: '{GALLERY_6_IMAGE_ALT}' },
+  { src: '{GALLERY_7_IMAGE_URL}', alt: '{GALLERY_7_IMAGE_ALT}' },
+  { src: '{GALLERY_8_IMAGE_URL}', alt: '{GALLERY_8_IMAGE_ALT}' },
 ];
 
 const tiers: PricingTier[] = [

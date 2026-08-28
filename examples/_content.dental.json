@@ -165,5 +165,9 @@
   "GALLERY_5_IMAGE_URL": "https://images.unsplash.com/photo-1675526607070-f5cbd71dde92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw1fHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
   "GALLERY_5_IMAGE_ALT": "a close up of a woman with a smile on her face",
   "GALLERY_6_IMAGE_URL": "https://images.unsplash.com/photo-1663755787934-3742b0f5983a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTc1ODN8MHwxfHNlYXJjaHw2fHxoYXBweSUyMHBhdGllbnQlMjBkZW50YWwlMjBzbWlsZXxlbnwxfDB8fHwxNzg3NjE4MDExfDA&ixlib=rb-4.1.0&q=80&w=1080",
-  "GALLERY_6_IMAGE_ALT": "a man smiling at another man"
+  "GALLERY_6_IMAGE_ALT": "a man smiling at another man",
+  "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_7_IMAGE_ALT": "a modern dental treatment room with a patient chair",
+  "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1588776814546-daab30f310ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+  "GALLERY_8_IMAGE_ALT": "a dentist and assistant working on a patient"
 }
