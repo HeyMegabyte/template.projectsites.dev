@@ -256,6 +256,10 @@ p          { text-wrap: pretty; }
   pointer-events: none;
   z-index: -1;
 }
+/* A11y: users who disable transparency shouldn't get the decorative noise overlay. */
+@media (prefers-reduced-transparency: reduce) {
+  .grain::after { display: none; }
+}
 
 /* ─────────────────────────────────────────────────────────────────────────
    TYPE UTILITIES
