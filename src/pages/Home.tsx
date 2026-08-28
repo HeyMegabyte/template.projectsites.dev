@@ -234,6 +234,18 @@ export default function Home() {
     description: seoDescription,
   });
 
+  // Vertical-aware secondary CTA — mirrors the Header/Footer/CommandPalette logic
+  // so the "second action" always points at a page this vertical actually has.
+  // A medical/legal/nonprofit site has no /pricing (SaaS tiers would misrepresent
+  // it), so linking "See pricing" → /pricing sent visitors to a fabricated tier
+  // table (and an indexed dead page). Pricing verticals → pricing; quote verticals
+  // → quote; everyone else → services.
+  const ctaSecondary = featureOn('pricing')
+    ? { label: 'See pricing', href: '/pricing' }
+    : featureOn('quote')
+      ? { label: 'Get a quote', href: '/quote' }
+      : { label: 'View our services', href: '/services' };
+
   return (
     <>
       <JsonLd
@@ -359,7 +371,7 @@ export default function Home() {
             headline="{CTA_HEADLINE}"
             description="{CTA_DESCRIPTION}"
             primary={{ label: '{CTA_BUTTON}', href: '/contact' }}
-            secondary={{ label: 'See pricing', href: '/pricing' }}
+            secondary={ctaSecondary}
           />
         </SafeSection>
       )}

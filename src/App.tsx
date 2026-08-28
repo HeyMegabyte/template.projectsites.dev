@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop';
 import PageTransition from './components/PageTransition';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
+import { featureOn } from './brand';
 
 // Lazy-load every secondary route. Home + Gallery stay eager so the front door
 // (whichever mode the deploy is in) renders without a network round-trip.
@@ -48,8 +49,14 @@ export default function App() {
             <Route path="/studio"        element={<Studio />} />
             <Route path="/about"         element={<About />} />
             <Route path="/services"      element={<Services />} />
-            <Route path="/pricing"       element={<Pricing />} />
-            <Route path="/quote"         element={<Quote />} />
+            {/* /pricing + /quote are vertical-specific. A medical/legal/nonprofit
+                site has neither, so serving a SaaS-tier /pricing (or an estimate
+                /quote) there is a misleading, indexable dead page. Gate both to a
+                real 404 when their feature is off — matching the sitemap (which now
+                omits them) + the vertical-aware nav. TEMPLATE_MODE keeps the
+                template's own showcase rendering every page. */}
+            <Route path="/pricing"       element={featureOn('pricing') || TEMPLATE_MODE ? <Pricing /> : <NotFound />} />
+            <Route path="/quote"         element={featureOn('quote') || TEMPLATE_MODE ? <Quote /> : <NotFound />} />
             <Route path="/faq"           element={<FAQ />} />
             <Route path="/blog"          element={<Blog />} />
             <Route path="/blog/:slug"    element={<BlogPost />} />

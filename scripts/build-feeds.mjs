@@ -27,15 +27,29 @@ const SITE_NAME = business.name?.$value || business.name || 'ProjectSites Templa
 const SITE_TAGLINE = business.tagline?.$value || business.tagline || 'Cinematic React + Vite + Tailwind template';
 const AUTHOR = business.contactEmail?.$value || business.contactEmail || 'hey@megabyte.space';
 
-// Static routes (drives sitemap.xml).
+// Resolve a feature flag from _brand.json, tolerating the {$value} design-token
+// wrapper (features may be `true` or `{ $value: true }`). Mirrors featureOn() in
+// src/brand.ts so the sitemap agrees with the runtime nav/routes.
+const FEATURES = brand.features ?? {};
+const TEMPLATE_MODE = process.env.VITE_TEMPLATE_MODE === 'gallery';
+function feat(key) {
+  const v = FEATURES[key];
+  return Boolean(v && typeof v === 'object' ? v.$value : v);
+}
+
+// Static routes (drives sitemap.xml → which routes prerender-spa.mjs renders +
+// indexes). /pricing + /quote are vertical-specific: a medical/legal/nonprofit
+// site has neither, so emitting them here would index a misleading SaaS-tier
+// (or estimate) page. Gate them by feature — the template's own showcase
+// (VITE_TEMPLATE_MODE=gallery) still lists everything.
 const staticRoutes = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
   { path: '/gallery', priority: 0.9, changefreq: 'weekly' },
   { path: '/studio', priority: 0.8, changefreq: 'monthly' },
   { path: '/about', priority: 0.7, changefreq: 'monthly' },
   { path: '/services', priority: 0.8, changefreq: 'monthly' },
-  { path: '/pricing', priority: 0.9, changefreq: 'monthly' },
-  { path: '/quote', priority: 0.9, changefreq: 'monthly' },
+  { path: '/pricing', priority: 0.9, changefreq: 'monthly', requiresFeature: 'pricing' },
+  { path: '/quote', priority: 0.9, changefreq: 'monthly', requiresFeature: 'quote' },
   { path: '/faq', priority: 0.6, changefreq: 'monthly' },
   { path: '/blog', priority: 0.8, changefreq: 'weekly' },
   { path: '/team', priority: 0.5, changefreq: 'monthly' },
@@ -44,7 +58,7 @@ const staticRoutes = [
   { path: '/privacy', priority: 0.3, changefreq: 'yearly' },
   { path: '/terms', priority: 0.3, changefreq: 'yearly' },
   { path: '/accessibility', priority: 0.4, changefreq: 'yearly' },
-];
+].filter((r) => !r.requiresFeature || TEMPLATE_MODE || feat(r.requiresFeature));
 
 // Try to read posts from src/data/content.ts via dynamic import.
 // Falls back gracefully if the file doesn't exist yet (content-writer agent hasn't finished).
