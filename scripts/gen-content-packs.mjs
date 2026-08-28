@@ -1127,6 +1127,28 @@ const CONTACT_EXTRA = {
   },
 };
 
+// Contact page HEAD — the H1 (CONTACT_HEADLINE), its subheadline, and the page
+// meta description. These 3 tokens were never emitted, so /contact shipped an
+// EMPTY <h1> (gradient-text span with no text) on every vertical — an SEO + a11y
+// defect (empty heading, no keyworded H1). Each entry: [headline, subheadline, meta].
+// `_default` guarantees a non-empty H1 for any vertical not listed.
+const CONTACT_HEAD = {
+  medical: ['We’re here whenever you need us', 'Book a visit, ask about a result, or become a new patient — our team makes it simple.', 'Get in touch to book an appointment, ask about your care, or become a new patient. Friendly help by phone, email, or the form below.'],
+  dental: ['Let’s get you smiling', 'Schedule a cleaning, ask about a treatment, or become a new patient — we’d love to hear from you.', 'Contact us to book a cleaning or exam, ask about treatment options, or become a new patient. Reach our friendly front desk any way you like.'],
+  wellness: ['Come as you are', 'Book a session, ask about our services, or just say hello — we’re glad you’re here.', 'Reach out to book a session, ask about our services, or plan your first visit. Our team is here to help you feel calm, cared for, and welcome.'],
+  fitness: ['Ready when you are', 'Book a tour, start a trial, or ask about memberships — let’s get you moving.', 'Get in touch to book a tour, claim a free trial, or ask about memberships and class schedules. Our team helps you find the right fit fast.'],
+  legal: ['Let’s talk about your case', 'Request a consultation or ask a question — your first conversation is confidential and pressure-free.', 'Contact us to request a confidential consultation or ask about your situation. We respond promptly and explain your options in plain language.'],
+  restaurant: ['Come dine with us', 'Reserve a table, plan an event, or ask about the menu — we can’t wait to host you.', 'Get in touch to book a table, plan a private event, or ask about the menu and hours. We’d love to welcome you and make your visit memorable.'],
+  'local-service': ['Let’s get it handled', 'Request a quote, book a visit, or ask a question — we’ll respond fast.', 'Reach out for a free quote, to schedule service, or to ask a question. Our team responds quickly and shows up on time, every single visit.'],
+  nonprofit: ['Join us — every hand helps', 'Volunteer, donate, or ask how you can help — there’s a place here for you.', 'Get in touch to volunteer, donate, partner with us, or learn more about our mission. Every message helps us serve our community a little better.'],
+  retail: ['We’d love to help', 'Ask about a product, check availability, or plan a visit — we’re happy to help.', 'Contact us about a product, stock and availability, orders, or store hours. Our team is happy to help you find exactly what you’re looking for.'],
+  saas: ['Let’s build something great', 'Ask a question, book a demo, or talk to our team — we usually reply within a day.', 'Get in touch to book a demo, ask about pricing and features, or talk to our team. We typically respond within one business day, often sooner.'],
+  'real-estate': ['Let’s find your place', 'Ask about a listing, book a showing, or start your search — we’re here to guide you.', 'Reach out to ask about a listing, schedule a showing, or start your home search. Our team guides you through every step with real local insight.'],
+  agency: ['Let’s make something', 'Tell us about your project, book a call, or just say hi — we’re all ears.', 'Get in touch to scope a project, book a discovery call, or ask about our work. We reply quickly and love a good creative challenge.'],
+  portfolio: ['Let’s work together', 'Have a project in mind or just want to connect? Send a note — I’d love to hear from you.', 'Reach out to discuss a project, ask a question, or say hello. I read every message and reply personally — let’s create something together.'],
+  _default: ['Get in touch', 'Have a question or ready to get started? Send us a message and we’ll be right with you.', 'Contact us with any question or to get started. Reach our team by phone, email, or the form below — we’re glad to help and reply quickly.'],
+};
+
 // Pricing page — only the 3 verticals with features.pricing:true (saas, fitness,
 // wellness) render /pricing. Prices are HARD-CODED in src/pages/Pricing.tsx
 // ($49 / $149 / $499 per month), so names + descriptions + feature bullets must
@@ -1285,6 +1307,11 @@ function pack(v) {
   }
   const ch = CONTACT_HELP[v];
   if (ch) { o.CONTACT_HELP_TITLE = ch[0]; o.CONTACT_HELP_TEXT = ch[1]; }
+  // Contact page HEAD — H1 + subheadline + meta (were unemitted → empty <h1>).
+  const chd = CONTACT_HEAD[v] || CONTACT_HEAD._default;
+  o.CONTACT_HEADLINE = chd[0];
+  o.CONTACT_SUBHEADLINE = chd[1];
+  o.CONTACT_META_DESCRIPTION = chd[2];
   // FAQ page — two more general Q&A (→ 12-13 items total, 500+ words).
   const fm2 = FAQ_MORE2[v];
   if (fm2) fm2.forEach(([q, a], i) => { o[`FAQ_MORE_${i + 5}_Q`] = q; o[`FAQ_MORE_${i + 5}_A`] = a; });
