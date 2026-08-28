@@ -53,7 +53,7 @@ function linkResolves(link) {
 
 const CONTRAST_EXEMPT_DIR = /\/components\/local\//;
 
-// ── Empty-H1 prevention ──
+// ── Empty-H1 + empty-meta-description prevention ──
 // A page that renders `{SOME_TOKEN}` inside an <h1> ships a BLANK heading on any
 // vertical whose content pack never emits that token: the fill-safety-net writes
 // "" (not a leaked `{TOKEN}`), so BOTH the {TOKEN}-leak gate (nothing leaked) AND
@@ -72,18 +72,25 @@ if (fs.existsSync(examplesDir)) {
     } catch { /* a malformed pack shouldn't crash the gate */ }
   }
 }
-function h1Tokens(src) {
-  const toks = new Set();
+function emptyRiskTokens(src) {
+  const out = [];
+  const seen = new Set();
+  const add = (tok, kind) => { const key = kind + ':' + tok; if (!seen.has(key)) { seen.add(key); out.push({ tok, kind }); } };
   // inline <h1>…</h1> (About/Services/Contact render `{'{X_HEADLINE}'}` in a span)
   for (const block of src.match(/<h1[\s>][\s\S]*?<\/h1>/g) || []) {
-    for (const m of block.matchAll(/\{([A-Z][A-Z0-9_]{3,})\}/g)) toks.add(m[1]);
+    for (const m of block.matchAll(/\{([A-Z][A-Z0-9_]{3,})\}/g)) add(m[1], 'h1');
   }
   // component heading marked as="h1" with a token headline (Pricing pattern)
   for (const m of src.matchAll(/as=["']h1["']/g)) {
     const win = src.slice(Math.max(0, m.index - 220), m.index + 220);
-    for (const hm of win.matchAll(/headline=["']\{([A-Z][A-Z0-9_]{3,})\}["']/g)) toks.add(hm[1]);
+    for (const hm of win.matchAll(/headline=["']\{([A-Z][A-Z0-9_]{3,})\}["']/g)) add(hm[1], 'h1');
   }
-  return toks;
+  // useSEO({ description: '{X_META_DESCRIPTION}' }) — a bare-token meta description
+  // no pack emits ships an EMPTY <meta name="description"> (blank SERP snippet).
+  // Only whole-token values (quoted OR backticked) count; computed `${brand…}`
+  // literals always have text and are correctly skipped.
+  for (const m of src.matchAll(/description:\s*(['"`])\{([A-Z][A-Z0-9_]{3,})\}\1/g)) add(m[2], 'meta');
+  return out;
 }
 
 for (const f of walk(SRC)) {
@@ -98,11 +105,15 @@ for (const f of walk(SRC)) {
     }
   }
 
-  // 2) empty-H1 risk — page <h1> token must be emitted by a content pack
+  // 2) empty-H1 / empty-meta risk — page <h1> + useSEO description tokens must be
+  //    emitted by a content pack (else they fill EMPTY and ship a blank heading /
+  //    meta description that still passes the leak-gate + exactly-1-H1 gate).
   if (PACK_TOKENS.size && /\/pages\//.test(rel)) {
-    for (const tok of h1Tokens(src)) {
+    for (const { tok, kind } of emptyRiskTokens(src)) {
       if (!PACK_TOKENS.has(tok)) {
-        violations.push({ kind: 'empty-h1-risk', file: rel, detail: `<h1> renders {${tok}} but NO content pack emits it — every vertical would ship an EMPTY <h1>. Emit ${tok} in scripts/gen-content-packs.mjs, or hardcode the heading.` });
+        const surface = kind === 'h1' ? 'an EMPTY <h1>' : 'a BLANK <meta name="description">';
+        const where = kind === 'h1' ? 'an <h1>' : 'useSEO({description})';
+        violations.push({ kind: `empty-${kind}-risk`, file: rel, detail: `renders {${tok}} in ${where} but NO content pack emits it — every vertical would ship ${surface}. Emit ${tok} in scripts/gen-content-packs.mjs, or use a static/computed value.` });
       }
     }
   }
@@ -125,4 +136,4 @@ if (violations.length) {
   console.error('');
   process.exit(1);
 }
-console.log(`✓ validate-site: ${routes.size} routes; internal links resolve; no light-on-light contrast; every page <h1> token emitted by a pack (${PACK_TOKENS.size} pack tokens)`);
+console.log(`✓ validate-site: ${routes.size} routes; internal links resolve; no light-on-light contrast; every page <h1> + meta-description token emitted by a pack (${PACK_TOKENS.size} pack tokens)`);
