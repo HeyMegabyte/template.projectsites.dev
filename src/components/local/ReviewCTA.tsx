@@ -7,6 +7,15 @@ interface ReviewCTAProps {
   qrCodeSrc?: string;
 }
 
+/**
+ * `ReviewCTA` — a smart review gate: 4-5 stars route to a public Google review, 1-3 stars open
+ * a private feedback form (protects the public rating while still capturing the signal). Cinematic
+ * + theme-token: a `card-tactile` panel floats over a soft OKLCH accent aura, the star icon badge
+ * carries an accent ring, the picker stars glow + spring on hover, and the whole card reveals on
+ * scroll. Legible on light AND dark verticals — the old hardcoded `text-white`/`bg-white/5` assumed
+ * a dark canvas, and the "Send Feedback" button referenced a non-existent `--color-primary` token
+ * (invisible background); both fixed to real theme tokens.
+ */
 export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCTAProps) {
   const [rating, setRating] = useState(0);
   const [hoveredStar, setHoveredStar] = useState(0);
@@ -41,54 +50,50 @@ export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCT
 
   return (
     <section className="py-16">
-      <div className="max-w-lg mx-auto px-6">
-        <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 text-center overflow-hidden">
-          {/* Gradient border effect */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--color-accent)]/20 via-transparent to-[var(--color-primary)]/20 pointer-events-none" />
+      <div className="max-w-lg mx-auto px-6 reveal-on-view">
+        <div className="review-cta relative card-tactile rounded-2xl p-8 text-center overflow-hidden">
+          {/* soft accent aura */}
+          <div className="review-cta-aura" aria-hidden="true" />
 
           <div className="relative z-10">
             {!submitted ? (
               <>
-                <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center">
-                  <Star size={28} className="text-[var(--color-accent)]" />
+                <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-[var(--color-accent)]/12 ring-1 ring-accent/30 flex items-center justify-center">
+                  <Star size={28} className="text-accent" />
                 </div>
 
-                <h2 className="text-2xl font-heading font-bold text-white mb-2">
-                  Love our service?
-                </h2>
-                <p className="text-white/60 text-sm mb-6">
-                  Your review helps others find {businessName}
-                </p>
+                <h2 className="text-2xl font-heading font-bold text-text mb-2 text-balance">Love our service?</h2>
+                <p className="text-text-muted text-sm mb-6">Your review helps others find {businessName}</p>
 
                 {/* Star picker */}
                 <div className="flex justify-center gap-2 mb-6" role="radiogroup" aria-label="Rate your experience">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      onClick={() => handleStarClick(star)}
-                      onMouseEnter={() => setHoveredStar(star)}
-                      onMouseLeave={() => setHoveredStar(0)}
-                      className="p-1 transition-transform hover:scale-110 active:scale-95"
-                      aria-label={`${star} star${star > 1 ? 's' : ''}`}
-                      role="radio"
-                      aria-checked={rating === star}
-                    >
-                      <Star
-                        size={36}
-                        className={
-                          star <= (hoveredStar || rating)
-                            ? 'text-yellow-400 fill-yellow-400 drop-shadow-[0_0_6px_rgba(250,204,21,0.4)]'
-                            : 'text-white/20'
-                        }
-                      />
-                    </button>
-                  ))}
+                  {[1, 2, 3, 4, 5].map((star) => {
+                    const lit = star <= (hoveredStar || rating);
+                    return (
+                      <button
+                        key={star}
+                        onClick={() => handleStarClick(star)}
+                        onMouseEnter={() => setHoveredStar(star)}
+                        onMouseLeave={() => setHoveredStar(0)}
+                        className="p-1 transition-transform hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded motion-reduce:transition-none motion-reduce:hover:scale-100"
+                        aria-label={`${star} star${star > 1 ? 's' : ''}`}
+                        role="radio"
+                        aria-checked={rating === star}
+                      >
+                        <Star
+                          size={36}
+                          className={lit ? 'text-yellow-400 fill-yellow-400 drop-shadow-[0_0_7px_rgba(250,204,21,0.5)]' : ''}
+                          style={lit ? undefined : { color: 'var(--color-text-subtle)', opacity: 0.4 }}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Private feedback form */}
                 {showFeedback && (
                   <form onSubmit={handleFeedbackSubmit} className="space-y-4 motion-safe:animate-[fadeIn_200ms_ease-out]">
-                    <div className="flex items-center gap-2 text-white/60 text-sm mb-2">
+                    <div className="flex items-center gap-2 text-text-muted text-sm mb-2">
                       <MessageSquare size={16} />
                       <span>We&apos;d love to hear how we can improve</span>
                     </div>
@@ -97,12 +102,12 @@ export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCT
                       onChange={(e) => setFeedback(e.target.value)}
                       placeholder="Tell us what happened..."
                       rows={4}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[var(--color-accent)]/50 resize-none"
+                      className="w-full card-tactile rounded-lg px-4 py-3 text-text text-sm placeholder:text-text-muted focus:outline-none focus:border-accent/50 resize-none"
                       required
                     />
                     <button
                       type="submit"
-                      className="w-full bg-[var(--color-primary)] text-white font-semibold py-3 rounded-lg transition-all hover:brightness-110 active:scale-[0.98]"
+                      className="w-full bg-accent hover:bg-accent-hover text-[var(--color-on-accent)] font-semibold py-3 rounded-lg transition-all hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                     >
                       Send Feedback
                     </button>
@@ -111,12 +116,12 @@ export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCT
 
                 {/* QR Code */}
                 {qrCodeSrc && !showFeedback && (
-                  <div className="mt-6 pt-6 border-t border-white/10">
-                    <p className="text-white/40 text-xs mb-3">Or scan to review</p>
+                  <div className="mt-6 pt-6 border-t border-border">
+                    <p className="text-text-muted text-xs mb-3">Or scan to review</p>
                     <img
                       src={qrCodeSrc}
                       alt="Scan to leave a review"
-                      className="w-28 h-28 mx-auto rounded-lg"
+                      className="w-28 h-28 mx-auto rounded-lg bg-surface p-1"
                       loading="lazy"
                       decoding="async"
                     />
@@ -128,7 +133,7 @@ export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCT
                     href={googleReviewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[var(--color-accent)] hover:text-[var(--color-accent)]/80 text-sm font-medium mt-6 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-accent hover:text-accent/80 text-sm font-medium mt-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70 rounded"
                     onClick={() => track('review_click', { source: 'direct_link' })}
                   >
                     <ExternalLink size={14} />
@@ -137,19 +142,27 @@ export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCT
                 )}
               </>
             ) : (
-              <div className="py-4">
-                <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-green-500/10 flex items-center justify-center">
+              <div className="py-4 motion-safe:animate-[fadeIn_220ms_ease-out]">
+                <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-green-500/10 ring-1 ring-green-500/30 flex items-center justify-center">
                   <MessageSquare size={28} className="text-green-400" />
                 </div>
-                <h3 className="text-xl font-heading font-bold text-white mb-2">Thank you!</h3>
-                <p className="text-white/60 text-sm">
-                  Your feedback helps us serve you better.
-                </p>
+                <h3 className="text-xl font-heading font-bold text-text mb-2">Thank you!</h3>
+                <p className="text-text-muted text-sm">Your feedback helps us serve you better.</p>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      <style>{`
+        .review-cta-aura {
+          position: absolute; inset: -30% -10% -40%;
+          background: radial-gradient(55% 55% at 50% 0%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 70%);
+          filter: blur(30px); pointer-events: none;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .review-cta-aura { display: none; } }
+      `}</style>
     </section>
   );
 }
