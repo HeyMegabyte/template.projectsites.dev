@@ -15,23 +15,37 @@ interface MapEmbedProps {
   mapsApiKey?: string;
 }
 
+/**
+ * `MapEmbed` — the location section: a framed Google Maps embed beside address / phone / today-aware
+ * hours. Cinematic + theme-token: the map frame carries an accent hairline and warms to an accent
+ * border on hover, the columns reveal on scroll, the address/phone rows nudge their icon on hover,
+ * and today's hours glow with a live pulse dot. Fixes a latent bug — the section background used a
+ * non-existent `--color-bg-secondary` token falling back to hardcoded `#0a0a1a` (a dark band on
+ * light verticals); now `bg-surface`, theme-aware.
+ */
 export default function MapEmbed({ lat, lng, address, directionsUrl, phone, hours, mapsApiKey }: MapEmbedProps) {
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
   const mapSrc = mapsApiKey
     ? `https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}&q=${lat},${lng}&maptype=roadmap`
     : `https://www.google.com/maps?q=${lat},${lng}&output=embed`;
 
+  const track = (event: string, props?: Record<string, unknown>) => {
+    window.gtag?.('event', event, props);
+    window.posthog?.capture(event, props);
+  };
+
   return (
-    <section className="py-20 bg-[var(--color-bg-secondary,#0a0a1a)]">
+    <section className="map-embed py-20 bg-surface">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 reveal-on-view">
           {/* Map */}
-          <div className="lg:col-span-3 rounded-xl overflow-hidden border border-white/10">
+          <div className="map-frame lg:col-span-3 relative rounded-xl overflow-hidden border border-border transition-colors duration-300 hover:border-accent/40">
+            <div className="map-frame-rule" aria-hidden="true" />
             <iframe
               src={mapSrc}
               width="100%"
               height="400"
-              style={{ border: 0 }}
+              style={{ border: 0, display: 'block' }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -46,15 +60,15 @@ export default function MapEmbed({ lat, lng, address, directionsUrl, phone, hour
               href={directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-3 text-white/80 hover:text-[var(--color-accent)] transition-colors group"
-              onClick={() => {
-                if (typeof gtag !== 'undefined') gtag('event', 'direction_click');
-                if (typeof posthog !== 'undefined') posthog.capture('direction_click');
-              }}
+              className="group flex items-start gap-3 text-text-muted hover:text-accent transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+              onClick={() => track('direction_click')}
             >
-              <MapPin size={20} className="text-[var(--color-accent)] mt-0.5 shrink-0" />
+              <MapPin
+                size={20}
+                className="text-accent mt-0.5 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none"
+              />
               <div>
-                <p className="font-semibold text-white group-hover:text-[var(--color-accent)]">Get Directions</p>
+                <p className="font-semibold text-text group-hover:text-accent transition-colors">Get Directions</p>
                 <p className="text-sm">{address}</p>
               </div>
             </a>
@@ -63,37 +77,60 @@ export default function MapEmbed({ lat, lng, address, directionsUrl, phone, hour
             {phone && (
               <a
                 href={`tel:${phone}`}
-                className="flex items-center gap-3 text-white/80 hover:text-[var(--color-accent)] transition-colors"
-                onClick={() => {
-                  if (typeof gtag !== 'undefined') gtag('event', 'phone_click', { phone });
-                  if (typeof posthog !== 'undefined') posthog.capture('phone_click', { phone });
-                }}
+                className="group flex items-center gap-3 text-text-muted hover:text-accent transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+                onClick={() => track('phone_click', { phone })}
               >
-                <PhoneIcon size={20} className="text-[var(--color-accent)] shrink-0" />
-                <span className="font-semibold">{phone}</span>
+                <PhoneIcon
+                  size={20}
+                  className="text-accent shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none"
+                />
+                <span className="font-semibold text-text group-hover:text-accent transition-colors">{phone}</span>
               </a>
             )}
 
             {/* Hours */}
             {hours && hours.length > 0 && (
               <div className="flex items-start gap-3">
-                <Clock size={20} className="text-[var(--color-accent)] mt-0.5 shrink-0" />
-                <div className="space-y-1 text-sm">
-                  {hours.map(({ day, hours: h }) => (
-                    <div
-                      key={day}
-                      className={`flex justify-between gap-6 ${day === today ? 'text-[var(--color-accent)] font-semibold' : 'text-white/60'}`}
-                    >
-                      <span>{day}</span>
-                      <span>{h}</span>
-                    </div>
-                  ))}
+                <Clock size={20} className="text-accent mt-0.5 shrink-0" />
+                <div className="space-y-1 text-sm w-full">
+                  {hours.map(({ day, hours: h }) => {
+                    const isToday = day === today;
+                    return (
+                      <div
+                        key={day}
+                        className={`flex justify-between gap-6 ${isToday ? 'text-accent font-semibold' : 'text-text-muted'}`}
+                      >
+                        <span className="inline-flex items-center gap-2">
+                          {isToday && <span className="map-today-dot" aria-hidden="true" />}
+                          {day}
+                        </span>
+                        <span>{h}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      <style>{`
+        .map-frame-rule {
+          position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 1; pointer-events: none;
+          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 55%, transparent), transparent);
+        }
+        .map-today-dot {
+          width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .map-today-dot { animation: mapPulse 2.4s ease-in-out infinite; }
+          @keyframes mapPulse {
+            0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 55%, transparent); }
+            50% { box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-accent) 0%, transparent); }
+          }
+        }
+      `}</style>
     </section>
   );
 }
