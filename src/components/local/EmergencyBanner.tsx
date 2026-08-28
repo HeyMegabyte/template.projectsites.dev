@@ -1,4 +1,4 @@
-import { Phone, AlertTriangle } from 'lucide-react';
+import { Phone, AlertTriangle, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface EmergencyBannerProps {
@@ -46,12 +46,20 @@ function isOutsideBusinessHours(businessHours: Record<string, string>, timezone?
   return currentMinutes < openMinutes || currentMinutes >= closeMinutes;
 }
 
+/**
+ * `EmergencyBanner` — an after-hours alert bar that only appears outside business hours, offering
+ * a one-tap emergency call (for HVAC / plumbing / medical / any 24-7 service). The red/white is
+ * intentional — a solid urgent alert reads correctly on any theme (not the dark-assumed bug). It
+ * announces via `role="alert"`, the warning icon gives a subtle attention pulse, the call button
+ * glows, and it can be dismissed. All motion is `prefers-reduced-motion` gated.
+ */
 export default function EmergencyBanner({
   emergencyPhone,
   businessHours,
   timezone,
 }: EmergencyBannerProps) {
   const [afterHours, setAfterHours] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     setAfterHours(isOutsideBusinessHours(businessHours, timezone));
@@ -63,7 +71,7 @@ export default function EmergencyBanner({
     return () => clearInterval(interval);
   }, [businessHours, timezone]);
 
-  if (!afterHours) return null;
+  if (!afterHours || dismissed) return null;
 
   const track = (event: string, props?: Record<string, unknown>) => {
     window.gtag?.('event', event, props);
@@ -71,15 +79,16 @@ export default function EmergencyBanner({
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] bg-red-600/95 backdrop-blur-sm border-b border-red-400/30 motion-safe:animate-[slideDown_300ms_ease-out]">
+    <div
+      role="alert"
+      className="emergency-banner fixed top-0 left-0 right-0 z-[60] bg-red-600/95 backdrop-blur-sm border-b border-red-400/30 motion-safe:animate-[slideDown_300ms_ease-out]"
+    >
       <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
-        <AlertTriangle size={18} className="text-white shrink-0" />
-        <span className="text-white text-sm font-medium">
-          After Hours?
-        </span>
+        <AlertTriangle size={18} className="emergency-pulse text-white shrink-0" aria-hidden="true" />
+        <span className="text-white text-sm font-medium">After Hours?</span>
         <a
           href={`tel:${emergencyPhone}`}
-          className="inline-flex items-center gap-1.5 bg-white/20 hover:bg-white/30 text-white font-bold text-sm px-4 py-1.5 rounded-full transition-colors active:scale-95"
+          className="inline-flex items-center gap-1.5 bg-white/20 hover:bg-white/30 text-white font-bold text-sm px-4 py-1.5 rounded-full transition-all hover:shadow-[0_0_14px_rgba(255,255,255,0.35)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 motion-reduce:transition-none"
           onClick={() => track('phone_click', { phone: emergencyPhone, after_hours: true })}
         >
           <Phone size={14} strokeWidth={2.5} />
@@ -87,10 +96,26 @@ export default function EmergencyBanner({
         </a>
       </div>
 
+      <button
+        type="button"
+        onClick={() => setDismissed(true)}
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+        aria-label="Dismiss after-hours banner"
+      >
+        <X size={16} />
+      </button>
+
       <style>{`
         @keyframes slideDown {
           from { transform: translateY(-100%); }
           to { transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .emergency-pulse { animation: emergencyPulse 1.8s ease-in-out infinite; transform-origin: center; }
+          @keyframes emergencyPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.18); opacity: 0.75; }
+          }
         }
       `}</style>
     </div>
