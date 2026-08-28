@@ -1127,6 +1127,100 @@ const CONTACT_EXTRA = {
   },
 };
 
+// Pricing page — only the 3 verticals with features.pricing:true (saas, fitness,
+// wellness) render /pricing. Prices are HARD-CODED in src/pages/Pricing.tsx
+// ($49 / $149 / $499 per month), so names + descriptions + feature bullets must
+// FIT those price points. Comparison rows 3 and 4 have fixed value patterns in
+// the page ('—'/'10 GB'/'Unlimited' and false/'partial'/true), so those two row
+// labels describe a quantity and a partially-included capability. Without these
+// tokens the page ships thin (empty tiers collapse) — journey 2026-08-28.
+const PRICING = {
+  saas: {
+    headline: 'Simple pricing that scales with your team',
+    subheadline: 'Start free, upgrade when you are ready, and only pay for what your team actually uses. Every plan includes core features, honest billing, and real human support.',
+    meta: 'Clear, month-to-month pricing for teams of every size. Compare the Starter, Pro, and Enterprise plans, then start a 14-day free trial with no credit card required.',
+    tiers: [
+      {
+        name: 'Starter',
+        desc: 'Everything a small team needs to get organized and move faster, without the busywork.',
+        features: ['Up to 5 team members', '10,000 tracked events per month', '3 shared dashboards', 'Email support within one business day'],
+      },
+      {
+        name: 'Pro',
+        desc: 'Built for growing teams that want deeper insight, more automation, and faster answers.',
+        features: ['Up to 25 team members', '250,000 tracked events per month', 'Unlimited dashboards and reports', '50+ app integrations', 'Priority chat and email support'],
+      },
+      {
+        name: 'Enterprise',
+        desc: 'Advanced security, control, and support for larger organizations that cannot slow down.',
+        features: ['Unlimited team members', 'Unlimited tracked events', 'Single sign-on with SAML and SCIM', 'Role-based access and audit logs', 'A 99.9% uptime SLA in writing', 'A dedicated account manager'],
+      },
+    ],
+    compare: ['Core analytics and dashboards', 'Third-party integrations', 'Monthly event volume', 'Single sign-on (SSO/SAML)', 'Dedicated account manager'],
+    faqs: [
+      ['Is there a free trial?', 'Yes. Every plan starts with a 14-day free trial and no credit card is required. You get full access to the platform, so you can connect your tools, invite your team, and see the value before you ever pay a cent.'],
+      ['Can I change or cancel my plan anytime?', 'You can. Upgrade, downgrade, or cancel whenever you like, right from your account settings, with no phone call and no penalty. If you cancel, you keep access through the end of the period you already paid for.'],
+      ['Can I export my data if I leave?', 'Always. Your data belongs to you. You can export your events, reports, and account data to CSV at any time, and we will never hold it hostage or make you jump through hoops to get it back.'],
+    ],
+  },
+  fitness: {
+    headline: 'Membership plans for every goal',
+    subheadline: 'Pick the plan that matches how often you train. Every membership is month-to-month, with expert coaching, no long contracts, and the freedom to change or pause whenever life happens.',
+    meta: 'Simple month-to-month gym memberships for every level. Compare the Basic, Premium, and Unlimited plans, then book a free first session to find the right fit.',
+    tiers: [
+      {
+        name: 'Basic',
+        desc: 'A great start for lifters who want to train on their own schedule during the week.',
+        features: ['Open-gym access on weekdays', 'Two group classes each week', 'Full use of racks, bars, and machines', 'A free intro session with a coach'],
+      },
+      {
+        name: 'Premium',
+        desc: 'Our most popular plan, for members who want more classes and hands-on coaching.',
+        features: ['Open-gym access seven days a week', 'Unlimited group classes', 'A personalized training program', 'One guest pass every month', 'Monthly form checks with a coach'],
+      },
+      {
+        name: 'Unlimited',
+        desc: 'The full experience for serious athletes who want coaching, recovery, and one-on-one time.',
+        features: ['Everything in the Premium plan', 'Two private personal-training sessions a month', 'Full recovery-room and mobility access', 'Nutrition guidance built for your goals', 'Bring a friend to any class, anytime', 'Priority booking on every class'],
+      },
+    ],
+    compare: ['Open-gym access', 'Personal training sessions', 'Guest passes per month', 'Recovery-room access', 'Priority class booking'],
+    faqs: [
+      ['Can I freeze my membership?', 'Of course. Life gets busy, and travel or injury happens. You can freeze your membership for up to three months a year at no charge, and pick right back up where you left off whenever you are ready to train again.'],
+      ['Is there a long-term contract?', 'No. Every membership is month-to-month, so you are never locked in. Cancel anytime with 30 days notice, no hoops and no hard feelings. We would rather earn your membership each month than trap you in a contract.'],
+      ['Do you offer single-visit drop-ins?', 'We do. If you are visiting from out of town or just want to try us out, you can buy a single day pass and join any open-gym session or class. It is a low-pressure way to feel the gym before you commit to a plan.'],
+    ],
+  },
+  wellness: {
+    headline: 'Packages for the way you want to feel',
+    subheadline: 'Whether you visit now and then or make wellness a weekly habit, there is a plan for you. Every package is flexible, easy to book, and free of long contracts or pressure.',
+    meta: 'Flexible wellness packages for every routine. Compare the Essential, Signature, and Membership plans, then book your first visit and start feeling your best.',
+    tiers: [
+      {
+        name: 'Essential',
+        desc: 'A relaxed way to begin, for guests who like to book a treatment when the mood strikes.',
+        features: ['One signature treatment each month', 'Online booking that takes seconds', 'Ten percent off any add-on service', 'A warm welcome for first-time guests'],
+      },
+      {
+        name: 'Signature',
+        desc: 'Our most-loved plan, for guests who make self-care a regular and rewarding habit.',
+        features: ['Two signature treatments each month', 'Priority booking on the best time slots', 'Fifteen percent off all add-on services', 'One guest pass to share each month', 'A complimentary birthday treatment'],
+      },
+      {
+        name: 'Membership',
+        desc: 'The complete experience for guests who want the calm of a weekly wellness ritual.',
+        features: ['Four signature treatments each month', 'First choice on every appointment', 'Twenty percent off all products and add-ons', 'Bring a guest to any visit, anytime', 'Free access to seasonal wellness events', 'Rollover for any unused treatments'],
+      },
+    ],
+    compare: ['Signature treatments included', 'Priority booking', 'Add-on and product discount', 'Guest passes', 'Rollover of unused visits'],
+    faqs: [
+      ['How do I book my appointments?', 'It takes just a few seconds. Book online anytime from your phone or computer, choose the treatment and time that suit you, and you are set. Members get first pick of the calendar, so the best slots are yours before anyone else.'],
+      ['What if I need to reschedule?', 'No problem at all. You can reschedule or cancel online up to 24 hours before your visit at no charge. We know plans change, so we keep it simple and never penalize you for taking care of the rest of your life.'],
+      ['Do you offer gift cards?', 'We do, and they make a wonderful gift. Gift cards can be bought online in any amount and used toward treatments, packages, or products. There is no expiration to worry about, so your recipient can relax and redeem it whenever they like.'],
+    ],
+  },
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -1210,6 +1304,23 @@ function pack(v) {
   for (let i = 0; i < 8; i++) if (gal[i]) {
     o[`GALLERY_${i + 1}_IMAGE_URL`] = gal[i].src;
     o[`GALLERY_${i + 1}_IMAGE_ALT`] = gal[i].alt;
+  }
+  // Pricing page — only emitted for verticals that render /pricing (features.pricing
+  // true: saas, fitness, wellness). Tier feature counts match src/pages/Pricing.tsx
+  // exactly (Starter 4, Pro 5, Enterprise 6). Every token below is rendered by the
+  // page, so all MUST be emitted or the page ships thin (distUnfilledTokens gate).
+  const pr = PRICING[v];
+  if (pr) {
+    o.PRICING_HEADLINE = pr.headline;
+    o.PRICING_SUBHEADLINE = pr.subheadline;
+    o.PRICING_META_DESCRIPTION = pr.meta;
+    pr.tiers.forEach((t, i) => {
+      o[`TIER_${i + 1}_NAME`] = t.name;
+      o[`TIER_${i + 1}_DESC`] = t.desc;
+      t.features.forEach((f, j) => { o[`TIER_${i + 1}_F${j + 1}`] = f; });
+    });
+    pr.compare.forEach((f, i) => { o[`COMPARE_${i + 1}_FEATURE`] = f; });
+    pr.faqs.forEach(([q, a], i) => { o[`PRICING_FAQ_${i + 1}_Q`] = q; o[`PRICING_FAQ_${i + 1}_A`] = a; });
   }
   return o;
 }
