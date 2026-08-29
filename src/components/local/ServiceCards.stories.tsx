@@ -24,7 +24,7 @@ export const WithImagesAndPrices: Story = {
         name: 'AC Repair & Tune-Up',
         description: 'Fast, honest diagnostics and lasting fixes to keep your home cool all summer.',
         image:
-          'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+          'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080',
         price: 'From $89',
         bookingUrl: '#',
       },
@@ -32,7 +32,7 @@ export const WithImagesAndPrices: Story = {
         name: 'Furnace Installation',
         description: 'Efficient, code-compliant heating systems sized right for your space.',
         image:
-          'https://images.unsplash.com/photo-1631545806609-24f2b568d2e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+          'https://images.unsplash.com/photo-1631545806609-24f2b568d2e0?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080',
         price: 'Free quote',
         bookingUrl: '#',
       },

@@ -21,9 +21,9 @@ export const WhiteningResult: Story = {
   args: {
     label: 'Professional whitening — one visit',
     beforeSrc:
-      'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080',
     afterSrc:
-      'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080',
     beforeAlt: 'Smile before professional whitening',
     afterAlt: 'Brighter smile after professional whitening',
   },
@@ -33,9 +33,9 @@ export const WhiteningResult: Story = {
 export const NoLabel: Story = {
   args: {
     beforeSrc:
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080',
     afterSrc:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080',
     beforeAlt: 'Room before the remodel',
     afterAlt: 'Room after the remodel',
   },

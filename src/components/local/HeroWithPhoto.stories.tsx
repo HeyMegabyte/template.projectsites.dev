@@ -17,7 +17,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const IMG =
-  'https://images.unsplash.com/photo-1540555700478-4be289fbecef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920';
+  'https://images.unsplash.com/photo-1540555700478-4be289fbecef?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1920';
 
 /** Full hero — rating badge, both CTAs, Ken-Burns image, scroll cue. */
 export const FullHero: Story = {
