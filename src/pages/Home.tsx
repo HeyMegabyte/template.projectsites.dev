@@ -111,6 +111,12 @@ const logos: Logo[] = [
  */
 function HomeContact() {
   const { name, phone, email, address, hours } = brand.business;
+  // Per-vertical contact headline (was a hardcoded "Request your free estimate" — a
+  // local-service phrase wrong for realty/medical/legal/etc.). Reuses the pack's existing
+  // on-brand CONTACT_HEADLINE (real-estate "Let's find your place", medical "We're here
+  // whenever you need us", …). Quoted-literal token keeps the local build valid; the
+  // container fills it — and it self-heals from the safety net if ever unfilled.
+  const contactHeadline = '{CONTACT_HEADLINE}';
   const telHref = phone ? `tel:${phone.replace(/[^+\d]/g, '')}` : '';
   const mapHref = address
     ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
@@ -123,7 +129,7 @@ function HomeContact() {
         <div className="text-center mb-14">
           <span className="text-accent text-sm font-mono tracking-widest uppercase">Get in touch</span>
           <h2 className="mt-4 text-4xl md:text-5xl font-extrabold font-heading tracking-[-0.02em]">
-            <span className="gradient-text">Request your free estimate</span>
+            <span className="gradient-text">{contactHeadline}</span>
           </h2>
           <p className="mt-4 text-text-muted max-w-2xl mx-auto text-lg">
             Tell us what you need and {name} will get back to you within one business day.
