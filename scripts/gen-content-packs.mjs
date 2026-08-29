@@ -105,7 +105,7 @@ const V = {
     meta: ['An experienced law firm offering family law, estate planning, personal injury, business, and real estate representation.', 'Our practice areas: family law, estate planning, personal injury, business law, real estate, and probate.'],
   },
   restaurant: {
-    hero: ['Fresh flavors, made from scratch', 'A warm table for family and friends, with a menu built from local ingredients and a whole lot of heart.', 'Reserve a table', 'View menu'],
+    hero: ['Fresh flavors, made from scratch', 'A warm table for family and friends, with a from-scratch menu built on local ingredients, honest cooking, and a whole lot of heart — the kind of neighborhood place you come back to again and again.', 'Reserve a table', 'View menu'],
     badges: ['Locally sourced', 'Reservations welcome', 'Private events & catering'],
     features: [['Made from scratch', 'We cook everything in house, from the sauces to the desserts.'], ['Local ingredients', 'We source from nearby farms, so the menu changes with the season.'], ['Warm atmosphere', 'A cozy room that feels right for date night or the whole family.'], ['Catering & events', 'From office lunches to celebrations, we bring the flavor to you.'], ['Craft drinks', 'A thoughtful list of wine, beer, and house cocktails.'], ['Easy reservations', 'Book your table online in seconds.']],
     servicesHead: ['On the menu', 'Honest, delicious food made fresh every day.'],
@@ -117,7 +117,7 @@ const V = {
     faqHead: ['Good to know', 'Answers before you visit.'],
     faqs: [['Do you take reservations?', 'Yes, you can book online or call us. Walk-ins are always welcome too, based on availability.'], ['Do you offer catering?', 'We do. From office lunches to celebrations, we cater events of every size with fresh, made-to-order food.'], ['Do you have vegetarian or gluten-free options?', 'Plenty. Our menu marks these dishes, and the kitchen is happy to accommodate dietary needs.'], ['Can I host a private event?', 'Absolutely. Reach out and we will help you plan a menu and space that fit your occasion.']],
     cta: ['Come hungry, leave happy', 'Reserve your table today and taste the difference fresh, local, and made-from-scratch makes.', 'Reserve a table'],
-    about: ['Good food, made with heart', 'We started with a simple idea: cook honest food from local ingredients and treat every guest like family. That is still exactly what we do.', 'Our kitchen philosophy', 'Fresh over frozen, local over far away, and made from scratch every single day. Great food should taste like someone cared, because we do.'],
+    about: ['Good food, made with heart', 'We started with a simple idea: cook honest food from local ingredients, pour real care into every plate, and treat every guest like family who just walked through the door. Years later, that is still exactly what we do — one fresh, made-from-scratch meal at a time.', 'Our kitchen philosophy', 'Fresh over frozen, local over far away, and made from scratch every single day. Great food should taste like someone cared, because we do.'],
     meta: ['A neighborhood restaurant serving fresh, made-from-scratch food from local ingredients, with catering and private events.', 'See our menu: chef specials, brunch, dinner, desserts, plus catering and private events for any occasion.'],
   },
   'local-service': {
