@@ -137,7 +137,7 @@ const V = {
     meta: ['Licensed, insured local pros offering fast repairs, installations, maintenance, and same-day emergency service.', 'Our services: repairs, installations, maintenance plans, emergency service, upgrades, and inspections.'],
   },
   nonprofit: {
-    hero: ['Together, we can do more', 'Every gift and every volunteer hour creates real change in our community. Join us and see the difference you make.', 'Donate now', 'Get involved'],
+    hero: ['Together, we can do more', 'Every gift and every volunteer hour creates real, lasting change for our neighbors — from warm meals and mentoring for kids to a steady hand up in the hardest moments. Join us and see the difference you make.', 'Donate now', 'Get involved'],
     badges: ['Every dollar counts', '100% local impact', 'Volunteers always welcome'],
     features: [['Real, local impact', 'Your support stays here and helps neighbors who need it most.'], ['Transparent stewardship', 'We share where funds go, so you can give with confidence.'], ['Volunteer-powered', 'Caring people, not overhead, drive the work we do.'], ['Every gift matters', 'Small or large, every donation moves the mission forward.'], ['Community partners', 'We work alongside local groups to reach more people.'], ['Easy ways to help', 'Give, volunteer, or spread the word in just a few minutes.']],
     servicesHead: ['Our programs', 'Practical, caring work that meets real needs in our community.'],
@@ -149,7 +149,7 @@ const V = {
     faqHead: ['Questions supporters ask', 'How your support creates change.'],
     faqs: [['How is my donation used?', 'The large majority of every gift goes directly to programs. We publish our impact so you can see exactly where funds go.'], ['Is my donation tax-deductible?', 'Yes. We are a registered nonprofit and provide a receipt for every gift you make.'], ['How can I volunteer?', 'We welcome volunteers of all backgrounds. Reach out and we will match you with a role that fits your time and skills.'], ['Can my company get involved?', 'Absolutely. We partner with local businesses on giving, sponsorships, and team volunteer days.']],
     cta: ['Your gift changes lives', 'Donate today and help us bring food, hope, and support to neighbors who need it.', 'Donate now'],
-    about: ['Neighbors helping neighbors', 'We are a community of donors, volunteers, and staff united by one belief: everyone deserves care and a real chance. Together, we turn that belief into action.', 'Our mission', 'To meet urgent needs today and build a stronger, more caring community for tomorrow, one neighbor at a time.'],
+    about: ['Neighbors helping neighbors', 'We are a community of donors, volunteers, and staff united by one belief: everyone deserves care, dignity, and a real chance to get back on their feet. Together, we turn that belief into action every single day, meal by meal and neighbor by neighbor.', 'Our mission', 'To meet urgent needs today and build a stronger, more caring community for tomorrow, one neighbor at a time.'],
     meta: ['A local nonprofit providing food, youth programs, outreach, and emergency support. Donate or volunteer to make an impact.', 'Explore our programs: food and essentials, youth programs, outreach, emergency support, and volunteer opportunities.'],
   },
   retail: {
