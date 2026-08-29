@@ -6,7 +6,6 @@ import { applyBrand } from './brand';
 import { initCursorRipple } from './lib/cursor';
 import { initPerfMonitor } from './lib/perfMonitor';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import 'animate.css/animate.min.css';
 import './index.css';
 
 /**
