@@ -172,5 +172,13 @@
   "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
   "GALLERY_7_IMAGE_ALT": "a technician servicing an outdoor hvac unit",
   "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
-  "GALLERY_8_IMAGE_ALT": "a tradesperson working with tools on a job"
+  "GALLERY_8_IMAGE_ALT": "a tradesperson working with tools on a job",
+  "TEAM_HEADLINE": "The pros who show up",
+  "TEAM_INTRO": "Licensed, insured technicians and staff who treat your home like their own.",
+  "TEAM_ROLE_1_TITLE": "Licensed Technicians",
+  "TEAM_ROLE_1_DESC": "Credentialed pros who diagnose honestly, fix it right the first time, and respect your home.",
+  "TEAM_ROLE_2_TITLE": "Project & Install Crew",
+  "TEAM_ROLE_2_DESC": "A skilled crew who handle installs and upgrades to code, on time, and cleaned up when done.",
+  "TEAM_ROLE_3_TITLE": "Dispatch & Customer Care",
+  "TEAM_ROLE_3_DESC": "A responsive team who answer fast, give upfront pricing, and keep your appointment on schedule."
 }

@@ -22,5 +22,6 @@ export { Spotlight } from './Spotlight';
 export { Stats, type Stat } from './Stats';
 export { Tabs, type TabItem } from './Tabs';
 export { TeamGrid, type TeamMember } from './TeamGrid';
+export { TeamRoles, type TeamRole } from './TeamRoles';
 export { Timeline, type TimelineEvent } from './Timeline';
 export { VideoEmbed } from './VideoEmbed';

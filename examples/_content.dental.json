@@ -172,5 +172,13 @@
   "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
   "GALLERY_7_IMAGE_ALT": "a modern dental treatment room with a patient chair",
   "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1588776814546-daab30f310ce?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
-  "GALLERY_8_IMAGE_ALT": "a dentist and assistant working on a patient"
+  "GALLERY_8_IMAGE_ALT": "a dentist and assistant working on a patient",
+  "TEAM_HEADLINE": "The team behind every smile",
+  "TEAM_INTRO": "Gentle, judgment-free people who make dental visits easy for the whole family.",
+  "TEAM_ROLE_1_TITLE": "Dentists",
+  "TEAM_ROLE_1_DESC": "Experienced dentists who explain every option clearly and keep your comfort first, always.",
+  "TEAM_ROLE_2_TITLE": "Hygienists & Assistants",
+  "TEAM_ROLE_2_DESC": "A gentle clinical team who make cleanings and treatments calm, quick, and genuinely pain-aware.",
+  "TEAM_ROLE_3_TITLE": "Front Desk & Coordinators",
+  "TEAM_ROLE_3_DESC": "Helpful staff who handle insurance, scheduling, and reminders so your visit is effortless."
 }

@@ -1243,6 +1243,140 @@ const PRICING = {
   },
 };
 
+// Meet-the-team band content — ROLE-BASED by design. We never fabricate named staff
+// (the one thing generation must never invent), so this section presents credible ROLES
+// + descriptions instead of people. Rendered by <TeamRoles> on the homepage; each entry
+// is { head, intro, roles: [[title, desc] × 3] }. pack() always emits via `|| _default`
+// so no vertical ever ships an unfilled {TEAM_*} token (distUnfilledTokens gate).
+const TEAM = {
+  medical: {
+    head: 'The people who care for you',
+    intro: 'Real clinicians and staff who know your name, listen closely, and treat your whole family with warmth.',
+    roles: [
+      ['Physicians & Providers', 'Board-certified doctors who listen first, explain in plain language, and treat the whole person, not just a symptom.'],
+      ['Nursing & Clinical Care', 'A steady, compassionate care team who make every exam, lab, and follow-up feel calm and unhurried.'],
+      ['Front Office & Patient Support', 'Friendly staff who make scheduling, insurance, and paperwork simple, so getting care is never a hassle.'],
+    ],
+  },
+  dental: {
+    head: 'The team behind every smile',
+    intro: 'Gentle, judgment-free people who make dental visits easy for the whole family.',
+    roles: [
+      ['Dentists', 'Experienced dentists who explain every option clearly and keep your comfort first, always.'],
+      ['Hygienists & Assistants', 'A gentle clinical team who make cleanings and treatments calm, quick, and genuinely pain-aware.'],
+      ['Front Desk & Coordinators', 'Helpful staff who handle insurance, scheduling, and reminders so your visit is effortless.'],
+    ],
+  },
+  wellness: {
+    head: 'The people who guide your practice',
+    intro: 'Certified teachers and a welcoming front desk who help every body feel at home on the mat.',
+    roles: [
+      ['Instructors', 'Certified teachers who guide you safely, meet you where you are, and adjust for every level.'],
+      ['Wellness Coaches', 'Supportive coaches who help you build a steady practice and celebrate every small win.'],
+      ['Studio & Front Desk', 'A warm team who greet you by name, set up your space, and keep the studio calm and clean.'],
+    ],
+  },
+  fitness: {
+    head: 'The coaches in your corner',
+    intro: 'Certified coaches and staff who help you show up, lift safely, and get real results.',
+    roles: [
+      ['Head Coaches', 'Certified coaches who teach real technique, scale every lift, and keep you progressing safely.'],
+      ['Personal Trainers', 'One-on-one trainers who build a plan around your goals and hold you to it, session after session.'],
+      ['Front Desk & Member Support', 'A friendly team who handle sign-ups, scheduling, and everything that keeps your training on track.'],
+    ],
+  },
+  legal: {
+    head: 'The advocates on your side',
+    intro: 'Experienced attorneys and staff who handle the details and the hard conversations for you.',
+    roles: [
+      ['Attorneys', 'Senior attorneys who handle your matter directly, explain your options, and fight for your outcome.'],
+      ['Paralegals & Legal Staff', 'A meticulous team who keep filings, deadlines, and documents moving without a hitch.'],
+      ['Client Intake & Support', 'Approachable staff who make the first call easy and keep you informed at every step.'],
+    ],
+  },
+  restaurant: {
+    head: 'The people behind the plates',
+    intro: 'A from-scratch kitchen and a warm front-of-house team who treat every guest like family.',
+    roles: [
+      ['Chefs & Kitchen', 'Cooks who source local, make everything from scratch, and plate every dish with pride.'],
+      ['Bar & Beverage', 'A craft team who pour thoughtful wine, beer, and house cocktails to match the menu.'],
+      ['Hospitality & Service', 'A warm front-of-house crew who know the regulars and make every guest feel at home.'],
+    ],
+  },
+  'local-service': {
+    head: 'The pros who show up',
+    intro: 'Licensed, insured technicians and staff who treat your home like their own.',
+    roles: [
+      ['Licensed Technicians', 'Credentialed pros who diagnose honestly, fix it right the first time, and respect your home.'],
+      ['Project & Install Crew', 'A skilled crew who handle installs and upgrades to code, on time, and cleaned up when done.'],
+      ['Dispatch & Customer Care', 'A responsive team who answer fast, give upfront pricing, and keep your appointment on schedule.'],
+    ],
+  },
+  nonprofit: {
+    head: 'The people who power the mission',
+    intro: 'Dedicated staff and volunteers who turn your support into real impact in the community.',
+    roles: [
+      ['Program Team', 'Experienced staff who run our programs day to day and make sure help reaches the people who need it.'],
+      ['Volunteers', 'Neighbors who give their time and heart, and make everything we do possible.'],
+      ['Community & Outreach', 'A welcoming team who connect donors, partners, and families to the work and to each other.'],
+    ],
+  },
+  'real-estate': {
+    head: 'The people who guide your move',
+    intro: 'Local agents and staff who know the market and look out for your best interests.',
+    roles: [
+      ['Agents & Advisors', 'Local experts who know every neighborhood and negotiate hard on your behalf.'],
+      ['Transaction & Closing Team', 'A detail-driven team who keep contracts, inspections, and closings on track and stress-free.'],
+      ['Client Care & Concierge', 'Friendly staff who answer questions fast and make every step of the move feel simple.'],
+    ],
+  },
+  saas: {
+    head: 'The team building your tools',
+    intro: 'Engineers, designers, and support people obsessed with making the product genuinely useful.',
+    roles: [
+      ['Engineering', 'Builders who ship reliable, secure software and sweat the details users never have to see.'],
+      ['Product & Design', 'A team who turn real problems into simple, delightful workflows that just make sense.'],
+      ['Customer Success', 'Real humans who onboard you fast, answer quickly, and make sure you get value from day one.'],
+    ],
+  },
+  retail: {
+    head: 'The people behind the counter',
+    intro: 'A friendly team who curate the shelves and help you find exactly what you need.',
+    roles: [
+      ['Buyers & Curators', 'Tastemakers who hand-pick every product for quality, value, and things you will actually love.'],
+      ['Store & Floor Team', 'Helpful staff who know the stock, offer honest advice, and make shopping a pleasure.'],
+      ['Customer Care', 'A responsive team who handle orders, returns, and questions with a smile.'],
+    ],
+  },
+  agency: {
+    head: 'The team behind the work',
+    intro: 'Strategists, creatives, and builders who treat your goals like our own.',
+    roles: [
+      ['Strategy & Accounts', 'Partners who learn your business deeply and turn goals into a clear, measurable plan.'],
+      ['Creative & Design', 'Makers who craft brand, story, and design that stands out and actually converts.'],
+      ['Build & Delivery', 'A hands-on team who ship the work on time and sweat every last detail.'],
+    ],
+  },
+  portfolio: {
+    head: 'A little about how I work',
+    intro: 'The craft, the process, and the values behind every project I take on.',
+    roles: [
+      ['Craft & Discipline', 'Years of focused practice poured into work that is thoughtful, polished, and built to last.'],
+      ['Process', 'A clear, collaborative way of working that keeps projects calm, transparent, and on track.'],
+      ['Values', 'Honest communication, real care for the details, and a genuine investment in your success.'],
+    ],
+  },
+  _default: {
+    head: 'The people behind the work',
+    intro: 'A dedicated team who treat your goals like our own and sweat the details you should not have to.',
+    roles: [
+      ['Experienced Team', 'Seasoned professionals who bring real craft and genuine care to every project.'],
+      ['Dedicated Support', 'Responsive people who answer fast, keep you informed, and make the whole process easy.'],
+      ['Trusted Partners', 'A team who stand behind their work and are genuinely invested in your success.'],
+    ],
+  },
+};
+
 function pack(v) {
   const s = V[v];
   const o = {};
@@ -1332,6 +1466,12 @@ function pack(v) {
     o[`GALLERY_${i + 1}_IMAGE_URL`] = gal[i].src;
     o[`GALLERY_${i + 1}_IMAGE_ALT`] = gal[i].alt;
   }
+  // Meet-the-team band (role-based, never named people). Always emitted via `|| _default`
+  // so the homepage <TeamRoles> section never ships an unfilled {TEAM_*} token.
+  const tm = TEAM[v] || TEAM._default;
+  o.TEAM_HEADLINE = tm.head;
+  o.TEAM_INTRO = tm.intro;
+  tm.roles.forEach(([t, x], i) => { o[`TEAM_ROLE_${i + 1}_TITLE`] = t; o[`TEAM_ROLE_${i + 1}_DESC`] = x; });
   // Pricing page — only emitted for verticals that render /pricing (features.pricing
   // true: saas, fitness, wellness). Tier feature counts match src/pages/Pricing.tsx
   // exactly (Starter 4, Pro 5, Enterprise 6). Every token below is rendered by the

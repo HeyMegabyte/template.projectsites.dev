@@ -172,5 +172,13 @@
   "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
   "GALLERY_7_IMAGE_ALT": "volunteers packing boxes at a food drive",
   "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1617817546276-80b86dd60151?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
-  "GALLERY_8_IMAGE_ALT": "community members sorting donations together"
+  "GALLERY_8_IMAGE_ALT": "community members sorting donations together",
+  "TEAM_HEADLINE": "The people who power the mission",
+  "TEAM_INTRO": "Dedicated staff and volunteers who turn your support into real impact in the community.",
+  "TEAM_ROLE_1_TITLE": "Program Team",
+  "TEAM_ROLE_1_DESC": "Experienced staff who run our programs day to day and make sure help reaches the people who need it.",
+  "TEAM_ROLE_2_TITLE": "Volunteers",
+  "TEAM_ROLE_2_DESC": "Neighbors who give their time and heart, and make everything we do possible.",
+  "TEAM_ROLE_3_TITLE": "Community & Outreach",
+  "TEAM_ROLE_3_DESC": "A welcoming team who connect donors, partners, and families to the work and to each other."
 }

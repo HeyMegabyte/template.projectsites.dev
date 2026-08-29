@@ -172,5 +172,13 @@
   "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
   "GALLERY_7_IMAGE_ALT": "a bright modern living room with clean decor",
   "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
-  "GALLERY_8_IMAGE_ALT": "a sleek contemporary kitchen interior"
+  "GALLERY_8_IMAGE_ALT": "a sleek contemporary kitchen interior",
+  "TEAM_HEADLINE": "The people who guide your move",
+  "TEAM_INTRO": "Local agents and staff who know the market and look out for your best interests.",
+  "TEAM_ROLE_1_TITLE": "Agents & Advisors",
+  "TEAM_ROLE_1_DESC": "Local experts who know every neighborhood and negotiate hard on your behalf.",
+  "TEAM_ROLE_2_TITLE": "Transaction & Closing Team",
+  "TEAM_ROLE_2_DESC": "A detail-driven team who keep contracts, inspections, and closings on track and stress-free.",
+  "TEAM_ROLE_3_TITLE": "Client Care & Concierge",
+  "TEAM_ROLE_3_DESC": "Friendly staff who answer questions fast and make every step of the move feel simple."
 }

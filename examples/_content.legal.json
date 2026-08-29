@@ -172,5 +172,13 @@
   "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1505664194779-8beaceb93744?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
   "GALLERY_7_IMAGE_ALT": "rows of leather-bound law books on a shelf",
   "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
-  "GALLERY_8_IMAGE_ALT": "an attorney at a desk reviewing legal documents"
+  "GALLERY_8_IMAGE_ALT": "an attorney at a desk reviewing legal documents",
+  "TEAM_HEADLINE": "The advocates on your side",
+  "TEAM_INTRO": "Experienced attorneys and staff who handle the details and the hard conversations for you.",
+  "TEAM_ROLE_1_TITLE": "Attorneys",
+  "TEAM_ROLE_1_DESC": "Senior attorneys who handle your matter directly, explain your options, and fight for your outcome.",
+  "TEAM_ROLE_2_TITLE": "Paralegals & Legal Staff",
+  "TEAM_ROLE_2_DESC": "A meticulous team who keep filings, deadlines, and documents moving without a hitch.",
+  "TEAM_ROLE_3_TITLE": "Client Intake & Support",
+  "TEAM_ROLE_3_DESC": "Approachable staff who make the first call easy and keep you informed at every step."
 }

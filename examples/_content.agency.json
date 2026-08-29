@@ -172,5 +172,13 @@
   "GALLERY_7_IMAGE_URL": "https://images.unsplash.com/photo-1526378787940-576a539ba69d?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
   "GALLERY_7_IMAGE_ALT": "a creative team brainstorming around a table",
   "GALLERY_8_IMAGE_URL": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?crop=entropy&cs=tinysrgb&fit=max&auto=format&q=80&w=1080",
-  "GALLERY_8_IMAGE_ALT": "designers collaborating on ideas in a studio"
+  "GALLERY_8_IMAGE_ALT": "designers collaborating on ideas in a studio",
+  "TEAM_HEADLINE": "The team behind the work",
+  "TEAM_INTRO": "Strategists, creatives, and builders who treat your goals like our own.",
+  "TEAM_ROLE_1_TITLE": "Strategy & Accounts",
+  "TEAM_ROLE_1_DESC": "Partners who learn your business deeply and turn goals into a clear, measurable plan.",
+  "TEAM_ROLE_2_TITLE": "Creative & Design",
+  "TEAM_ROLE_2_DESC": "Makers who craft brand, story, and design that stands out and actually converts.",
+  "TEAM_ROLE_3_TITLE": "Build & Delivery",
+  "TEAM_ROLE_3_DESC": "A hands-on team who ship the work on time and sweat every last detail."
 }

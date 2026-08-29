@@ -19,12 +19,14 @@ import {
   FAQ,
   LogoCloud,
   CTASection,
+  TeamRoles,
   type BentoTile,
   type Stat,
   type PricingTier,
   type FAQItem,
   type ProcessStep,
   type Logo,
+  type TeamRole,
 } from '@/components/sections';
 
 const bentoTiles: BentoTile[] = [
@@ -79,6 +81,15 @@ const faqs: FAQItem[] = [
 const logos: Logo[] = [
   { name: '{LOGO_1_NAME}' }, { name: '{LOGO_2_NAME}' }, { name: '{LOGO_3_NAME}' },
   { name: '{LOGO_4_NAME}' }, { name: '{LOGO_5_NAME}' }, { name: '{LOGO_6_NAME}' },
+];
+
+// Meet-the-team band — ROLE-based, never named people (generation must never fabricate
+// staff). Each role is a content-pack token pair; <TeamRoles> filters any still-`{TOKEN}`
+// entry and self-hides if none survive, so a bare template never prints an empty section.
+const teamRoles: TeamRole[] = [
+  { title: '{TEAM_ROLE_1_TITLE}', description: '{TEAM_ROLE_1_DESC}' },
+  { title: '{TEAM_ROLE_2_TITLE}', description: '{TEAM_ROLE_2_DESC}' },
+  { title: '{TEAM_ROLE_3_TITLE}', description: '{TEAM_ROLE_3_DESC}' },
 ];
 
 /**
@@ -328,6 +339,21 @@ export default function Home() {
           bullets={['{ABOUT_BULLET_1}', '{ABOUT_BULLET_2}', '{ABOUT_BULLET_3}']}
           cta={{ label: 'Learn more', href: '/about' }}
           image={{ src: '{ABOUT_IMAGE_URL}', alt: '{ABOUT_IMAGE_ALT}' }}
+        />
+      </SafeSection>
+
+      {/*
+        Meet-the-team — a role-based credibility band (never fabricated named staff).
+        Self-hides when its role tokens are unfilled, so it only appears once real
+        per-vertical role copy is present. Placed after About (who we are) and before
+        the gallery (our work): who we are → our people → our work.
+      */}
+      <SafeSection name="team">
+        <TeamRoles
+          roles={teamRoles}
+          eyebrow="Our team"
+          headline="{TEAM_HEADLINE}"
+          intro="{TEAM_INTRO}"
         />
       </SafeSection>
 
