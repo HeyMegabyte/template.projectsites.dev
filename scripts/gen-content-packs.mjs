@@ -121,7 +121,7 @@ const V = {
     meta: ['A neighborhood restaurant serving fresh, made-from-scratch food from local ingredients, with catering and private events.', 'See our menu: chef specials, brunch, dinner, desserts, plus catering and private events for any occasion.'],
   },
   'local-service': {
-    hero: ['Reliable service, done right the first time', 'Licensed, insured, and on time. From urgent repairs to planned upgrades, we treat your home like our own.', 'Get a free quote', 'Our services'],
+    hero: ['Reliable service, done right the first time', 'Licensed, insured, and on time. From urgent repairs to planned upgrades, we treat your home like our own — protecting your floors, cleaning up when we finish, and standing behind every job in writing. When something breaks, you get a fast, honest answer and a fair price, never a runaround.', 'Get a free quote', 'Our services'],
     badges: ['Licensed & insured', 'Upfront pricing', 'Same-day service available'],
     features: [['On-time, every time', 'We show up in the window we promise and respect your schedule.'], ['Upfront pricing', 'You approve the price before we start, with no surprise charges.'], ['Licensed & insured', 'Fully credentialed pros protect your home and your peace of mind.'], ['Fast response', 'Urgent problem? We offer same-day and emergency service.'], ['Clean & respectful', 'We protect your floors, tidy up, and treat your home with care.'], ['Workmanship guaranteed', 'If it is not right, we make it right. Simple as that.']],
     servicesHead: ['What we do', 'Dependable repairs, installs, and maintenance for your home.'],
@@ -133,7 +133,7 @@ const V = {
     faqHead: ['Questions homeowners ask', 'The details before you book.'],
     faqs: [['Do you offer free estimates?', 'Yes. We provide a clear, no-obligation quote before any work begins.'], ['Are you licensed and insured?', 'We are fully licensed and insured, so your home and our team are protected on every job.'], ['Do you handle emergencies?', 'We do. We offer same-day and after-hours service for urgent problems that cannot wait.'], ['Do you guarantee your work?', 'Every job is backed by our workmanship guarantee. If something is not right, we return and fix it.']],
     cta: ['Need it fixed? We are ready', 'Request your free quote today and get dependable service from a team you can trust.', 'Get a free quote'],
-    about: ['Your dependable local pros', 'We built our reputation the hard way: by showing up on time, charging fair prices, and doing honest work. Our neighbors know they can count on us.', 'How we work', 'Straight answers, upfront pricing, and quality that lasts. We treat your home the way we would treat our own.'],
+    about: ['Your dependable local pros', 'We built our reputation the hard way: by showing up on time, charging fair prices, and doing honest work that lasts. Our neighbors know they can count on us for everything from a leaky faucet at midnight to a full system upgrade — and they know the price we quote is the price they pay, with no surprises tacked on at the end.', 'How we work', 'Straight answers, upfront pricing, and quality that lasts. We treat your home the way we would treat our own.'],
     meta: ['Licensed, insured local pros offering fast repairs, installations, maintenance, and same-day emergency service.', 'Our services: repairs, installations, maintenance plans, emergency service, upgrades, and inspections.'],
   },
   nonprofit: {
