@@ -169,7 +169,7 @@ const V = {
     meta: ['Quality goods at honest prices with free shipping over $50 and easy 30-day returns. Shop new arrivals and best sellers.', 'Shop our collections: new arrivals, best sellers, essentials, seasonal picks, gifts, and sale items.'],
   },
   saas: {
-    hero: ['Ship faster with less busywork', 'The platform that handles the tedious parts so your team can focus on the work that matters. Set up in minutes, not weeks.', 'Start free trial', 'See how it works'],
+    hero: ['Ship faster with less busywork', 'The platform that handles the tedious parts so your team can focus on the work that matters. Set up in minutes, not weeks — connect the tools you already use, and let reliable automations quietly run the repetitive work in the background while your team ships.', 'Start free trial', 'See how it works'],
     badges: ['Free 14-day trial', 'No credit card required', 'Cancel anytime'],
     features: [['Fast setup', 'Connect your tools and go live in minutes, not weeks.'], ['Built to scale', 'From your first user to your millionth, performance stays steady.'], ['Secure by default', 'Encryption, access controls, and audit logs come standard.'], ['Automations', 'Replace repetitive manual steps with reliable, hands-off workflows.'], ['Clear analytics', 'See what is working with dashboards your whole team understands.'], ['Helpful support', 'Real humans who answer fast when you need them.']],
     servicesHead: ['What you can do', 'Everything you need to move faster, in one place.'],
@@ -181,7 +181,7 @@ const V = {
     faqHead: ['Questions teams ask', 'The details before you start.'],
     faqs: [['Is there really a free trial?', 'Yes. You get a full 14-day trial with no credit card required, so you can try everything first.'], ['How long does setup take?', 'Most teams are up and running in minutes. Connect your tools, invite your team, and go.'], ['Is my data secure?', 'Security is built in, with encryption, access controls, and audit logs standard on every plan.'], ['Can I cancel anytime?', 'Of course. There are no long-term contracts, and you can upgrade, downgrade, or cancel whenever you like.']],
     cta: ['Start building today', 'Try it free for 14 days. No credit card, no risk, just less busywork.', 'Start free trial'],
-    about: ['Software that respects your time', 'We build tools that get out of the way. Instead of adding more dashboards to check, we automate the work you never wanted to do by hand.', 'Our approach', 'Simple to start, powerful when you need it, and honest about pricing. Great software should save time, not steal it.'],
+    about: ['Software that respects your time', 'We build tools that get out of the way. Instead of adding one more dashboard to check, we automate the work you never wanted to do by hand — the copy-paste between apps, the manual status updates, the reports nobody has time to run — so your team spends its hours on work that actually moves the business forward.', 'Our approach', 'Simple to start, powerful when you need it, and honest about pricing. Great software should save time, not steal it.'],
     meta: ['A platform that automates busywork so your team ships faster. Free 14-day trial, no credit card, cancel anytime.', 'Explore features: workflow automation, collaboration, analytics, integrations, access controls, and a developer API.'],
   },
   'real-estate': {

@@ -104,6 +104,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!--
+    Image-CDN handshake + LCP hero preload (per ttfr-north-star). Every photo is served from
+    the Unsplash CDN, so preconnecting saves the DNS+TLS roundtrip for the LCP image and every
+    image site-wide. The homepage hero is the LCP element; preloading its URL (filled per-build
+    from the content pack) lets the browser fetch it during HTML parse — BEFORE the client-only
+    SPA bundle hydrates — so the largest paint lands seconds sooner on throttled mobile. No
+    `crossorigin` here: plain <img> fetches are no-cors, so a cors preconnect wouldn't be reused.
+  -->
+  <link rel="dns-prefetch" href="//images.unsplash.com" />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preload" as="image" fetchpriority="high" href="{HERO_IMAGE_URL}" />
+
+  <!--
     Fonts: preload as style for parallel discovery, then async swap to stylesheet.
     Inter ships as a variable font (idea #75) but we still request a weight range
     so older browsers download an interpolated subset.

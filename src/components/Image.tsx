@@ -16,9 +16,15 @@ interface Props extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'srcSet'> {
   sizes?: string;
 }
 
-function siblingPath(src: string, ext: string): string {
+function siblingPath(src: string, ext: string): string | null {
+  // Remote CDN URLs (Unsplash/Pexels) already negotiate AVIF/WebP themselves via `auto=format`,
+  // and swapping the extension on a query-string URL yields a broken host
+  // (`images.unsplash.com/photo-x?…` → `images.unsplash.avif`) that renders a failed <source>
+  // for EVERY image. Skip sibling generation for them so the browser loads the real <img src>
+  // directly — the CDN serves modern formats on that same URL. Local assets still get siblings.
+  if (/^https?:/i.test(src) || src.includes('?')) return null;
   const dot = src.lastIndexOf('.');
-  if (dot < 0) return src;
+  if (dot <= src.lastIndexOf('/')) return null; // dot must be a real filename extension, not a path/host dot
   return src.slice(0, dot) + ext;
 }
 
@@ -48,8 +54,12 @@ export const Image = forwardRef<HTMLImageElement, Props>(
 
     return (
       <picture>
-        {avif !== src && <source type="image/avif" srcSet={responsive ?? avif} sizes={sizes} />}
-        {webp !== src && <source type="image/webp" srcSet={responsive ?? webp} sizes={sizes} />}
+        {(responsive ?? avif) && (
+          <source type="image/avif" srcSet={responsive ?? avif!} sizes={sizes} />
+        )}
+        {(responsive ?? webp) && (
+          <source type="image/webp" srcSet={responsive ?? webp!} sizes={sizes} />
+        )}
         <img
           ref={ref}
           src={src}
