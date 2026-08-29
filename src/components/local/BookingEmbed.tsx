@@ -199,7 +199,7 @@ export default function BookingEmbed({
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-[var(--color-accent)] text-[#0a0a1a] font-bold py-3.5 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--color-accent)]/20 active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 bg-[var(--color-accent)] text-[var(--color-on-accent)] font-bold py-3.5 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--color-accent)]/20 active:scale-[0.98]"
               >
                 <Send size={18} />
                 Request Booking

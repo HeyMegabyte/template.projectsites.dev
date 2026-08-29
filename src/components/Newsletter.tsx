@@ -74,7 +74,7 @@ export default function Newsletter({
           <button
             type="submit"
             disabled={status === 'submitting' || !email}
-            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-[#0a0a1a] font-bold px-6 py-3 rounded-lg transition-all hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 min-h-[44px]"
+            className="bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-[var(--color-on-accent)] font-bold px-6 py-3 rounded-lg transition-all hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 min-h-[44px]"
           >
             {status === 'submitting' ? 'Subscribing…' : 'Subscribe'}
           </button>

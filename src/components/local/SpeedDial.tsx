@@ -85,7 +85,7 @@ export default function SpeedDial({ phone, email, directionsUrl, bookingUrl }: S
       {/* FAB trigger */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className={`w-14 h-14 rounded-full bg-[var(--color-accent)] text-[#0a0a1a] shadow-lg shadow-[var(--color-accent)]/30 flex items-center justify-center transition-transform motion-safe:duration-200 active:scale-90 ${open ? 'rotate-45' : ''}`}
+        className={`w-14 h-14 rounded-full bg-[var(--color-accent)] text-[var(--color-on-accent)] shadow-lg shadow-[var(--color-accent)]/30 flex items-center justify-center transition-transform motion-safe:duration-200 active:scale-90 ${open ? 'rotate-45' : ''}`}
         aria-label={open ? 'Close quick actions' : 'Open quick actions'}
         aria-expanded={open}
       >
