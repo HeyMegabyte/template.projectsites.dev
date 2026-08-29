@@ -8,210 +8,207 @@ export interface BlogPost extends BlogPostSummary {
 
 export const posts: BlogPost[] = [
   {
-    slug: 'dental-implants-cost-2026',
-    title: 'Dental implants cost in 2026: what a single tooth to a full mouth really runs',
-    excerpt: 'Dental implants cost anywhere from $3,000 for one tooth to $30,000+ per arch in 2026. Here is how to read a quote, spot hidden line items, and lower the price.',
-    date: '2026-08-12',
+    slug: 'website-speed-core-web-vitals-2026',
+    title: 'Website speed in 2026: how Core Web Vitals win or lose customers',
+    excerpt: 'A slow site turns buyers away before they ever see your offer. Here is what Core Web Vitals measure, the numbers to hit, and the fixes that move them.',
+    date: '2026-08-18',
     author: 'Editorial Team',
-    category: 'Patient guide',
+    category: 'Web guide',
     readMinutes: 6,
-    body: `If you have started pricing dental implants, you have probably seen numbers that swing by tens of thousands of dollars for what sounds like the same procedure. That is not a scam — it is how implant pricing works. A "full mouth" quote bundles several separate treatments, and two honest estimates for the same mouth can land thousands of dollars apart. Here is what dental implants cost in 2026 and how to read a quote line by line.
+    body: `Speed is not a technical vanity metric. It is the first impression your website makes, and visitors decide whether to stay in the time it takes a page to paint. Google has measured this for years through Core Web Vitals, and in 2026 those scores shape both how you rank in search and how many visitors turn into customers. Here is what they measure and how to move them.
 
-## What a single implant costs in 2026
+## The three numbers that matter
 
-A single tooth implant in the United States generally runs $3,000 to $7,000 once you include the surgical placement of the post and the final crown that sits on top. Where you live matters more than most people expect: the same single implant can cost around $3,800 in a lower-overhead market and closer to $5,700 in a major coastal metro — a gap of more than 50% for identical work.
+Core Web Vitals boil the experience down to three measurements, each with a clear target:
 
-That single-tooth number is the cleanest one to compare across providers, because it usually covers one implant, one abutment, and one crown with fewer add-ons.
+- **Largest Contentful Paint (LCP)** — how long until the biggest thing on screen, usually the hero image or headline, finishes loading. Aim for under 2.5 seconds.
+- **Interaction to Next Paint (INP)** — how quickly the page responds when someone taps a button or opens a menu. Aim for under 200 milliseconds.
+- **Cumulative Layout Shift (CLS)** — how much the page jumps around as it loads. Aim for under 0.1, so a customer never taps the wrong thing because a banner pushed the page down.
 
-## Full-mouth and full-arch pricing
+Google reports these from real visits, not a lab test, so they reflect what your actual customers feel on their actual phones.
 
-This is where the ranges get wide. In 2026, full-arch treatments such as All-on-4 or All-on-6 typically cost $18,000 to $35,000 per arch. Replacing both the upper and lower teeth commonly totals $28,000 to $72,000, and premium cases with zirconia prosthetics can climb higher.
+## Why a slow site quietly costs you money
 
-The spread comes down to a few drivers:
+Every extra second of load time thins out the people who wait. Studies across retail and services consistently show conversion falling as pages get slower, and mobile visitors are the least patient of all. A business that loads in one second routinely converts a meaningfully higher share of visitors than one that takes five, for the exact same offer. You are not losing customers because your prices are wrong. You are losing them before the page even appears.
 
-- **Materials.** An acrylic full-arch bridge sits at the low end. A monolithic zirconia arch costs more but lasts longer and resists staining.
-- **Prep work.** Bone grafting or extractions can add several thousand dollars before a single implant is placed.
-- **Number of implants.** Four implants per arch (All-on-4) costs less than six (All-on-6), which distributes bite force across more posts.
-- **Sedation.** IV sedation and anesthesia are frequently billed separately.
+## The fixes that actually move the needle
 
-## How to read a quote without getting surprised
+Most speed problems trace back to a short list of causes:
 
-The single most useful habit is to ask for an itemized estimate. Your total is the sum of separate line items — implant, abutment, crown or bridge, extractions, grafting, sedation, and follow-up visits — not one flat fee. An estimate that looks unusually low has often moved grafting or sedation onto a separate page.
+- **Oversized images.** A photo saved straight from a camera can be several megabytes. Serve modern formats like WebP or AVIF, sized to how they are actually displayed.
+- **Too much code loading at once.** Defer scripts that are not needed for the first paint, and drop plugins you no longer use.
+- **No caching.** A content delivery network keeps a copy of your site close to each visitor, so it arrives fast whether they are down the street or across the country.
+- **Unreserved space for images and ads.** Set width and height so the layout does not lurch as things load, which fixes most layout shift.
 
-Ask three questions of any provider: What is the final prosthetic material? How many implants are included? Are extractions, bone grafting, and sedation in this number or added later?
+## Measure, then improve
 
-## Ways to bring the cost down
-
-Implants are an IRS-eligible medical expense, so paying with pre-tax HSA or FSA dollars effectively discounts the bill by your tax rate. Many practices offer 0% promotional financing through cards like CareCredit, and dedicated dental lenders fund large full-mouth cases over several years. Some markets simply run cheaper because of lower operating overhead, so a second opinion in a nearby suburb can be worth the drive.
+You cannot fix what you do not watch. Run your homepage and top landing pages through a free tool like PageSpeed Insights, note the three scores, make one change, and measure again. Treat it like a monthly habit rather than a one-time project, because new photos and features can slow a fast site back down.
 
 ## The bottom line
 
-Budget roughly $3,000 to $7,000 for a single tooth and $18,000 to $35,000 per arch for full-mouth work in 2026, then get at least two itemized quotes. Experience is the best insurance against implant failure, so weigh the surgeon's track record alongside the price. A personalized quote after an exam is the only way to know your exact number — treat every figure here as a planning range, not a promise.`,
+A fast website is not a luxury. It is table stakes for being chosen. Hit the three Core Web Vitals targets, keep your images lean, and re-check your key pages every month. The reward is a site that both ranks better and turns more of its hard-won visitors into paying customers.`,
   },
   {
-    slug: 'when-to-replace-hvac-system-2026',
-    title: 'When to replace your HVAC system in 2026 (and when a repair still makes sense)',
-    excerpt: 'Knowing when to replace your HVAC system saves thousands. Here are the age, efficiency, and refrigerant signs that make 2026 the year to upgrade — or keep repairing.',
-    date: '2026-08-05',
+    slug: 'local-seo-checklist-2026',
+    title: 'The local SEO checklist every small business needs in 2026',
+    excerpt: 'Ranking in your own town is mostly blocking and tackling. Here is the local SEO checklist that gets a small business into the map results and keeps it there.',
+    date: '2026-08-04',
     author: 'Editorial Team',
-    category: 'Home guide',
+    category: 'Local SEO guide',
     readMinutes: 6,
-    body: `Deciding when to replace your HVAC system is one of the more expensive home calls you will make, and the wrong answer costs money either way. Replace too early and you throw away years of useful life. Wait too long and you pour cash into repairs and inflated energy bills. Here is a clear framework for 2026, when a refrigerant phase-out and new efficiency rules change the math.
+    body: `When someone nearby searches for what you sell, you want to be one of the three businesses in the map at the top of the results. That spot drives calls, direction requests, and walk-ins. Getting there is less about clever tricks and more about doing a handful of unglamorous things well and consistently. Here is the checklist.
 
-## Start with age
+## Get your basics identical everywhere
 
-Most central air conditioners and heat pumps last 10 to 15 years. With consistent annual maintenance, many reach 15 to 20; without it, 10 to 12 is more typical. Age alone is not a death sentence, but it sets the baseline. At 15 years, most components are near the end of their service life, and the efficiency gap versus a new unit is large enough that major repairs rarely pay off.
+Search engines trust businesses whose details line up across the web. Your name, address, and phone number should be written exactly the same way on your website, your Google Business Profile, and every directory that lists you. A suite number on one and not the other, or an old phone number lingering on a review site, sends a small signal of doubt. Pick one format and make everything match.
 
-## The repair-versus-replace signals
+## Claim and complete your Google Business Profile
 
-Lean toward replacement in 2026 if several of these are true:
+This is the single highest-leverage thing a local business can do. Claim the profile, then fill in every field: hours, categories, services, service areas, and a genuine description. Add real photos of your space, your team, and your work. Businesses with complete profiles and fresh photos consistently earn more views and clicks than half-finished ones.
 
-- Your system is 10 to 15 years old.
-- It uses older R-22 or R-410A refrigerant.
-- You have had two or more repair visits in a year, or a single repair quote that is 40 to 50% of the cost of a new system.
-- Energy bills have climbed while comfort has not.
-- Rooms heat and cool unevenly, or humidity feels off.
-- The warranty has expired and parts are getting expensive.
+## Build pages that match local intent
 
-A useful rule of thumb: if the repair costs more than half the price of replacement and the unit is past 10 years, replacement usually wins.
+Your website should make it obvious where you are and what you do:
 
-## Why 2026 changes the calculation
+- **A clear location.** Put your city and neighborhood in your homepage copy, your page titles, and your footer, next to an embedded map.
+- **A page per major service.** One strong page about each service beats a single page that lists everything in a sentence.
+- **Local proof.** Mention the neighborhoods you serve and the kinds of customers you help, in plain language a real person would use.
 
-Two shifts matter this year. First, efficiency is now measured with SEER2, an updated test that reflects real-world performance more accurately than the old SEER rating. Every new system carries a SEER2 number, and minimum requirements vary by region. For most climates, a SEER2 rating of 15 to 18 balances upfront cost against long-term savings; hot southern zones often justify 18 to 20.
+## Earn reviews and answer them
 
-Second, refrigerant is changing. Traditional R-410A is being phased out in favor of lower-impact A2L refrigerants like R-32 and R-454B. Equipment built after January 2025 already uses them. These refrigerants are mildly flammable, so installation and service require a trained, licensed contractor.
+Reviews are both a ranking factor and a deciding factor for the human reading them. Ask happy customers at the natural moment, right after a good experience, and make it easy with a direct link. Then reply to every review, positive or negative, in a calm and human voice. A thoughtful response to a complaint often impresses future readers more than a wall of five-star ratings.
 
-## What you save by upgrading
+## Get listed where it counts
 
-Replacing a system that is 10 or more years old typically cuts cooling costs by 20 to 40%. For very old units, the gain can reach 30 to 50%, because cooling energy scales roughly inverse to efficiency. Moving from a 10 SEER unit to a high-SEER2 system is where those larger savings live.
+You do not need hundreds of directory listings. You need the ones people and search engines actually trust: the big general directories, plus the two or three that matter in your industry. Make sure each one carries your identical details and a link back to your site.
 
-## Do it right, not just fast
+## Keep it fresh
 
-Sizing matters more than brand. A system matched to a proper Manual J load calculation and Manual D duct design outlives a rule-of-thumb install by years, because it never fights the ductwork. Before you buy, schedule a professional inspection, get two or three detailed quotes, and ask about federal tax credits for qualifying heat pumps plus any state or utility rebates.
-
-If your system is past 10 years, leans on old refrigerant, and is racking up repair bills, 2026 is a sensible year to replace it. If it is under 10 and the fix is minor, a repair still makes sense.`,
-  },
-  {
-    slug: 'estate-planning-checklist-2026',
-    title: 'Your 2026 estate planning checklist: the 5 documents (and 3 tasks) most people miss',
-    excerpt: 'A complete estate planning checklist for 2026: the five core documents every adult needs, the three maintenance tasks that fail most often, and what changed this year.',
-    date: '2026-07-28',
-    author: 'Editorial Team',
-    category: 'Legal guide',
-    readMinutes: 7,
-    body: `More than half of American adults still have no estate planning documents, and only about a quarter have a will. The usual reason is not cost or denial — it is simply not knowing where to start. This 2026 estate planning checklist gives you the five documents that form a complete plan, the three ongoing tasks that quietly derail good plans, and the changes that took effect this year.
-
-## The five core documents
-
-A complete estate plan rests on five documents. Skip one and you leave a gap your family has to fill in a courtroom.
-
-1. **Last will and testament.** Names who receives your assets, appoints an executor to settle your estate, and designates guardians for minor children. Without a will, your state's intestacy laws make those decisions for you.
-2. **Revocable living trust.** Helps manage assets and can keep your estate out of probate. Once you own real estate or meaningful assets, a trust is usually worth it.
-3. **Durable financial power of attorney.** Lets someone you trust manage your finances if you become incapacitated.
-4. **Healthcare power of attorney.** Names a health care agent to make medical decisions when you cannot.
-5. **Living will and HIPAA authorization.** Spells out your medical wishes and lets the people you choose access your medical information.
-
-Together these cover both what happens after you die and what happens if you are alive but unable to decide for yourself.
-
-## The three tasks that fail more than the documents
-
-The documents are the easy part. These three maintenance tasks cause most of the real-world problems:
-
-- **Keep beneficiary designations current.** Retirement accounts, life insurance, annuities, and transfer-on-death accounts pass by beneficiary form, not by your will. An outdated form is one of the most common causes of money going to the wrong person — an ex-spouse, for example.
-- **Fund your trust.** Creating a trust and never transferring assets into it is a classic, costly mistake. An unfunded trust can still land in probate even though the document itself is valid.
-- **Plan for digital assets.** Email, photos, crypto, and online accounts need instructions and access too. Modern plans account for them explicitly.
-
-## What changed for 2026
-
-Two updates are worth knowing. The federal estate, gift, and generation-skipping exemption rose to $15 million per person, or $30 million per couple. Far fewer families owe federal estate tax at that level.
-
-State estate taxes are the trap. Several states set their own thresholds much lower — as little as $1 million in Oregon and $2 million in Massachusetts. Owning a vacation home in one of those states can create exposure even if you live elsewhere.
-
-## A practical order of operations
-
-Work through it in sequence: inventory your assets and debts with account numbers and locations, choose an executor, name beneficiaries and guardians, gather your financial and property records, then sign and store everything correctly. Blended families, a family business, special-needs beneficiaries, or charitable intent at scale call for professional trust design rather than a template.
-
-## Do not file it and forget it
-
-The most common failure is a good plan that goes stale in a drawer while children are born, parents pass, and executors move away. Review your plan after every major life event so it still reflects reality when it is needed. Rules vary by state, so confirm your documents with a qualified attorney where you live.`,
-  },
-  {
-    slug: 'restaurant-direct-online-ordering-vs-delivery-apps-2026',
-    title: 'Direct online ordering vs delivery apps in 2026: the two-channel strategy that protects your margin',
-    excerpt: 'Third-party delivery apps take 15-30% per order. In 2026 the smart restaurants use apps for discovery and direct online ordering for repeat customers. Here is the playbook.',
-    date: '2026-07-20',
-    author: 'Editorial Team',
-    category: 'Restaurant guide',
-    readMinutes: 6,
-    body: `If you run a restaurant, the delivery-app math keeps you up at night. Third-party platforms take 15 to 30% of every order, and once you add fees and promotions the effective cost often lands closer to 30 to 40% of revenue. For a kitchen running on 5 to 10% margins, that can erase the profit on every delivery you make. In 2026, the answer is not to quit the apps — it is to use each channel for what it does best.
-
-## The real cost of third-party apps
-
-The advertised commission understates the bill. After service fees, promoted placements, and surcharges, many operators find the true cost per order is well above the headline rate. Mid-year changes made it worse: Uber Eats moved its marketplace fees up in early 2026, and membership surcharges mean a meaningful share of repeat customers now effectively cost 30% rather than 25%.
-
-There is a second, quieter cost. When a customer orders through an app, the app keeps the relationship. You do not get their name, phone number, email, or order history — the data you would need to bring them back yourself.
-
-## Why direct online ordering wins
-
-Direct ordering flips both problems. Instead of a 15 to 35% commission, you pay standard payment processing of roughly 2.9% plus a small fixed fee, plus a flat software subscription. On steady volume, that can save a busy restaurant tens of thousands of dollars a year.
-
-Just as important, every direct order captures the customer data the apps hoard. That name, phone number, and order history become the foundation of your own retention marketing — a text when you launch a new special, an email to win back a lapsed regular.
-
-## The winning move: run two channels on purpose
-
-The restaurants growing most efficiently in 2026 are not picking a side. They run a deliberate two-channel strategy:
-
-- **Third-party apps for discovery.** Treat them as a customer-acquisition tool. New diners find you on DoorDash, Uber Eats, or Grubhub because those apps have reach you cannot buy cheaply on your own.
-- **Direct ordering for retention.** Once someone has ordered, nudge them toward your own site or app for the next order. Repeat customers are where the margin lives, and they cost you a fraction to serve directly.
-
-The pattern is simple and repeatable: acquire on the apps, retain on your own channel.
-
-## How to move customers to direct ordering
-
-You do not need a heavy tech stack. A commission-free ordering page on your own domain, a QR code on the table and the takeout bag, an insert in every delivery order, and a small loyalty incentive for ordering direct are enough to start shifting habits. Make the direct option at least as fast and easy as the app, or customers will default back to what is convenient.
+Local SEO is not a one-time setup. Post an update or a photo to your profile now and then, refresh your hours around holidays, and add a new service page when your business grows. A profile that shows recent activity outranks one that has sat untouched for two years.
 
 ## The bottom line
 
-Direct ordering has moved from a nice-to-have to a standard part of restaurant operations. Keep the apps for what they do well — putting your food in front of new people — but own the repeat relationship. Operators who build direct-ordering habits with their guests now will carry a durable cost advantage over those who stay dependent on commission platforms.`,
+Winning locally is a checklist, not a secret. Make your details identical everywhere, complete your Google Business Profile, build clear service and location pages, earn and answer reviews, and keep it all fresh. Do those five things and you will steadily climb into the map results where your neighbors are already looking.`,
   },
   {
-    slug: 'nonprofit-monthly-donor-retention-2026',
-    title: 'Monthly donors are your best fundraising bet in 2026 — here is the retention data',
-    excerpt: 'Recurring donors retain at roughly twice the rate of one-time givers and deliver about 5x the lifetime value. Here is what the 2026 data says and how to keep them.',
+    slug: 'repeat-customers-retention-2026',
+    title: 'Turning first-time visitors into repeat customers',
+    excerpt: 'Winning a new customer costs far more than keeping one. Here are the follow-up habits and small touches that turn a single visit into a lasting relationship.',
+    date: '2026-07-21',
+    author: 'Editorial Team',
+    category: 'Growth guide',
+    readMinutes: 5,
+    body: `Most small businesses pour their energy into attracting new customers and almost none into keeping the ones they already earned. That is backwards. Winning a new customer typically costs several times more than keeping an existing one, and repeat customers spend more, refer friends, and forgive the occasional off day. Here is how to turn a first visit into a habit.
+
+## Make the first experience easy to repeat
+
+Retention starts before anyone thinks about coming back. The smoother the first experience, the more likely a second one becomes. Remove friction wherever you can: a booking page that works on a phone, clear pricing, a checkout that does not demand an account, and a genuine thank-you at the end. People return to places that respect their time.
+
+## Follow up while you are still remembered
+
+The window to cement a relationship is short. A simple, well-timed follow-up does most of the work:
+
+- **A thank-you within a day.** A short, personal note beats a generic receipt.
+- **A helpful nudge at the right moment.** A reminder when a service is due again, or a tip that helps them get more from what they bought.
+- **A reason to return.** A small offer, early access, or a members-only perk that rewards coming back rather than shopping around.
+
+None of this needs an expensive platform. A tidy email list and a calendar reminder will carry a small business a long way.
+
+## Build a simple reason to stay
+
+Loyalty does not require a points app. It requires a reason. That might be a punch card, a standing appointment, a subscription for something people buy regularly, or simply being the place that remembers their name and their usual order. The mechanism matters less than the feeling that they belong here and are recognized.
+
+## Ask, then act on what you hear
+
+Your repeat customers will tell you how to keep them if you ask. A one-question survey after a purchase, or a quick conversation at the counter, surfaces the small annoyances that quietly push people away. The businesses that grow are the ones that close the loop: they hear the feedback, fix the thing, and mention that they fixed it.
+
+## Turn regulars into advocates
+
+Your happiest repeat customers are your cheapest and most credible marketing. Make it easy for them to spread the word with a referral perk, a shareable link, or simply by asking for a review at the right moment. A recommendation from a friend outperforms any ad you could buy.
+
+## The bottom line
+
+Growth is not only about the top of the funnel. Deliver a smooth first experience, follow up while you are still fresh in mind, give people a real reason to return, and act on what they tell you. A modest lift in how many customers come back a second time compounds into steadier revenue than any single burst of new traffic.`,
+  },
+  {
+    slug: 'online-reviews-trust-signals-2026',
+    title: 'Online reviews: the trust signals that win new customers',
+    excerpt: 'Most buyers read reviews before they ever call. Here is how to earn more of them, respond well, and turn your reputation into your best salesperson.',
     date: '2026-07-14',
     author: 'Editorial Team',
-    category: 'Nonprofit guide',
+    category: 'Reputation guide',
     readMinutes: 6,
-    body: `If your nonprofit is watching its donor base shrink, you are not alone — and the 2026 data points to a clear way out. While one-time giving and overall supporter counts are falling, monthly and recurring donors are growing, retaining far better, and quietly funding a growing share of online revenue. Here is what the numbers say and how to build a program around them.
+    body: `Before a new customer calls you, they check what other people say about you. Reviews have quietly become the most persuasive marketing you have, and unlike an ad, you do not write them. What you can do is earn more of them, shape how you respond, and make your reputation easy to find. Here is how to treat reviews as the asset they are.
 
-## Why recurring giving stands out
+## Why reviews carry so much weight
 
-The contrast is stark. One-time donor retention fell to roughly 32% in 2025, and the average nonprofit's active supporter base shrank several percent between 2023 and 2025. Recurring donors moved the opposite way: their numbers grew 32% over that same window, their retention held steady around 78 to 80%, and they stay engaged for nearly eight years on average.
+A stranger trusts other customers far more than they trust your own marketing. The number of reviews, how recent they are, your average rating, and how you respond all feed a quick gut judgment: is this business reliable or risky. That judgment happens in seconds, often on a phone, and it decides whether the call ever comes.
 
-The lifetime value follows. The average recurring donor gives around $938 a year, and monthly giving now accounts for about 27% of all online revenue at nonprofits. Recurring givers are retained at roughly twice the rate of single-gift donors and deliver several times the lifetime value.
+## Earn more reviews without begging
 
-## Monthly is the standard — and donors often opt in on their own
+The businesses with the most reviews are rarely the biggest. They are the ones who ask well:
 
-Among recurring donors, 94% choose monthly gifts, so a monthly option should be your default recurring path. Encouragingly, many donors sign up without being asked directly. In one survey, nearly 59% of monthly givers said they started without a direct ask, and about 42% joined after seeing the organization's ongoing impact. Showing your work converts.
+- **Ask at the peak moment.** Right after a job done well, when the customer is happiest, is when they are most willing.
+- **Make it one tap.** Send a direct link to the review page. Every extra step loses people.
+- **Ask everyone, not just the delighted.** A steady trickle of honest reviews reads as more trustworthy than a sudden pile of perfect ones.
 
-## The hidden retention killer: failed payments
+A simple, consistent habit of asking beats any one-time campaign.
 
-Here is the insight most programs miss. A large share of recurring-donor loss is not people deciding to cancel — it is involuntary churn from failed payments. Expired cards, insufficient funds, fraud flags, and lost or stolen cards silently break monthly gifts, and those donors are often never recovered. Since roughly 91% of monthly gifts run on credit cards, card expiration alone quietly erodes your base every month.
+## Respond to every review, especially the hard ones
 
-Timing compounds the problem. The first 60 days are the highest-churn window in the entire monthly-donor lifecycle, with about 10% of new monthly donors lapsing within two months of signup.
+Responding is where reputation is truly built, because future customers read the responses more closely than the reviews. Thank people for the good ones briefly and warmly. For the critical ones, stay calm, take responsibility for anything that was yours, and offer to make it right offline. A gracious reply to a one-star review often wins more trust than the five-star reviews around it, because it shows how you treat people when things go wrong.
 
-## How to keep more monthly donors
+## Turn a bad review into a better business
 
-Focus your effort where it compounds:
+A negative review is uncomfortable, but it is also free market research. If the same complaint shows up twice, it is not a fluke, it is a signal. Fix the underlying problem, then mention in your response that you have changed it. Prospective customers reading later see a business that listens and improves rather than one that argues.
 
-- **Recover failed payments.** Set up automatic card-update tools and a dunning sequence — a friendly email and a simple link to fix a lapsed card. This is often the single highest-ROI retention move available.
-- **Nail the first 60 days.** Welcome new monthly donors immediately, confirm the impact of their gift, and check in early. The first two months decide whether they stay for years.
-- **Convert one-time donors to monthly.** Invite recent one-time givers into a monthly program within 30 to 60 days, while your impact is fresh in their minds.
-- **Reactivate lapsed donors.** Reactivated donors retain better than brand-new ones, so a win-back campaign often outperforms pure acquisition.
+## Put your reputation where people look
 
-## The takeaway
+Once you are earning reviews, do not hide them. Feature a few genuine ones on your homepage and service pages, keep your review profiles complete, and make sure the star rating shows up when someone searches your name. Real quotes from real customers, with their first name and context, carry more weight than any slogan you could write about yourself.
 
-A 5% lift in retention compounds into meaningful revenue over a few years and frequently beats an equal investment in acquisition. Build recurring giving into your default donor path, fight involuntary churn with payment recovery, and treat the first 60 days as make-or-break. In 2026, retention is not an operational afterthought — it is the highest-return fundraising work you can do.`,
+## The bottom line
+
+Reviews are the closest thing a small business has to a salesperson who works around the clock and costs nothing. Ask for them at the right moment, make leaving one effortless, respond to every one with grace, and fix what the critical ones reveal. Do that steadily and your reputation becomes the reason new customers choose you over the business next door.`,
+  },
+  {
+    slug: 'google-business-profile-optimization-2026',
+    title: 'Your Google Business Profile, optimized for 2026',
+    excerpt: 'Your Google Business Profile is often the first thing a customer sees. Here is how to fill it out completely, keep it fresh, and turn views into visits.',
+    date: '2026-07-02',
+    author: 'Editorial Team',
+    category: 'Local guide',
+    readMinutes: 6,
+    body: `For a local business, your Google Business Profile is often more important than your website, because it is what appears first when someone searches your name or your service nearby. It shows your hours, photos, reviews, and a map, all before anyone clicks through to your site. A complete, active profile earns more calls and visits than a neglected one. Here is how to get it right.
+
+## Claim it and complete every field
+
+Start by claiming and verifying the profile so you control it. Then fill in everything, because empty fields cost you. Set your exact hours, choose the most accurate primary category, add secondary categories for the other things you do, and list your services with short descriptions. Write a genuine business description in plain language. Google rewards completeness, and so do customers scanning for a reason to trust you.
+
+## Choose your categories carefully
+
+Your primary category is one of the strongest signals for which searches you show up in, so pick the one that describes your core business most precisely rather than the broadest option. Add secondary categories for legitimate additional services. A profile that claims to be everything ranks for nothing, so keep the list honest and specific.
+
+## Add real photos, and keep adding them
+
+Photos are the first thing most people look at, and profiles with fresh, genuine images consistently earn more clicks. Show what a customer actually wants to see:
+
+- **Your space,** so people recognize it when they arrive.
+- **Your team,** because faces build trust.
+- **Your work or products,** shown honestly rather than staged.
+
+Add a few new photos every month. A profile that keeps posting looks alive and open for business.
+
+## Use posts, questions, and messaging
+
+The profile is more than a listing. Use posts to share an offer, an event, or an update, which keeps the profile active and gives searchers a reason to act now. Watch the questions section and answer them yourself before someone else answers wrong. If you can reply quickly, turn on messaging so an interested customer can reach you in the moment they are ready.
+
+## Keep it accurate and fresh
+
+Nothing erodes trust like wrong information. Update your hours before every holiday, fix your phone number the day it changes, and remove services you no longer offer. Google may also let customers suggest edits, so check the profile now and then to make sure no one has changed your details incorrectly.
+
+## The bottom line
+
+Your Google Business Profile is a storefront that most of your future customers will see before anything else you own. Claim it, complete every field, choose precise categories, add fresh photos, stay active with posts and answers, and keep every detail accurate. It is free, it takes an hour to set up and minutes a week to maintain, and it is one of the highest-return investments a local business can make.`,
   },
   {
     slug: 'google-ai-overviews-seo-small-business-2026',

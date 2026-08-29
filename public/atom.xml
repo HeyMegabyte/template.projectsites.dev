@@ -5,41 +5,41 @@
   <link href="{BUSINESS_URL}/atom.xml" rel="self" type="application/atom+xml" />
   <link href="{BUSINESS_URL}" />
   <id>{BUSINESS_URL}/</id>
-  <updated>2026-08-29T00:48:22.810Z</updated>
+  <updated>2026-08-29T02:54:19.218Z</updated>
   <author><name>{BUSINESS_NAME}</name><email>hey@megabyte.space</email></author>
   <entry>
-    <title>Dental implants cost in 2026: what a single tooth to a full mouth really runs</title>
-    <link href="{BUSINESS_URL}/blog/dental-implants-cost-2026" />
-    <id>{BUSINESS_URL}/blog/dental-implants-cost-2026</id>
-    <updated>2026-08-12T00:00:00.000Z</updated>
+    <title>Website speed in 2026: how Core Web Vitals win or lose customers</title>
+    <link href="{BUSINESS_URL}/blog/website-speed-core-web-vitals-2026" />
+    <id>{BUSINESS_URL}/blog/website-speed-core-web-vitals-2026</id>
+    <updated>2026-08-18T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
-    <title>When to replace your HVAC system in 2026 (and when a repair still makes sense)</title>
-    <link href="{BUSINESS_URL}/blog/when-to-replace-hvac-system-2026" />
-    <id>{BUSINESS_URL}/blog/when-to-replace-hvac-system-2026</id>
-    <updated>2026-08-05T00:00:00.000Z</updated>
+    <title>The local SEO checklist every small business needs in 2026</title>
+    <link href="{BUSINESS_URL}/blog/local-seo-checklist-2026" />
+    <id>{BUSINESS_URL}/blog/local-seo-checklist-2026</id>
+    <updated>2026-08-04T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
-    <title>Your 2026 estate planning checklist: the 5 documents (and 3 tasks) most people miss</title>
-    <link href="{BUSINESS_URL}/blog/estate-planning-checklist-2026" />
-    <id>{BUSINESS_URL}/blog/estate-planning-checklist-2026</id>
-    <updated>2026-07-28T00:00:00.000Z</updated>
+    <title>Turning first-time visitors into repeat customers</title>
+    <link href="{BUSINESS_URL}/blog/repeat-customers-retention-2026" />
+    <id>{BUSINESS_URL}/blog/repeat-customers-retention-2026</id>
+    <updated>2026-07-21T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>
-    <title>Direct online ordering vs delivery apps in 2026: the two-channel strategy that protects your margin</title>
-    <link href="{BUSINESS_URL}/blog/restaurant-direct-online-ordering-vs-delivery-apps-2026" />
-    <id>{BUSINESS_URL}/blog/restaurant-direct-online-ordering-vs-delivery-apps-2026</id>
-    <updated>2026-07-20T00:00:00.000Z</updated>
-    <summary></summary>
-  </entry>
-  <entry>
-    <title>Monthly donors are your best fundraising bet in 2026 — here is the retention data</title>
-    <link href="{BUSINESS_URL}/blog/nonprofit-monthly-donor-retention-2026" />
-    <id>{BUSINESS_URL}/blog/nonprofit-monthly-donor-retention-2026</id>
+    <title>Online reviews: the trust signals that win new customers</title>
+    <link href="{BUSINESS_URL}/blog/online-reviews-trust-signals-2026" />
+    <id>{BUSINESS_URL}/blog/online-reviews-trust-signals-2026</id>
     <updated>2026-07-14T00:00:00.000Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Your Google Business Profile, optimized for 2026</title>
+    <link href="{BUSINESS_URL}/blog/google-business-profile-optimization-2026" />
+    <id>{BUSINESS_URL}/blog/google-business-profile-optimization-2026</id>
+    <updated>2026-07-02T00:00:00.000Z</updated>
     <summary></summary>
   </entry>
   <entry>

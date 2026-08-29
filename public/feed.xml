@@ -5,42 +5,42 @@
     <link>{BUSINESS_URL}</link>
     <description>{BUSINESS_TAGLINE}</description>
     <language>en-US</language>
-    <lastBuildDate>Sat, 29 Aug 2026 00:48:22 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 29 Aug 2026 02:54:19 GMT</lastBuildDate>
     <atom:link href="{BUSINESS_URL}/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Dental implants cost in 2026: what a single tooth to a full mouth really runs</title>
-      <link>{BUSINESS_URL}/blog/dental-implants-cost-2026</link>
-      <guid isPermaLink="true">{BUSINESS_URL}/blog/dental-implants-cost-2026</guid>
+      <title>Website speed in 2026: how Core Web Vitals win or lose customers</title>
+      <link>{BUSINESS_URL}/blog/website-speed-core-web-vitals-2026</link>
+      <guid isPermaLink="true">{BUSINESS_URL}/blog/website-speed-core-web-vitals-2026</guid>
       <description></description>
-      <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>When to replace your HVAC system in 2026 (and when a repair still makes sense)</title>
-      <link>{BUSINESS_URL}/blog/when-to-replace-hvac-system-2026</link>
-      <guid isPermaLink="true">{BUSINESS_URL}/blog/when-to-replace-hvac-system-2026</guid>
+      <title>The local SEO checklist every small business needs in 2026</title>
+      <link>{BUSINESS_URL}/blog/local-seo-checklist-2026</link>
+      <guid isPermaLink="true">{BUSINESS_URL}/blog/local-seo-checklist-2026</guid>
       <description></description>
-      <pubDate>Wed, 05 Aug 2026 00:00:00 GMT</pubDate>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>Your 2026 estate planning checklist: the 5 documents (and 3 tasks) most people miss</title>
-      <link>{BUSINESS_URL}/blog/estate-planning-checklist-2026</link>
-      <guid isPermaLink="true">{BUSINESS_URL}/blog/estate-planning-checklist-2026</guid>
+      <title>Turning first-time visitors into repeat customers</title>
+      <link>{BUSINESS_URL}/blog/repeat-customers-retention-2026</link>
+      <guid isPermaLink="true">{BUSINESS_URL}/blog/repeat-customers-retention-2026</guid>
       <description></description>
-      <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
-      <title>Direct online ordering vs delivery apps in 2026: the two-channel strategy that protects your margin</title>
-      <link>{BUSINESS_URL}/blog/restaurant-direct-online-ordering-vs-delivery-apps-2026</link>
-      <guid isPermaLink="true">{BUSINESS_URL}/blog/restaurant-direct-online-ordering-vs-delivery-apps-2026</guid>
-      <description></description>
-      <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>Monthly donors are your best fundraising bet in 2026 — here is the retention data</title>
-      <link>{BUSINESS_URL}/blog/nonprofit-monthly-donor-retention-2026</link>
-      <guid isPermaLink="true">{BUSINESS_URL}/blog/nonprofit-monthly-donor-retention-2026</guid>
+      <title>Online reviews: the trust signals that win new customers</title>
+      <link>{BUSINESS_URL}/blog/online-reviews-trust-signals-2026</link>
+      <guid isPermaLink="true">{BUSINESS_URL}/blog/online-reviews-trust-signals-2026</guid>
       <description></description>
       <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Your Google Business Profile, optimized for 2026</title>
+      <link>{BUSINESS_URL}/blog/google-business-profile-optimization-2026</link>
+      <guid isPermaLink="true">{BUSINESS_URL}/blog/google-business-profile-optimization-2026</guid>
+      <description></description>
+      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>How small businesses rank in Google AI Overviews in 2026</title>
