@@ -2290,6 +2290,25 @@ p          { text-wrap: pretty; }
   }
 }
 
+/* @starting-style entry — each row un-blurs + settles the FIRST time it paints
+   (SPA route-in / mount). Base state (`.faq-item` above) is fully visible, so
+   SSR / no-JS / unsupported browsers render at rest — this only plays where
+   allow-discrete + motion are both available. GPU-only (opacity + transform).
+   Layered over the scroll-stagger; the stagger owns scroll, this owns mount. */
+@supports (transition-behavior: allow-discrete) {
+  @media (prefers-reduced-motion: no-preference) {
+    .faq-item {
+      transition:
+        opacity var(--duration-slow) var(--ease),
+        transform var(--duration-slow) var(--ease);
+      transition-delay: calc(var(--faq-i, 0) * 45ms);
+    }
+    @starting-style {
+      .faq-item { opacity: 0; transform: translateY(10px); }
+    }
+  }
+}
+
 /* Reduced-motion / no-timeline safety net: never leave a row hidden or the
    answer faded out. (The open row's answer is shown by the [data-faq-open]
    rule above; a collapsed row's grid-rows:0fr keeps it correctly clipped.) */
@@ -2298,4 +2317,32 @@ p          { text-wrap: pretty; }
   .faq-item[data-faq-open]::before { transform: scaleY(1); }
   .faq-badge__icon { transition: none; }
   .faq-item[data-faq-open] .faq-badge__icon { transform: rotate(135deg); }
+}
+
+/* Save-Data (prefers-reduced-data: reduce) — the missing gate. Every other
+   cinematic section (hero-aurora, stat-tile, team-role-card…) drops its motion
+   under Save-Data; FAQ must too. Kill the scroll-stagger, the @starting-style
+   mount travel, the grid-rows slide, and the answer/left-bar/badge tweens — the
+   accordion opens/closes INSTANTLY and stays fully operable (only motion is
+   removed, never function). Rows render at rest, every answer legible on open. */
+@media (prefers-reduced-data: reduce) {
+  .faq-item {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  .faq-panel { transition: none !important; }
+  .faq-trigger,
+  .faq-item::before,
+  .faq-item::after,
+  .faq-badge,
+  .faq-badge__icon,
+  .faq-answer { transition: none !important; }
+  .faq-trigger:hover { transform: none; }
+  .faq-item[data-faq-open]::before { transform: scaleY(1); }
+  .faq-item[data-faq-open] .faq-badge__icon { transform: rotate(135deg); }
+  /* Answer is hidden purely by the wrapper's grid-rows:0fr; keep the copy
+     itself fully opaque so the open state reveals it with no fade dependency. */
+  .faq-answer { opacity: 1; transform: none; }
 }

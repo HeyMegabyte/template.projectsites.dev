@@ -6,12 +6,17 @@ import { FAQ } from './FAQ';
  *
  * Cinematic behaviour (all gated behind `prefers-reduced-motion: no-preference`
  * and auto-neutralised for reduced-motion users): rows stagger-rise as the list
- * scrolls into view, the trigger lifts + reveals an accent hairline on
- * hover/focus, a focus-visible ring keeps it keyboard-operable, and the `+`
- * badge blooms into a glowing `×` while the open row gains a soft accent wash +
- * left accent bar. The answer slides via a `grid-rows` 0fr↔1fr transition with
- * a fade so there is zero layout jank. `exclusive` toggles single-open vs
- * multi-open. Try the "Interactions" a11y checks and toggle a row to see it.
+ * scrolls into view, un-blur + settle on first paint via `@starting-style`, the
+ * trigger lifts + reveals an accent hairline on hover/focus, a focus-visible
+ * ring keeps it keyboard-operable, and the `+` badge blooms into a glowing `×`
+ * while the open row gains a soft accent wash + left accent bar. The answer
+ * slides via a `grid-rows` 0fr↔1fr transition (the modern jank-free technique —
+ * no `max-height` guessing) with a fade, so there is zero layout jank.
+ *
+ * `exclusive` toggles single-open vs multi-open. All motion is additionally
+ * dropped under `prefers-reduced-data: reduce` (Save-Data) — the accordion then
+ * opens/closes instantly and stays fully operable. Toggle a row with the mouse
+ * or the keyboard (Tab to a question, then Enter/Space) to see it.
  */
 const meta = {
   title: 'Sections/FAQ',
@@ -90,5 +95,39 @@ export const ManyQuestions: Story = {
       answer:
         'A clear, jargon-free answer that resolves the concern in a sentence or two, written the way a real front-desk teammate would explain it in person.',
     })),
+  },
+};
+
+/**
+ * Disclosure mode (the default, non-`exclusive`) — MULTIPLE rows can be open at
+ * once. Tab to any question and press Enter/Space to toggle it independently;
+ * the `grid-rows` 0fr↔1fr slide plays per row. Under `prefers-reduced-motion`
+ * or `prefers-reduced-data`, toggling is instant and still fully operable — use
+ * a Storybook toolbar/OS setting or DevTools emulation to verify.
+ */
+export const MultipleOpen: Story = {
+  args: {
+    exclusive: false,
+    eyebrow: 'Booking',
+    headline: 'Open several at once',
+    description: 'Disclosure mode keeps every row you open expanded — keyboard-toggle a few to compare answers.',
+    items: [
+      {
+        question: 'What are your hours?',
+        answer: 'Weekdays 8am–6pm and Saturdays 9am–2pm. Emergency slots are held every morning.',
+      },
+      {
+        question: 'Where are you located?',
+        answer: 'Downtown, two blocks from the transit center, with free patient parking behind the building.',
+      },
+      {
+        question: 'Do you offer payment plans?',
+        answer: 'Yes — interest-free in-house plans and third-party financing are both available at checkout.',
+      },
+      {
+        question: 'Can I book online?',
+        answer: 'Absolutely. Pick any open slot in the booking widget and you will get an instant confirmation.',
+      },
+    ],
   },
 };

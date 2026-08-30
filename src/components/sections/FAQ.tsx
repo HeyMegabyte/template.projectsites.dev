@@ -29,10 +29,17 @@ interface Props {
  * Cinematic detail (all gated behind `prefers-reduced-motion: no-preference`
  * via the `.faq-*` classes in `index.css`, and auto-neutralised by the global
  * reduced-motion reset): each row rises in on scroll with a per-item stagger
- * (`--faq-i`), the trigger lifts + reveals an accent hairline on hover/focus,
- * the `+` badge blooms into a glowing `×` when open, and the open row gets a
- * soft accent wash + left accent bar. The answer slides via a `grid-rows`
- * 0fr↔1fr transition with a fade so there is no layout jank.
+ * (`--faq-i`), un-blurs + settles on first paint via `@starting-style`, the
+ * trigger lifts + reveals an accent hairline on hover/focus, the `+` badge
+ * blooms into a glowing `×` when open, and the open row gets a soft accent wash
+ * + left accent bar. The answer slides via a `grid-rows` 0fr↔1fr transition
+ * (the modern jank-free technique — no `max-height` guessing) with a fade.
+ *
+ * Accessibility + data-saver: every trigger is a real `<button>` with
+ * `aria-expanded` + `aria-controls`, a labelled `role="region"` panel, native
+ * Enter/Space, and a keyboard-visible focus ring. All motion is additionally
+ * dropped under `prefers-reduced-data: reduce` (Save-Data) — the accordion then
+ * opens/closes INSTANTLY and stays fully operable (only motion is removed).
  */
 export function FAQ({
   items,
