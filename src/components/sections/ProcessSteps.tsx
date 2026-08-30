@@ -56,11 +56,13 @@ export function ProcessSteps({ steps, eyebrow = 'How it works', headline, descri
             style={{ '--step-i': i } as CSSProperties}
             className="relative card-tactile p-6 md:p-8 reveal-on-view transition-transform duration-300 hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
-            {/* Editorial ghost number — staggered scale-pop as each step enters
-                view (process-num, keyed on --step-i); persistent soft accent glow. */}
+            {/* Editorial ghost number — a faint watermark in the TOP-RIGHT corner so it
+                never collides with the icon + title in the top-LEFT (it was `-left-2`,
+                overlapping the icon). Decorative + behind the content (earlier in DOM),
+                staggered scale-pop keyed on --step-i. */}
             <span
               aria-hidden="true"
-              className="process-num absolute -top-4 -left-2 font-heading text-7xl font-extrabold text-accent/15 leading-none"
+              className="process-num pointer-events-none select-none absolute -top-4 right-3 font-heading text-6xl font-extrabold text-accent/15 leading-none"
             >
               {String(i + 1).padStart(2, '0')}
             </span>
