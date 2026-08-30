@@ -190,14 +190,25 @@ export function fitMetaDescription(
     if (d.length >= MIN) break;
     if (d.includes(pad)) continue;
     const prefix = d.length === 0 ? '' : /[.!?]$/.test(d) ? ' ' : '. ';
-    // Append token-by-token so we approach — but never overshoot — MAX.
+    // Append token-by-token so we approach — but never overshoot — MAX. STOP at
+    // the first word that won't fit (break, not skip) — skipping an interior word
+    // while keeping its spaces produced broken grammar + a double space
+    // ("…and the  area." instead of "…and the surrounding area.").
     for (const tok of (prefix + pad).split(/(\s+)/)) {
       if (d.length >= MAX) break;
       if ((d + tok).length <= MAX) d += tok;
+      else break;
     }
   }
 
-  d = clampMax(d.replace(/[\s,;:-]+$/, ''));
+  // Collapse any stray double space, then strip a dangling trailing connector
+  // ("…serving Portland and the") left when a pad was cut mid-phrase, so a
+  // partially-appended pad always ends on a real word.
+  d = d
+    .replace(/\s{2,}/g, ' ')
+    .replace(/[\s,;:-]+$/, '')
+    .replace(/(?:\s+(?:and|the|a|an|of|to|for|with|in|on|at|or|&|but))+$/i, '');
+  d = clampMax(d);
   if (!/[.!?]$/.test(d) && d.length < MAX) d += '.';
   return d;
 }
