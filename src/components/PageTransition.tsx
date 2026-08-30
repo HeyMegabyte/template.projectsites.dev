@@ -7,23 +7,24 @@ interface Props {
 }
 
 /**
- * Cinematic route-change wrapper powered by the **View Transitions API**.
+ * Route-change wrapper powered by the **View Transitions API**, scoped so ONLY
+ * the main content fades.
  *
- * On every SPA navigation this holds the *currently displayed* subtree in
- * state and swaps in the new route's subtree **inside**
- * `document.startViewTransition()`. The browser snapshots the old + new DOM
- * and cross-fades/rises between them via the `::view-transition-old/new(root)`
- * keyframes in `src/index.css` (gated behind `prefers-reduced-motion`).
+ * On every SPA navigation this holds the *currently displayed* subtree in state
+ * and swaps in the new route's subtree **inside** `document.startViewTransition()`.
+ * The browser snapshots the old + new DOM; the CSS in `src/index.css` names the
+ * `<main>` element (`view-transition-name: ps-main`) and cross-fades ONLY that
+ * group (~300ms, pure opacity) while pinning the `root` snapshot — the fixed
+ * navbar, footer, and page background — to no animation. So the chrome stays
+ * perfectly static and just the page body cross-fades.
  *
  * Feature-detected end-to-end: if `document.startViewTransition` is missing
  * (older browsers), we fall back to a plain synchronous render — no jank, no
- * animation, identical behavior to before. Reduced-motion users get an
- * instant, flash-free swap (the CSS clamps the VT animation to none).
+ * animation, identical behavior to before. Reduced-motion / reduced-data users
+ * get an instant, flash-free swap (the CSS clamps the VT animation to none).
  *
- * `<html>` is pinned to the brand bg during the swap so the cross-fade reads
- * as a single smooth shot rather than flashing the page background. The
- * separate `<ScrollToTop>` component (keyed on `useLocation().pathname`) still
- * owns scroll restoration — this wrapper never touches scroll, so
+ * The separate `<ScrollToTop>` component (keyed on `useLocation().pathname`)
+ * still owns scroll restoration — this wrapper never touches scroll, so
  * scroll-to-top-on-nav is preserved exactly.
  */
 export default function PageTransition({ children }: Props) {
@@ -35,10 +36,6 @@ export default function PageTransition({ children }: Props) {
   const lastKeyRef = useRef(location.key);
 
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.documentElement.style.backgroundColor = '#0a0a1a';
-    }
-
     // First mount (same key) — nothing to transition; keep children fresh so
     // lazy Suspense fallbacks that resolve after mount still update.
     if (location.key === lastKeyRef.current) {

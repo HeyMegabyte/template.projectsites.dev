@@ -180,45 +180,54 @@ h1, h2, h3 { text-wrap: balance; }
 p          { text-wrap: pretty; }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   VIEW TRANSITIONS
-   Cinematic same-document cross-fade + rise on every SPA route change. The
-   React `PageTransition` wrapper drives these by committing the new route
-   inside `document.startViewTransition()` (feature-detected — unsupported
-   browsers just render, no jank). `@view-transition { navigation: auto }`
-   additionally covers true cross-document (MPA / prerendered) navigations.
+   VIEW TRANSITIONS — scoped cross-fade of the MAIN CONTENT only
+   On every SPA route change ONLY the `<main>` content cross-fades (~300ms, pure
+   opacity — no slide/rise); the fixed navbar + footer + page background hold
+   PERFECTLY STATIC. `main#main` carries its own `view-transition-name`, so the
+   browser snapshots just the page body old→new and cross-fades between them,
+   while the `root` snapshot (all the chrome) is pinned to no animation. Driven
+   by the React `PageTransition` wrapper committing the new route inside
+   `document.startViewTransition()` (feature-detected — unsupported browsers just
+   render, no jank). `@view-transition { navigation: auto }` covers true
+   cross-document (MPA / prerendered) navigations the same way.
 
-   Motion is gated behind `prefers-reduced-motion: no-preference` — reduced-
-   motion users get an instant swap (the global reduced-motion reset below
-   also clamps any residual VT animation to ~0ms). Only the `root` snapshot
-   animates, so per-element named groups (hero, gallery-card) stay free to
-   opt in elsewhere.
+   Motion gated behind `prefers-reduced-motion` + `prefers-reduced-data` — those
+   users get an instant, flash-free swap.
    ─────────────────────────────────────────────────────────────────────── */
 @view-transition { navigation: auto; }
 
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root) {
-    animation: vt-fade-out 0.28s var(--ease) both;
-  }
-  ::view-transition-new(root) {
-    animation: vt-rise-in 0.34s var(--ease) both;
-  }
-  @keyframes vt-fade-out {
-    from { opacity: 1; transform: translateY(0); }
-    to   { opacity: 0; transform: translateY(-8px); }
-  }
-  @keyframes vt-rise-in {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+/* The main content is its own transition group so it can fade independently of
+   the static chrome (the navbar is `position: fixed`, so before this it was part
+   of the animated `root` snapshot and rose/faded on every nav). */
+main#main { view-transition-name: ps-main; }
+
+/* The navbar + footer + background (the `root` snapshot) NEVER animate — they
+   hold static across the swap. This is the whole point: only <main> transitions.
+   Unconditional (outside the motion queries) so the chrome is static always. */
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none !important;
 }
-/* Reduced-motion: hold both snapshots fully opaque so the swap is instant and
-   flash-free (no fade, no slide). */
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+
+/* Pure cross-fade of the main content — new fades in as old fades out, 300ms. */
+@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+  ::view-transition-old(ps-main) {
+    animation: ps-main-out 0.3s var(--ease) both;
+  }
+  ::view-transition-new(ps-main) {
+    animation: ps-main-in 0.3s var(--ease) both;
+  }
+  @keyframes ps-main-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes ps-main-in  { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* Reduced-motion / reduced-data: hold both snapshots opaque → instant, flash-free. */
+@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+  ::view-transition-old(ps-main),
+  ::view-transition-new(ps-main) {
     animation: none !important;
     opacity: 1;
-    mix-blend-mode: normal;
   }
 }
 
