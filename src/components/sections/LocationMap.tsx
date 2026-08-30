@@ -61,6 +61,18 @@ export function LocationMap(props: Props = {}) {
             'radial-gradient(55% 50% at 50% 0%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent 70%)',
         }}
       />
+      <style>{`
+        .lm-map{transition:box-shadow .4s var(--ease,ease)}
+        .lm-dir{transition:transform .3s var(--ease,ease),background-color .3s,box-shadow .3s}
+        @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference){
+          .lm-map:hover{box-shadow:0 0 0 1px color-mix(in oklch,var(--color-accent) 40%,transparent),0 24px 60px -24px color-mix(in oklch,var(--color-accent) 35%,transparent)}
+          .lm-pin{animation:lm-pulse 3.4s ease-in-out infinite}
+          @keyframes lm-pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in oklch,var(--color-accent) 30%,transparent)}50%{box-shadow:0 0 0 9px color-mix(in oklch,var(--color-accent) 0%,transparent)}}
+          .lm-dir:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px color-mix(in oklch,var(--color-accent) 45%,transparent)}
+          .lm-dir svg{transition:transform .3s var(--ease,ease)}
+          .lm-dir:hover svg{transform:translateX(3px)}
+        }
+      `}</style>
       <div className="max-w-container-wide mx-auto px-6">
         <div className="reveal-on-view mb-14 text-center">
           <span className="font-mono text-sm uppercase tracking-widest text-accent">Visit us</span>
@@ -75,7 +87,7 @@ export function LocationMap(props: Props = {}) {
 
         <div className="grid items-stretch gap-8 lg:grid-cols-[1.5fr_1fr]">
           {/* Real, keyless, address-driven map (enhancement — never gates the info). */}
-          <div className="card-tactile reveal-on-view overflow-hidden rounded-2xl">
+          <div className="lm-map card-tactile reveal-on-view overflow-hidden rounded-2xl">
             <iframe
               title={`Map showing the location of ${name}`}
               src={mapSrc}
@@ -87,7 +99,7 @@ export function LocationMap(props: Props = {}) {
 
           {/* Address + hours + directions — renders regardless of the embed. */}
           <div className="card-tactile reveal-on-view flex flex-col justify-center p-8">
-            <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20">
+            <span className="lm-pin mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20">
               <MapPin size={26} strokeWidth={1.75} aria-hidden />
             </span>
             <h3 className="font-heading text-xl font-bold text-text">{name}</h3>
@@ -102,7 +114,7 @@ export function LocationMap(props: Props = {}) {
               href={dirHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-accent/50 px-6 py-3 font-medium text-accent transition-colors duration-300 hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+              className="lm-dir mt-6 inline-flex items-center gap-2 self-start rounded-full border border-accent/50 px-6 py-3 font-medium text-accent hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
               aria-label={`Get directions to ${name}`}
             >
               <Navigation size={18} aria-hidden />
