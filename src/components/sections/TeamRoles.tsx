@@ -1,3 +1,4 @@
+import { type CSSProperties } from 'react';
 import { Users, Sparkles, HeartHandshake } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -25,8 +26,13 @@ const ROLE_ICONS = [Users, Sparkles, HeartHandshake] as const;
 /**
  * TeamRoles — a role-based "meet the team / providers" credibility section. Renders
  * accent-iconed glass cards for each role (title + description), a motion-gated accent
- * glow, and reveal-on-view. Emits NO Person JSON-LD (these are roles, not people, so we
- * never claim named individuals). Self-hides when no real roles are supplied.
+ * glow, and a STAGGERED reveal-on-view (each card lifts in on a small incremental
+ * offset keyed on the inline `--role-i` index — see the `TEAM ROLES` block in index.css).
+ * Each card grows a gradient top-accent bar that brightens on hover/focus, and its icon
+ * circle warms + rotates. Every effect is transform/opacity-only and gated behind
+ * `prefers-reduced-motion: no-preference` + `prefers-reduced-data` (reduced users get the
+ * static, fully-legible section). Emits NO Person JSON-LD (these are roles, not people, so
+ * we never claim named individuals). Self-hides when no real roles are supplied.
  */
 export function TeamRoles({
   roles,
@@ -69,9 +75,13 @@ export function TeamRoles({
             return (
               <li
                 key={i}
-                className="card-tactile p-8 reveal-on-view group transition-transform duration-300 hover:-translate-y-1"
+                style={{ '--role-i': i } as CSSProperties}
+                className="team-role-card card-tactile relative overflow-hidden p-8 reveal-on-view group transition-transform duration-300 hover:-translate-y-1 focus-within:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:focus-within:translate-y-0"
               >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20 transition-transform duration-300 group-hover:scale-110">
+                {/* Gradient top-accent bar — draws/brightens on hover+focus (keyed on
+                    --role-lift). Decorative, transform/opacity-only, motion-gated. */}
+                <span aria-hidden className="team-role-bar pointer-events-none" />
+                <div className="team-role-icon mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent ring-1 ring-accent/20 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6 group-focus-within:scale-110 group-focus-within:-rotate-6 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:rotate-0 motion-reduce:group-focus-within:scale-100 motion-reduce:group-focus-within:rotate-0">
                   <Icon size={26} strokeWidth={1.75} aria-hidden />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-text">{r.title}</h3>

@@ -534,6 +534,77 @@ p          { text-wrap: pretty; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   TEAM ROLES (src/components/sections/TeamRoles.tsx)
+   Role cards stagger up on scroll (offset keyed on the inline `--role-i`, matching
+   the `.stat-tile` / `.process-num` pattern), each grows a gradient top-accent bar
+   that brightens on hover/focus (keyed on `--role-lift`, matching the
+   `.pricing-card::before` / `.bento-tile::after` hairline), and the accent icon
+   circle warms + rotates. Every effect is transform/opacity/filter-only (GPU-safe,
+   no layout thrash) and gated behind `prefers-reduced-motion: no-preference`; the
+   global reduced-motion reset above additionally clamps it to instant, so the resting
+   base state HERE is the reduced-motion / no-JS experience — every card fully legible,
+   no offset, nothing hidden. Colors are theme tokens + `--color-accent` only.
+   ─────────────────────────────────────────────────────────────────────── */
+.team-role-card {
+  --role-lift: 0;
+}
+/* Gradient top-accent bar — a thin premium detail that draws in + brightens on
+   hover/focus. `--role-lift` (0→1) drives both its scale and accent strength. */
+.team-role-bar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) calc(20% + var(--role-lift) * 60%), transparent) 50%,
+    transparent 100%
+  );
+  transform: scaleX(0.55);
+  transform-origin: center;
+  transition:
+    transform var(--duration-base) var(--ease),
+    background var(--duration-base) var(--ease);
+}
+.team-role-card:hover,
+.team-role-card:focus-within {
+  --role-lift: 1;
+}
+.team-role-card:hover .team-role-bar,
+.team-role-card:focus-within .team-role-bar {
+  transform: scaleX(1);
+}
+/* Accent icon circle — an accent glow layered on the component's Tailwind
+   scale+rotate hover transform. `filter` only (never `transform`, so it never
+   fights Tailwind's composed transform). Motion-gated: reduced-motion keeps the
+   circle un-glowed + un-transformed (the Tailwind `motion-reduce:` guards zero the
+   scale/rotate). */
+@media (prefers-reduced-motion: no-preference) {
+  .team-role-card:hover .team-role-icon,
+  .team-role-card:focus-within .team-role-icon {
+    filter: drop-shadow(0 0 14px color-mix(in oklch, var(--color-accent) 40%, transparent));
+  }
+  /* Staggered reveal — each card lifts in on a small incremental scroll offset
+     keyed on the inline `--role-i`, layered on `.reveal-on-view`. */
+  @supports (animation-timeline: view()) {
+    .team-role-card {
+      animation: team-role-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(2% + var(--role-i, 0) * 8%) cover 32%;
+    }
+    @keyframes team-role-rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+}
+/* Save-Data: drop the scroll-driven stagger — cards render at rest, fully legible. */
+@media (prefers-reduced-data: reduce) {
+  .team-role-card { animation: none !important; opacity: 1; transform: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    SCROLL REVEAL — the shared `AnimatedSection` entrance (IntersectionObserver-
    driven). Visible by default; JS adds `.js-reveal-active` then, per element,
    `.in-view`. The reveal is a cinematic blur-rise: content lifts a touch, un-

@@ -68,6 +68,53 @@ export const Medical: Story = {
 };
 
 /**
+ * Six roles across two rows — the case where the cinematic polish reads best: the
+ * staggered reveal-on-view lifts each card in on an incremental scroll offset (keyed on
+ * `--role-i`), every card carries its gradient top-accent bar (hover/focus to brighten +
+ * draw it full-width), and the accent icon circle warms, scales, and rotates on hover.
+ */
+export const NonprofitSixRoles: Story = {
+  args: {
+    eyebrow: 'Our team',
+    headline: 'The people who make it happen',
+    intro:
+      'Staff and volunteers who show up every day so no neighbor is turned away — hover a card to see it come alive.',
+    roles: [
+      {
+        title: 'Program Directors',
+        description:
+          'Leaders who design services around real community need and keep every program running with care.',
+      },
+      {
+        title: 'Case Managers',
+        description:
+          'Advocates who meet people where they are and walk with them from first visit to lasting stability.',
+      },
+      {
+        title: 'Volunteers',
+        description:
+          'Neighbors who give their time — sorting, serving, and welcoming — and make the mission possible.',
+      },
+      {
+        title: 'Community Partners',
+        description:
+          'Local businesses and faith groups who share resources so help reaches further, together.',
+      },
+      {
+        title: 'Development & Outreach',
+        description:
+          'Storytellers who raise the funds and awareness that keep the doors open and the shelves full.',
+      },
+      {
+        title: 'Board & Governance',
+        description:
+          'Stewards who guard the mission, the finances, and the trust the community places in us.',
+      },
+    ],
+  },
+};
+
+/**
  * Edge case — an unfilled token role is filtered out; the section still renders with the
  * surviving real roles (proving the self-heal never prints a `{TOKEN}` card).
  */
