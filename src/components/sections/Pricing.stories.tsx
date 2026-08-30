@@ -5,11 +5,14 @@ import { Pricing } from './Pricing';
 /**
  * `Pricing` — monthly/yearly toggle, featured-tier highlight, per-tier Product
  * JSON-LD. The featured tier stands proud (accent ring, subtle scale-up, glass
- * wash + soft OKLCH glow + drifting aura) so the eye lands there first; every
- * card lifts + reveals an accent hairline on hover/focus-within; the amount is
- * fluid (`clamp()`) and fades+rises when the toggle flips; the grid staggers in
- * on scroll. All motion is gated behind `prefers-reduced-motion` and every CTA
- * carries a keyboard-visible accent ring. Wrapped in a router (CTAs are `<Link>`).
+ * wash + soft OKLCH glow + drifting aura + a slow-rotating conic accent halo) so
+ * the eye lands there first; every card lifts + reveals an accent hairline on
+ * hover/focus-within, and its feature rows STAGGER in top-to-bottom; the amount
+ * is fluid (`clamp()`), tier names use `text-wrap: balance`, and on toggle flip
+ * the price scales + un-blurs as it settles while the `/period` suffix
+ * crossfades; the grid staggers in on scroll. All motion is double-gated behind
+ * `prefers-reduced-motion` + `prefers-reduced-data` and every CTA carries a
+ * keyboard-visible accent ring. Wrapped in a router (CTAs are `<Link>`).
  */
 const meta = {
   title: 'Sections/Pricing',
@@ -105,6 +108,51 @@ export const FeaturedHighlight: Story = {
         featured: true,
         badge: 'Best value',
         cta: { label: 'Go Pro', href: '/contact' },
+      },
+    ],
+  },
+};
+
+/**
+ * Long feature list on the featured tier — hover (or tab into) the "Enterprise"
+ * card to watch the checkmarks stagger in top-to-bottom (keyed on `--pce-fi`),
+ * and the conic accent ring rotate behind it. Flip the toggle to see the amount
+ * scale + un-blur as it settles.
+ */
+export const ManyFeatures: Story = {
+  args: {
+    eyebrow: 'Pricing',
+    headline: 'Everything you need to scale',
+    description: 'Rich feature lists show the per-card staggered reveal on hover.',
+    tiers: [
+      {
+        id: 'team',
+        name: 'Team',
+        description: 'For focused teams shipping fast.',
+        monthly: 29,
+        yearly: 290,
+        features: ['5 seats included', '250k events / mo', 'Dashboards', 'Slack alerts'],
+        cta: { label: 'Start trial', href: '/contact' },
+      },
+      {
+        id: 'enterprise',
+        name: 'Enterprise Platform',
+        description: 'Everything, at organization scale.',
+        monthly: 499,
+        yearly: 4790,
+        features: [
+          'Unlimited seats',
+          '50M events / mo',
+          'Session replay + heatmaps',
+          'Funnels, cohorts & retention',
+          'SSO / SAML + SCIM',
+          'Audit logs + data residency',
+          'Dedicated success manager',
+          '99.99% uptime SLA',
+        ],
+        featured: true,
+        badge: 'Most popular',
+        cta: { label: 'Contact sales', href: '/contact' },
       },
     ],
   },
