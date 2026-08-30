@@ -19,6 +19,7 @@ import {
   FAQ,
   LogoCloud,
   LocationMap,
+  PageAudio,
   CTASection,
   TeamRoles,
   type BentoTile,
@@ -320,6 +321,17 @@ export default function Home() {
           the fold. Vertical-aware, promise-based, never fabricated numbers. */}
       <SafeSection name="trustbar">
         <TrustBar />
+      </SafeSection>
+
+      {/*
+        AI-native "Listen to this page" — a Web Speech API player that reads the
+        page's <main> text aloud on demand (zero backend/deps/keys). Placed high,
+        right under the hero, so every generated home page ships an accessible,
+        AI-native audio surface. Self-hides (renders null) when the browser lacks
+        speechSynthesis; wrapped in SafeSection like every sibling so it fails soft.
+      */}
+      <SafeSection name="page-audio">
+        <PageAudio />
       </SafeSection>
 
       {featureOn('logoCloud') && (

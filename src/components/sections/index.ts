@@ -15,6 +15,7 @@ export { LogoCloud, type Logo } from './LogoCloud';
 export { Marquee } from './Marquee';
 export { MetricRow, type Metric } from './MetricRow';
 export { Newsletter } from './Newsletter';
+export { PageAudio } from './PageAudio';
 export { Pricing, type PricingTier } from './Pricing';
 export { ProcessSteps, type ProcessStep } from './ProcessSteps';
 export { Quote } from './Quote';
