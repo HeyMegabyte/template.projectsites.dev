@@ -143,6 +143,66 @@ export function scrubText(value: unknown, fallback = ''): string {
 }
 
 /**
+ * Guarantee a meta description in the SEO sweet spot (120–156 chars) — the
+ * `meta.description_length` build invariant. Generation reliably fills a rich
+ * HOMEPAGE description but often ships SHORT sub-page ones (`{ABOUT_META_DESCRIPTION}`
+ * etc. land 70–118 chars). When the (already-scrubbed) description is under 120,
+ * this pads it with REAL brand copy only — the tagline, then "serving <City>"
+ * parsed from the address, then a neutral CTA — never a fabricated claim — and
+ * clamps to ≤156 at a word boundary. A description already ≥120 is returned as-is
+ * (only clamped if it somehow exceeds 156). Mirrors the live local-SEO title
+ * padding lever. Pure — same inputs, same output.
+ *
+ * @param description - the scrubbed page description (may be short)
+ * @param business - brand business fields (`name`, `tagline`, `address`)
+ * @returns a description whose length is in [120, 156] whenever any real brand copy exists
+ * @example
+ * fitMetaDescription('About our team.', { name: 'Cedar Ridge', tagline: '', address: '..., Boise, ID' })
+ * // → 'About our team. Proudly serving Boise and the surrounding area. Learn more about Cedar Ridge…'
+ */
+export function fitMetaDescription(
+  description: string,
+  business: { name?: string; tagline?: string; address?: string },
+): string {
+  const MIN = 120;
+  const MAX = 156;
+  const clampMax = (s: string): string => {
+    if (s.length <= MAX) return s;
+    const cut = s.slice(0, MAX);
+    const sp = cut.lastIndexOf(' ');
+    return sp > MIN - 2 ? cut.slice(0, sp) : cut;
+  };
+
+  let d = (description || '').trim();
+  if (d.length >= MIN) return clampMax(d);
+
+  const city = business.address ? (business.address.split(',')[1] || '').trim() : '';
+  const pads = [
+    (business.tagline || '').trim(),
+    city ? `Proudly serving ${city} and the surrounding area.` : '',
+    business.name ? `Learn more about ${business.name} and get in touch today.` : '',
+    // Long neutral last-resort so a minimal brand (no tagline, no address) still
+    // clears the 120 floor from a short base + name alone.
+    'Get in touch with our team today to learn more about our services and how we can help you.',
+  ].filter((s): s is string => s.length > 0);
+
+  for (const pad of pads) {
+    if (d.length >= MIN) break;
+    if (d.includes(pad)) continue;
+    const prefix = d.length === 0 ? '' : /[.!?]$/.test(d) ? ' ' : '. ';
+    // Append token-by-token so we approach — but never overshoot — MAX.
+    for (const tok of (prefix + pad).split(/(\s+)/)) {
+      if (d.length >= MAX) break;
+      if ((d + tok).length <= MAX) d += tok;
+    }
+  }
+
+  d = clampMax(d.replace(/[\s,;:-]+$/, ''));
+  if (!/[.!?]$/.test(d) && d.length < MAX) d += '.';
+  return d;
+}
+
+/**
  * Scrub an array of text values, dropping every entry that is an unresolved
  * placeholder / empty / non-string. Preserves order of the survivors.
  *

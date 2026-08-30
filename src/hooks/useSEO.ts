@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { brand } from '@/brand';
-import { scrubText } from '@/lib/placeholders';
+import { scrubText, fitMetaDescription } from '@/lib/placeholders';
 
 interface SEOProps {
   title: string;
@@ -16,9 +16,12 @@ export function useSEO({ title, description, canonical }: SEOProps) {
     // app-shell reads for its static hero, so a leak here would poison the LCP
     // too. Fall back to real brand copy so the tags are always meaningful.
     const safeTitle = scrubText(title, brand.business.name);
-    const safeDescription = scrubText(
-      description,
-      scrubText(brand.business.tagline, brand.business.name),
+    // Scrub first, then guarantee the 120–156 SEO length: generation ships rich
+    // homepage descriptions but short sub-page ones — pad short ones with real
+    // brand copy (never fabricated) so `meta.description_length` always passes.
+    const safeDescription = fitMetaDescription(
+      scrubText(description, scrubText(brand.business.tagline, brand.business.name)),
+      brand.business,
     );
 
     document.title = safeTitle;
