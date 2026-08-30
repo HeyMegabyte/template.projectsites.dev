@@ -247,8 +247,21 @@ export default function Home() {
     brand.business.description && brand.business.description.trim().length >= 80
       ? brand.business.description
       : '{SEO_DESCRIPTION}';
+  // Local-SEO title padding: when the "{Name} — {Tagline}" base is short (< 48),
+  // append the city so the <title> lands in the 50-60 sweet spot AND carries the
+  // "{business} in {city}" local keyword the SEO doctrine wants. Reuses the proven
+  // address→city idiom from TrustBar; guarded so it only helps (city present, no
+  // 60-char overflow) and never rewrites a long title or a build with no address.
+  const baseTitle = seoTagline
+    ? `${brand.business.name} — ${seoTagline}`
+    : brand.business.name;
+  const seoCity = (brand.business.address || '').split(',').slice(-2, -1)[0]?.trim() || '';
+  const seoTitle =
+    seoCity && baseTitle.length < 48 && `${baseTitle} | ${seoCity}`.length <= 60
+      ? `${baseTitle} | ${seoCity}`
+      : baseTitle;
   useSEO({
-    title: seoTagline ? `${brand.business.name} — ${seoTagline}` : brand.business.name,
+    title: seoTitle,
     description: seoDescription,
   });
 
