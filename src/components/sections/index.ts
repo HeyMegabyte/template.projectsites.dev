@@ -10,6 +10,7 @@ export { FAQ, type FAQItem } from './FAQ';
 export { FeatureSplit } from './FeatureSplit';
 export { HeroCenter, HeroSplit } from './HeroVariants';
 export { KineticHeadline } from './KineticHeadline';
+export { LocationMap } from './LocationMap';
 export { LogoCloud, type Logo } from './LogoCloud';
 export { Marquee } from './Marquee';
 export { MetricRow, type Metric } from './MetricRow';

@@ -18,6 +18,7 @@ import {
   Pricing,
   FAQ,
   LogoCloud,
+  LocationMap,
   CTASection,
   TeamRoles,
   type BentoTile,
@@ -414,6 +415,16 @@ export default function Home() {
         gated: every generated site must ship a way to convert + a machine-
         readable local-business signal even if only the hero was customized.
       */}
+      {/*
+        Where-to-find-us — a real, keyless, address-driven map + service-area line +
+        directions. Self-hides when the business has no real address (online-only /
+        bare template). Placed before the contact form so a visitor sees the location
+        then converts. No JSON-LD (HomeContact's NAP already carries LocalBusiness).
+      */}
+      <SafeSection name="location">
+        <LocationMap />
+      </SafeSection>
+
       <SafeSection name="contact">
         <HomeContact />
       </SafeSection>
