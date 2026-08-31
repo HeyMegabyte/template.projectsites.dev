@@ -47,42 +47,56 @@ export default function Contact() {
               <form className="glass rounded-2xl p-8 space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-text-muted text-sm font-medium mb-2">
+                    <label htmlFor="ps-contact-name" className="block text-text-muted text-sm font-medium mb-2">
                       Name
                     </label>
                     <input
+                      id="ps-contact-name"
+                      name="name"
                       type="text"
+                      autoComplete="name"
+                      required
                       className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
-                    <label className="block text-text-muted text-sm font-medium mb-2">
+                    <label htmlFor="ps-contact-email" className="block text-text-muted text-sm font-medium mb-2">
                       Email
                     </label>
                     <input
+                      id="ps-contact-email"
+                      name="email"
                       type="email"
+                      autoComplete="email"
+                      required
                       className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
                       placeholder="you@example.com"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-text-muted text-sm font-medium mb-2">
+                  <label htmlFor="ps-contact-subject" className="block text-text-muted text-sm font-medium mb-2">
                     Subject
                   </label>
                   <input
+                    id="ps-contact-subject"
+                    name="subject"
                     type="text"
+                    autoComplete="off"
                     className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
                     placeholder="How can we help?"
                   />
                 </div>
                 <div>
-                  <label className="block text-text-muted text-sm font-medium mb-2">
+                  <label htmlFor="ps-contact-message" className="block text-text-muted text-sm font-medium mb-2">
                     Message
                   </label>
                   <textarea
+                    id="ps-contact-message"
+                    name="message"
                     rows={5}
+                    required
                     className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors resize-none"
                     placeholder="Tell us about your project..."
                   />
