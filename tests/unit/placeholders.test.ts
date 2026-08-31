@@ -6,7 +6,61 @@ import {
   scrubList,
   hasRealImage,
   scrubImage,
+  fitMetaTitle,
 } from '@/lib/placeholders';
+
+describe('fitMetaTitle', () => {
+  it('clamps a long "{Page} {Name} — {Tagline}" WITHOUT a dangling stop-word', () => {
+    // The sub-page overflow case (a long name + long tagline) — must not end on "… for".
+    const t = fitMetaTitle('About Meridian Family Medicine — Trusted Primary Care for Every Age', {
+      name: 'Meridian Family Medicine',
+      tagline: 'Trusted Primary Care for Every Age',
+      address: '2000 16th St, Denver, CO 80202',
+    });
+    expect(t.length).toBeLessThanOrEqual(60);
+    expect(t).toBe('About Meridian Family Medicine — Trusted Primary Care');
+    expect(t).not.toMatch(/\b(for|and|the|of|to|with|in|on|at|or)$/i);
+    expect(t).not.toMatch(/[—–·|,;:-]\s*$/);
+  });
+
+  it('drops a truncated trailing "<stop-word> <word>" phrase on the homepage title', () => {
+    // "… Trusted Primary Care for Every Age" (61) overflows → the cut lands on "… for
+    // Every" (Age dropped). "Every" is not a stop-word, so it must drop the whole "for
+    // Every" tail, not leave a mid-phrase dangle.
+    const t = fitMetaTitle('Meridian Family Medicine — Trusted Primary Care for Every Age', {
+      name: 'Meridian Family Medicine',
+      tagline: 'Trusted Primary Care for Every Age',
+    });
+    expect(t.length).toBeLessThanOrEqual(60);
+    expect(t).toBe('Meridian Family Medicine — Trusted Primary Care');
+    expect(t).not.toMatch(/\bfor\s+\w+$/i);
+  });
+
+  it('never strips a COMPLETE "for X" phrase in an in-range title', () => {
+    // Safety: 55 chars (≥50, ≤60) so it takes the non-clamp branch — "Care for Kids"
+    // is a real phrase and must survive (the aggressive strip fires ONLY on a clamp).
+    const t = fitMetaTitle('Sunrise Home Care for Kids — Trusted Local Nursing Team', {
+      name: 'Sunrise Home Care for Kids',
+      tagline: 'Trusted Local Nursing Team',
+    });
+    expect(t).toBe('Sunrise Home Care for Kids — Trusted Local Nursing Team');
+  });
+
+  it('leaves an already-clean in-range title untouched', () => {
+    const t = fitMetaTitle('About Brightwater Plumbing — Reliable Service, Done Right', {
+      name: 'Brightwater Plumbing',
+      tagline: 'Reliable Service, Done Right',
+    });
+    expect(t).toBe('About Brightwater Plumbing — Reliable Service, Done Right');
+  });
+
+  it('pads a short title with the tagline, ending on a real word', () => {
+    const t = fitMetaTitle('About — Ada Co', { tagline: 'Design that ships fast', address: '9 5th, Austin, TX' });
+    expect(t.length).toBeGreaterThanOrEqual(50);
+    expect(t.length).toBeLessThanOrEqual(60);
+    expect(t).not.toMatch(/[—–·|,;:-]\s*$/);
+  });
+});
 
 describe('isPlaceholder', () => {
   it('detects the exact generation tokens the template ships', () => {

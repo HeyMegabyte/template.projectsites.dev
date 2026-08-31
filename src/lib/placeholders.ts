@@ -235,11 +235,29 @@ export function fitMetaTitle(
 ): string {
   const MIN = 50;
   const MAX = 60;
+  // Strip a dangling separator / stop-word connector left when a title is cut at a
+  // word boundary, so it never ends on "… —" / "… ·" / "… for" / "… and". Applied on
+  // EVERY clamp (both the pad path AND the already-long early-return) — the sub-page
+  // "{Page} {Name} — {Tagline}" overflow case cut a long tagline mid-phrase and kept
+  // the dangling connector (e.g. "… Trusted Primary Care for") because the old strip
+  // ran only after padding. Covers en/em dashes too (the sub-page " — " separator).
+  const stripDangling = (s: string): string =>
+    s
+      .replace(/(?:\s*[·|,;:—–-]\s*)+$/g, '')
+      .replace(/(?:\s+(?:and|the|a|an|of|to|for|with|in|on|at|or|&|but))+$/i, '')
+      .trim();
   const clampMax = (s: string): string => {
-    if (s.length <= MAX) return s;
+    if (s.length <= MAX) return stripDangling(s);
     const cut = s.slice(0, MAX);
     const sp = cut.lastIndexOf(' ');
-    return sp > MIN - 2 ? cut.slice(0, sp) : cut;
+    let out = sp > MIN - 2 ? cut.slice(0, sp) : cut;
+    // We DID truncate, so a trailing "<stop-word> <word>" ("… Primary Care for Every")
+    // is a cut-off phrase (the real end, "… Age", was dropped) — drop the whole tail so
+    // the title ends on a complete thought. Only fires on a genuine clamp, so a complete
+    // title that merely CONTAINS "for X" (e.g. "Care for Kids", which fit under MAX and
+    // took the branch above) is never touched.
+    out = out.replace(/\s+(?:and|the|a|an|of|to|for|with|in|on|at|or)\s+\S+$/i, '');
+    return stripDangling(out);
   };
 
   let t = (title || '').trim();
