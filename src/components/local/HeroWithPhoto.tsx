@@ -108,30 +108,6 @@ export default function HeroWithPhoto({
       <div className="hero-photo-scroll absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/60" aria-hidden="true">
         <ChevronDown size={26} />
       </div>
-
-      <style>{`
-        .hero-photo-glow {
-          position: absolute; inset: 0; pointer-events: none;
-          background: radial-gradient(60% 45% at 50% 78%, color-mix(in oklch, var(--color-accent) 14%, transparent), transparent 70%);
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          .hero-photo-img { animation: heroKenBurns 22s ease-in-out infinite alternate; transform-origin: center; will-change: transform; }
-          @keyframes heroKenBurns {
-            from { transform: scale(1.08) translate3d(0, 0, 0); }
-            to   { transform: scale(1.2) translate3d(-1.5%, -1.2%, 0); }
-          }
-          .hero-photo-in { animation: heroPhotoIn 0.9s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--hero-i) * 0.12s); }
-          @keyframes heroPhotoIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-          .hero-photo-scroll { animation: heroScrollCue 2.2s ease-in-out infinite; }
-          @keyframes heroScrollCue {
-            0%, 100% { transform: translate(-50%, 0); opacity: 0.45; }
-            50% { transform: translate(-50%, 7px); opacity: 1; }
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .hero-photo-img { transform: scale(1.05); }
-        }
-      `}</style>
     </section>
   );
 }

@@ -95,13 +95,6 @@ export default function QuickActions({
           </a>
         ))}
       </div>
-
-      <style>{`
-        @media (prefers-reduced-motion: no-preference) {
-          .qa-tile { animation: qaRise 0.4s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--qa-i) * 0.05s); }
-          @keyframes qaRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-        }
-      `}</style>
     </div>
   );
 }

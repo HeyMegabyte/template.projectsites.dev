@@ -253,46 +253,10 @@ export function AiChat({
             </button>
           </form>
         </div>
-        <style>{aiChatStyle}</style>
       </dialog>
     </>
   );
 }
 
-const aiChatStyle = `
-.ai-chat-dialog {
-  border-radius: var(--radius-lg);
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  width: min(90vw, 28rem);
-  transition: opacity 220ms var(--ease), transform 220ms var(--ease), overlay 220ms allow-discrete, display 220ms allow-discrete;
-}
-.ai-chat-dialog:not([open]) {
-  opacity: 0;
-  transform: scale(0.96) translateY(20px);
-}
-@starting-style {
-  .ai-chat-dialog[open] {
-    opacity: 0;
-    transform: scale(0.96) translateY(20px);
-  }
-}
-.ai-chat-dialog[open] {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-.ai-chat-dialog::backdrop {
-  background: color-mix(in oklch, var(--color-background) 70%, transparent);
-  backdrop-filter: blur(8px);
-  transition: opacity 220ms var(--ease);
-}
-.ai-chat-dialog:not([open])::backdrop { opacity: 0; }
-@starting-style { .ai-chat-dialog[open]::backdrop { opacity: 0; } }
-.ai-chat-dialog[open]::backdrop { opacity: 1; }
-@media (prefers-reduced-motion: reduce) {
-  .ai-chat-dialog, .ai-chat-dialog::backdrop { transition: none; transform: none; }
-}
-`;
 
 export default AiChat;

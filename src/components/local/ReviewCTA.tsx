@@ -153,16 +153,6 @@ export default function ReviewCTA({ placeId, businessName, qrCodeSrc }: ReviewCT
           </div>
         </div>
       </div>
-
-      <style>{`
-        .review-cta-aura {
-          position: absolute; inset: -30% -10% -40%;
-          background: radial-gradient(55% 55% at 50% 0%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 70%);
-          filter: blur(30px); pointer-events: none;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-        @media (prefers-reduced-motion: reduce) { .review-cta-aura { display: none; } }
-      `}</style>
     </section>
   );
 }

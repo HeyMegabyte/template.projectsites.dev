@@ -197,37 +197,6 @@ export default function TestimonialCarousel({ reviews, googleReviewUrl }: Testim
           </div>
         )}
       </div>
-
-      <style>{`
-        .testimonial-aura {
-          position: absolute; inset: -12% -6% -18%;
-          background: radial-gradient(60% 60% at 50% 30%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 70%);
-          filter: blur(28px); pointer-events: none; z-index: 0;
-        }
-        .testimonial-enter { animation: testimonialIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
-        @keyframes testimonialIn {
-          from { opacity: 0; transform: translateY(14px) scale(0.985); filter: blur(3px); }
-          to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
-        .testimonial-star { animation: testimonialStar 0.4s cubic-bezier(0.34,1.56,0.64,1) both; animation-delay: calc(var(--star-i) * 60ms); }
-        @keyframes testimonialStar {
-          from { opacity: 0; transform: scale(0.4) rotate(-12deg); }
-          to   { opacity: 1; transform: scale(1) rotate(0); }
-        }
-        .testimonial-progress {
-          position: absolute; top: 0; left: 0; height: 3px; width: 100%;
-          transform-origin: left; transform: scaleX(0);
-          background: linear-gradient(90deg, color-mix(in oklch, var(--color-accent) 55%, transparent), var(--color-accent));
-          animation: testimonialProgress 5s linear forwards;
-        }
-        .testimonial-progress[data-paused='true'] { animation-play-state: paused; }
-        @keyframes testimonialProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-        @media (prefers-reduced-motion: reduce) {
-          .testimonial-enter, .testimonial-star, .testimonial-progress { animation: none !important; }
-          .testimonial-progress { transform: scaleX(1); }
-          .testimonial-aura { display: none; }
-        }
-      `}</style>
     </section>
   );
 }

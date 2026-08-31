@@ -190,30 +190,6 @@ export default function NAPFooter({
           </div>
         </div>
       </div>
-
-      <style>{`
-        .nap-rule {
-          position: absolute; top: 0; left: 0; right: 0; height: 1px;
-          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 55%, transparent), transparent);
-        }
-        .nap-wash {
-          position: absolute; left: -10%; right: -10%; bottom: -60%; height: 80%;
-          background: radial-gradient(50% 100% at 50% 100%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent 70%);
-          filter: blur(44px); pointer-events: none;
-        }
-        .nap-today-dot {
-          width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent);
-          box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 60%, transparent);
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          /* columns reveal on scroll via the global .reveal-on-view observer; the dot pulses */
-          .nap-today-dot { animation: napPulse 2.4s ease-in-out infinite; }
-          @keyframes napPulse {
-            0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 55%, transparent); }
-            50% { box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-accent) 0%, transparent); }
-          }
-        }
-      `}</style>
     </footer>
   );
 }

@@ -114,23 +114,6 @@ export default function MapEmbed({ lat, lng, address, directionsUrl, phone, hour
           </div>
         </div>
       </div>
-
-      <style>{`
-        .map-frame-rule {
-          position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 1; pointer-events: none;
-          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 55%, transparent), transparent);
-        }
-        .map-today-dot {
-          width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent);
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          .map-today-dot { animation: mapPulse 2.4s ease-in-out infinite; }
-          @keyframes mapPulse {
-            0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 55%, transparent); }
-            50% { box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-accent) 0%, transparent); }
-          }
-        }
-      `}</style>
     </section>
   );
 }

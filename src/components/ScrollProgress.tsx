@@ -30,48 +30,6 @@ export function ScrollProgress({ height = 3, className }: Props) {
         className={cn('fixed inset-x-0 top-0 z-40 origin-left scroll-progress', className)}
         style={{ height }}
       />
-      <style>{`
-        .scroll-progress {
-          transform: scaleX(0);
-          background: linear-gradient(
-            90deg,
-            var(--color-accent) 0%,
-            var(--color-primary) 55%,
-            var(--color-info) 100%
-          );
-          box-shadow:
-            0 0 12px -1px color-mix(in oklch, var(--color-accent) 65%, transparent),
-            0 1px 0 0 color-mix(in oklch, var(--color-accent) 30%, transparent);
-          will-change: transform;
-        }
-        /* Faint highlight riding the leading edge for a "wet ink" gleam. */
-        .scroll-progress::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          right: 0;
-          width: 40px;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            color-mix(in oklch, var(--color-accent) 90%, white 25%)
-          );
-          opacity: 0.85;
-        }
-        @supports (animation-timeline: scroll(root)) {
-          @media (prefers-reduced-motion: no-preference) {
-            .scroll-progress {
-              animation: scroll-progress-grow linear both;
-              animation-timeline: scroll(root);
-            }
-            @keyframes scroll-progress-grow {
-              from { transform: scaleX(0); }
-              to   { transform: scaleX(1); }
-            }
-          }
-        }
-      `}</style>
     </>
   );
 }

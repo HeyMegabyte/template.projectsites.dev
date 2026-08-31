@@ -62,49 +62,11 @@ export function Popover({
       >
         {children}
       </div>
-      <style>{popoverStyle}</style>
     </>
   );
 }
 
 /* The styles are kept inline as a module-level constant so consumers don't
    need a separate import. Vite hoists them via React. */
-const popoverStyle = `
-.popover-panel {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  min-width: 12rem;
-  max-width: min(36rem, calc(100vw - 2rem));
-  transition: opacity 200ms var(--ease), transform 200ms var(--ease), overlay 200ms allow-discrete, display 200ms allow-discrete;
-}
-.popover-panel:not(:popover-open) {
-  opacity: 0;
-  transform: scale(0.96) translateY(-4px);
-}
-@starting-style {
-  .popover-panel:popover-open {
-    opacity: 0;
-    transform: scale(0.96) translateY(-4px);
-  }
-}
-.popover-panel:popover-open {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-@supports (anchor-name: --a) {
-  .popover-panel {
-    margin: 0;
-    inset: unset;
-  }
-  .pop-place-top    { position-area: top span-all; margin-bottom: 8px; }
-  .pop-place-bottom { position-area: bottom span-all; margin-top: 8px; }
-  .pop-place-left   { position-area: left span-all; margin-right: 8px; }
-  .pop-place-right  { position-area: right span-all; margin-left: 8px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .popover-panel { transition: none; transform: none; }
-}
-`;
 
 export default Popover;

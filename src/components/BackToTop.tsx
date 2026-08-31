@@ -47,42 +47,6 @@ export default function BackToTop() {
       )}
     >
       <ArrowUp size={20} strokeWidth={2.25} aria-hidden="true" />
-      <style>{`
-        .back-to-top {
-          transition:
-            opacity 260ms var(--ease),
-            transform 260ms var(--ease),
-            box-shadow 200ms var(--ease);
-        }
-        .back-to-top--out {
-          opacity: 0;
-          transform: translateY(12px) scale(0.85);
-          pointer-events: none;
-        }
-        .back-to-top--in {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-          pointer-events: auto;
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          .back-to-top--in:hover,
-          .back-to-top--in:focus-visible {
-            transform: translateY(-3px) scale(1.06);
-            box-shadow:
-              0 16px 34px -12px color-mix(in oklch, var(--color-accent) 60%, transparent),
-              0 0 0 1px color-mix(in oklch, var(--color-accent) 45%, transparent);
-          }
-          .back-to-top--in:active {
-            transform: translateY(-1px) scale(0.94);
-            transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-          }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .back-to-top { transition: opacity 120ms linear; }
-          .back-to-top--out { transform: none; }
-          .back-to-top--in { transform: none; }
-        }
-      `}</style>
     </button>
   );
 }

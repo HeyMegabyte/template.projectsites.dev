@@ -77,20 +77,6 @@ export default function TrustBadges({ badges, rating, reviewCount }: TrustBadges
         })}
       </div>
       <div className="trust-rule trust-rule-bottom" aria-hidden="true" />
-
-      <style>{`
-        .trust-rule {
-          position: absolute; left: 0; right: 0; height: 1px;
-          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 40%, transparent), transparent);
-        }
-        .trust-rule-top { top: 0; }
-        .trust-rule-bottom { bottom: 0; }
-        .trust-star { filter: drop-shadow(0 0 3px color-mix(in oklch, #facc15 55%, transparent)); }
-        @media (prefers-reduced-motion: no-preference) {
-          .tb-item { animation: tbItemIn 0.55s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--badge-i) * 0.07s); }
-          @keyframes tbItemIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-        }
-      `}</style>
     </section>
   );
 }

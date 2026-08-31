@@ -104,20 +104,6 @@ export default function EmergencyBanner({
       >
         <X size={16} />
       </button>
-
-      <style>{`
-        @keyframes slideDown {
-          from { transform: translateY(-100%); }
-          to { transform: translateY(0); }
-        }
-        @media (prefers-reduced-motion: no-preference) {
-          .emergency-pulse { animation: emergencyPulse 1.8s ease-in-out infinite; transform-origin: center; }
-          @keyframes emergencyPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.18); opacity: 0.75; }
-          }
-        }
-      `}</style>
     </div>
   );
 }

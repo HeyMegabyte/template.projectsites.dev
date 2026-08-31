@@ -43,21 +43,6 @@ export default function StickyPhoneCTA({ phone, label = 'Call Now' }: StickyPhon
         <Phone size={20} strokeWidth={2.5} className="sticky-phone-icon" />
         {label}
       </a>
-
-      <style>{`
-        .sticky-phone-cta { box-shadow: 0 -8px 26px -12px color-mix(in oklch, var(--color-accent) 65%, transparent); }
-        @media (prefers-reduced-motion: no-preference) {
-          .sticky-phone-cta { animation: stickyUp 0.34s cubic-bezier(0.22,1,0.36,1) both; }
-          @keyframes stickyUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-          .sticky-phone-icon { animation: stickyRing 2.6s ease-in-out infinite; transform-origin: center; }
-          @keyframes stickyRing {
-            0%, 86%, 100% { transform: rotate(0); }
-            89% { transform: rotate(-14deg); }
-            93% { transform: rotate(12deg); }
-            97% { transform: rotate(-6deg); }
-          }
-        }
-      `}</style>
     </>
   );
 }

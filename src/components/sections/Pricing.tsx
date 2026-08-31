@@ -47,92 +47,6 @@ interface Props {
  * theme tokens + `--color-accent` only (validate-site gate). Transform / opacity
  * / filter only; every decorative node is `aria-hidden`.
  */
-const PRICING_CINEMATIC_CSS = `
-.pce-name { text-wrap: balance; }
-
-/* Amount base — inherits the fluid clamp() from .pricing-amount; add a
-   transform-origin so the settle scales from the baseline. */
-.pce-amount { transform-origin: left bottom; display: inline-block; }
-
-/* Rotating conic accent ring behind the featured tier — a premium halo that the
-   static .pricing-aura sits inside. Masked to a thin rim so it reads as a ring,
-   not a fill. Decorative + aria-hidden. */
-.pce-ring {
-  position: absolute;
-  inset: -1px;
-  z-index: -1;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--pce-ring-angle, 0deg),
-    transparent 0deg,
-    color-mix(in oklch, var(--color-accent) 70%, transparent) 70deg,
-    transparent 150deg,
-    transparent 210deg,
-    color-mix(in oklch, var(--color-accent) 45%, transparent) 290deg,
-    transparent 360deg
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  opacity: 0.75;
-  pointer-events: none;
-}
-
-@property --pce-ring-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
-  /* The conic ring slowly rotates. */
-  .pce-ring { animation: pce-ring-spin 9s linear infinite; will-change: --pce-ring-angle; }
-  @keyframes pce-ring-spin {
-    to { --pce-ring-angle: 360deg; }
-  }
-
-  /* Amount settle — scales up + un-blurs as it fades in on toggle flip. Layered
-     on top of .price-swap's translate, so the number arrives with real weight. */
-  .pce-amount { animation: pce-amount-settle 0.42s var(--ease) both; }
-  @keyframes pce-amount-settle {
-    from { transform: scale(0.9); filter: blur(3px); opacity: 0; }
-    60%  { filter: blur(0); }
-    to   { transform: scale(1); filter: blur(0); opacity: 1; }
-  }
-
-  /* Period suffix crossfades in just after the amount. */
-  .pce-period { animation: pce-period-fade 0.42s var(--ease) both; animation-delay: 0.06s; }
-  @keyframes pce-period-fade {
-    from { opacity: 0; transform: translateX(-4px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-
-  /* Feature rows rest slightly recessed; on card hover/focus they STAGGER in —
-     each row keyed on --pce-fi so they settle top-to-bottom. transform/opacity
-     only. Base (no-hover) state stays fully legible for reduced-motion below. */
-  .pce-feature {
-    transition:
-      transform var(--duration-base) var(--ease),
-      opacity var(--duration-base) var(--ease);
-    transition-delay: 0s;
-  }
-  .pricing-card:hover .pce-feature,
-  .pricing-card:focus-within .pce-feature {
-    transform: translateX(3px);
-    transition-delay: calc(var(--pce-fi, 0) * 45ms);
-  }
-}
-
-/* Reduced-data OR reduced-motion: kill the ring spin + keep every surface
-   settled and legible (no blur, no offset, full opacity). */
-@media (prefers-reduced-data: reduce), (prefers-reduced-motion: reduce) {
-  .pce-ring { animation: none !important; opacity: 0.6; }
-  .pce-amount,
-  .pce-period,
-  .pce-feature { animation: none !important; transform: none !important; filter: none !important; opacity: 1 !important; }
-}
-`;
 
 /**
  * Pricing table with monthly/yearly toggle + featured-tier highlight + JSON-LD
@@ -196,7 +110,6 @@ export function Pricing({
 
   return (
     <section className={cn('py-24 md:py-32 max-w-container-wide mx-auto px-6', className)}>
-      <style>{PRICING_CINEMATIC_CSS}</style>
       <JsonLd data={jsonLd} />
       <div className="text-center mb-12 reveal-on-view">
         <span className="text-accent text-sm font-mono tracking-widest uppercase">{safeEyebrow}</span>

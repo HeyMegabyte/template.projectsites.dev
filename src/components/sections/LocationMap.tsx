@@ -61,18 +61,6 @@ export function LocationMap(props: Props = {}) {
             'radial-gradient(55% 50% at 50% 0%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent 70%)',
         }}
       />
-      <style>{`
-        .lm-map{transition:box-shadow .4s var(--ease,ease)}
-        .lm-dir{transition:transform .3s var(--ease,ease),background-color .3s,box-shadow .3s}
-        @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference){
-          .lm-map:hover{box-shadow:0 0 0 1px color-mix(in oklch,var(--color-accent) 40%,transparent),0 24px 60px -24px color-mix(in oklch,var(--color-accent) 35%,transparent)}
-          .lm-pin{animation:lm-pulse 3.4s ease-in-out infinite}
-          @keyframes lm-pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in oklch,var(--color-accent) 30%,transparent)}50%{box-shadow:0 0 0 9px color-mix(in oklch,var(--color-accent) 0%,transparent)}}
-          .lm-dir:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px color-mix(in oklch,var(--color-accent) 45%,transparent)}
-          .lm-dir svg{transition:transform .3s var(--ease,ease)}
-          .lm-dir:hover svg{transform:translateX(3px)}
-        }
-      `}</style>
       <div className="max-w-container-wide mx-auto px-6">
         <div className="reveal-on-view mb-14 text-center">
           <span className="font-mono text-sm uppercase tracking-widest text-accent">Visit us</span>

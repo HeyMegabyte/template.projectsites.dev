@@ -119,13 +119,6 @@ export default function SpeedDial({ phone, email, directionsUrl, bookingUrl }: S
           ))}
         </div>
       )}
-
-      <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }

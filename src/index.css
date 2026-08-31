@@ -2405,3 +2405,941 @@ main#main { view-transition-name: ps-main; }
     }
   }
 }
+
+
+/* ─────────────────────────────────────────────────────────────────────────
+   STATS (sections/Stats.tsx) — moved here from a component-inline <style> because
+   React 19 does not render inline `<style>{cssString}</style>` on the client SPA
+   (the scoped CSS was stripped in prod → unstyled stacked stats + visible sr-only
+   value, e.g. "500+500+"). index.css is a linked stylesheet → always applied. fire-51.
+   ─────────────────────────────────────────────────────────────────────── */
+.pst-stats { --pst-accent: oklch(0.82 0.16 205); --pst-accent-2: oklch(0.72 0.19 285); }
+.pst-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+@media (min-width: 768px) { .pst-grid { gap: 2.5rem; } }
+
+.pst-tile {
+  position: relative;
+  text-align: center;
+  padding: clamp(1.1rem, 2vw, 1.75rem) clamp(0.85rem, 2vw, 1.5rem);
+  border-radius: 22px;
+  border: 1px solid oklch(1 0 0 / 0.08);
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.015));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 oklch(1 0 0 / 0.06) inset, 0 18px 44px -30px oklch(0 0 0 / 0.85);
+  overflow: hidden;
+}
+/* Accent hairline that lights the top edge of every tile. */
+.pst-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pst-accent), transparent);
+  opacity: 0.65;
+}
+/* Soft accent aura behind the numeral. */
+.pst-tile::after {
+  content: '';
+  position: absolute;
+  inset: -40% 0 auto 0;
+  height: 70%;
+  background: radial-gradient(60% 60% at 50% 0%, oklch(0.82 0.16 205 / 0.14), transparent 70%);
+  pointer-events: none;
+}
+
+.pst-figure {
+  display: block;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-size: clamp(2.5rem, 1.4rem + 4.4vw, 4rem);
+  background: linear-gradient(135deg, var(--pst-accent), var(--pst-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+.pst-suffix { -webkit-text-fill-color: currentColor; }
+
+.pst-underline {
+  display: block;
+  height: 2px;
+  width: 2.75rem;
+  margin: 0.75rem auto 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--pst-accent), transparent);
+}
+/* text-wrap: balance keeps labels from ragging into one-word orphan lines. */
+.pst-label { display: block; margin-top: 0.5rem; font-weight: 500; text-wrap: balance; }
+.pst-caption { display: block; margin-top: 0.25rem; font-size: 0.875rem; opacity: 0.72; text-wrap: balance; }
+
+/* Screen-reader value is always in the DOM; the animated overlay is aria-hidden
+   so assistive tech always announces the correct FINAL number. */
+.pst-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* --- Motion: enabled ONLY when BOTH media features are "no-preference". --- */
+@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+  .pst-tile {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .pst-stats[data-inview='true'] .pst-tile {
+    animation: pst-rise 0.66s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--pst-i, 0) * 110ms);
+  }
+  .pst-tile:hover { transform: translateY(-4px) scale(1); box-shadow: 0 1px 0 oklch(1 0 0 / 0.1) inset, 0 26px 60px -30px oklch(0.82 0.16 205 / 0.5); }
+  @keyframes pst-rise {
+    from { opacity: 0; transform: translateY(18px) scale(0.985); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+
+/* --- Reduced motion OR reduced data: no animation, final state shown. --- */
+@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+  .pst-tile { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+}
+
+
+/* [Pricing.tsx] moved from inline <style> — React 19 drops component <style>{str} on the client SPA (fire-51). */
+.pce-name { text-wrap: balance; }
+
+/* Amount base — inherits the fluid clamp() from .pricing-amount; add a
+   transform-origin so the settle scales from the baseline. */
+.pce-amount { transform-origin: left bottom; display: inline-block; }
+
+/* Rotating conic accent ring behind the featured tier — a premium halo that the
+   static .pricing-aura sits inside. Masked to a thin rim so it reads as a ring,
+   not a fill. Decorative + aria-hidden. */
+.pce-ring {
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--pce-ring-angle, 0deg),
+    transparent 0deg,
+    color-mix(in oklch, var(--color-accent) 70%, transparent) 70deg,
+    transparent 150deg,
+    transparent 210deg,
+    color-mix(in oklch, var(--color-accent) 45%, transparent) 290deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+@property --pce-ring-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+  /* The conic ring slowly rotates. */
+  .pce-ring { animation: pce-ring-spin 9s linear infinite; will-change: --pce-ring-angle; }
+  @keyframes pce-ring-spin {
+    to { --pce-ring-angle: 360deg; }
+  }
+
+  /* Amount settle — scales up + un-blurs as it fades in on toggle flip. Layered
+     on top of .price-swap's translate, so the number arrives with real weight. */
+  .pce-amount { animation: pce-amount-settle 0.42s var(--ease) both; }
+  @keyframes pce-amount-settle {
+    from { transform: scale(0.9); filter: blur(3px); opacity: 0; }
+    60%  { filter: blur(0); }
+    to   { transform: scale(1); filter: blur(0); opacity: 1; }
+  }
+
+  /* Period suffix crossfades in just after the amount. */
+  .pce-period { animation: pce-period-fade 0.42s var(--ease) both; animation-delay: 0.06s; }
+  @keyframes pce-period-fade {
+    from { opacity: 0; transform: translateX(-4px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Feature rows rest slightly recessed; on card hover/focus they STAGGER in —
+     each row keyed on --pce-fi so they settle top-to-bottom. transform/opacity
+     only. Base (no-hover) state stays fully legible for reduced-motion below. */
+  .pce-feature {
+    transition:
+      transform var(--duration-base) var(--ease),
+      opacity var(--duration-base) var(--ease);
+    transition-delay: 0s;
+  }
+  .pricing-card:hover .pce-feature,
+  .pricing-card:focus-within .pce-feature {
+    transform: translateX(3px);
+    transition-delay: calc(var(--pce-fi, 0) * 45ms);
+  }
+}
+
+/* Reduced-data OR reduced-motion: kill the ring spin + keep every surface
+   settled and legible (no blur, no offset, full opacity). */
+@media (prefers-reduced-data: reduce), (prefers-reduced-motion: reduce) {
+  .pce-ring { animation: none !important; opacity: 0.6; }
+  .pce-amount,
+  .pce-period,
+  .pce-feature { animation: none !important; transform: none !important; filter: none !important; opacity: 1 !important; }
+}
+
+
+/* [Timeline.tsx] moved from inline <style> — React 19 drops component <style>{str} on the client SPA (fire-51). */
+.tl-root { --tl-accent: oklch(0.82 0.16 205); --tl-accent-2: oklch(0.72 0.19 285); }
+
+/* ---------- Vertical rail ---------- */
+.tl-list { position: relative; margin: 0; padding: 0 0 0 2.25rem; list-style: none; }
+/* The static base rail — always visible, low-opacity guide line. */
+.tl-list::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.35rem; bottom: 0.35rem;
+  width: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.14), oklch(1 0 0 / 0.05));
+}
+/* The bright accent rail that draws down over the base line on scroll. */
+.tl-list::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.35rem; bottom: 0.35rem;
+  width: 2px;
+  border-radius: 9999px;
+  transform-origin: top;
+  background: linear-gradient(180deg, var(--tl-accent), var(--tl-accent-2) 70%, transparent);
+  box-shadow: 0 0 12px -1px oklch(0.82 0.16 205 / 0.55);
+}
+
+.tl-item { position: relative; padding-bottom: 2.5rem; }
+.tl-item:last-child { padding-bottom: 0; }
+
+/* Node marker sitting on the rail. */
+.tl-node {
+  position: absolute;
+  left: calc(-2.25rem - 1px);
+  top: 0.4rem;
+  transform: translateX(-50%);
+  height: 1rem; width: 1rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--tl-accent), var(--tl-accent-2));
+  box-shadow: 0 0 0 4px var(--color-background, #060610), 0 0 14px -1px oklch(0.82 0.16 205 / 0.7);
+}
+
+.tl-year {
+  display: inline-block;
+  font-size: clamp(0.8rem, 0.72rem + 0.3vw, 0.95rem);
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+}
+.tl-title {
+  margin: 0.35rem 0 0.6rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  font-size: clamp(1.15rem, 1rem + 0.8vw, 1.6rem);
+  text-wrap: balance;
+}
+.tl-desc { line-height: 1.65; text-wrap: pretty; }
+.tl-fig { margin: 1rem 0; max-width: 28rem; }
+.tl-fig img { border-radius: 12px; border: 1px solid oklch(1 0 0 / 0.1); }
+
+/* ---------- Horizontal cards ---------- */
+.tl-track { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; scroll-snap-type: x mandatory; }
+.tl-card {
+  position: relative;
+  min-width: 280px;
+  scroll-snap-align: start;
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid oklch(1 0 0 / 0.08);
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.015));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 oklch(1 0 0 / 0.06) inset, 0 18px 44px -30px oklch(0 0 0 / 0.85);
+}
+.tl-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tl-accent), transparent);
+  opacity: 0.6;
+}
+
+/* --- Motion: enabled ONLY when BOTH media features are "no-preference". --- */
+@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+  /* Rail draws down as the list scrolls through the viewport. */
+  .tl-list::after {
+    transform: scaleY(0);
+    animation: tl-draw linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 60%;
+  }
+  @keyframes tl-draw { to { transform: scaleY(1); } }
+
+  /* Entrance stagger — toggled by the JS IntersectionObserver on the root. */
+  .tl-item { opacity: 0; transform: translateY(18px); }
+  .tl-root[data-inview='true'] .tl-item {
+    animation: tl-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--tl-i, 0) * 90ms);
+  }
+  @keyframes tl-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Node pops with an expanding accent pulse ring once the list is in view. */
+  .tl-node { transform: translateX(-50%) scale(0); }
+  .tl-root[data-inview='true'] .tl-node {
+    animation: tl-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(var(--tl-i, 0) * 90ms + 60ms);
+  }
+  @keyframes tl-pop { to { transform: translateX(-50%) scale(1); } }
+  .tl-node::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    border: 1px solid var(--tl-accent);
+  }
+  .tl-root[data-inview='true'] .tl-node::after {
+    animation: tl-ring 1.4s ease-out both;
+    animation-delay: calc(var(--tl-i, 0) * 90ms + 220ms);
+  }
+  @keyframes tl-ring {
+    from { opacity: 0.7; transform: scale(0.6); }
+    to   { opacity: 0; transform: scale(2.4); }
+  }
+
+  .tl-item:hover .tl-node { box-shadow: 0 0 0 4px var(--color-background, #060610), 0 0 22px 0 oklch(0.82 0.16 205 / 0.8); }
+  .tl-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .tl-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1px 0 oklch(1 0 0 / 0.1) inset, 0 26px 60px -30px oklch(0.82 0.16 205 / 0.5);
+  }
+}
+
+/* --- Reduced motion OR reduced data: static, final state, rail fully drawn. --- */
+@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+  .tl-list::after { transform: none !important; animation: none !important; }
+  .tl-item { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .tl-node { transform: translateX(-50%) !important; animation: none !important; }
+  .tl-node::after { display: none !important; }
+  .tl-card { transform: none !important; transition: none !important; }
+}
+
+
+/* [PageAudio.tsx] moved from inline <style> — React 19 drops component <style>{str} on the client SPA (fire-51). */
+.psa-band { --psa-accent: oklch(0.82 0.16 205); --psa-accent-2: oklch(0.72 0.19 285); }
+.psa-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 2.4vw, 1.75rem);
+  flex-wrap: wrap;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 2.4vw, 1.5rem) clamp(1.1rem, 3vw, 1.9rem);
+  border-radius: 22px;
+  border: 1px solid oklch(1 0 0 / 0.1);
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.015));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 oklch(1 0 0 / 0.06) inset, 0 20px 50px -34px oklch(0 0 0 / 0.85);
+  overflow: hidden;
+}
+/* Accent hairline lighting the top edge of the shell. */
+.psa-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--psa-accent), transparent);
+  opacity: 0.7;
+}
+/* Soft accent aura behind the controls — breathes while playing (gated below). */
+.psa-aura {
+  content: '';
+  position: absolute;
+  inset: -55% -10% auto -10%;
+  height: 90%;
+  background: radial-gradient(50% 60% at 22% 0%, oklch(0.82 0.16 205 / 0.16), transparent 70%);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.psa-controls { position: relative; display: inline-flex; align-items: center; gap: 0.6rem; }
+
+.psa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(2.75rem, 6vw, 3.25rem);
+  width: clamp(2.75rem, 6vw, 3.25rem);
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklch, var(--psa-accent) 45%, transparent);
+  color: var(--psa-accent);
+  background: color-mix(in oklch, var(--psa-accent) 10%, transparent);
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, color 0.2s ease;
+}
+.psa-btn:hover { background: color-mix(in oklch, var(--psa-accent) 18%, transparent); }
+.psa-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--psa-bg, transparent), 0 0 0 4px color-mix(in oklch, var(--psa-accent) 70%, transparent);
+}
+.psa-btn[data-primary='true'] {
+  height: clamp(3rem, 7vw, 3.6rem);
+  width: clamp(3rem, 7vw, 3.6rem);
+  color: oklch(0.14 0.02 260);
+  background: linear-gradient(135deg, var(--psa-accent), var(--psa-accent-2));
+  border-color: transparent;
+  box-shadow: 0 10px 28px -14px color-mix(in oklch, var(--psa-accent) 60%, transparent);
+}
+.psa-btn[data-primary='true']:hover { filter: brightness(1.05); }
+.psa-btn svg { width: 42%; height: 42%; }
+
+.psa-copy { position: relative; display: flex; flex-direction: column; gap: 0.15rem; min-width: 10rem; flex: 1 1 12rem; }
+.psa-label {
+  font-family: var(--font-heading, inherit);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  font-size: clamp(1.05rem, 0.9rem + 0.9vw, 1.35rem);
+  text-wrap: balance;
+  color: inherit;
+}
+.psa-hint { font-size: 0.85rem; opacity: 0.72; text-wrap: balance; }
+
+/* Equalizer — bars are STATIC ticks by default; they only dance under the gate. */
+.psa-eq { position: relative; display: inline-flex; align-items: flex-end; gap: 0.28rem; height: clamp(1.75rem, 4.5vw, 2.4rem); }
+.psa-eq span {
+  display: block;
+  width: 0.28rem;
+  height: 38%;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, var(--psa-accent), var(--psa-accent-2));
+  opacity: 0.85;
+}
+
+/* Screen-reader-only helper (label text also visible; this backs the status region). */
+.psa-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* --- Motion: enabled ONLY when BOTH media features are "no-preference". --- */
+@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+  .psa-band[data-playing='true'] .psa-aura { animation: psa-breathe 3.2s ease-in-out infinite; }
+  .psa-band[data-playing='true'] .psa-eq span { animation: psa-bounce 1.05s ease-in-out infinite; }
+  .psa-eq span:nth-child(1) { animation-delay: -0.9s; }
+  .psa-eq span:nth-child(2) { animation-delay: -0.5s; }
+  .psa-eq span:nth-child(3) { animation-delay: -0.15s; }
+  .psa-eq span:nth-child(4) { animation-delay: -0.7s; }
+  .psa-eq span:nth-child(5) { animation-delay: -0.35s; }
+  .psa-btn:hover { transform: translateY(-2px); }
+  .psa-btn[data-primary='true']:active { transform: translateY(0) scale(0.97); }
+  @keyframes psa-bounce { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+  @keyframes psa-breathe { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.04); } }
+}
+
+/* --- Reduced motion OR reduced data: bars frozen, aura still, audio unaffected. --- */
+@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+  .psa-aura { animation: none !important; }
+  .psa-eq span { animation: none !important; height: 55% !important; }
+  .psa-btn { transition: none !important; }
+}
+
+
+/* [ContactForm.tsx] moved from inline <style> (React 19 drops component <style> on the client SPA; fire-51). */
+/* ── Cinematic entrance — the card fades + rises in on first paint.
+           Base state (below / reduced-motion / Save-Data) is fully visible, so
+           SSR / no-JS / reduced-motion renders never hide the form. Only plays
+           where allow-discrete + motion + data are all available. ─────────── */
+        @supports (transition-behavior: allow-discrete) {
+          @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+            .pst-cf {
+              transition:
+                opacity var(--duration-slow, 450ms) var(--ease),
+                transform var(--duration-slow, 450ms) var(--ease),
+                border-color var(--duration-base, 250ms) var(--ease),
+                box-shadow var(--duration-base, 250ms) var(--ease);
+            }
+            @starting-style {
+              .pst-cf {
+                opacity: 0;
+                transform: translateY(16px) scale(0.985);
+              }
+            }
+          }
+        }
+
+        /* Glass hairline warms to a soft OKLCH accent glow when a field inside is
+           focused — the whole card subtly "lights up" as the visitor engages. */
+        @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+          .pst-cf:focus-within {
+            border-color: color-mix(in oklch, var(--color-accent) 45%, var(--color-border));
+            box-shadow:
+              0 22px 60px -30px color-mix(in oklch, var(--color-accent) 45%, transparent),
+              0 0 0 1px color-mix(in oklch, var(--color-accent) 22%, transparent);
+          }
+        }
+
+        /* Fluid label sizing + balanced wrap. */
+        .pst-cf-label {
+          font-size: clamp(0.8125rem, 0.72rem + 0.35vw, 0.9375rem);
+          text-wrap: balance;
+        }
+
+        /* Input focus-glow ring — accent OKLCH halo on keyboard/click focus.
+           Layered as a box-shadow (not the global 3px outline) for a soft, on-
+           brand glow. Motion-gated for the transition; the glow itself still
+           appears instantly for reduced-motion users (accessibility affordance
+           must not depend on motion). */
+        .pst-cf-input {
+          transition:
+            border-color var(--duration-fast, 150ms) var(--ease),
+            box-shadow var(--duration-fast, 150ms) var(--ease),
+            background-color var(--duration-fast, 150ms) var(--ease);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .pst-cf-input { transition: none; }
+        }
+        .pst-cf-input:focus-visible {
+          outline: none;
+          border-color: color-mix(in oklch, var(--color-accent) 60%, var(--color-border));
+          box-shadow:
+            0 0 0 3px color-mix(in oklch, var(--color-accent) 30%, transparent),
+            0 0 18px -4px color-mix(in oklch, var(--color-accent) 45%, transparent);
+        }
+        /* Valid / invalid tint the ring green / red so the state reads at a glance. */
+        .pst-cf-input[data-valid='true']:focus-visible {
+          border-color: color-mix(in oklch, var(--color-success) 55%, var(--color-border));
+          box-shadow:
+            0 0 0 3px color-mix(in oklch, var(--color-success) 26%, transparent),
+            0 0 16px -4px color-mix(in oklch, var(--color-success) 38%, transparent);
+        }
+        .pst-cf-input[data-valid='false'] {
+          border-color: color-mix(in oklch, var(--color-danger) 55%, var(--color-border));
+        }
+        .pst-cf-input[data-valid='false']:focus-visible {
+          box-shadow:
+            0 0 0 3px color-mix(in oklch, var(--color-danger) 26%, transparent),
+            0 0 16px -4px color-mix(in oklch, var(--color-danger) 40%, transparent);
+        }
+
+        /* The live validity icon pops in with a springy overshoot when a field
+           first becomes valid/invalid. Static swap under reduced-motion / Save-Data. */
+        @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+          .pst-cf-mark {
+            animation: pst-cf-mark-in 260ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+          }
+          @keyframes pst-cf-mark-in {
+            from { opacity: 0; transform: scale(0.6); }
+            to   { opacity: 1; transform: scale(1); }
+          }
+        }
+
+        /* Submit button — accent lift + glow on hover/focus, springy press dip. */
+        @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+          .pst-cf-submit {
+            transition:
+              transform var(--duration-base, 250ms) var(--ease),
+              box-shadow var(--duration-base, 250ms) var(--ease),
+              background-color var(--duration-base, 250ms) var(--ease);
+          }
+          .pst-cf-submit:not(:disabled):hover,
+          .pst-cf-submit:not(:disabled):focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px -12px color-mix(in oklch, var(--color-accent) 60%, transparent);
+          }
+          .pst-cf-submit:not(:disabled):active {
+            transform: translateY(0) scale(0.98);
+            transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+          }
+        }
+        /* Save-Data: no card entrance, focus glow, or button lift — pure static. */
+        @media (prefers-reduced-data: reduce) {
+          .pst-cf,
+          .pst-cf-submit { transition: none !important; }
+          .pst-cf-mark { animation: none !important; }
+        }
+
+
+/* [LocationMap.tsx] moved from inline <style> (React 19 drops component <style> on the client SPA; fire-51). */
+.lm-map{transition:box-shadow .4s var(--ease,ease)}
+        .lm-dir{transition:transform .3s var(--ease,ease),background-color .3s,box-shadow .3s}
+        @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference){
+          .lm-map:hover{box-shadow:0 0 0 1px color-mix(in oklch,var(--color-accent) 40%,transparent),0 24px 60px -24px color-mix(in oklch,var(--color-accent) 35%,transparent)}
+          .lm-pin{animation:lm-pulse 3.4s ease-in-out infinite}
+          @keyframes lm-pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in oklch,var(--color-accent) 30%,transparent)}50%{box-shadow:0 0 0 9px color-mix(in oklch,var(--color-accent) 0%,transparent)}}
+          .lm-dir:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px color-mix(in oklch,var(--color-accent) 45%,transparent)}
+          .lm-dir svg{transition:transform .3s var(--ease,ease)}
+          .lm-dir:hover svg{transform:translateX(3px)}
+        }
+
+
+/* [BackToTop.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.back-to-top {
+          transition:
+            opacity 260ms var(--ease),
+            transform 260ms var(--ease),
+            box-shadow 200ms var(--ease);
+        }
+        .back-to-top--out {
+          opacity: 0;
+          transform: translateY(12px) scale(0.85);
+          pointer-events: none;
+        }
+        .back-to-top--in {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          pointer-events: auto;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .back-to-top--in:hover,
+          .back-to-top--in:focus-visible {
+            transform: translateY(-3px) scale(1.06);
+            box-shadow:
+              0 16px 34px -12px color-mix(in oklch, var(--color-accent) 60%, transparent),
+              0 0 0 1px color-mix(in oklch, var(--color-accent) 45%, transparent);
+          }
+          .back-to-top--in:active {
+            transform: translateY(-1px) scale(0.94);
+            transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .back-to-top { transition: opacity 120ms linear; }
+          .back-to-top--out { transform: none; }
+          .back-to-top--in { transform: none; }
+        }
+
+
+/* [ScrollProgress.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.scroll-progress {
+          transform: scaleX(0);
+          background: linear-gradient(
+            90deg,
+            var(--color-accent) 0%,
+            var(--color-primary) 55%,
+            var(--color-info) 100%
+          );
+          box-shadow:
+            0 0 12px -1px color-mix(in oklch, var(--color-accent) 65%, transparent),
+            0 1px 0 0 color-mix(in oklch, var(--color-accent) 30%, transparent);
+          will-change: transform;
+        }
+        /* Faint highlight riding the leading edge for a "wet ink" gleam. */
+        .scroll-progress::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 40px;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            color-mix(in oklch, var(--color-accent) 90%, white 25%)
+          );
+          opacity: 0.85;
+        }
+        @supports (animation-timeline: scroll(root)) {
+          @media (prefers-reduced-motion: no-preference) {
+            .scroll-progress {
+              animation: scroll-progress-grow linear both;
+              animation-timeline: scroll(root);
+            }
+            @keyframes scroll-progress-grow {
+              from { transform: scaleX(0); }
+              to   { transform: scaleX(1); }
+            }
+          }
+        }
+
+
+/* [BookingEmbed.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+@keyframes fadeIn {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+
+/* [SpeedDial.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+@keyframes fadeUp {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+
+/* [StickyPhoneCTA.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.sticky-phone-cta { box-shadow: 0 -8px 26px -12px color-mix(in oklch, var(--color-accent) 65%, transparent); }
+        @media (prefers-reduced-motion: no-preference) {
+          .sticky-phone-cta { animation: stickyUp 0.34s cubic-bezier(0.22,1,0.36,1) both; }
+          @keyframes stickyUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+          .sticky-phone-icon { animation: stickyRing 2.6s ease-in-out infinite; transform-origin: center; }
+          @keyframes stickyRing {
+            0%, 86%, 100% { transform: rotate(0); }
+            89% { transform: rotate(-14deg); }
+            93% { transform: rotate(12deg); }
+            97% { transform: rotate(-6deg); }
+          }
+        }
+
+
+/* [NAPFooter.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.nap-rule {
+          position: absolute; top: 0; left: 0; right: 0; height: 1px;
+          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 55%, transparent), transparent);
+        }
+        .nap-wash {
+          position: absolute; left: -10%; right: -10%; bottom: -60%; height: 80%;
+          background: radial-gradient(50% 100% at 50% 100%, color-mix(in oklch, var(--color-accent) 10%, transparent), transparent 70%);
+          filter: blur(44px); pointer-events: none;
+        }
+        .nap-today-dot {
+          width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent);
+          box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 60%, transparent);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          /* columns reveal on scroll via the global .reveal-on-view observer; the dot pulses */
+          .nap-today-dot { animation: napPulse 2.4s ease-in-out infinite; }
+          @keyframes napPulse {
+            0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 55%, transparent); }
+            50% { box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-accent) 0%, transparent); }
+          }
+        }
+
+
+/* [TrustBadges.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.trust-rule {
+          position: absolute; left: 0; right: 0; height: 1px;
+          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 40%, transparent), transparent);
+        }
+        .trust-rule-top { top: 0; }
+        .trust-rule-bottom { bottom: 0; }
+        .trust-star { filter: drop-shadow(0 0 3px color-mix(in oklch, #facc15 55%, transparent)); }
+        @media (prefers-reduced-motion: no-preference) {
+          .tb-item { animation: tbItemIn 0.55s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--badge-i) * 0.07s); }
+          @keyframes tbItemIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        }
+
+
+/* [ReviewCTA.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.review-cta-aura {
+          position: absolute; inset: -30% -10% -40%;
+          background: radial-gradient(55% 55% at 50% 0%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 70%);
+          filter: blur(30px); pointer-events: none;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .review-cta-aura { display: none; } }
+
+
+/* [QuickActions.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+@media (prefers-reduced-motion: no-preference) {
+          .qa-tile { animation: qaRise 0.4s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--qa-i) * 0.05s); }
+          @keyframes qaRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+        }
+
+
+/* [TestimonialCarousel.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.testimonial-aura {
+          position: absolute; inset: -12% -6% -18%;
+          background: radial-gradient(60% 60% at 50% 30%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 70%);
+          filter: blur(28px); pointer-events: none; z-index: 0;
+        }
+        .testimonial-enter { animation: testimonialIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+        @keyframes testimonialIn {
+          from { opacity: 0; transform: translateY(14px) scale(0.985); filter: blur(3px); }
+          to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        .testimonial-star { animation: testimonialStar 0.4s cubic-bezier(0.34,1.56,0.64,1) both; animation-delay: calc(var(--star-i) * 60ms); }
+        @keyframes testimonialStar {
+          from { opacity: 0; transform: scale(0.4) rotate(-12deg); }
+          to   { opacity: 1; transform: scale(1) rotate(0); }
+        }
+        .testimonial-progress {
+          position: absolute; top: 0; left: 0; height: 3px; width: 100%;
+          transform-origin: left; transform: scaleX(0);
+          background: linear-gradient(90deg, color-mix(in oklch, var(--color-accent) 55%, transparent), var(--color-accent));
+          animation: testimonialProgress 5s linear forwards;
+        }
+        .testimonial-progress[data-paused='true'] { animation-play-state: paused; }
+        @keyframes testimonialProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        @media (prefers-reduced-motion: reduce) {
+          .testimonial-enter, .testimonial-star, .testimonial-progress { animation: none !important; }
+          .testimonial-progress { transform: scaleX(1); }
+          .testimonial-aura { display: none; }
+        }
+
+
+/* [EmergencyBanner.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+@keyframes slideDown {
+          from { transform: translateY(-100%); }
+          to { transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .emergency-pulse { animation: emergencyPulse 1.8s ease-in-out infinite; transform-origin: center; }
+          @keyframes emergencyPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.18); opacity: 0.75; }
+          }
+        }
+
+
+/* [MapEmbed.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.map-frame-rule {
+          position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 1; pointer-events: none;
+          background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--color-accent) 55%, transparent), transparent);
+        }
+        .map-today-dot {
+          width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .map-today-dot { animation: mapPulse 2.4s ease-in-out infinite; }
+          @keyframes mapPulse {
+            0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 55%, transparent); }
+            50% { box-shadow: 0 0 0 5px color-mix(in oklch, var(--color-accent) 0%, transparent); }
+          }
+        }
+
+
+/* [HeroWithPhoto.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.hero-photo-glow {
+          position: absolute; inset: 0; pointer-events: none;
+          background: radial-gradient(60% 45% at 50% 78%, color-mix(in oklch, var(--color-accent) 14%, transparent), transparent 70%);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+          .hero-photo-img { animation: heroKenBurns 22s ease-in-out infinite alternate; transform-origin: center; will-change: transform; }
+          @keyframes heroKenBurns {
+            from { transform: scale(1.08) translate3d(0, 0, 0); }
+            to   { transform: scale(1.2) translate3d(-1.5%, -1.2%, 0); }
+          }
+          .hero-photo-in { animation: heroPhotoIn 0.9s cubic-bezier(0.22,1,0.36,1) both; animation-delay: calc(var(--hero-i) * 0.12s); }
+          @keyframes heroPhotoIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+          .hero-photo-scroll { animation: heroScrollCue 2.2s ease-in-out infinite; }
+          @keyframes heroScrollCue {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.45; }
+            50% { transform: translate(-50%, 7px); opacity: 1; }
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-photo-img { transform: scale(1.05); }
+        }
+
+
+/* [Popover.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.popover-panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 12rem;
+  max-width: min(36rem, calc(100vw - 2rem));
+  transition: opacity 200ms var(--ease), transform 200ms var(--ease), overlay 200ms allow-discrete, display 200ms allow-discrete;
+}
+.popover-panel:not(:popover-open) {
+  opacity: 0;
+  transform: scale(0.96) translateY(-4px);
+}
+@starting-style {
+  .popover-panel:popover-open {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+}
+.popover-panel:popover-open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+@supports (anchor-name: --a) {
+  .popover-panel {
+    margin: 0;
+    inset: unset;
+  }
+  .pop-place-top    { position-area: top span-all; margin-bottom: 8px; }
+  .pop-place-bottom { position-area: bottom span-all; margin-top: 8px; }
+  .pop-place-left   { position-area: left span-all; margin-right: 8px; }
+  .pop-place-right  { position-area: right span-all; margin-left: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .popover-panel { transition: none; transform: none; }
+}
+
+
+/* [Dialog.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.modal-dialog {
+  border-radius: var(--radius-lg);
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(90vw, 32rem);
+  transition: opacity 220ms var(--ease), transform 220ms var(--ease), overlay 220ms allow-discrete, display 220ms allow-discrete;
+}
+.modal-dialog:not([open]) {
+  opacity: 0;
+  transform: scale(0.96) translateY(-8px);
+}
+@starting-style {
+  .modal-dialog[open] {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+}
+.modal-dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal-dialog::backdrop {
+  background: color-mix(in oklch, var(--color-background) 60%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 220ms var(--ease), display 220ms allow-discrete;
+}
+.modal-dialog:not([open])::backdrop { opacity: 0; }
+@starting-style { .modal-dialog[open]::backdrop { opacity: 0; } }
+.modal-dialog[open]::backdrop { opacity: 1; }
+@media (prefers-reduced-transparency: reduce) {
+  .modal-dialog::backdrop { backdrop-filter: none; background: var(--color-background); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal-dialog, .modal-dialog::backdrop { transition: none; transform: none; }
+}
+
+
+/* [AiChat.tsx] moved from inline <style> (React 19 drops component <style> on client SPA; fire-51). */
+.ai-chat-dialog {
+  border-radius: var(--radius-lg);
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(90vw, 28rem);
+  transition: opacity 220ms var(--ease), transform 220ms var(--ease), overlay 220ms allow-discrete, display 220ms allow-discrete;
+}
+.ai-chat-dialog:not([open]) {
+  opacity: 0;
+  transform: scale(0.96) translateY(20px);
+}
+@starting-style {
+  .ai-chat-dialog[open] {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+}
+.ai-chat-dialog[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.ai-chat-dialog::backdrop {
+  background: color-mix(in oklch, var(--color-background) 70%, transparent);
+  backdrop-filter: blur(8px);
+  transition: opacity 220ms var(--ease);
+}
+.ai-chat-dialog:not([open])::backdrop { opacity: 0; }
+@starting-style { .ai-chat-dialog[open]::backdrop { opacity: 0; } }
+.ai-chat-dialog[open]::backdrop { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .ai-chat-dialog, .ai-chat-dialog::backdrop { transition: none; transform: none; }
+}

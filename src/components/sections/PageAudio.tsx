@@ -54,124 +54,6 @@ const MAX_CHARS = 9000;
  * both media features are "no-preference"; when either is reduced the bars are
  * static ticks, the aura is still, and the audio path is unaffected.
  */
-const SCOPED_CSS = `
-.psa-band { --psa-accent: oklch(0.82 0.16 205); --psa-accent-2: oklch(0.72 0.19 285); }
-.psa-shell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: clamp(0.9rem, 2.4vw, 1.75rem);
-  flex-wrap: wrap;
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: clamp(1rem, 2.4vw, 1.5rem) clamp(1.1rem, 3vw, 1.9rem);
-  border-radius: 22px;
-  border: 1px solid oklch(1 0 0 / 0.1);
-  background: linear-gradient(180deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.015));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 oklch(1 0 0 / 0.06) inset, 0 20px 50px -34px oklch(0 0 0 / 0.85);
-  overflow: hidden;
-}
-/* Accent hairline lighting the top edge of the shell. */
-.psa-shell::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--psa-accent), transparent);
-  opacity: 0.7;
-}
-/* Soft accent aura behind the controls — breathes while playing (gated below). */
-.psa-aura {
-  content: '';
-  position: absolute;
-  inset: -55% -10% auto -10%;
-  height: 90%;
-  background: radial-gradient(50% 60% at 22% 0%, oklch(0.82 0.16 205 / 0.16), transparent 70%);
-  pointer-events: none;
-  opacity: 0.55;
-}
-
-.psa-controls { position: relative; display: inline-flex; align-items: center; gap: 0.6rem; }
-
-.psa-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: clamp(2.75rem, 6vw, 3.25rem);
-  width: clamp(2.75rem, 6vw, 3.25rem);
-  border-radius: 9999px;
-  border: 1px solid color-mix(in oklch, var(--psa-accent) 45%, transparent);
-  color: var(--psa-accent);
-  background: color-mix(in oklch, var(--psa-accent) 10%, transparent);
-  cursor: pointer;
-  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, color 0.2s ease;
-}
-.psa-btn:hover { background: color-mix(in oklch, var(--psa-accent) 18%, transparent); }
-.psa-btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--psa-bg, transparent), 0 0 0 4px color-mix(in oklch, var(--psa-accent) 70%, transparent);
-}
-.psa-btn[data-primary='true'] {
-  height: clamp(3rem, 7vw, 3.6rem);
-  width: clamp(3rem, 7vw, 3.6rem);
-  color: oklch(0.14 0.02 260);
-  background: linear-gradient(135deg, var(--psa-accent), var(--psa-accent-2));
-  border-color: transparent;
-  box-shadow: 0 10px 28px -14px color-mix(in oklch, var(--psa-accent) 60%, transparent);
-}
-.psa-btn[data-primary='true']:hover { filter: brightness(1.05); }
-.psa-btn svg { width: 42%; height: 42%; }
-
-.psa-copy { position: relative; display: flex; flex-direction: column; gap: 0.15rem; min-width: 10rem; flex: 1 1 12rem; }
-.psa-label {
-  font-family: var(--font-heading, inherit);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  font-size: clamp(1.05rem, 0.9rem + 0.9vw, 1.35rem);
-  text-wrap: balance;
-  color: inherit;
-}
-.psa-hint { font-size: 0.85rem; opacity: 0.72; text-wrap: balance; }
-
-/* Equalizer — bars are STATIC ticks by default; they only dance under the gate. */
-.psa-eq { position: relative; display: inline-flex; align-items: flex-end; gap: 0.28rem; height: clamp(1.75rem, 4.5vw, 2.4rem); }
-.psa-eq span {
-  display: block;
-  width: 0.28rem;
-  height: 38%;
-  border-radius: 9999px;
-  background: linear-gradient(180deg, var(--psa-accent), var(--psa-accent-2));
-  opacity: 0.85;
-}
-
-/* Screen-reader-only helper (label text also visible; this backs the status region). */
-.psa-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
-/* --- Motion: enabled ONLY when BOTH media features are "no-preference". --- */
-@media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
-  .psa-band[data-playing='true'] .psa-aura { animation: psa-breathe 3.2s ease-in-out infinite; }
-  .psa-band[data-playing='true'] .psa-eq span { animation: psa-bounce 1.05s ease-in-out infinite; }
-  .psa-eq span:nth-child(1) { animation-delay: -0.9s; }
-  .psa-eq span:nth-child(2) { animation-delay: -0.5s; }
-  .psa-eq span:nth-child(3) { animation-delay: -0.15s; }
-  .psa-eq span:nth-child(4) { animation-delay: -0.7s; }
-  .psa-eq span:nth-child(5) { animation-delay: -0.35s; }
-  .psa-btn:hover { transform: translateY(-2px); }
-  .psa-btn[data-primary='true']:active { transform: translateY(0) scale(0.97); }
-  @keyframes psa-bounce { 0%, 100% { height: 30%; } 50% { height: 100%; } }
-  @keyframes psa-breathe { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.04); } }
-}
-
-/* --- Reduced motion OR reduced data: bars frozen, aura still, audio unaffected. --- */
-@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
-  .psa-aura { animation: none !important; }
-  .psa-eq span { animation: none !important; height: 55% !important; }
-  .psa-btn { transition: none !important; }
-}
-`;
 
 /** Collapse runs of whitespace and hard-cap the length so utterances stay bounded. */
 function normalizeText(raw: string): string {
@@ -280,7 +162,6 @@ export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
       data-playing={isPlaying ? 'true' : 'false'}
       aria-label="Listen to this page"
     >
-      <style>{SCOPED_CSS}</style>
       <div className="psa-shell text-text">
         <span className="psa-aura" aria-hidden="true" />
 
