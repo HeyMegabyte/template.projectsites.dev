@@ -4,7 +4,30 @@ All notable changes to `projectsites-template` are documented here. Format: [Kee
 
 ## [Unreleased]
 
+### Changed
+
+- **Sub-page titles use the real per-vertical tagline (FIRE-53).** About / Services
+  / Contact / FAQ / Pricing `useSEO` titles now read
+  `"{Page} {BUSINESS_NAME} — {SEO_TAGLINE}"` (e.g. "About Cedarhouse Yoga Studio —
+  Find Your Calm and Strength") instead of the bare `"{Page} — {BUSINESS_NAME}"`,
+  which `fitMetaTitle` padded to length with a generic
+  "· get in touch to learn more" tail. FAQ/Pricing switched from the runtime
+  `` `{Page} — ${brand.business.name}` `` template literal to the
+  `{BUSINESS_NAME}` + `{SEO_TAGLINE}` token form so `fillTemplateTokens` injects the
+  real tagline (present in all 10 content packs). Homepage title unchanged (already
+  `BUSINESS_NAME + SEO_TAGLINE`).
+
 ### Fixed
+
+- **Contact form: explicit field names + associated labels (FIRE-53, a11y).**
+  Every Contact input now carries `name` + `id` + `autoComplete` and every `<label>`
+  its `htmlFor`; the previously-anonymous "Subject" field is named `subject`;
+  `required` on name/email/message. The edge runtime (`app.js`) `serialize()` was
+  delivering name/email/message only via type/`textarea` FALLBACKS (order-fragile,
+  and it dropped the subject line entirely). Now the runtime matches by explicit
+  `name`, browsers autofill by `autocomplete`, and screen-reader label association
+  (WCAG 1.3.1 / 3.3.2) is correct. *(Folding `subject` into the submitted message is
+  an `app.js` change deferred to a clean worker tree.)*
 
 - **Systemic placeholder leak (2.8/10 root cause).** Every Home-page section
   component now scrubs unresolved generation tokens at render via the new
