@@ -37,7 +37,7 @@ import { z } from 'zod';
 const ContactSchema = z.object({
   name:    z.string().trim().min(2, 'Name must be at least 2 characters'),
   email:   z.string().trim().email('Please enter a valid email'),
-  subject: z.string().trim().min(3, 'Subject must be at least 3 characters'),
+  phone:   z.string().trim().optional(),
   message: z.string().trim().min(10, 'Message must be at least 10 characters'),
 });
 
@@ -61,6 +61,14 @@ export function isValidEmail(v: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t);
 }
 
+/** True when `v` is empty (phone is OPTIONAL) OR has at least 7 digits — the live
+ *  affordance never blocks submit on a blank phone. Matches the app.js/edge delivery
+ *  contract, which carries `phone` (not the dropped `subject`). */
+export function isValidPhone(v: string): boolean {
+  const t = v.trim();
+  return t === '' || t.replace(/\D/g, '').length >= 7;
+}
+
 /** Live validity for a single field, mirroring the Zod thresholds above. */
 export function isFieldValid(name: FieldName, value: string): boolean {
   switch (name) {
@@ -68,8 +76,8 @@ export function isFieldValid(name: FieldName, value: string): boolean {
       return isMinLength(value, 2);
     case 'email':
       return isValidEmail(value);
-    case 'subject':
-      return isMinLength(value, 3);
+    case 'phone':
+      return isValidPhone(value);
     case 'message':
       return isMinLength(value, 10);
     default:
@@ -81,7 +89,7 @@ export function isFieldValid(name: FieldName, value: string): boolean {
 const HINTS: Record<FieldName, string> = {
   name:    'Name must be at least 2 characters',
   email:   'Please enter a valid email',
-  subject: 'Subject must be at least 3 characters',
+  phone:   'Enter a valid phone number',
   message: 'Message must be at least 10 characters',
 };
 
@@ -162,13 +170,13 @@ export function ContactForm({ endpoint, slug = 'default' }: Props) {
   const [values, setValues] = useState<Record<FieldName, string>>({
     name: '',
     email: '',
-    subject: '',
+    phone: '',
     message: '',
   });
   const [touched, setTouched] = useState<Record<FieldName, boolean>>({
     name: false,
     email: false,
-    subject: false,
+    phone: false,
     message: false,
   });
 
@@ -203,9 +211,9 @@ export function ContactForm({ endpoint, slug = 'default' }: Props) {
         />
       </div>
       <Field
-        label="Subject" name="subject" type="text" autoComplete="off" required
-        state={state} value={values.subject} touched={touched.subject}
-        onChange={onFieldChange('subject')} onBlur={onFieldBlur('subject')}
+        label="Phone (optional)" name="phone" type="tel" autoComplete="tel" inputMode="tel"
+        state={state} value={values.phone} touched={touched.phone}
+        onChange={onFieldChange('phone')} onBlur={onFieldBlur('phone')}
       />
       <Field
         label="Message" name="message" type="textarea" rows={5} required
