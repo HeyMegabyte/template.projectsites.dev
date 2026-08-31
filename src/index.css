@@ -2413,7 +2413,7 @@ main#main { view-transition-name: ps-main; }
    (the scoped CSS was stripped in prod → unstyled stacked stats + visible sr-only
    value, e.g. "500+500+"). index.css is a linked stylesheet → always applied. fire-51.
    ─────────────────────────────────────────────────────────────────────── */
-.pst-stats { --pst-accent: oklch(0.82 0.16 205); --pst-accent-2: oklch(0.72 0.19 285); }
+.pst-stats { --pst-accent: var(--color-accent); --pst-accent-2: var(--color-primary); }
 .pst-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 @media (min-width: 768px) { .pst-grid { gap: 2.5rem; } }
 
@@ -2444,7 +2444,7 @@ main#main { view-transition-name: ps-main; }
   position: absolute;
   inset: -40% 0 auto 0;
   height: 70%;
-  background: radial-gradient(60% 60% at 50% 0%, oklch(0.82 0.16 205 / 0.14), transparent 70%);
+  background: radial-gradient(60% 60% at 50% 0%, color-mix(in oklch, var(--color-accent) 14%, transparent), transparent 70%);
   pointer-events: none;
 }
 
@@ -2489,7 +2489,7 @@ main#main { view-transition-name: ps-main; }
     animation: pst-rise 0.66s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: calc(var(--pst-i, 0) * 110ms);
   }
-  .pst-tile:hover { transform: translateY(-4px) scale(1); box-shadow: 0 1px 0 oklch(1 0 0 / 0.1) inset, 0 26px 60px -30px oklch(0.82 0.16 205 / 0.5); }
+  .pst-tile:hover { transform: translateY(-4px) scale(1); box-shadow: 0 1px 0 oklch(1 0 0 / 0.1) inset, 0 26px 60px -30px color-mix(in oklch, var(--color-accent) 50%, transparent); }
   @keyframes pst-rise {
     from { opacity: 0; transform: translateY(18px) scale(0.985); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -2590,7 +2590,7 @@ main#main { view-transition-name: ps-main; }
 
 
 /* [Timeline.tsx] moved from inline <style> — React 19 drops component <style>{str} on the client SPA (fire-51). */
-.tl-root { --tl-accent: oklch(0.82 0.16 205); --tl-accent-2: oklch(0.72 0.19 285); }
+.tl-root { --tl-accent: var(--color-accent); --tl-accent-2: var(--color-primary); }
 
 /* ---------- Vertical rail ---------- */
 .tl-list { position: relative; margin: 0; padding: 0 0 0 2.25rem; list-style: none; }
@@ -2612,7 +2612,7 @@ main#main { view-transition-name: ps-main; }
   border-radius: 9999px;
   transform-origin: top;
   background: linear-gradient(180deg, var(--tl-accent), var(--tl-accent-2) 70%, transparent);
-  box-shadow: 0 0 12px -1px oklch(0.82 0.16 205 / 0.55);
+  box-shadow: 0 0 12px -1px color-mix(in oklch, var(--color-accent) 55%, transparent);
 }
 
 .tl-item { position: relative; padding-bottom: 2.5rem; }
@@ -2627,7 +2627,7 @@ main#main { view-transition-name: ps-main; }
   height: 1rem; width: 1rem;
   border-radius: 9999px;
   background: linear-gradient(135deg, var(--tl-accent), var(--tl-accent-2));
-  box-shadow: 0 0 0 4px var(--color-background, #060610), 0 0 14px -1px oklch(0.82 0.16 205 / 0.7);
+  box-shadow: 0 0 0 4px var(--color-background, #060610), 0 0 14px -1px color-mix(in oklch, var(--color-accent) 70%, transparent);
 }
 
 .tl-year {
@@ -2716,11 +2716,11 @@ main#main { view-transition-name: ps-main; }
     to   { opacity: 0; transform: scale(2.4); }
   }
 
-  .tl-item:hover .tl-node { box-shadow: 0 0 0 4px var(--color-background, #060610), 0 0 22px 0 oklch(0.82 0.16 205 / 0.8); }
+  .tl-item:hover .tl-node { box-shadow: 0 0 0 4px var(--color-background, #060610), 0 0 22px 0 color-mix(in oklch, var(--color-accent) 80%, transparent); }
   .tl-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
   .tl-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 1px 0 oklch(1 0 0 / 0.1) inset, 0 26px 60px -30px oklch(0.82 0.16 205 / 0.5);
+    box-shadow: 0 1px 0 oklch(1 0 0 / 0.1) inset, 0 26px 60px -30px color-mix(in oklch, var(--color-accent) 50%, transparent);
   }
 }
 
@@ -2735,7 +2735,7 @@ main#main { view-transition-name: ps-main; }
 
 
 /* [PageAudio.tsx] moved from inline <style> — React 19 drops component <style>{str} on the client SPA (fire-51). */
-.psa-band { --psa-accent: oklch(0.82 0.16 205); --psa-accent-2: oklch(0.72 0.19 285); }
+.psa-band { --psa-accent: var(--color-accent); --psa-accent-2: var(--color-primary); }
 .psa-shell {
   position: relative;
   display: flex;
@@ -2768,7 +2768,7 @@ main#main { view-transition-name: ps-main; }
   position: absolute;
   inset: -55% -10% auto -10%;
   height: 90%;
-  background: radial-gradient(50% 60% at 22% 0%, oklch(0.82 0.16 205 / 0.16), transparent 70%);
+  background: radial-gradient(50% 60% at 22% 0%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 70%);
   pointer-events: none;
   opacity: 0.55;
 }
