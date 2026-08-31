@@ -214,6 +214,70 @@ export function fitMetaDescription(
 }
 
 /**
+ * Guarantee a page `<title>` in the SEO sweet spot (50–60 chars) — the
+ * `meta.title_length` build invariant. Generation pads the HOMEPAGE title (the
+ * local-SEO "| City" append) but ships SHORT sub-page titles ("About — {Business}"
+ * ≈ 15–20 chars). When a (scrubbed) title is under 50, this appends REAL brand
+ * copy only — the tagline, then the city parsed from the address, then a neutral
+ * suffix — separated by " · ", and clamps to ≤60 at a word boundary. A title
+ * already ≥50 passes through (clamped only if it exceeds 60). Mirrors
+ * {@link fitMetaDescription}. Pure — same inputs, same output.
+ *
+ * @param title - the scrubbed page title (may be short)
+ * @param business - brand business fields (`name`, `tagline`, `address`)
+ * @returns a title whose length is in [50, 60] whenever any real brand copy exists
+ * @example fitMetaTitle('About — Ada Co', { tagline: 'Design that ships', address: '..., Austin, TX' })
+ * // → 'About — Ada Co · Design that ships · Austin'
+ */
+export function fitMetaTitle(
+  title: string,
+  business: { name?: string; tagline?: string; address?: string },
+): string {
+  const MIN = 50;
+  const MAX = 60;
+  const clampMax = (s: string): string => {
+    if (s.length <= MAX) return s;
+    const cut = s.slice(0, MAX);
+    const sp = cut.lastIndexOf(' ');
+    return sp > MIN - 2 ? cut.slice(0, sp) : cut;
+  };
+
+  let t = (title || '').trim();
+  if (t.length >= MIN) return clampMax(t);
+
+  const city = business.address ? (business.address.split(',')[1] || '').trim() : '';
+  const pads = [
+    (business.tagline || '').trim(),
+    city,
+    // Generic, claim-free last-resort so a minimal brand (no tagline, no city)
+    // still clears 50 without an awkward name-echo — mirrors fitMetaDescription.
+    'get in touch to learn more about our work',
+  ].filter((s): s is string => s.length > 0);
+
+  for (const pad of pads) {
+    if (t.length >= MIN) break;
+    if (t.includes(pad)) continue;
+    // Append token-by-token after a " · " separator; BREAK (not skip) at the first
+    // word that won't fit, so a cut pad ends on a real word (never a mid-word slice)
+    // — the same lesson as fitMetaDescription.
+    for (const tok of ` · ${pad}`.split(/(\s+)/)) {
+      if (t.length >= MAX) break;
+      if ((t + tok).length <= MAX) t += tok;
+      else break;
+    }
+  }
+
+  // Collapse a stray double space + strip a dangling trailing separator / connector
+  // ("… ·" / "…and") left when a pad was cut mid-phrase, so the title ends on a word.
+  t = t
+    .replace(/\s{2,}/g, ' ')
+    .replace(/(?:\s*[·|,;:-]\s*)+$/g, '')
+    .replace(/(?:\s+(?:and|the|a|an|of|to|for|with|in|on|at|or|&|but))+$/i, '')
+    .trim();
+  return clampMax(t);
+}
+
+/**
  * Scrub an array of text values, dropping every entry that is an unresolved
  * placeholder / empty / non-string. Preserves order of the survivors.
  *

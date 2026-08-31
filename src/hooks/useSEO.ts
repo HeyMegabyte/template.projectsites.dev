@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { brand } from '@/brand';
-import { scrubText, fitMetaDescription } from '@/lib/placeholders';
+import { scrubText, fitMetaDescription, fitMetaTitle } from '@/lib/placeholders';
 
 interface SEOProps {
   title: string;
@@ -15,7 +15,10 @@ export function useSEO({ title, description, canonical }: SEOProps) {
     // page title or meta description. That same head text is what the edge
     // app-shell reads for its static hero, so a leak here would poison the LCP
     // too. Fall back to real brand copy so the tags are always meaningful.
-    const safeTitle = scrubText(title, brand.business.name);
+    // Scrub first, then guarantee the 50–60 SEO length: generation pads the
+    // HOMEPAGE title but ships short sub-page ones ("About — {Business}") — pad
+    // short ones with real brand copy so `meta.title_length` always passes.
+    const safeTitle = fitMetaTitle(scrubText(title, brand.business.name), brand.business);
     // Scrub first, then guarantee the 120–156 SEO length: generation ships rich
     // homepage descriptions but short sub-page ones — pad short ones with real
     // brand copy (never fabricated) so `meta.description_length` always passes.
