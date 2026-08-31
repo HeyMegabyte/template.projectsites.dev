@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export default function Contact() {
   useSEO({
-    title: 'Contact — {BUSINESS_NAME}',
+    title: 'Contact {BUSINESS_NAME} — {SEO_TAGLINE}',
     description: '{CONTACT_META_DESCRIPTION}',
   });
 

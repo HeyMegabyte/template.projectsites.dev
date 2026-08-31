@@ -33,7 +33,7 @@ const support: FAQItem[] = [
 
 export default function FAQPage() {
   useSEO({
-    title: `FAQ — ${brand.business.name}`,
+    title: 'FAQ {BUSINESS_NAME} — {SEO_TAGLINE}',
     description: `Answers to the most common questions about ${brand.business.name}.`,
   });
 

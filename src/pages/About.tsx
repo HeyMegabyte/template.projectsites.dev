@@ -27,7 +27,7 @@ const aboutShots = [
 
 export default function About() {
   useSEO({
-    title: 'About — {BUSINESS_NAME}',
+    title: 'About {BUSINESS_NAME} — {SEO_TAGLINE}',
     description: '{ABOUT_META_DESCRIPTION}',
   });
 

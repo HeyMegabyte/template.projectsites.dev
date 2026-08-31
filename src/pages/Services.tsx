@@ -29,7 +29,7 @@ const whyUs = [
 
 export default function Services() {
   useSEO({
-    title: 'Services — {BUSINESS_NAME}',
+    title: 'Services {BUSINESS_NAME} — {SEO_TAGLINE}',
     description: '{SERVICES_META_DESCRIPTION}',
   });
 

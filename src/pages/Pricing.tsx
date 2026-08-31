@@ -28,7 +28,7 @@ const faqs: FAQItem[] = [
 
 export default function Pricing() {
   useSEO({
-    title: `Pricing — ${brand.business.name}`,
+    title: 'Pricing {BUSINESS_NAME} — {SEO_TAGLINE}',
     description: `{PRICING_META_DESCRIPTION}`,
   });
 
