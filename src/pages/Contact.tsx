@@ -76,16 +76,17 @@ export default function Contact() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="ps-contact-subject" className="block text-text-muted text-sm font-medium mb-2">
-                    Subject
+                  <label htmlFor="ps-contact-phone" className="block text-text-muted text-sm font-medium mb-2">
+                    Phone <span className="text-text-subtle font-normal">(optional)</span>
                   </label>
                   <input
-                    id="ps-contact-subject"
-                    name="subject"
-                    type="text"
-                    autoComplete="off"
+                    id="ps-contact-phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
                     className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text placeholder-text-subtle focus:outline-none focus:border-[var(--color-accent)]/50 focus:ring-1 focus:ring-[var(--color-accent)]/50 transition-colors"
-                    placeholder="How can we help?"
+                    placeholder="(555) 123-4567"
                   />
                 </div>
                 <div>
