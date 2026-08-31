@@ -1,3 +1,4 @@
+import { type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Shield, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,14 +39,22 @@ const TRUST_ICONS = { star: Star, shield: Shield, award: Award } as const;
 function TrustRow({ items }: { items?: Trust[] }) {
   if (!items?.length) return null;
   return (
-    <div className="mt-14 flex flex-wrap justify-center gap-x-8 gap-y-3 text-text-subtle text-sm">
+    <div className="mt-12 flex flex-wrap justify-center gap-3 text-sm">
       {items.map((t, i) => {
         const Icon = TRUST_ICONS[t.icon ?? 'star'];
         return (
-          <div key={i} className="flex items-center gap-2">
-            <Icon className="h-4 w-4 text-accent" />
+          <span
+            key={i}
+            // Cinematic credential pill: a glass surface + hairline border, a staggered
+            // entrance keyed on `--trust-i`, and a hover lift with the icon springing —
+            // all motion-gated via `.trust-pill` in index.css (the resting state is
+            // fully legible for reduced-motion / no-JS). Informational, not a control.
+            style={{ ['--trust-i' as string]: i } as CSSProperties}
+            className="trust-pill inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/60 px-3.5 py-1.5 text-text-muted backdrop-blur-sm"
+          >
+            <Icon aria-hidden="true" className="trust-pill__icon h-4 w-4 text-accent" />
             <span>{t.label}</span>
-          </div>
+          </span>
         );
       })}
     </div>
