@@ -5,7 +5,7 @@
   <link href="{BUSINESS_URL}/atom.xml" rel="self" type="application/atom+xml" />
   <link href="{BUSINESS_URL}" />
   <id>{BUSINESS_URL}/</id>
-  <updated>2026-09-01T08:50:29.778Z</updated>
+  <updated>2026-09-01T10:51:26.136Z</updated>
   <author><name>{BUSINESS_NAME}</name><email>hey@megabyte.space</email></author>
   <entry>
     <title>Website speed in 2026: how Core Web Vitals win or lose customers</title>

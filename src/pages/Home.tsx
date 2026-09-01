@@ -291,6 +291,11 @@ export default function Home() {
           // Parse the free-text address string → structured PostalAddress so the
           // LocalBusiness JSON-LD carries NAP + Google's local pack can key on it.
           address: parseAddress(brand.business.address),
+          // Real social profiles → schema.org `sameAs` (the knowledge-panel entity links).
+          // brand.social is a Record of unwrapped URL strings; drop the empty slots.
+          sameAs: Object.values(brand.social).filter(
+            (v): v is string => typeof v === 'string' && v.trim().length > 0,
+          ),
         })}
       />
 

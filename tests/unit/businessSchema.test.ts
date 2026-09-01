@@ -58,6 +58,13 @@ describe('buildBusinessJsonLd', () => {
     expect((json.founder as Record<string, unknown>).jobTitle).toBe('CEO');
   });
 
+  it('includes sameAs when real social URLs are provided, omits it when empty', () => {
+    const withSocial = buildBusinessJsonLd({ ...baseProfile, sameAs: ['https://facebook.com/acme', 'https://x.com/acme'] });
+    expect(withSocial.sameAs).toEqual(['https://facebook.com/acme', 'https://x.com/acme']);
+    const noSocial = buildBusinessJsonLd({ ...baseProfile, sameAs: [] });
+    expect(noSocial.sameAs).toBeUndefined();
+  });
+
   it('maps every loop vertical to its specific LocalBusiness subtype', () => {
     const cases: Record<string, string> = {
       dental: 'Dentist',
