@@ -2,7 +2,7 @@
  * Tests the JSON-LD graph builder in `src/lib/businessSchema.ts`.
  */
 import { describe, it, expect } from 'vitest';
-import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress, parseHours } from '@/lib/businessSchema';
+import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress, parseHours, hoursToWeek, isOpenAt, formatTime12 } from '@/lib/businessSchema';
 
 const baseProfile = {
   name: 'Acme Inc.',
@@ -144,6 +144,51 @@ describe('parseHours', () => {
   });
 });
 
+describe('hoursToWeek', () => {
+  it('builds a Mon→Sun grid with closed days for a single range', () => {
+    const w = hoursToWeek('Mon–Fri 9am–5pm');
+    expect(w).toHaveLength(7);
+    expect(w[0]).toEqual({ day: 'Monday', opens: '09:00', closes: '17:00', closed: false });
+    expect(w[5]).toEqual({ day: 'Saturday', closed: true });
+    expect(w[6]).toEqual({ day: 'Sunday', closed: true });
+  });
+  it('marks the un-named days closed for a wrap-around range', () => {
+    const w = hoursToWeek('Wed–Sun 7am–3pm · Closed Mon & Tue');
+    expect(w.find((d) => d.day === 'Monday')?.closed).toBe(true);
+    expect(w.find((d) => d.day === 'Wednesday')).toEqual({ day: 'Wednesday', opens: '07:00', closes: '15:00', closed: false });
+    expect(w.find((d) => d.day === 'Sunday')?.closed).toBe(false);
+  });
+  it('returns [] for by-appointment / unparseable (caller falls back to raw text)', () => {
+    expect(hoursToWeek('By appointment only')).toEqual([]);
+    expect(hoursToWeek(undefined)).toEqual([]);
+  });
+});
+
+describe('isOpenAt', () => {
+  it('is open inside the window, closed outside, and closed on a closed day', () => {
+    expect(isOpenAt('Mon–Fri 9am–5pm', 'Monday', 10 * 60)).toBe(true); // 10:00
+    expect(isOpenAt('Mon–Fri 9am–5pm', 'Monday', 8 * 60)).toBe(false); // 08:00 before open
+    expect(isOpenAt('Mon–Fri 9am–5pm', 'Sunday', 10 * 60)).toBe(false); // closed day
+  });
+  it('treats opens as inclusive and closes as exclusive', () => {
+    expect(isOpenAt('Mon–Fri 9am–5pm', 'Monday', 9 * 60)).toBe(true); // 09:00 exactly → open
+    expect(isOpenAt('Mon–Fri 9am–5pm', 'Monday', 17 * 60)).toBe(false); // 17:00 exactly → closed
+  });
+});
+
+describe('formatTime12', () => {
+  it.each([
+    ['08:00', '8am'],
+    ['14:30', '2:30pm'],
+    ['00:00', '12am'],
+    ['12:00', '12pm'],
+    ['17:00', '5pm'],
+    ['09:15', '9:15am'],
+  ])('%s → %s', (input, expected) => {
+    expect(formatTime12(input)).toBe(expected);
+  });
+});
+
 describe('buildSiteJsonLd', () => {
   it('returns at least 4 JSON-LD nodes', () => {
     const graph = buildSiteJsonLd(baseProfile);
@@ -162,6 +207,24 @@ describe('buildSiteJsonLd', () => {
     const graph = buildSiteJsonLd(baseProfile);
     const website = graph.find((n) => n['@type'] === 'WebSite');
     expect(website?.potentialAction).toBeDefined();
+  });
+});
+
+describe('end-to-end org node (the live Home.tsx path)', () => {
+  it('a local-service profile with real hours+address emits HomeAndConstructionBusiness + openingHoursSpecification + address', () => {
+    const [org] = buildSiteJsonLd({
+      name: 'Anchor Plumbing',
+      description: 'Licensed plumber, same-day service.',
+      url: 'https://anchorplumbing.example',
+      businessClass: 'local-service',
+      address: parseAddress('5678 C Street, Anchorage, AK 99503'),
+      openingHours: parseHours('Mon–Sat 8am–6pm · 24/7 emergency'),
+    });
+    expect(org['@type']).toBe('HomeAndConstructionBusiness');
+    expect((org.address as Record<string, unknown>)['@type']).toBe('PostalAddress');
+    const hours = org.openingHoursSpecification as Array<Record<string, unknown>>;
+    expect(hours).toHaveLength(1); // "24/7 emergency" clause skipped
+    expect(hours[0]).toEqual({ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '18:00' });
   });
 });
 

@@ -1,5 +1,10 @@
+import { useEffect, useState } from 'react';
 import { MapPin, Navigation, Clock } from 'lucide-react';
 import { brand } from '@/brand';
+import { cn } from '@/lib/utils';
+import { hoursToWeek, isOpenAt, formatTime12 } from '@/lib/businessSchema';
+
+const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 /**
  * LocationMap — a "where to find us" band: a real, keyless embedded map of the business
@@ -46,6 +51,20 @@ export function LocationMap(props: Props = {}) {
     ? `Proudly serving ${city} and the surrounding area — come see us.`
     : 'Come see us — we would love to welcome you in person.';
   const hasHours = Boolean(hours && !hours.startsWith('{') && hours.trim());
+  const week = hoursToWeek(hours);
+
+  // Live "Open now" + today-highlight are CLIENT-only (visitor's local clock) so the
+  // prerendered shell never bakes in a stale day/time or triggers a hydration mismatch:
+  // the grid renders on the server, the chip + today row light up after mount and
+  // refresh every minute.
+  const [now, setNow] = useState<Date | null>(null);
+  useEffect(() => {
+    setNow(new Date());
+    const t = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(t);
+  }, []);
+  const todayName = now ? DAY_NAMES[now.getDay()] : null;
+  const openNow = now ? isOpenAt(hours, todayName as string, now.getHours() * 60 + now.getMinutes()) : null;
 
   return (
     <section
@@ -92,12 +111,44 @@ export function LocationMap(props: Props = {}) {
             </span>
             <h3 className="font-heading text-xl font-bold text-text">{name}</h3>
             <p className="mt-2 leading-relaxed text-text-muted">{address}</p>
-            {hasHours && (
+            {hasHours && week.length > 0 ? (
+              <div className="oh mt-5">
+                <div className="mb-3 flex items-center gap-2">
+                  <Clock size={16} className="shrink-0 text-accent" aria-hidden />
+                  {now && (
+                    <span
+                      className={cn('oh-status', openNow ? 'oh-open' : 'oh-closed')}
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <span className="oh-dot" aria-hidden />
+                      {openNow ? 'Open now' : 'Closed now'}
+                    </span>
+                  )}
+                </div>
+                <table className="oh-table w-full text-sm">
+                  <caption className="sr-only">Weekly opening hours for {name}</caption>
+                  <tbody>
+                    {week.map((d) => (
+                      <tr key={d.day} className={cn('oh-row', d.day === todayName && 'oh-today')}>
+                        <th scope="row" className="oh-day py-1 pr-4 text-left font-medium">
+                          {d.day.slice(0, 3)}
+                          {d.day === todayName && <span className="sr-only"> (today)</span>}
+                        </th>
+                        <td className="oh-time py-1 text-right tabular-nums">
+                          {d.closed ? 'Closed' : `${formatTime12(d.opens as string)} – ${formatTime12(d.closes as string)}`}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : hasHours ? (
               <p className="mt-4 flex items-start gap-2 text-sm text-text-muted">
                 <Clock size={16} className="mt-0.5 shrink-0 text-accent" aria-hidden />
                 <span>{hours}</span>
               </p>
-            )}
+            ) : null}
             <a
               href={dirHref}
               target="_blank"

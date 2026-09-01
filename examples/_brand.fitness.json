@@ -8,7 +8,7 @@
     "tagline":       { "$value": "Train Hard, Get Strong",                "$type": "string" },
     "description":   { "$value": "A welcoming strength and conditioning gym with expert coaching, barbell training, and small-group classes for every level, from your first session to the competition platform.", "$type": "string" },
     "url":           { "$value": "https://ironworks.example",             "$type": "string" },
-    "businessClass": { "$value": "gym",                                   "$type": "string" },
+    "businessClass": { "$value": "fitness",                               "$type": "string" },
     "email":         { "$value": "hello@ironworks.example",               "$type": "string" },
     "phone":         { "$value": "",                                      "$type": "string" },
     "address":       { "$value": "",                                      "$type": "string" },

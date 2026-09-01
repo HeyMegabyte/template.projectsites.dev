@@ -8,7 +8,7 @@
     "tagline":       { "$value": "Breathe. Move. Restore." },
     "description":   { "$value": "Neighborhood yoga and movement studio in Portland, OR. Small heated and unheated classes, beginner-friendly teachers, and a calm space to slow down." },
     "url":           { "$value": "https://stillpoint.example" },
-    "businessClass": { "$value": "salon" },
+    "businessClass": { "$value": "wellness" },
     "email":         { "$value": "hello@stillpoint.example" },
     "phone":         { "$value": "+15035550100" },
     "address":       { "$value": "412 SE Belmont Street, Portland, OR 97214" },

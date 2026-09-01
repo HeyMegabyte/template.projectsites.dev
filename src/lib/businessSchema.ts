@@ -262,3 +262,59 @@ export function parseHours(raw?: string): Array<Record<string, unknown>> {
   }
   return out;
 }
+
+/** One row of the visible weekly-hours grid. `closed` days carry no opens/closes. */
+export interface DayHours {
+  day: string;
+  opens?: string;
+  closes?: string;
+  closed: boolean;
+}
+
+const WEEK_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+/**
+ * Flatten the free-text `hours` string into a Mon→Sun grid for the visible
+ * "Hours" card — the human-readable twin of {@link parseHours}'s JSON-LD, built
+ * from the SAME parse so display and structured data can never disagree. Days not
+ * named in any clause render as `closed`. Returns `[]` when nothing parses (e.g.
+ * "By appointment only") so the caller can fall back to showing the raw string.
+ *
+ * @example hoursToWeek('Mon–Fri 9am–5pm')
+ * // → [{day:'Monday',opens:'09:00',closes:'17:00',closed:false}, … , {day:'Sunday',closed:true}]
+ */
+export function hoursToWeek(raw?: string): DayHours[] {
+  const specs = parseHours(raw);
+  if (!specs.length) return [];
+  const map = new Map<string, { opens: string; closes: string }>();
+  for (const s of specs) {
+    for (const d of s.dayOfWeek as string[]) map.set(d, { opens: s.opens as string, closes: s.closes as string });
+  }
+  return WEEK_ORDER.map((day) => {
+    const h = map.get(day);
+    return h ? { day, opens: h.opens, closes: h.closes, closed: false } : { day, closed: true };
+  });
+}
+
+/**
+ * Is the business open at `dayName` + `minutes` (minutes since local midnight)?
+ * Pure — the caller passes a `new Date()`-derived day/time, so the fn stays
+ * deterministic + unit-testable. `false` when the day is closed or unparseable.
+ *
+ * @example isOpenAt('Mon–Fri 9am–5pm', 'Monday', 600) // 10:00 → true
+ */
+export function isOpenAt(raw: string | undefined, dayName: string, minutes: number): boolean {
+  const d = hoursToWeek(raw).find((x) => x.day === dayName);
+  if (!d || d.closed || !d.opens || !d.closes) return false;
+  const [oh, om] = d.opens.split(':').map(Number);
+  const [ch, cm] = d.closes.split(':').map(Number);
+  return minutes >= oh * 60 + om && minutes < ch * 60 + cm;
+}
+
+/** "08:00" → "8am", "14:30" → "2:30pm", "00:00" → "12am". Display-only. */
+export function formatTime12(hhmm: string): string {
+  const [h, m] = hhmm.split(':').map(Number);
+  const period = h < 12 ? 'am' : 'pm';
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return m === 0 ? `${h12}${period}` : `${h12}:${String(m).padStart(2, '0')}${period}`;
+}

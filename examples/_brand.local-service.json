@@ -18,7 +18,7 @@
       "$value": "https://anchorplumbing.example"
     },
     "businessClass": {
-      "$value": "storefront"
+      "$value": "local-service"
     },
     "email": {
       "$value": "dispatch@anchorplumbing.example"

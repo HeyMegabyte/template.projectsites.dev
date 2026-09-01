@@ -3343,3 +3343,47 @@ main#main { view-transition-name: ps-main; }
 @media (prefers-reduced-motion: reduce) {
   .ai-chat-dialog, .ai-chat-dialog::backdrop { transition: none; transform: none; }
 }
+
+/* [LocationMap.tsx] Opening-hours weekly grid + live open/closed chip — component-scoped
+   (.oh-*), moved out of an inline <style> (React 19 drops component <style>{str} on the
+   client SPA, fire-51). Pairs the visible hours with the OpeningHoursSpecification JSON-LD
+   (both from the SAME parseHours) — the live "Open now" is the visitor's local clock. */
+.oh-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.oh-status.oh-open {
+  color: color-mix(in oklch, var(--color-success) 88%, var(--color-text));
+  background: color-mix(in oklch, var(--color-success) 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--color-success) 30%, transparent);
+}
+.oh-status.oh-closed {
+  color: var(--color-text-muted);
+  background: color-mix(in oklch, var(--color-text-muted) 10%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--color-text-muted) 22%, transparent);
+}
+.oh-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: currentColor; }
+.oh-open .oh-dot { animation: oh-pulse 2s ease-in-out infinite; }
+@keyframes oh-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.7); }
+}
+.oh-table { border-collapse: collapse; }
+.oh-row { border-top: 1px solid color-mix(in oklch, var(--color-border) 55%, transparent); }
+.oh-row:first-child { border-top: 0; }
+.oh-day { color: var(--color-text); }
+.oh-time { color: var(--color-text-muted); }
+.oh-today {
+  background: color-mix(in oklch, var(--color-accent) 9%, transparent);
+  box-shadow: inset 2px 0 0 0 var(--color-accent);
+}
+.oh-today .oh-day { color: var(--color-accent); }
+.oh-today .oh-time { color: color-mix(in oklch, var(--color-text) 92%, transparent); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .oh-open .oh-dot { animation: none; } }
