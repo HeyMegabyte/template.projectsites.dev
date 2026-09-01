@@ -115,16 +115,6 @@ export function LocationMap(props: Props = {}) {
             </span>
             <h3 className="font-heading text-xl font-bold text-text">{name}</h3>
             <p className="mt-2 leading-relaxed text-text-muted">{address}</p>
-            {hasPhone && (
-              <a
-                href={telHref}
-                className="mt-3 inline-flex items-center gap-2 self-start font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-                aria-label={`Call ${name} at ${phone}`}
-              >
-                <Phone size={16} className="shrink-0" aria-hidden />
-                {phone}
-              </a>
-            )}
             {hasHours && week.length > 0 ? (
               <div className="oh mt-5">
                 <div className="mb-3 flex items-center gap-2">
@@ -163,16 +153,31 @@ export function LocationMap(props: Props = {}) {
                 <span>{hours}</span>
               </p>
             ) : null}
-            <a
-              href={dirHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="lm-dir mt-6 inline-flex items-center gap-2 self-start rounded-full border border-accent/50 px-6 py-3 font-medium text-accent hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
-              aria-label={`Get directions to ${name}`}
-            >
-              <Navigation size={18} aria-hidden />
-              Get directions
-            </a>
+            {/* Matched pill CTA row — Call (accent-tinted, primary) + Get directions
+                (outline). Both ≥44px tap targets (WCAG 2.5.8); flex-wrap so they stack
+                on a narrow card. Call self-hides when no phone. */}
+            <div className="mt-6 flex flex-wrap gap-3">
+              {hasPhone && (
+                <a
+                  href={telHref}
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-6 py-3 font-medium text-accent transition hover:bg-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                  aria-label={`Call ${name} at ${phone}`}
+                >
+                  <Phone size={18} aria-hidden />
+                  Call {phone}
+                </a>
+              )}
+              <a
+                href={dirHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lm-dir inline-flex min-h-[44px] items-center gap-2 rounded-full border border-accent/50 px-6 py-3 font-medium text-accent transition hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                aria-label={`Get directions to ${name}`}
+              >
+                <Navigation size={18} aria-hidden />
+                Get directions
+              </a>
+            </div>
           </div>
         </div>
       </div>
