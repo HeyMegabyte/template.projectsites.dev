@@ -256,14 +256,30 @@ export function fitMetaTitle(
     // the title ends on a complete thought. Only fires on a genuine clamp, so a complete
     // title that merely CONTAINS "for X" (e.g. "Care for Kids", which fit under MAX and
     // took the branch above) is never touched.
-    out = out.replace(/\s+(?:and|the|a|an|of|to|for|with|in|on|at|or)\s+\S+$/i, '');
+    // Include subordinating conjunctions (when/while/where) — a clamped tagline like
+    // "Trusted Counsel When It Matters" cuts to "… Counsel When It", a dangling
+    // dependent clause; drop it to "… Counsel". Fires only on a genuine clamp, so a
+    // COMPLETE in-range "Care When You Need It" (took the ≤MAX branch) is never touched.
+    out = out.replace(/\s+(?:and|the|a|an|of|to|for|with|in|on|at|or|when|while|where)\s+\S+$/i, '');
     return stripDangling(out);
   };
 
-  let t = (title || '').trim();
-  if (t.length >= MIN) return clampMax(t);
-
   const city = business.address ? (business.address.split(',')[1] || '').trim() : '';
+
+  let t = (title || '').trim();
+  if (t.length >= MIN) {
+    const clamped = clampMax(t);
+    // If clamping a long "{Name} — {Tagline}" dropped us below the sweet spot (the
+    // tagline got truncated away), refill with the CITY — the "{business} … {city}"
+    // local-SEO signal. The tagline is already present (clamped), so re-padding it
+    // would duplicate; the city is the right, non-redundant pad. Only when it fits ≤MAX.
+    if (clamped.length < MIN && city && !clamped.includes(city)) {
+      const withCity = `${clamped} · ${city}`;
+      if (withCity.length <= MAX) return withCity;
+    }
+    return clamped;
+  }
+
   const pads = [
     (business.tagline || '').trim(),
     city,

@@ -36,6 +36,44 @@ describe('fitMetaTitle', () => {
     expect(t).not.toMatch(/\bfor\s+\w+$/i);
   });
 
+  it('refills a clamp-shortened title with the CITY for local-SEO (no tagline dup)', () => {
+    const t = fitMetaTitle('Meridian Family Medicine — Trusted Primary Care for Every Age', {
+      name: 'Meridian Family Medicine',
+      tagline: 'Trusted Primary Care for Every Age',
+      address: '2000 16th St, Denver, CO 80202',
+    });
+    expect(t).toBe('Meridian Family Medicine — Trusted Primary Care · Denver');
+    expect(t.length).toBeGreaterThanOrEqual(50);
+    expect(t.length).toBeLessThanOrEqual(60);
+  });
+
+  it('skips the city refill when it would exceed 60 (keeps the clean clamp)', () => {
+    const t = fitMetaTitle('Meridian Family Medicine — Trusted Primary Care for Every Age', {
+      name: 'Meridian Family Medicine',
+      tagline: 'Trusted Primary Care for Every Age',
+      address: '2000 16th St, San Francisco, CA 94103',
+    });
+    expect(t).toBe('Meridian Family Medicine — Trusted Primary Care');
+  });
+
+  it('drops a truncated subordinate clause ("… When It") on a clamped sub-page title', () => {
+    const t = fitMetaTitle('Services Kessler Family Law — Trusted Counsel When It Matters', {
+      name: 'Kessler Family Law',
+      tagline: 'Trusted Counsel When It Matters',
+    });
+    expect(t.length).toBeLessThanOrEqual(60);
+    expect(t).toBe('Services Kessler Family Law — Trusted Counsel');
+    expect(t).not.toMatch(/\bwhen\b/i);
+  });
+
+  it('keeps a COMPLETE "When …" clause in an in-range title (only clamps strip it)', () => {
+    const t = fitMetaTitle('Sunrise Home Care When You Need It Most — Local Team', {
+      name: 'Sunrise Home Care',
+      tagline: 'Local Team',
+    });
+    expect(t).toBe('Sunrise Home Care When You Need It Most — Local Team');
+  });
+
   it('never strips a COMPLETE "for X" phrase in an in-range title', () => {
     // Safety: 55 chars (≥50, ≤60) so it takes the non-clamp branch — "Care for Kids"
     // is a real phrase and must survive (the aggressive strip fires ONLY on a clamp).
