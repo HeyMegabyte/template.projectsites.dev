@@ -26,6 +26,7 @@ export const LocalService: Story = {
     address: '4500 Federal Blvd, Denver, CO 80211',
     hours: 'Mon–Fri 7am–6pm · Sat 8am–2pm · 24/7 emergency service',
     phone: '+1 303 555 0142',
+    email: 'service@summitridge.example',
   },
 };
 
@@ -35,6 +36,7 @@ export const Restaurant: Story = {
     address: '1200 E 6th St, Austin, TX 78702',
     hours: 'Tue–Sun 5pm–10pm · Brunch Sat–Sun 10am–2pm',
     phone: '+1 512 555 0190',
+    email: 'hello@larkspurkitchen.example',
   },
 };
 

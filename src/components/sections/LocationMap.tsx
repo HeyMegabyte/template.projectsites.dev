@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapPin, Navigation, Clock, Phone } from 'lucide-react';
+import { MapPin, Navigation, Clock, Phone, Mail } from 'lucide-react';
 import { brand } from '@/brand';
 import { cn } from '@/lib/utils';
 import { hoursToWeek, describeToday, formatTime12 } from '@/lib/businessSchema';
@@ -27,6 +27,7 @@ interface Props {
   address?: string;
   hours?: string;
   phone?: string;
+  email?: string;
 }
 
 export function LocationMap(props: Props = {}) {
@@ -35,10 +36,13 @@ export function LocationMap(props: Props = {}) {
   const address = props.address ?? b.address;
   const hours = props.hours ?? b.hours;
   const phone = props.phone ?? b.phone;
+  const email = props.email ?? b.email;
   const hasAddress = Boolean(address && !address.startsWith('{') && address.trim().length >= 6);
   if (!hasAddress) return null;
   const hasPhone = Boolean(phone && !phone.startsWith('{') && phone.replace(/[^\d]/g, '').length >= 7);
   const telHref = hasPhone ? `tel:${phone.replace(/[^\d+]/g, '')}` : '';
+  const hasEmail = Boolean(email && !email.startsWith('{') && email.includes('@'));
+  const mailtoHref = hasEmail ? `mailto:${email.trim()}` : '';
 
   const q = encodeURIComponent(address);
   const mapSrc = `https://maps.google.com/maps?q=${q}&z=14&output=embed`;
@@ -165,6 +169,16 @@ export function LocationMap(props: Props = {}) {
                 >
                   <Phone size={18} aria-hidden />
                   Call {phone}
+                </a>
+              )}
+              {hasEmail && (
+                <a
+                  href={mailtoHref}
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-accent/50 px-6 py-3 font-medium text-accent transition hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                  aria-label={`Email ${name}`}
+                >
+                  <Mail size={18} aria-hidden />
+                  Email
                 </a>
               )}
               <a
