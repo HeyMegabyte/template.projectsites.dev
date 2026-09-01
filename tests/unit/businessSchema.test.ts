@@ -2,7 +2,7 @@
  * Tests the JSON-LD graph builder in `src/lib/businessSchema.ts`.
  */
 import { describe, it, expect } from 'vitest';
-import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress } from '@/lib/businessSchema';
+import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress, parseHours } from '@/lib/businessSchema';
 
 const baseProfile = {
   name: 'Acme Inc.',
@@ -106,6 +106,41 @@ describe('parseAddress', () => {
     expect(parseAddress('Online')).toBeUndefined();
     expect(parseAddress('')).toBeUndefined();
     expect(parseAddress(undefined)).toBeUndefined();
+  });
+});
+
+describe('parseHours', () => {
+  it('parses a single "Mon–Fri 9am–5pm" clause into one OpeningHoursSpecification', () => {
+    expect(parseHours('Mon–Fri 9am–5pm')).toEqual([
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '17:00' },
+    ]);
+  });
+  it('expands a wrap-around "Wed–Sun 7am–3pm" range and SKIPS the "Closed Mon & Tue" note', () => {
+    expect(parseHours('Wed–Sun 7am–3pm · Closed Mon & Tue')).toEqual([
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '07:00', closes: '15:00' },
+    ]);
+  });
+  it('emits one spec per "·"-separated clause and drops the closed note', () => {
+    expect(parseHours('Tue–Fri 8am–5pm · Sat 9am–2pm · Closed Sun & Mon')).toEqual([
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '09:00', closes: '14:00' },
+    ]);
+  });
+  it('skips 24/7 + emergency notes, keeping only the real hours', () => {
+    expect(parseHours('Mon–Sat 8am–6pm · 24/7 emergency')).toEqual([
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '18:00' },
+    ]);
+  });
+  it('converts 12h→24h correctly across the noon/midnight boundary', () => {
+    expect(parseHours('Mon 12am–12pm')).toEqual([
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday'], opens: '00:00', closes: '12:00' },
+    ]);
+  });
+  it('returns [] for by-appointment / empty / unparseable input', () => {
+    expect(parseHours('By appointment only')).toEqual([]);
+    expect(parseHours('')).toEqual([]);
+    expect(parseHours(undefined)).toEqual([]);
+    expect(parseHours('call us anytime')).toEqual([]);
   });
 });
 

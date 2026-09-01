@@ -74,7 +74,7 @@ export interface BusinessProfile {
     addressCountry: string;
   };
   geo?: { latitude: number; longitude: number };
-  openingHours?: string[];
+  openingHours?: Array<string | Record<string, unknown>>;
   priceRange?: string;
   founder?: { name: string; jobTitle?: string; sameAs?: string[] };
   foundingDate?: string;
@@ -212,4 +212,53 @@ export function parseAddress(raw?: string): BusinessProfile['address'] | undefin
   const streetAddress = localityIdx > 0 ? parts.slice(0, localityIdx).join(', ') : '';
   if (!addressLocality && !streetAddress) return undefined;
   return { streetAddress, addressLocality, addressRegion, postalCode, addressCountry: 'US' };
+}
+
+const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const DAY_INDEX: Record<string, number> = { sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6 };
+
+/** "7am" | "7:30pm" | "12pm" → "HH:MM" (24h), or null when unparseable. */
+function to24h(t: string): string | null {
+  const m = t.trim().toLowerCase().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/);
+  if (!m) return null;
+  let h = Number(m[1]);
+  if (h < 1 || h > 12) return null;
+  if (m[3] === 'pm' && h !== 12) h += 12;
+  if (m[3] === 'am' && h === 12) h = 0;
+  return `${String(h).padStart(2, '0')}:${m[2] ?? '00'}`;
+}
+
+/**
+ * Parse the free-text `hours` string ("Wed–Sun 7am–3pm · Closed Mon & Tue") into
+ * schema.org `OpeningHoursSpecification` objects for the LocalBusiness JSON-LD — the
+ * signal Google shows in the local pack / knowledge panel. Handles the pack format
+ * (`·`-separated "DayRange TimeRange" clauses, en-dash or hyphen ranges); SKIPS
+ * closed/24-7/by-appointment notes; returns `[]` for anything unparseable (omit, never
+ * emit malformed hours — a bad node can void the whole entity). Pure.
+ *
+ * @example parseHours('Mon–Fri 9am–5pm')
+ * // → [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday'..'Friday'], opens: '09:00', closes: '17:00' }]
+ */
+export function parseHours(raw?: string): Array<Record<string, unknown>> {
+  if (!raw || typeof raw !== 'string') return [];
+  const out: Array<Record<string, unknown>> = [];
+  for (const clause of raw.split(/[·|,;]/).map((c) => c.trim()).filter(Boolean)) {
+    if (/closed|24\s*\/\s*7|emergency|appointment|by appt/i.test(clause)) continue;
+    const m = clause.match(
+      /^([A-Za-z]{3})\s*(?:[–—-]\s*([A-Za-z]{3}))?\s+(\d{1,2}(?::\d{2})?\s*[ap]m)\s*[–—-]\s*(\d{1,2}(?::\d{2})?\s*[ap]m)$/i,
+    );
+    if (!m) continue;
+    const start = DAY_INDEX[m[1].toLowerCase()];
+    const end = m[2] ? DAY_INDEX[m[2].toLowerCase()] : start;
+    const opens = to24h(m[3]);
+    const closes = to24h(m[4]);
+    if (start === undefined || end === undefined || !opens || !closes) continue;
+    const days: string[] = [];
+    for (let i = start, guard = 0; guard < 8; i = (i + 1) % 7, guard++) {
+      days.push(DAY_NAMES[i]);
+      if (i === end) break;
+    }
+    out.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: days, opens, closes });
+  }
+  return out;
 }

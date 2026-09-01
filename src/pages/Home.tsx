@@ -5,7 +5,7 @@ import { ContactForm } from '@/components/ContactForm';
 import { TrustBar } from '@/components/TrustBar';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
-import { buildSiteJsonLd, parseAddress, type BusinessClass } from '@/lib/businessSchema';
+import { buildSiteJsonLd, parseAddress, parseHours, type BusinessClass } from '@/lib/businessSchema';
 import { GalleryGrid } from '@/components/local';
 import { hasRealImage } from '@/lib/placeholders';
 
@@ -296,6 +296,9 @@ export default function Home() {
           sameAs: Object.values(brand.social).filter(
             (v): v is string => typeof v === 'string' && v.trim().length > 0,
           ),
+          // Parse the free-text hours string → schema.org OpeningHoursSpecification so the
+          // local pack / knowledge panel shows real hours ([] when unparseable → omitted).
+          openingHours: parseHours(brand.business.hours),
         })}
       />
 
