@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapPin, Navigation, Clock } from 'lucide-react';
+import { MapPin, Navigation, Clock, Phone } from 'lucide-react';
 import { brand } from '@/brand';
 import { cn } from '@/lib/utils';
 import { hoursToWeek, describeToday, formatTime12 } from '@/lib/businessSchema';
@@ -26,6 +26,7 @@ interface Props {
   name?: string;
   address?: string;
   hours?: string;
+  phone?: string;
 }
 
 export function LocationMap(props: Props = {}) {
@@ -33,8 +34,11 @@ export function LocationMap(props: Props = {}) {
   const name = props.name ?? b.name;
   const address = props.address ?? b.address;
   const hours = props.hours ?? b.hours;
+  const phone = props.phone ?? b.phone;
   const hasAddress = Boolean(address && !address.startsWith('{') && address.trim().length >= 6);
   if (!hasAddress) return null;
+  const hasPhone = Boolean(phone && !phone.startsWith('{') && phone.replace(/[^\d]/g, '').length >= 7);
+  const telHref = hasPhone ? `tel:${phone.replace(/[^\d+]/g, '')}` : '';
 
   const q = encodeURIComponent(address);
   const mapSrc = `https://maps.google.com/maps?q=${q}&z=14&output=embed`;
@@ -111,6 +115,16 @@ export function LocationMap(props: Props = {}) {
             </span>
             <h3 className="font-heading text-xl font-bold text-text">{name}</h3>
             <p className="mt-2 leading-relaxed text-text-muted">{address}</p>
+            {hasPhone && (
+              <a
+                href={telHref}
+                className="mt-3 inline-flex items-center gap-2 self-start font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                aria-label={`Call ${name} at ${phone}`}
+              >
+                <Phone size={16} className="shrink-0" aria-hidden />
+                {phone}
+              </a>
+            )}
             {hasHours && week.length > 0 ? (
               <div className="oh mt-5">
                 <div className="mb-3 flex items-center gap-2">
