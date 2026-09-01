@@ -5,7 +5,7 @@
     <link>{BUSINESS_URL}</link>
     <description>{BUSINESS_TAGLINE}</description>
     <language>en-US</language>
-    <lastBuildDate>Tue, 01 Sep 2026 02:52:12 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 07:01:21 GMT</lastBuildDate>
     <atom:link href="{BUSINESS_URL}/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Website speed in 2026: how Core Web Vitals win or lose customers</title>

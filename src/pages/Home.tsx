@@ -5,7 +5,7 @@ import { ContactForm } from '@/components/ContactForm';
 import { TrustBar } from '@/components/TrustBar';
 import { useSEO } from '@/hooks/useSEO';
 import { brand, featureOn } from '@/brand';
-import { buildSiteJsonLd, type BusinessClass } from '@/lib/businessSchema';
+import { buildSiteJsonLd, parseAddress, type BusinessClass } from '@/lib/businessSchema';
 import { GalleryGrid } from '@/components/local';
 import { hasRealImage } from '@/lib/placeholders';
 
@@ -288,6 +288,9 @@ export default function Home() {
           businessClass: (brand.business.businessClass || 'organization') as BusinessClass,
           email: brand.business.email,
           phone: brand.business.phone,
+          // Parse the free-text address string → structured PostalAddress so the
+          // LocalBusiness JSON-LD carries NAP + Google's local pack can key on it.
+          address: parseAddress(brand.business.address),
         })}
       />
 

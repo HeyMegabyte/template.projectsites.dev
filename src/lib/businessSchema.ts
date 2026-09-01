@@ -2,36 +2,59 @@ export type BusinessClass =
   | 'storefront'
   | 'restaurant'
   | 'medical'
+  | 'dental'
+  | 'wellness'
   | 'retail'
   | 'salon'
   | 'gym'
+  | 'fitness'
   | 'auto-repair'
+  | 'local-service'
+  | 'real-estate'
   | 'saas'
   | 'portfolio'
   | 'nonprofit'
   | 'legal'
   | 'organization';
 
+// Physically-located businesses → get the LocalBusiness subtype + geo + openingHours +
+// priceRange. Every loop vertical except saas/portfolio/organization has a real address,
+// so all of them are local (a law firm, clinic, and food bank all have a findable office).
 const LOCAL_BUSINESS_CLASSES: ReadonlySet<BusinessClass> = new Set([
   'storefront',
   'restaurant',
   'medical',
+  'dental',
+  'wellness',
   'retail',
   'salon',
   'gym',
+  'fitness',
   'auto-repair',
+  'local-service',
+  'real-estate',
+  'nonprofit',
+  'legal',
 ]);
 
+// Specific Schema.org LocalBusiness subtypes (richer than the generic 'LocalBusiness')
+// so Google's rich-results/local-pack shows the right entity. Each is a real schema.org
+// type. saas → SoftwareApplication (not local).
 const TYPE_OVERRIDES: Partial<Record<BusinessClass, string>> = {
-  restaurant:    'Restaurant',
-  medical:       'MedicalBusiness',
-  retail:        'Store',
-  salon:         'BeautySalon',
-  gym:           'ExerciseGym',
-  'auto-repair': 'AutoRepair',
-  legal:         'LegalService',
-  nonprofit:     'NGO',
-  saas:          'SoftwareApplication',
+  restaurant:      'Restaurant',
+  medical:         'MedicalBusiness',
+  dental:          'Dentist',
+  wellness:        'HealthAndBeautyBusiness',
+  retail:          'Store',
+  salon:           'BeautySalon',
+  gym:             'ExerciseGym',
+  fitness:         'ExerciseGym',
+  'auto-repair':   'AutoRepair',
+  'local-service': 'HomeAndConstructionBusiness',
+  'real-estate':   'RealEstateAgent',
+  legal:           'LegalService',
+  nonprofit:       'NGO',
+  saas:            'SoftwareApplication',
 };
 
 export interface BusinessProfile {
@@ -151,4 +174,42 @@ export function buildSiteJsonLd(profile: BusinessProfile): Record<string, unknow
 
 export function isLocalBusinessClass(value: BusinessClass): boolean {
   return LOCAL_BUSINESS_CLASSES.has(value);
+}
+
+/**
+ * Parse a free-text US address string ("300 S 16th St, Omaha, NE 68102") into the
+ * structured `PostalAddress` shape `buildBusinessJsonLd` needs. `brand.business.address`
+ * ships as a single string, so without this the LocalBusiness JSON-LD emits NO address —
+ * the single biggest local-SEO gap (Google's local pack keys on the structured address).
+ *
+ * Defensive: returns `undefined` for anything without at least a locality (online-only /
+ * placeholder builds → no address node, never a malformed one). Pure.
+ *
+ * @example parseAddress('300 S 16th St, Omaha, NE 68102')
+ * // → { streetAddress: '300 S 16th St', addressLocality: 'Omaha', addressRegion: 'NE', postalCode: '68102', addressCountry: 'US' }
+ */
+export function parseAddress(raw?: string): BusinessProfile['address'] | undefined {
+  if (!raw || typeof raw !== 'string') return undefined;
+  const parts = raw.split(',').map((p) => p.trim()).filter(Boolean);
+  if (parts.length < 2) return undefined; // need at least "Street, City" or "City, ST ZIP"
+  const last = parts[parts.length - 1];
+  const stZip = last.match(/^([A-Za-z]{2})\s+(\d{5}(?:-\d{4})?)$/); // "NE 68102"
+  let addressRegion = '';
+  let postalCode = '';
+  let localityIdx = parts.length - 1;
+  if (stZip) {
+    addressRegion = stZip[1].toUpperCase();
+    postalCode = stZip[2];
+    localityIdx = parts.length - 2;
+  } else if (/^[A-Za-z]{2}$/.test(last)) {
+    addressRegion = last.toUpperCase();
+    localityIdx = parts.length - 2;
+  } else if (/^\d{5}(?:-\d{4})?$/.test(last)) {
+    postalCode = last;
+    localityIdx = parts.length - 2;
+  }
+  const addressLocality = localityIdx >= 0 ? parts[localityIdx] : '';
+  const streetAddress = localityIdx > 0 ? parts.slice(0, localityIdx).join(', ') : '';
+  if (!addressLocality && !streetAddress) return undefined;
+  return { streetAddress, addressLocality, addressRegion, postalCode, addressCountry: 'US' };
 }

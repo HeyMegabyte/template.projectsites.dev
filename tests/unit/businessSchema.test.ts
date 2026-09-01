@@ -2,7 +2,7 @@
  * Tests the JSON-LD graph builder in `src/lib/businessSchema.ts`.
  */
 import { describe, it, expect } from 'vitest';
-import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass } from '@/lib/businessSchema';
+import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress } from '@/lib/businessSchema';
 
 const baseProfile = {
   name: 'Acme Inc.',
@@ -57,6 +57,49 @@ describe('buildBusinessJsonLd', () => {
     expect((json.founder as Record<string, unknown>).name).toBe('Jane Doe');
     expect((json.founder as Record<string, unknown>).jobTitle).toBe('CEO');
   });
+
+  it('maps every loop vertical to its specific LocalBusiness subtype', () => {
+    const cases: Record<string, string> = {
+      dental: 'Dentist',
+      medical: 'MedicalBusiness',
+      wellness: 'HealthAndBeautyBusiness',
+      'local-service': 'HomeAndConstructionBusiness',
+      'real-estate': 'RealEstateAgent',
+      fitness: 'ExerciseGym',
+      restaurant: 'Restaurant',
+      legal: 'LegalService',
+      nonprofit: 'NGO',
+    };
+    for (const [cls, type] of Object.entries(cases)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      expect(buildBusinessJsonLd({ ...baseProfile, businessClass: cls as any })['@type']).toBe(type);
+    }
+  });
+
+  it('treats dental/wellness/local-service/real-estate/fitness/legal/nonprofit as LOCAL (geo emits)', () => {
+    for (const cls of ['dental', 'wellness', 'local-service', 'real-estate', 'fitness', 'legal', 'nonprofit'] as const) {
+      const json = buildBusinessJsonLd({ ...baseProfile, businessClass: cls, geo: { latitude: 1, longitude: 2 } });
+      expect(json.geo, `${cls} should be local`).toBeDefined();
+    }
+  });
+});
+
+describe('parseAddress', () => {
+  it('parses "Street, City, ST ZIP" into a structured PostalAddress', () => {
+    expect(parseAddress('300 S 16th St, Omaha, NE 68102')).toEqual({
+      streetAddress: '300 S 16th St', addressLocality: 'Omaha', addressRegion: 'NE', postalCode: '68102', addressCountry: 'US',
+    });
+  });
+  it('handles a partial "Street, City" (no state/zip)', () => {
+    expect(parseAddress('123 Main St, Springfield')).toEqual({
+      streetAddress: '123 Main St', addressLocality: 'Springfield', addressRegion: '', postalCode: '', addressCountry: 'US',
+    });
+  });
+  it('returns undefined for online-only / empty / single-token', () => {
+    expect(parseAddress('Online')).toBeUndefined();
+    expect(parseAddress('')).toBeUndefined();
+    expect(parseAddress(undefined)).toBeUndefined();
+  });
 });
 
 describe('buildSiteJsonLd', () => {
@@ -82,18 +125,25 @@ describe('buildSiteJsonLd', () => {
 
 describe('isLocalBusinessClass', () => {
   it.each([
-    ['storefront',  true],
-    ['restaurant',  true],
-    ['medical',     true],
-    ['retail',      true],
-    ['salon',       true],
-    ['gym',         true],
-    ['auto-repair', true],
-    ['saas',        false],
-    ['portfolio',   false],
-    ['nonprofit',   false],
-    ['legal',       false],
-    ['organization',false],
+    ['storefront',   true],
+    ['restaurant',   true],
+    ['medical',      true],
+    ['dental',       true],
+    ['wellness',     true],
+    ['retail',       true],
+    ['salon',        true],
+    ['gym',          true],
+    ['fitness',      true],
+    ['auto-repair',  true],
+    ['local-service', true],
+    ['real-estate',  true],
+    // legal + nonprofit have a findable office → local (get address/geo/openingHours),
+    // matching how Google surfaces law firms + food banks in the local pack.
+    ['nonprofit',    true],
+    ['legal',        true],
+    ['saas',         false],
+    ['portfolio',    false],
+    ['organization', false],
   ] as const)('%s → %s', (cls, expected) => {
     expect(isLocalBusinessClass(cls)).toBe(expected);
   });
