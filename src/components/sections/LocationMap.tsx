@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { MapPin, Navigation, Clock } from 'lucide-react';
 import { brand } from '@/brand';
 import { cn } from '@/lib/utils';
-import { hoursToWeek, isOpenAt, formatTime12 } from '@/lib/businessSchema';
+import { hoursToWeek, describeToday, formatTime12 } from '@/lib/businessSchema';
 
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -64,7 +64,7 @@ export function LocationMap(props: Props = {}) {
     return () => clearInterval(t);
   }, []);
   const todayName = now ? DAY_NAMES[now.getDay()] : null;
-  const openNow = now ? isOpenAt(hours, todayName as string, now.getHours() * 60 + now.getMinutes()) : null;
+  const today = now ? describeToday(hours, todayName as string, now.getHours() * 60 + now.getMinutes()) : null;
 
   return (
     <section
@@ -115,14 +115,14 @@ export function LocationMap(props: Props = {}) {
               <div className="oh mt-5">
                 <div className="mb-3 flex items-center gap-2">
                   <Clock size={16} className="shrink-0 text-accent" aria-hidden />
-                  {now && (
+                  {now && today && (
                     <span
-                      className={cn('oh-status', openNow ? 'oh-open' : 'oh-closed')}
+                      className={cn('oh-status', today.open ? 'oh-open' : 'oh-closed')}
                       role="status"
                       aria-live="polite"
                     >
                       <span className="oh-dot" aria-hidden />
-                      {openNow ? 'Open now' : 'Closed now'}
+                      {today.label}
                     </span>
                   )}
                 </div>

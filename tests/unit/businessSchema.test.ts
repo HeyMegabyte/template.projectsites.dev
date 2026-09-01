@@ -2,7 +2,7 @@
  * Tests the JSON-LD graph builder in `src/lib/businessSchema.ts`.
  */
 import { describe, it, expect } from 'vitest';
-import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress, parseHours, hoursToWeek, isOpenAt, formatTime12 } from '@/lib/businessSchema';
+import { buildBusinessJsonLd, buildSiteJsonLd, isLocalBusinessClass, parseAddress, parseHours, hoursToWeek, isOpenAt, formatTime12, describeToday } from '@/lib/businessSchema';
 
 const baseProfile = {
   name: 'Acme Inc.',
@@ -207,6 +207,24 @@ describe('buildSiteJsonLd', () => {
     const graph = buildSiteJsonLd(baseProfile);
     const website = graph.find((n) => n['@type'] === 'WebSite');
     expect(website?.potentialAction).toBeDefined();
+  });
+});
+
+describe('describeToday', () => {
+  it('says open with the closing time when currently open', () => {
+    expect(describeToday('Mon–Fri 9am–5pm', 'Monday', 10 * 60)).toEqual({ open: true, label: 'Open now · until 5pm' });
+  });
+  it('says when it opens later today', () => {
+    expect(describeToday('Mon–Fri 9am–5pm', 'Monday', 8 * 60)).toEqual({ open: false, label: 'Opens today at 9am' });
+  });
+  it('says closed now after closing time', () => {
+    expect(describeToday('Mon–Fri 9am–5pm', 'Monday', 18 * 60)).toEqual({ open: false, label: 'Closed now' });
+  });
+  it('says closed today on a closed day', () => {
+    expect(describeToday('Mon–Fri 9am–5pm', 'Sunday', 10 * 60)).toEqual({ open: false, label: 'Closed today' });
+  });
+  it('returns null for unparseable hours (chip hidden)', () => {
+    expect(describeToday('By appointment only', 'Monday', 600)).toBeNull();
   });
 });
 

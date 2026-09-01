@@ -318,3 +318,30 @@ export function formatTime12(hhmm: string): string {
   const h12 = h % 12 === 0 ? 12 : h % 12;
   return m === 0 ? `${h12}${period}` : `${h12}:${String(m).padStart(2, '0')}${period}`;
 }
+
+/**
+ * Richer one-line "today" status for the hours chip — tells the visitor WHEN, not
+ * just IF: open (with closing time), opening later today, or closed. Pure — caller
+ * passes a `new Date()`-derived day + minutes-since-midnight. `null` when hours are
+ * unparseable so the chip stays hidden (the grid falls back to the raw line).
+ *
+ * @example describeToday('Mon–Fri 9am–5pm', 'Monday', 600) // 10:00
+ * // → { open: true, label: 'Open now · until 5pm' }
+ */
+export function describeToday(
+  raw: string | undefined,
+  dayName: string,
+  minutes: number,
+): { open: boolean; label: string } | null {
+  const week = hoursToWeek(raw);
+  if (!week.length) return null;
+  const d = week.find((x) => x.day === dayName);
+  if (!d || d.closed || !d.opens || !d.closes) return { open: false, label: 'Closed today' };
+  const [oh, om] = d.opens.split(':').map(Number);
+  const [ch, cm] = d.closes.split(':').map(Number);
+  const open = oh * 60 + om;
+  const close = ch * 60 + cm;
+  if (minutes < open) return { open: false, label: `Opens today at ${formatTime12(d.opens)}` };
+  if (minutes < close) return { open: true, label: `Open now · until ${formatTime12(d.closes)}` };
+  return { open: false, label: 'Closed now' };
+}
