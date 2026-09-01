@@ -261,7 +261,16 @@ export function fitMetaTitle(
     // dependent clause; drop it to "… Counsel". Fires only on a genuine clamp, so a
     // COMPLETE in-range "Care When You Need It" (took the ≤MAX branch) is never touched.
     out = out.replace(/\s+(?:and|the|a|an|of|to|for|with|in|on|at|or|when|while|where)\s+\S+$/i, '');
-    return stripDangling(out);
+    out = stripDangling(out);
+    // A truncated comma-separated tagline ("Ship Faster, Skip the Busywork" → cut to
+    // "… Ship Faster, Skip") leaves a dangling SINGLE-word clause after the last comma —
+    // drop it back to the last complete clause ("… Ship Faster"). Clamp-only +
+    // exactly-one-word-after-the-last-comma, so a COMPLETE "Fast, Reliable Service"
+    // (which took the ≤MAX branch) is never touched; the 24-char floor guards against
+    // gutting a short title. Composes with the city refill below → "… Ship Faster · Seattle".
+    const commaDropped = out.replace(/,\s+\S+$/, '');
+    if (commaDropped !== out && commaDropped.length >= 24) out = stripDangling(commaDropped);
+    return out;
   };
 
   const city = business.address ? (business.address.split(',')[1] || '').trim() : '';

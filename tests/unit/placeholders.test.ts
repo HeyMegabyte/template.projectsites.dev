@@ -74,6 +74,25 @@ describe('fitMetaTitle', () => {
     expect(t).toBe('Sunrise Home Care When You Need It Most — Local Team');
   });
 
+  it('drops a truncated single-word comma-clause + city-appends (saas "Ship Faster, Skip")', () => {
+    const t = fitMetaTitle('Services Signalcraft Analytics — Ship Faster, Skip the Busywork', {
+      name: 'Signalcraft Analytics',
+      tagline: 'Ship Faster, Skip the Busywork',
+      address: '1201 3rd Ave, Seattle, WA 98101',
+    });
+    expect(t.length).toBeLessThanOrEqual(60);
+    expect(t).toBe('Services Signalcraft Analytics — Ship Faster · Seattle');
+    expect(t).not.toMatch(/,\s*\w+$/);
+  });
+
+  it('never strips a COMPLETE comma-tagline that fits under 60', () => {
+    const t = fitMetaTitle('Fast, Reliable Local Plumbing — Trusted Since 1998', {
+      name: 'Fast, Reliable Local Plumbing',
+      tagline: 'Trusted Since 1998',
+    });
+    expect(t).toBe('Fast, Reliable Local Plumbing — Trusted Since 1998');
+  });
+
   it('never strips a COMPLETE "for X" phrase in an in-range title', () => {
     // Safety: 55 chars (≥50, ≤60) so it takes the non-clamp branch — "Care for Kids"
     // is a real phrase and must survive (the aggressive strip fires ONLY on a clamp).
