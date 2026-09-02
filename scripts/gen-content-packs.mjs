@@ -100,7 +100,7 @@ const V = {
     process: [['Consult', 'Tell us your situation in a free, confidential meeting.'], ['Strategy', 'We map a clear plan and explain every option.'], ['Advocate', 'We handle the filings, negotiations, and hard conversations.'], ['Resolve', 'We pursue the strongest outcome and keep you informed throughout.']],
     faqHead: ['Common questions', 'What to expect when you work with our firm.'],
     faqs: [['How much does a consultation cost?', 'Your initial consultation is free. We will review your situation and explain your options with no obligation.'], ['How are your fees structured?', 'It depends on the matter. Many cases are flat-fee or contingency, and we explain the structure clearly up front.'], ['How long will my case take?', 'Every matter is different, but we give you a realistic timeline early and keep you updated at each step.'], ['Will I work with the same attorney?', 'Yes. A senior attorney handles your case directly, so you always speak with someone who knows the details.']],
-    cta: ['Let us review your case', 'Schedule a free, confidential consultation and get clear guidance on your next move.', 'Request consultation'],
+    cta: ['Ready when you are', 'Schedule a free, confidential consultation and get clear guidance on your next move.', 'Request consultation'],
     about: ['Experienced advocates in your corner', 'Our attorneys combine deep courtroom experience with genuine care for the people we represent. We take the time to understand what is really at stake for you, explain your options in plain language, and build a strategy around your goals — not a one-size-fits-all template. From the first consultation to the final resolution, we treat every client the way we would want our own family treated.', 'Our commitment', 'Honest counsel, tireless advocacy, and a clear path forward, no matter how complex the matter.'],
     meta: ['An experienced law firm offering family law, estate planning, personal injury, business, and real estate representation.', 'Our practice areas: family law, estate planning, personal injury, business law, real estate, and probate.'],
   },
@@ -1286,7 +1286,7 @@ const TEAM = {
     ],
   },
   legal: {
-    head: 'The advocates on your side',
+    head: 'Meet your legal team',
     intro: 'Experienced attorneys and staff who handle the details and the hard conversations for you.',
     roles: [
       ['Attorneys', 'Senior attorneys who handle your matter directly, explain your options, and fight for your outcome.'],
