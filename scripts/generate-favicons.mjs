@@ -3,7 +3,7 @@
 // from _brand.json (brandHue), with ZERO external deps (pure node: zlib for PNG, BMP-in-ICO).
 // Fixes the bug where index.html referenced 5 favicons that didn't exist (404 on every site).
 // Run before `vite build` (writes into public/, which vite copies to dist/). Regenerate per brand.
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -74,9 +74,17 @@ function ico(png32) {
 const png32 = pngSolid(32);
 writeFileSync(resolve(pub, 'favicon-16x16.png'), pngSolid(16));
 writeFileSync(resolve(pub, 'favicon-32x32.png'), png32);
-writeFileSync(resolve(pub, 'apple-touch-icon.png'), pngSolid(180));
+// A recovered OFFICIAL logo OR an Ideogram-generated logo (written to
+// public/apple-touch-icon.png by the container's ensureLogo step BEFORE this prebuild)
+// is the real brand mark — never overwrite it with the flat monogram fallback. The
+// pure-node monogram is tiny (<2KB); a real PNG logo is larger, so byte-size is a
+// reliable discriminator. The small favicons (16/32/ico/svg) stay the crisp monogram —
+// a detailed logo loses legibility at 16px anyway. (loop FIRE-74: Ideogram logo arc.)
+const appleTouchPath = resolve(pub, 'apple-touch-icon.png');
+const keptRealLogo = existsSync(appleTouchPath) && statSync(appleTouchPath).size > 4096;
+if (!keptRealLogo) writeFileSync(appleTouchPath, pngSolid(180));
 writeFileSync(resolve(pub, 'favicon.ico'), ico(png32));
 // rich SVG favicon (brand bg + initial) + monochrome safari mask
 writeFileSync(resolve(pub, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="${hex}"/><text x="16" y="22" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">${initial}</text></svg>`);
 writeFileSync(resolve(pub, 'safari-pinned-tab.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6"/><text x="16" y="22" font-family="system-ui" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">${initial}</text></svg>`);
-console.log(`[generate-favicons] wrote 6 favicons · brand=${hex} initial=${initial}`);
+console.log(`[generate-favicons] wrote favicons · brand=${hex} initial=${initial}${keptRealLogo ? ' · kept real apple-touch-icon logo (Ideogram/official)' : ''}`);
