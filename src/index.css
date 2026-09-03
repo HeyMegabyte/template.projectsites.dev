@@ -3387,3 +3387,135 @@ main#main { view-transition-name: ps-main; }
 .oh-today .oh-day { color: var(--color-accent); }
 .oh-today .oh-time { color: color-mix(in oklch, var(--color-text) 92%, transparent); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .oh-open .oh-dot { animation: none; } }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   COMPARISON (competitive / tier table)
+   Component-scoped `.cmp-*`. The base state below is fully visible: every row
+   opaque, the highlighted column washed + railed, and the ribbon in place — so
+   no-JS / reduced-motion / reduced-data renders the complete, legible table.
+   Motion is added only inside the gated blocks and is transform/opacity-only.
+   Theme-token colours throughout, so it is correct on light AND dark.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Fluid header sizing — one clamp() so the "Feature | Option | Option" row
+   never crowds between breakpoints. */
+.cmp-headline {
+  font-size: clamp(1.9rem, 3.2vw + 0.5rem, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.cmp-col-head {
+  font-size: clamp(0.95rem, 0.85rem + 0.35vw, 1.05rem);
+  text-wrap: balance;
+}
+
+/* Soft twin-tone accent wash behind the recommended column header. */
+.cmp-col-head[data-cmp-hl] {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--color-accent) 16%, transparent) 0%,
+      color-mix(in oklch, var(--color-accent) 7%, transparent) 100%
+    );
+}
+
+/* "Recommended" ribbon above the highlighted column. Base = visible + in place. */
+.cmp-ribbon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  padding: 0.15rem 0.6rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  box-shadow: 0 4px 14px -4px color-mix(in oklch, var(--color-accent) 60%, transparent);
+}
+
+/* Glowing vertical accent rail that marks the recommended column. Base state
+   is fully drawn (scaleY:1); it only animates the draw-down under motion. */
+.cmp-rail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform-origin: top;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--color-accent) 90%, transparent) 0%,
+    color-mix(in oklch, var(--color-primary) 70%, transparent) 100%
+  );
+  box-shadow: 0 0 12px -1px color-mix(in oklch, var(--color-accent) 55%, transparent);
+  pointer-events: none;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (prefers-reduced-data: no-preference) {
+    /* Rows stagger-rise as the table scrolls into view. Per-row delay is faked
+       via `animation-range` keyed on the inline `--cmp-i` index (matching the
+       `.faq-item` / `.pricing-card` pattern — no JS observer needed). */
+    .cmp-row {
+      animation: cmp-row-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(2% + var(--cmp-i, 0) * 5%) cover 24%;
+    }
+    @keyframes cmp-row-rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Answer icons scale-pop as their row settles — playful, transform-only. */
+    .cmp-icon {
+      animation: cmp-icon-pop linear both;
+      animation-timeline: view();
+      animation-range: entry calc(6% + var(--cmp-i, 0) * 5%) cover 26%;
+    }
+    @keyframes cmp-icon-pop {
+      from { transform: scale(0.55); opacity: 0.4; }
+      60%  { transform: scale(1.14); opacity: 1; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    /* The recommended-column rail draws down as the frame enters view. */
+    .cmp-rail {
+      animation: cmp-rail-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+    @keyframes cmp-rail-draw {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+  }
+}
+
+/* Ribbon drop-in on first paint (native, no JS timing). Base state above is the
+   final resting position, so SSR / no-support / reduced-motion never hide it. */
+@supports (transition-behavior: allow-discrete) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cmp-ribbon {
+      transition:
+        opacity var(--duration-base, 300ms) var(--ease, ease),
+        transform var(--duration-base, 300ms) var(--ease, ease);
+    }
+    @starting-style {
+      .cmp-ribbon {
+        opacity: 0;
+        transform: translate(-50%, -140%);
+      }
+    }
+  }
+}
+
+/* Safety net — never leave a row hidden or the rail un-drawn when motion/data is
+   reduced (the base states already handle this; this is belt-and-braces). */
+@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+  .cmp-row,
+  .cmp-icon,
+  .cmp-rail { animation: none !important; opacity: 1; transform: none; }
+}
