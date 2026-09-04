@@ -3769,44 +3769,80 @@ main#main { view-transition-name: ps-main; }
    weight, feature-settings, glass/card treatment) — never layout. `classic`
    intentionally has no extra flourish (the historical default look). */
 
-/* editorial — literary, calm, trustworthy (legal · medical · nonprofit) */
+/* Eyebrows/labels have NO semantic class — they are the utility signature
+   `font-mono … uppercase tracking-*` (never body copy). `.font-mono` is the
+   only stable hook, so each personality re-tracks labels through it. (The old
+   `.eyebrow` / `[class*='eyebrow']` selector matched NOTHING in this utility-
+   class template — dead CSS; `.font-mono` is the real target.) */
+
+/* editorial — literary, calm, trustworthy (legal · medical · nonprofit).
+   Ligature-rich tight heads · restrained mono rules · an accent hairline just
+   inside the top edge of every surface (inset shadow ⇒ zero reflow) · soft
+   glass. Reads like a trustworthy print magazine. */
 :root[data-style='editorial'] h1,
 :root[data-style='editorial'] h2,
 :root[data-style='editorial'] h3 {
   letter-spacing: -0.015em;
   font-feature-settings: 'liga' 1, 'kern' 1, 'ss01' 1;
 }
+:root[data-style='editorial'] .font-mono { letter-spacing: 0.2em; font-weight: 500; }
+:root[data-style='editorial'] .card-tactile {
+  box-shadow: inset 0 2px 0 0 color-mix(in oklch, var(--color-accent) 45%, transparent);
+}
 :root[data-style='editorial'] .glass,
-:root[data-style='editorial'] .glass-strong { backdrop-filter: blur(10px); }
+:root[data-style='editorial'] .glass-strong {
+  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 2px 0 0 color-mix(in oklch, var(--color-accent) 45%, transparent),
+    0 8px 24px -14px rgb(0 0 0 / 0.3);
+}
 
-/* warm — soft, inviting (restaurant · salon · gym · wellness) */
+/* warm — soft, inviting (restaurant · salon · gym · wellness).
+   Gently-tracked humanist heads · pillowy brand-tinted shadow that lifts every
+   card off the page · softly-spaced mono. Approachable and rounded. */
 :root[data-style='warm'] h1,
 :root[data-style='warm'] h2 { letter-spacing: -0.005em; }
+:root[data-style='warm'] .font-mono { letter-spacing: 0.12em; }
 :root[data-style='warm'] .card-tactile,
-:root[data-style='warm'] .glass {
-  box-shadow: 0 12px 44px -14px color-mix(in oklch, var(--color-primary) 24%, transparent);
+:root[data-style='warm'] .glass,
+:root[data-style='warm'] .glass-strong {
+  box-shadow: 0 16px 50px -16px color-mix(in oklch, var(--color-primary) 28%, transparent);
 }
 
-/* luxe — refined, premium (fine dining · high-end retail · real-estate) */
+/* luxe — refined, premium (fine dining · high-end retail · real-estate).
+   Wide-tracked serif heads · MAX-tracked uppercase mono labels (this is where
+   the dead `.eyebrow` selector should have lived) · thin accent hairline
+   borders (1px→1px color swap ⇒ zero reflow) · deep, quiet shadow. */
 :root[data-style='luxe'] h1,
 :root[data-style='luxe'] h2 { letter-spacing: 0.012em; font-weight: 500; }
-:root[data-style='luxe'] .eyebrow,
-:root[data-style='luxe'] [class*='eyebrow'] {
-  letter-spacing: 0.26em;
+:root[data-style='luxe'] .font-mono {
+  letter-spacing: 0.32em;
   text-transform: uppercase;
 }
+:root[data-style='luxe'] .card-tactile,
+:root[data-style='luxe'] .glass,
+:root[data-style='luxe'] .glass-strong {
+  border-color: color-mix(in oklch, var(--color-accent) 30%, transparent);
+  box-shadow: 0 22px 56px -28px rgb(0 0 0 / 0.55);
+}
 
-/* brutalist — bold, hard-edged, flat (creative · portfolio · events) */
+/* brutalist — bold, hard-edged, flat (creative · portfolio · events).
+   Ultra-heavy heads · UPPERCASE section titles (h2/h3 only — h1 taglines stay
+   sentence-case) · blocky bold mono · hard offset shadow + thick flat border,
+   no blur. Loud and confident. */
 :root[data-style='brutalist'] h1,
 :root[data-style='brutalist'] h2,
 :root[data-style='brutalist'] h3 {
   letter-spacing: -0.03em;
   font-weight: 800;
 }
+:root[data-style='brutalist'] h2,
+:root[data-style='brutalist'] h3 { text-transform: uppercase; }
+:root[data-style='brutalist'] .font-mono { letter-spacing: 0.06em; font-weight: 700; }
 :root[data-style='brutalist'] .card-tactile,
 :root[data-style='brutalist'] .glass,
 :root[data-style='brutalist'] .glass-strong {
   backdrop-filter: none;
-  box-shadow: 5px 5px 0 0 color-mix(in oklch, var(--color-text) 82%, transparent);
-  border-color: color-mix(in oklch, var(--color-text) 42%, transparent);
+  box-shadow: 6px 6px 0 0 color-mix(in oklch, var(--color-text) 82%, transparent);
+  border: 2px solid color-mix(in oklch, var(--color-text) 46%, transparent);
 }
