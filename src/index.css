@@ -506,20 +506,59 @@ main#main { view-transition-name: ps-main; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   PROCESS STEPS — the connector line draws left→right as the row scrolls in,
-   and each editorial ghost number scale-pops in, staggered by the inline
-   `--step-i`. Base state (no-JS / reduced-motion) is fully drawn + visible,
-   so content is never hidden. GPU-only (transform + opacity + filter).
+   PROCESS STEPS — a glowing connector rail draws left→right through flow-node
+   waypoints as the row scrolls in, each step CARD rises into view in sequence,
+   and each editorial ghost number scale-pops — all staggered by the inline
+   `--step-i` cascade. Base state (no-JS / reduced-motion) is fully drawn +
+   visible, so content is never hidden. GPU-only (transform + opacity + filter).
+   Fluid clamp() number size scales with the viewport, no media-query step.
    ─────────────────────────────────────────────────────────────────────── */
+.process-num {
+  font-size: clamp(2.75rem, 2rem + 3.4vw, 4.5rem);
+  filter: drop-shadow(0 0 14px color-mix(in oklch, var(--color-accent) 22%, transparent));
+}
+/* Overlay rail — base state fully drawn + softly glowing (this is the
+   reduced-motion / no-JS resting look). */
 .process-connector {
   transform: scaleX(1);
   transform-origin: left center;
+  filter: drop-shadow(0 0 6px color-mix(in oklch, var(--color-accent) 32%, transparent));
 }
-.process-num {
-  filter: drop-shadow(0 0 14px color-mix(in oklch, var(--color-accent) 22%, transparent));
+/* Flow-node waypoint — resting: fully visible with a soft accent halo. */
+.process-node {
+  filter: drop-shadow(0 0 8px color-mix(in oklch, var(--color-accent) 45%, transparent));
 }
+/* Accent-icon tile warms + lifts on hover/focus of its card. */
+.process-icon {
+  transition:
+    transform var(--duration-base, 0.4s) var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    background-color var(--duration-base, 0.4s) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+.process-step:hover .process-icon,
+.process-step:focus-within .process-icon {
+  transform: translateY(-2px) scale(1.06) rotate(-3deg);
+  background-color: color-mix(in oklch, var(--color-accent) 20%, transparent);
+}
+/* Gradient hairline that grows across the card top on hover/focus (matches the
+   `.pricing-card` / `.bento-tile` / TeamRoles accent-bar pattern for depth). */
+.process-step::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 2px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-primary), var(--color-info));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-base, 0.4s) var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+  pointer-events: none;
+}
+.process-step:hover::before,
+.process-step:focus-within::before { transform: scaleX(1); }
+
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
+    /* Rail draws left→right, its glow "comet" head pulsing as it advances. */
     .process-connector {
       transform: scaleX(0);
       animation: process-connector-draw linear both;
@@ -527,7 +566,31 @@ main#main { view-transition-name: ps-main; }
       animation-range: entry 0% cover 45%;
     }
     @keyframes process-connector-draw {
-      to { transform: scaleX(1); }
+      from { transform: scaleX(0); filter: drop-shadow(0 0 12px color-mix(in oklch, var(--color-accent) 60%, transparent)); }
+      to   { transform: scaleX(1); filter: drop-shadow(0 0 6px  color-mix(in oklch, var(--color-accent) 32%, transparent)); }
+    }
+    /* Each waypoint pops as the rail sweeps past it, staggered per --step-i. */
+    .process-node {
+      opacity: 0;
+      transform: translateX(-50%) scale(0);
+      animation: process-node-pop linear both;
+      animation-timeline: view();
+      animation-range: entry calc(6% + var(--step-i, 0) * 7%) cover 38%;
+    }
+    @keyframes process-node-pop {
+      from { opacity: 0; transform: translateX(-50%) scale(0); }
+      70%  { opacity: 1; transform: translateX(-50%) scale(1.35); }
+      to   { opacity: 1; transform: translateX(-50%) scale(1); }
+    }
+    /* Cards rise into view in sequence, tracing the rail's left→right draw. */
+    .process-step {
+      animation: process-card-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(2% + var(--step-i, 0) * 6%) cover 32%;
+    }
+    @keyframes process-card-rise {
+      from { opacity: 0; transform: translateY(28px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
     .process-num {
       animation: process-num-pop linear both;
@@ -812,9 +875,15 @@ main#main { view-transition-name: ps-main; }
        doesn't reset `animation-timeline`, so we have to be explicit. */
     animation-timeline: none !important;
   }
-  .animate-on-scroll, .reveal, .reveal-on-view, .kinetic-headline {
+  .animate-on-scroll, .reveal, .reveal-on-view, .kinetic-headline,
+  .process-step, .process-num {
     opacity: 1;
     transform: none;
+  }
+  /* Flow-node keeps its centering transform when motion is off. */
+  .process-node {
+    opacity: 1;
+    transform: translateX(-50%);
   }
 }
 
