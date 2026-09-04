@@ -70,7 +70,7 @@ export const THEME_PRESETS = {
   /** Modern, techy, geometric — the historical default. saas · tech · portfolio · auto. */
   classic: {
     label: 'Classic',
-    when: 'saas, tech, auto-repair, general modern brands — geometric + confident',
+    when: 'retail, general modern brands, mixed-vertical fallback — geometric + confident',
     font: { heading: 'Space Grotesk', body: 'Inter', mono: MONO },
     radius: { sm: '0.375rem', md: '0.75rem', lg: '1rem', xl: '1.5rem', '2xl': '2rem', full: '9999px' },
     shadow: {
@@ -141,6 +141,51 @@ export const THEME_PRESETS = {
     },
     motion: { easing: 'cubic-bezier(0.4, 0, 0.2, 1)', duration: { fast: '110ms', base: '190ms', slow: '300ms', scroll: '900ms' } },
   },
+
+  /** Athletic condensed display, punchy radii, strong brand glow, snappy motion — high-energy. fitness · gym · events · sports. */
+  bold: {
+    label: 'Bold',
+    when: 'fitness, gym, events, sports, martial arts, high-energy brands — athletic, loud, kinetic',
+    font: { heading: 'Oswald', body: 'Inter', mono: MONO },
+    radius: { sm: '0.25rem', md: '0.5rem', lg: '0.75rem', xl: '1rem', '2xl': '1.25rem', full: '9999px' },
+    shadow: {
+      sm: '0 2px 4px 0 rgb(0 0 0 / 0.30)',
+      md: '0 6px 16px -3px rgb(0 0 0 / 0.40)',
+      lg: '0 16px 40px -10px rgb(0 0 0 / 0.50)',
+      glow: '0 0 44px -6px oklch(0.75 0.20 var(--brand-hue) / 0.50)',
+    },
+    motion: { easing: 'cubic-bezier(0.2, 0.9, 0.25, 1)', duration: { fast: '120ms', base: '200ms', slow: '340ms', scroll: '1000ms' } },
+  },
+
+  /** Geometric sans, generous glassy radii, neon accent glow, floaty motion — sleek + modern. tech · saas · digital products. */
+  futuristic: {
+    label: 'Futuristic',
+    when: 'tech, saas, ai, fintech, digital products, developer tools — sleek, glassy, gradient-forward',
+    font: { heading: 'Sora', body: 'Inter', mono: MONO },
+    radius: { sm: '0.5rem', md: '0.875rem', lg: '1.25rem', xl: '1.75rem', '2xl': '2.25rem', full: '9999px' },
+    shadow: {
+      sm: '0 1px 3px 0 rgb(0 0 0 / 0.30)',
+      md: '0 8px 28px -8px rgb(0 0 0 / 0.45)',
+      lg: '0 24px 60px -16px rgb(0 0 0 / 0.55)',
+      glow: '0 0 52px -6px oklch(0.80 0.19 var(--brand-hue) / 0.48)',
+    },
+    motion: { easing: 'cubic-bezier(0.33, 1, 0.68, 1)', duration: { fast: '160ms', base: '300ms', slow: '520ms', scroll: '1400ms' } },
+  },
+
+  /** Slab serif, squared radii, deep grounded shadows, deliberate motion — industrial + dependable. construction · auto · trades. */
+  rugged: {
+    label: 'Rugged',
+    when: 'construction, auto-repair, trades, home services, manufacturing, logistics — sturdy, industrial, dependable',
+    font: { heading: 'Roboto Slab', body: 'Inter', mono: MONO },
+    radius: { sm: '0.25rem', md: '0.375rem', lg: '0.5rem', xl: '0.625rem', '2xl': '0.75rem', full: '9999px' },
+    shadow: {
+      sm: '0 2px 4px 0 rgb(0 0 0 / 0.35)',
+      md: '0 8px 20px -4px rgb(0 0 0 / 0.45)',
+      lg: '0 18px 44px -12px rgb(0 0 0 / 0.55)',
+      glow: '0 0 28px -10px oklch(0.72 0.12 var(--brand-hue) / 0.30)',
+    },
+    motion: { easing: 'cubic-bezier(0.4, 0, 0.2, 1)', duration: { fast: '140ms', base: '240ms', slow: '420ms', scroll: '1100ms' } },
+  },
 } as const satisfies Record<string, ThemePreset>;
 
 /** Union of valid preset names. */
@@ -202,12 +247,12 @@ export const CLASS_TO_PRESET: Record<string, PresetName> = {
   nonprofit: 'editorial',
   restaurant: 'warm',
   salon: 'warm',
-  gym: 'warm',
+  gym: 'bold',
   storefront: 'warm',
   portfolio: 'brutalist',
   retail: 'classic',
-  'auto-repair': 'classic',
-  saas: 'classic',
+  'auto-repair': 'rugged',
+  saas: 'futuristic',
   organization: 'classic',
 };
 

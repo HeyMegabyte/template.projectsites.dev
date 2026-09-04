@@ -40,7 +40,7 @@ describe('themePresets', () => {
   });
 
   it('covers every documented vertical personality', () => {
-    expect(new Set(PRESET_NAMES)).toEqual(new Set(['classic', 'editorial', 'warm', 'luxe', 'brutalist']));
+    expect(new Set(PRESET_NAMES)).toEqual(new Set(['classic', 'editorial', 'warm', 'luxe', 'brutalist', 'bold', 'futuristic', 'rugged']));
   });
 
   it('resolvePreset never throws and falls back to classic on bad input', () => {
@@ -67,7 +67,9 @@ describe('themePresets', () => {
     expect(presetForClass('legal')).toBe('editorial');
     expect(presetForClass('salon')).toBe('warm');
     expect(presetForClass('portfolio')).toBe('brutalist');
-    expect(presetForClass('SAAS')).toBe('classic'); // case-insensitive
+    expect(presetForClass('gym')).toBe('bold'); // athletic, not soft-warm
+    expect(presetForClass('auto-repair')).toBe('rugged'); // industrial, not geometric-classic
+    expect(presetForClass('SAAS')).toBe('futuristic'); // case-insensitive; glassy, not classic
     for (const bad of [undefined, null, '', 'nope', 42]) {
       expect(presetForClass(bad as unknown), String(bad)).toBe('classic');
     }
