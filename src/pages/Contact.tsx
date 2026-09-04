@@ -166,7 +166,7 @@ export default function Contact() {
               What to expect
             </span>
             <h2 className="text-2xl md:text-3xl font-bold font-heading text-text mt-3 mb-4">
-              Here&rsquo;s what happens after you reach out
+              Here&rsquo;s how it works after you reach out
             </h2>
             <p className="text-text-muted leading-relaxed">
               However you get in touch &mdash; the form, a phone call, or an email &mdash; you&rsquo;ll
