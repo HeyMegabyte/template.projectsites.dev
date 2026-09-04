@@ -334,6 +334,10 @@ export function applyBrand(root: HTMLElement = document.documentElement): void {
     // accent lightness is. Falls back to dark ink (accents ship light).
     const accent = typeof c.accent === 'string' ? c.accent : '';
     root.style.setProperty('--color-on-accent', onAccentInk(accent));
+    // Same legible-ink picker for text ON --color-primary (the `primary` button
+    // variant): a light brand primary needs dark ink, a dark one white.
+    const primary = typeof c.primary === 'string' ? c.primary : '';
+    root.style.setProperty('--color-on-primary', onAccentInk(primary));
 
     root.style.setProperty('--brand-hue', String(c.brandHue ?? 240));
     root.style.setProperty('--brand-chroma', String(c.brandChroma ?? 0.18));

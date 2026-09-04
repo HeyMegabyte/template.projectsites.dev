@@ -126,6 +126,10 @@
    is a safe default for the dark-first fallback (accents ship light).
    ─────────────────────────────────────────────────────────────────────── */
 :root { --color-on-accent: oklch(0.16 0.02 var(--brand-hue)); }
+/* On-PRIMARY ink for text on --color-primary (the `primary` button variant).
+   applyBrand() overwrites this per-brand (dark on light primary, white on dark).
+   Default = white, since brand primaries ship mid-to-dark (L≈0.34–0.58). */
+:root { --color-on-primary: oklch(0.98 0 0); }
 
 /* ON-SIGNAL INK — legible text on a filled STATUS surface (bg-success / warning /
    danger / info). Those signal colors are light-to-mid saturated (L≈0.66–0.82) and
