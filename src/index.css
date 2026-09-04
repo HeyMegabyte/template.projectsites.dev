@@ -677,6 +677,114 @@ main#main { view-transition-name: ps-main; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   TEAM GRID (src/components/sections/TeamGrid.tsx)
+   The named-people sibling of TEAM ROLES — same cinematic grammar so the two
+   read as one family: cards stagger up on scroll (offset keyed on the inline
+   `--tm-i`), lift on hover/focus, grow a gradient top-accent bar that draws in
+   + brightens (keyed on `--tm-lift`, matching `.team-role-bar`), the portrait
+   slow-zooms behind a fixed frame with an accent scrim, and the name shifts to
+   accent. Every effect is transform/opacity/filter-only (GPU-safe, no layout
+   thrash) and gated behind `prefers-reduced-motion: no-preference`; the global
+   reduced-motion reset above additionally clamps it to instant, so the resting
+   base state HERE is the reduced-motion / no-JS experience — every card fully
+   legible, no offset, nothing hidden. Colors are theme tokens + `--color-accent`.
+   ─────────────────────────────────────────────────────────────────────── */
+.team-card {
+  --tm-lift: 0;
+}
+/* Gradient top-accent bar — draws in + brightens on hover/focus. `--tm-lift`
+   (0→1) drives both its horizontal scale and accent strength. */
+.team-card-bar {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  z-index: 1;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-accent) calc(20% + var(--tm-lift) * 60%), transparent) 50%,
+    transparent 100%
+  );
+  transform: scaleX(0.55);
+  transform-origin: center;
+  transition:
+    transform var(--duration-base) var(--ease),
+    background var(--duration-base) var(--ease);
+}
+/* Accent scrim over the portrait — fades in from the bottom on hover/focus so
+   depth reads even over a light photo. Decorative, opacity-only. */
+.team-card-scrim {
+  opacity: 0;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklch, var(--color-accent) 22%, transparent) 0%,
+    transparent 55%
+  );
+  transition: opacity var(--duration-base) var(--ease);
+}
+.team-card:hover,
+.team-card:focus-within {
+  --tm-lift: 1;
+}
+.team-card:hover .team-card-bar,
+.team-card:focus-within .team-card-bar {
+  transform: scaleX(1);
+}
+.team-card:hover .team-card-scrim,
+.team-card:focus-within .team-card-scrim {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Portrait slow-zoom behind the fixed frame (the media wrapper clips it). The
+     monogram fallback shares the class, so it gently scales too. */
+  .team-card-photo {
+    transition: transform 500ms var(--ease);
+    will-change: transform;
+  }
+  .team-card:hover .team-card-photo,
+  .team-card:focus-within .team-card-photo {
+    transform: scale(1.06);
+  }
+  /* Ring warms to accent + a soft accent glow on hover/focus for extra depth. */
+  .team-card {
+    transition:
+      transform var(--duration-base) var(--ease),
+      border-color var(--duration-base) var(--ease),
+      box-shadow var(--duration-base) var(--ease);
+  }
+  .team-card:hover,
+  .team-card:focus-within {
+    border-color: color-mix(in oklch, var(--color-accent) 45%, var(--color-border));
+    box-shadow: 0 18px 44px -28px color-mix(in oklch, var(--color-accent) 55%, transparent);
+  }
+  /* Name shifts to accent as the card lifts. */
+  .team-card-name { transition: color var(--duration-base) var(--ease); }
+  .team-card:hover .team-card-name,
+  .team-card:focus-within .team-card-name {
+    color: var(--color-accent);
+  }
+  /* Staggered reveal — each card lifts in on a small incremental scroll offset
+     keyed on the inline `--tm-i`, layered on `.reveal-on-view`. */
+  @supports (animation-timeline: view()) {
+    .team-card {
+      animation: team-card-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(2% + var(--tm-i, 0) * 8%) cover 32%;
+    }
+    @keyframes team-card-rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+}
+/* Save-Data: drop scroll stagger + photo zoom — cards render at rest, fully legible. */
+@media (prefers-reduced-data: reduce) {
+  .team-card { animation: none !important; opacity: 1; transform: none; }
+  .team-card-photo { transform: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    SCROLL REVEAL — the shared `AnimatedSection` entrance (IntersectionObserver-
    driven). Visible by default; JS adds `.js-reveal-active` then, per element,
    `.in-view`. The reveal is a cinematic blur-rise: content lifts a touch, un-
