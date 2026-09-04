@@ -60,6 +60,11 @@ export function StickyActionBar() {
       }`}
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       aria-hidden={!shown}
+      // When hidden the bar is only slid off-screen (translate-y-full) — its CTA
+      // links stay keyboard-focusable, so a Tab lands inside aria-hidden content
+      // (axe aria-hidden-focus, serious). `inert` (React 19) removes the whole
+      // subtree from the tab order + a11y tree while hidden; dropped when shown.
+      inert={!shown}
     >
       <div className="glass-strong border-t border-border flex gap-2 p-2.5">
         {phoneHref && (
