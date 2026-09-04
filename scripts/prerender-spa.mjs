@@ -22,7 +22,11 @@ function discoverRoutes() {
   }
   return ['/about','/services','/contact','/pricing','/quote','/faq','/team','/gallery','/case-studies','/blog','/privacy','/terms','/accessibility'];
 }
-const ROUTES = discoverRoutes();
+// Include the homepage `/` FIRST: it's the #1 SEO page, yet its crawler-visible head
+// (meta description/title/JSON-LD) was previously left to the container token-fill (empty
+// when the business description is blank) + client-only useSEO (invisible to crawlers).
+// Prerendering it stamps the guaranteed useSEO fallback meta into the static HTML.
+const ROUTES = ['/', ...discoverRoutes()];
 const MIME = { '.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.ico':'image/x-icon', '.webmanifest':'application/manifest+json', '.xml':'application/xml', '.txt':'text/plain', '.woff2':'font/woff2' };
 
 // tiny static server with SPA fallback (so the app boots + client-routes)
