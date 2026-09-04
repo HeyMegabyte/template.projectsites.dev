@@ -29,8 +29,12 @@
   --color-border:           oklch(0.22 0.02 240);
 
   --color-text:        oklch(0.97 0.005 240);
-  --color-text-muted:  oklch(0.65 0.01 240);
-  --color-text-subtle: oklch(0.60 0.01 240);
+  /* Muted/subtle are legible on dark at these lightnesses; !important so a brand file's
+     inline value (applyBrand) can't push them darker and fail 4.5:1 on a near-black
+     surface (seen: #77706c muted → 4.11:1 in a dark team-role card). The [data-theme=light]
+     block below overrides these (later + equal specificity) for light schemes. */
+  --color-text-muted:  oklch(0.65 0.01 240) !important;
+  --color-text-subtle: oklch(0.60 0.01 240) !important;
 
   --color-success: oklch(0.74 0.16 152);
   --color-warning: oklch(0.82 0.16 85);
