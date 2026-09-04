@@ -16,6 +16,12 @@
   --color-primary-hover:    oklch(0.56 0.18 240);
   --color-accent:           oklch(0.85 0.18 195);
   --color-accent-hover:     oklch(0.78 0.18 195);
+  /* Accent used as TEXT (eyebrows, labels) needs 4.5:1 vs the surface. On dark the
+     accent (L~0.85) is already legible, so it passes through; the light-theme block
+     below forces a legible lightness (keeps the brand hue/chroma). */
+  --color-accent-readable:  var(--color-accent);
+  /* Same for success-as-text (the "Open now" badge) — legible on its light tint. */
+  --color-success-readable: var(--color-success);
 
   --color-background:       oklch(0.08 0.02 240);
   --color-surface:          oklch(0.12 0.02 240);
@@ -80,6 +86,10 @@
     --color-text:             oklch(0.18 0.02  var(--brand-hue));
     --color-text-muted:       oklch(0.42 0.01  var(--brand-hue));
     --color-text-subtle:      oklch(0.49 0.01  var(--brand-hue));
+    /* Legible accent-as-text on the light surface — keep the brand hue/chroma, force a
+       dark-enough lightness (a light/warm accent like gold is ~1.7:1 as text otherwise). */
+    --color-accent-readable:  oklch(from var(--color-accent) 0.48 c h);
+  --color-success-readable: oklch(from var(--color-success) 0.44 c h);
   }
 }
 :root[data-theme='light'] {
@@ -90,6 +100,19 @@
   --color-text:             oklch(0.18 0.02  var(--brand-hue));
   --color-text-muted:       oklch(0.42 0.01  var(--brand-hue));
   --color-text-subtle:      oklch(0.49 0.01  var(--brand-hue));
+  --color-accent-readable:  oklch(from var(--color-accent) 0.48 c h);
+  --color-success-readable: oklch(from var(--color-success) 0.44 c h);
+}
+
+/* Accent-as-TEXT (eyebrows, labels, contact links, today's hours) must clear 4.5:1. On a
+   LIGHT surface a light/warm accent (e.g. gold, ~1.6:1) is illegible, so route accent text
+   through the scheme-aware readable token — same brand hue/chroma, legibility-clamped
+   lightness. Only the light schemes need it (on dark the accent is already legible); and
+   only the `color` of `.text-accent` is touched, so `border-accent`/`bg-accent` keep the
+   full-vibrancy accent. */
+:root[data-theme='light'] .text-accent { color: var(--color-accent-readable); }
+@media (prefers-color-scheme: light) {
+  :root[data-theme='auto'] .text-accent { color: var(--color-accent-readable); }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -3572,7 +3595,7 @@ main#main { view-transition-name: ps-main; }
   line-height: 1;
 }
 .oh-status.oh-open {
-  color: color-mix(in oklch, var(--color-success) 88%, var(--color-text));
+  color: color-mix(in oklch, var(--color-success-readable) 92%, var(--color-text));
   background: color-mix(in oklch, var(--color-success) 14%, transparent);
   box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--color-success) 30%, transparent);
 }
@@ -3596,7 +3619,7 @@ main#main { view-transition-name: ps-main; }
   background: color-mix(in oklch, var(--color-accent) 9%, transparent);
   box-shadow: inset 2px 0 0 0 var(--color-accent);
 }
-.oh-today .oh-day { color: var(--color-accent); }
+.oh-today .oh-day { color: var(--color-accent-readable); }
 .oh-today .oh-time { color: color-mix(in oklch, var(--color-text) 92%, transparent); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { .oh-open .oh-dot { animation: none; } }
 
