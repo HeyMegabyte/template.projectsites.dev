@@ -89,6 +89,8 @@
   "colorScheme": {
     "$value": "light"
   },
+  "themeStyle":  { "$value": "classic", "$type": "string", "$description": "Visual personality preset (font/radius/shadow/motion + flourish). See template src/themePresets.ts." },
+
   "font": {
     "heading": {
       "$value": "Bebas Neue"

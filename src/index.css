@@ -3731,3 +3731,55 @@ main#main { view-transition-name: ps-main; }
   .cmp-icon,
   .cmp-rail { animation: none !important; opacity: 1; transform: none; }
 }
+
+/* ══ Theme-style flourishes ═══════════════════════════════════════════════
+   Additive decorative personalities keyed to _brand.json `themeStyle`
+   (src/brand.ts applyBrand() stamps :root[data-style="…"]). The font / radius /
+   shadow / motion TOKENS already come from the chosen preset (themePresets.ts);
+   these rules add a matching typographic + surface FLOURISH so each personality
+   reads distinct even when a build overrides the token groups. Unlayered + at
+   EOF so they win the cascade; they only touch DECORATIVE props (tracking,
+   weight, feature-settings, glass/card treatment) — never layout. `classic`
+   intentionally has no extra flourish (the historical default look). */
+
+/* editorial — literary, calm, trustworthy (legal · medical · nonprofit) */
+:root[data-style='editorial'] h1,
+:root[data-style='editorial'] h2,
+:root[data-style='editorial'] h3 {
+  letter-spacing: -0.015em;
+  font-feature-settings: 'liga' 1, 'kern' 1, 'ss01' 1;
+}
+:root[data-style='editorial'] .glass,
+:root[data-style='editorial'] .glass-strong { backdrop-filter: blur(10px); }
+
+/* warm — soft, inviting (restaurant · salon · gym · wellness) */
+:root[data-style='warm'] h1,
+:root[data-style='warm'] h2 { letter-spacing: -0.005em; }
+:root[data-style='warm'] .card-tactile,
+:root[data-style='warm'] .glass {
+  box-shadow: 0 12px 44px -14px color-mix(in oklch, var(--color-primary) 24%, transparent);
+}
+
+/* luxe — refined, premium (fine dining · high-end retail · real-estate) */
+:root[data-style='luxe'] h1,
+:root[data-style='luxe'] h2 { letter-spacing: 0.012em; font-weight: 500; }
+:root[data-style='luxe'] .eyebrow,
+:root[data-style='luxe'] [class*='eyebrow'] {
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+/* brutalist — bold, hard-edged, flat (creative · portfolio · events) */
+:root[data-style='brutalist'] h1,
+:root[data-style='brutalist'] h2,
+:root[data-style='brutalist'] h3 {
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+:root[data-style='brutalist'] .card-tactile,
+:root[data-style='brutalist'] .glass,
+:root[data-style='brutalist'] .glass-strong {
+  backdrop-filter: none;
+  box-shadow: 5px 5px 0 0 color-mix(in oklch, var(--color-text) 82%, transparent);
+  border-color: color-mix(in oklch, var(--color-text) 42%, transparent);
+}

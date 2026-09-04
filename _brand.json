@@ -45,6 +45,12 @@
     "$description": "dark | light | auto. Affects body bg + meta name=color-scheme."
   },
 
+  "themeStyle": {
+    "$value": "classic",
+    "$type": "string",
+    "$description": "Visual personality: classic (saas/tech/modern) | editorial (legal/medical/nonprofit — serif, trustworthy) | warm (restaurant/salon/gym/wellness — rounded, inviting) | luxe (fine-dining/high-end retail/real-estate — refined serif) | brutalist (creative/portfolio/events — bold, hard-edged). Drives font pairing + radius + shadow + motion + a matching flourish. OMIT the font/radius/shadow/motion groups below to let the preset supply them; keep only tokens you extracted from the source brand."
+  },
+
   "font": {
     "heading":   { "$value": "Space Grotesk", "$type": "fontFamily", "$description": "Display font. Geometric, condensed, or expressive." },
     "body":      { "$value": "Inter",         "$type": "fontFamily" },

@@ -87,6 +87,8 @@ const brandSchema = z.object({
     $value: z.union([colorSchemeEnum, z.string()]),
     $type: z.string().optional(), $description: z.string().optional(),
   }),
+  // Visual personality preset (optional; absent → 'classic'). See src/themePresets.ts.
+  themeStyle: tokenString.optional(),
   font: z.object({
     heading: tokenString, body: tokenString, mono: tokenString,
     weights: tokenNumberArray, fluidScale: tokenString,

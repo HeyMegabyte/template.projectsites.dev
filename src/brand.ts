@@ -10,6 +10,8 @@
  * If a token references another token's value, this resolver handles it.
  */
 
+import { resolvePreset, normalizePresetName, DEFAULT_PRESET, type PresetName } from './themePresets.ts';
+
 // The shipped template carries _brand.json at the repo root. A FRESH build
 // copy (e.g. the container's cp -r during site generation) can transiently
 // miss it — the import then fails the whole build with a bare Node error
@@ -78,6 +80,8 @@ export interface Brand {
   };
   color: Record<string, string | number>;
   colorScheme: 'dark' | 'light' | 'auto';
+  /** Visual personality preset (font pairing + radius + shadow + motion + flourish). */
+  themeStyle: PresetName;
   font: { heading: string; body: string; mono: string; weights: number[]; fluidScale: string };
   radius: Record<string, string>;
   spacing: Record<string, string>;
@@ -186,6 +190,7 @@ const DEFAULT_BRAND: Omit<Brand, 'business'> = {
     info: 'oklch(0.70 0.14 240)',
   },
   colorScheme: 'dark',
+  themeStyle: DEFAULT_PRESET,
   font: {
     heading: 'Space Grotesk',
     body: 'Inter',
@@ -230,6 +235,10 @@ function mergeGroup<T extends Record<string, unknown>>(base: T, override: unknow
 }
 
 const r = resolved as Record<string, unknown>;
+// The style preset is the BASE for font/radius/shadow/motion; a per-key
+// `_brand.json` value still wins via mergeGroup below (so a source-extracted
+// font is never clobbered). Unknown/absent themeStyle → 'classic' == DEFAULT_BRAND.
+const preset = resolvePreset(r.themeStyle);
 export const brand: Brand = {
   business: {
     name: pick('name', DEFAULTS.name),
@@ -245,23 +254,29 @@ export const brand: Brand = {
   },
   color: mergeGroup(DEFAULT_BRAND.color, r.color),
   colorScheme: (typeof r.colorScheme === 'string' ? r.colorScheme : DEFAULT_BRAND.colorScheme) as Brand['colorScheme'],
+  themeStyle: normalizePresetName(r.themeStyle),
   font: {
-    ...mergeGroup(DEFAULT_BRAND.font as unknown as Record<string, unknown>, r.font),
+    // weights + fluidScale come from DEFAULT_BRAND; the preset supplies the
+    // family pairing; an explicit _brand.json font still wins per-key.
+    ...mergeGroup({ ...DEFAULT_BRAND.font, ...preset.font } as unknown as Record<string, unknown>, r.font),
     weights:
       Array.isArray((r.font as { weights?: unknown } | undefined)?.weights) &&
       ((r.font as { weights: unknown[] }).weights.length > 0)
         ? (r.font as { weights: number[] }).weights
         : DEFAULT_BRAND.font.weights,
   } as Brand['font'],
-  radius: mergeGroup(DEFAULT_BRAND.radius, r.radius),
+  radius: mergeGroup(preset.radius as unknown as Record<string, string>, r.radius),
   spacing: mergeGroup(DEFAULT_BRAND.spacing, r.spacing),
-  shadow: mergeGroup(DEFAULT_BRAND.shadow, r.shadow),
+  shadow: mergeGroup(preset.shadow as unknown as Record<string, string>, r.shadow),
   motion: {
     easing:
       typeof (r.motion as { easing?: unknown } | undefined)?.easing === 'string'
         ? (r.motion as { easing: string }).easing
-        : DEFAULT_BRAND.motion.easing,
-    duration: mergeGroup(DEFAULT_BRAND.motion.duration, (r.motion as { duration?: unknown } | undefined)?.duration),
+        : preset.motion.easing,
+    duration: mergeGroup(
+      preset.motion.duration as unknown as Record<string, string>,
+      (r.motion as { duration?: unknown } | undefined)?.duration,
+    ),
   },
   layout: mergeGroup(DEFAULT_BRAND.layout, r.layout),
   social: mergeGroup(DEFAULT_BRAND.social, r.social),
@@ -338,6 +353,8 @@ export function applyBrand(root: HTMLElement = document.documentElement): void {
     const scheme = brand.colorScheme ?? DEFAULT_BRAND.colorScheme;
     root.style.colorScheme = scheme === 'auto' ? 'light dark' : scheme;
     root.dataset.theme = scheme;
+    // Style personality → :root[data-style="…"] flourish hooks in index.css.
+    root.dataset.style = brand.themeStyle ?? DEFAULT_PRESET;
   } catch (err) {
     // Last resort: never let a token write crash module init (pre-React,
     // uncatchable by ErrorBoundary). The site falls back to the static CSS

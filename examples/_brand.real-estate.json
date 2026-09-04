@@ -37,6 +37,9 @@
 
   "colorScheme": { "$value": "dark", "$type": "string" },
 
+  "themeStyle":  { "$value": "luxe", "$type": "string", "$description": "Visual personality preset (font/radius/shadow/motion + flourish). See template src/themePresets.ts." },
+
+
   "font": {
     "heading":   { "$value": "Fraunces",      "$type": "fontFamily" },
     "body":      { "$value": "Inter",         "$type": "fontFamily" },

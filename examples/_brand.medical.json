@@ -37,6 +37,9 @@
 
   "colorScheme": { "$value": "light" },
 
+  "themeStyle":  { "$value": "warm", "$type": "string", "$description": "Visual personality preset (font/radius/shadow/motion + flourish). See template src/themePresets.ts." },
+
+
   "font": {
     "heading":   { "$value": "Poppins" },
     "body":      { "$value": "Inter" },

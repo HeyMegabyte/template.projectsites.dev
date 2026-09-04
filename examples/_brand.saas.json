@@ -37,6 +37,9 @@
 
   "colorScheme": { "$value": "dark", "$type": "string" },
 
+  "themeStyle":  { "$value": "classic", "$type": "string", "$description": "Visual personality preset (font/radius/shadow/motion + flourish). See template src/themePresets.ts." },
+
+
   "font": {
     "heading":   { "$value": "Inter Tight",   "$type": "fontFamily" },
     "body":      { "$value": "Inter",         "$type": "fontFamily" },

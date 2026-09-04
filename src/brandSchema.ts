@@ -114,6 +114,10 @@ export const brandSchema = z
 
     colorScheme: colorSchemeToken,
 
+    // Visual personality preset. Optional so pre-existing brand files stay valid;
+    // absent → 'classic' (the historical default look). See src/themePresets.ts.
+    themeStyle: tokenString.optional(),
+
     font: z.object({
       heading:    tokenString,
       body:       tokenString,
