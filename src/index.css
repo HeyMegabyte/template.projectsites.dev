@@ -84,11 +84,11 @@
     --color-surface-elevated: oklch(0.94 0.01  var(--brand-hue));
     --color-border:           oklch(0.88 0.02  var(--brand-hue));
     --color-text:             oklch(0.18 0.02  var(--brand-hue));
-    --color-text-muted:       oklch(0.42 0.01  var(--brand-hue));
-    --color-text-subtle:      oklch(0.49 0.01  var(--brand-hue));
+    --color-text-muted:       oklch(0.42 0.01  var(--brand-hue)) !important;
+    --color-text-subtle:      oklch(0.49 0.01  var(--brand-hue)) !important;
     /* Legible accent-as-text on the light surface — keep the brand hue/chroma, force a
        dark-enough lightness (a light/warm accent like gold is ~1.7:1 as text otherwise). */
-    --color-accent-readable:  oklch(from var(--color-accent) 0.48 c h);
+    --color-accent-readable:  oklch(from var(--color-accent) 0.44 c h);
   --color-success-readable: oklch(from var(--color-success) 0.44 c h);
   }
 }
@@ -98,9 +98,9 @@
   --color-surface-elevated: oklch(0.94 0.01  var(--brand-hue));
   --color-border:           oklch(0.88 0.02  var(--brand-hue));
   --color-text:             oklch(0.18 0.02  var(--brand-hue));
-  --color-text-muted:       oklch(0.42 0.01  var(--brand-hue));
-  --color-text-subtle:      oklch(0.49 0.01  var(--brand-hue));
-  --color-accent-readable:  oklch(from var(--color-accent) 0.48 c h);
+  --color-text-muted:       oklch(0.42 0.01  var(--brand-hue)) !important;
+  --color-text-subtle:      oklch(0.49 0.01  var(--brand-hue)) !important;
+  --color-accent-readable:  oklch(from var(--color-accent) 0.44 c h);
   --color-success-readable: oklch(from var(--color-success) 0.44 c h);
 }
 
