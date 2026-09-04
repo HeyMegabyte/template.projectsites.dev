@@ -154,7 +154,7 @@ export function AiChat({
         aria-keyshortcuts="Meta+J Control+J"
         className={cn(
           'fixed bottom-6 right-6 z-30 h-12 px-4 rounded-full',
-          'bg-accent text-background font-bold shadow-lg hover:bg-accent-hover transition-all',
+          'bg-accent text-[var(--color-on-accent)] font-bold shadow-lg hover:bg-accent-hover transition-all',
           'flex items-center gap-2 group',
           className,
         )}
@@ -208,7 +208,7 @@ export function AiChat({
                   className={cn(
                     'inline-block px-3 py-2 rounded-2xl max-w-[85%] whitespace-pre-wrap leading-relaxed',
                     m.role === 'user'
-                      ? 'bg-accent text-background rounded-tr-sm'
+                      ? 'bg-accent text-[var(--color-on-accent)] rounded-tr-sm'
                       : 'bg-surface text-text rounded-tl-sm',
                   )}
                 >
@@ -247,7 +247,7 @@ export function AiChat({
               type="submit"
               disabled={streaming || !input.trim()}
               aria-label="Send"
-              className="h-10 w-10 rounded-lg bg-accent text-background flex items-center justify-center hover:bg-accent-hover disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="h-10 w-10 rounded-lg bg-accent text-[var(--color-on-accent)] flex items-center justify-center hover:bg-accent-hover disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               <Send size={16} />
             </button>

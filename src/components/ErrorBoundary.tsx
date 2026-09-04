@@ -59,7 +59,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <button
               type="button"
               onClick={this.retry}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-background font-bold hover:bg-accent-hover transition-colors min-h-[44px]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-[var(--color-on-accent)] font-bold hover:bg-accent-hover transition-colors min-h-[44px]"
             >
               <RefreshCw size={16} /> Try again
             </button>

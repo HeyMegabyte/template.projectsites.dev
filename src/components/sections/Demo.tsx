@@ -79,7 +79,7 @@ export function Demo({
                 <div className="h-full w-full bg-gradient-to-br from-surface to-surface-elevated" />
               )}
               <div className="absolute inset-0 bg-background/40 group-hover:bg-background/20 transition-colors flex items-center justify-center">
-                <span className="h-20 w-20 rounded-full bg-accent text-background flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <span className="h-20 w-20 rounded-full bg-accent text-[var(--color-on-accent)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                   <Play size={28} aria-hidden="true" fill="currentColor" />
                 </span>
               </div>

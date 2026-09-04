@@ -81,7 +81,7 @@ export function Tabs({ tabs, eyebrow, headline, description, defaultTab, classNa
                 className={cn(
                   'inline-flex items-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-colors min-h-[44px]',
                   selected
-                    ? 'bg-accent text-background'
+                    ? 'bg-accent text-[var(--color-on-accent)]'
                     : 'text-text-muted hover:text-text hover:bg-surface',
                 )}
               >

@@ -217,7 +217,7 @@ export default function Studio() {
                   onClick={() => setMode(m)}
                   className={`flex-1 px-3 py-2 rounded-md border text-sm capitalize transition-colors min-h-[44px] ${
                     mode === m
-                      ? 'bg-accent text-background border-accent'
+                      ? 'bg-accent text-[var(--color-on-accent)] border-accent'
                       : 'border-border text-text-muted hover:text-text hover:bg-surface'
                   }`}
                 >

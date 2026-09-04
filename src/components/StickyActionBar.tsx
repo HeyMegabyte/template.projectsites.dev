@@ -74,7 +74,7 @@ export function StickyActionBar() {
         <Link
           to={cta.to}
           data-bcl-cta
-          className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] rounded-lg bg-accent text-background font-bold text-sm hover:bg-accent-hover transition-colors"
+          className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] rounded-lg bg-accent text-[var(--color-on-accent)] font-bold text-sm hover:bg-accent-hover transition-colors"
         >
           {cta.icon} {cta.label}
         </Link>

@@ -61,7 +61,7 @@ function PWAPromptPreview({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
                   'pwa-prompt__install',
                   'inline-flex items-center justify-center gap-1.5',
                   'min-h-[44px] px-4 rounded-md text-sm font-bold',
-                  'bg-accent text-background hover:bg-accent-hover',
+                  'bg-accent text-[var(--color-on-accent)] hover:bg-accent-hover',
                   'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                 )}
               >

@@ -210,7 +210,7 @@ export function QuoteForm({ slug = 'default', endpoint }: Props) {
         type="button"
         onClick={() => void onSubmit()}
         disabled={status === 'sending'}
-        className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg bg-accent text-background font-bold hover:bg-accent-hover transition-colors min-h-[48px] disabled:opacity-60 disabled:cursor-wait"
+        className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 rounded-lg bg-accent text-[var(--color-on-accent)] font-bold hover:bg-accent-hover transition-colors min-h-[48px] disabled:opacity-60 disabled:cursor-wait"
       >
         {status === 'sending' ? (
           <>

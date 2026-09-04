@@ -127,6 +127,13 @@
    ─────────────────────────────────────────────────────────────────────── */
 :root { --color-on-accent: oklch(0.16 0.02 var(--brand-hue)); }
 
+/* ON-SIGNAL INK — legible text on a filled STATUS surface (bg-success / warning /
+   danger / info). Those signal colors are light-to-mid saturated (L≈0.66–0.82) and
+   scheme-constant, so a near-black brand-tinted ink clears 4.5:1 on all four. The old
+   `text-background` (white) was ~1.6–3.3:1 on light schemes — a real WCAG fail. Used
+   by AnnouncementBanner's filled tones. */
+.text-on-signal { color: oklch(0.17 0.03 var(--brand-hue, 240)); }
+
 /* ─────────────────────────────────────────────────────────────────────────
    LIGHT-THEME RENDER SAFETY NET
    The default component tree is token-driven and adapts to light themes for

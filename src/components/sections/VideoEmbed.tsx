@@ -96,7 +96,7 @@ export function VideoEmbed({
             />
             <div className="absolute inset-0 bg-background/40 group-hover:bg-background/30 transition-colors" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="h-20 w-20 rounded-full bg-accent text-background flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+              <span className="h-20 w-20 rounded-full bg-accent text-[var(--color-on-accent)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                 <Play size={32} aria-hidden="true" fill="currentColor" />
               </span>
             </div>

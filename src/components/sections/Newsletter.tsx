@@ -126,7 +126,7 @@ export function Newsletter({
             <button
               type="submit"
               disabled={submitting || !email}
-              className="newsletter-submit group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-background font-bold px-6 py-3 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-glow disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 disabled:hover:shadow-none min-h-[44px]"
+              className="newsletter-submit group inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-[var(--color-on-accent)] font-bold px-6 py-3 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-glow disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 disabled:hover:shadow-none min-h-[44px]"
             >
               {submitting ? (
                 <>

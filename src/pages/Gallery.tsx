@@ -80,7 +80,7 @@ export default function Gallery() {
             href={REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-background font-bold hover:bg-accent-hover transition-colors min-h-[44px]"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-accent text-[var(--color-on-accent)] font-bold hover:bg-accent-hover transition-colors min-h-[44px]"
           >
             <Github size={18} /> Use this template
           </a>

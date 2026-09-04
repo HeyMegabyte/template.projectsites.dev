@@ -124,7 +124,7 @@ export function Pricing({
               onClick={() => setAnnual(false)}
               className={cn(
                 'pricing-toggle__btn px-5 py-2 rounded-full text-sm font-medium transition-colors',
-                !annual ? 'bg-accent text-background' : 'text-text-muted hover:text-text'
+                !annual ? 'bg-accent text-[var(--color-on-accent)]' : 'text-text-muted hover:text-text'
               )}
               aria-pressed={!annual}
             >
@@ -135,7 +135,7 @@ export function Pricing({
               onClick={() => setAnnual(true)}
               className={cn(
                 'pricing-toggle__btn px-5 py-2 rounded-full text-sm font-medium transition-colors inline-flex items-center gap-2',
-                annual ? 'bg-accent text-background' : 'text-text-muted hover:text-text'
+                annual ? 'bg-accent text-[var(--color-on-accent)]' : 'text-text-muted hover:text-text'
               )}
               aria-pressed={annual}
             >
@@ -166,7 +166,7 @@ export function Pricing({
             {/* Featured ring — slow-rotating conic accent halo (enhancement layer). */}
             {t.featured && <span aria-hidden="true" className="pce-ring" />}
             {badge && (
-              <div className="pricing-badge absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-background text-xs font-bold inline-flex items-center gap-1 z-10">
+              <div className="pricing-badge absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-[var(--color-on-accent)] text-xs font-bold inline-flex items-center gap-1 z-10">
                 <Sparkles size={12} className="pricing-badge__icon" />
                 {badge}
               </div>

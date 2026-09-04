@@ -17,11 +17,11 @@ interface Props {
 }
 
 const TONE_CLASS: Record<NonNullable<Props['tone']>, string> = {
-  accent:  'bg-accent text-background',
-  success: 'bg-success text-background',
-  warning: 'bg-warning text-background',
-  danger:  'bg-danger text-background',
-  info:    'bg-info text-background',
+  accent:  'bg-accent text-[var(--color-on-accent)]',
+  success: 'bg-success text-on-signal',
+  warning: 'bg-warning text-on-signal',
+  danger:  'bg-danger text-on-signal',
+  info:    'bg-info text-on-signal',
 };
 
 /**

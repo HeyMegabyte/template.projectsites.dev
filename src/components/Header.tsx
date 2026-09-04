@@ -151,7 +151,7 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
           <ThemeToggle />
           <Link
             to={cta.href}
-            className="bg-accent hover:bg-accent-hover text-background font-bold text-sm px-5 py-2.5 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-glow"
+            className="bg-accent hover:bg-accent-hover text-[var(--color-on-accent)] font-bold text-sm px-5 py-2.5 rounded-lg transition-all hover:-translate-y-0.5 hover:shadow-glow"
           >
             {cta.label}
           </Link>
@@ -200,7 +200,7 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
             <ThemeToggle />
             <Link
               to={cta.href}
-              className="bg-accent hover:bg-accent-hover text-background font-bold text-sm px-5 py-3 rounded-lg transition-all hover:-translate-y-0.5"
+              className="bg-accent hover:bg-accent-hover text-[var(--color-on-accent)] font-bold text-sm px-5 py-3 rounded-lg transition-all hover:-translate-y-0.5"
               onClick={() => setOpen(false)}
             >
               {cta.label}
