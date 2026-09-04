@@ -189,3 +189,43 @@ export function normalizePresetName(name: unknown): PresetName {
   }
   return DEFAULT_PRESET;
 }
+
+/**
+ * Default personality per `business.businessClass` — the self-healing fallback
+ * for when `_brand.json` omits `themeStyle` (a build LLM sets businessClass far
+ * more reliably than a new themeStyle field). Keys are the `businessClass` enum
+ * from brandSchema.ts.
+ */
+export const CLASS_TO_PRESET: Record<string, PresetName> = {
+  legal: 'editorial',
+  medical: 'editorial',
+  nonprofit: 'editorial',
+  restaurant: 'warm',
+  salon: 'warm',
+  gym: 'warm',
+  storefront: 'warm',
+  portfolio: 'brutalist',
+  retail: 'classic',
+  'auto-repair': 'classic',
+  saas: 'classic',
+  organization: 'classic',
+};
+
+/**
+ * Derive a personality from a `businessClass` value. Never throws.
+ *
+ * @param businessClass - A `business.businessClass` value (any type).
+ * @returns The mapped {@link PresetName}, or `classic` when unmapped/invalid.
+ *
+ * @example
+ * presetForClass('legal')   // → 'editorial'
+ * presetForClass('salon')   // → 'warm'
+ * presetForClass('unknown') // → 'classic'
+ */
+export function presetForClass(businessClass: unknown): PresetName {
+  if (typeof businessClass === 'string') {
+    const key = businessClass.trim().toLowerCase();
+    if (key in CLASS_TO_PRESET) return CLASS_TO_PRESET[key];
+  }
+  return DEFAULT_PRESET;
+}

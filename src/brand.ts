@@ -10,7 +10,7 @@
  * If a token references another token's value, this resolver handles it.
  */
 
-import { resolvePreset, normalizePresetName, DEFAULT_PRESET, type PresetName } from './themePresets.ts';
+import { resolvePreset, presetForClass, PRESET_NAMES, DEFAULT_PRESET, type PresetName } from './themePresets.ts';
 
 // The shipped template carries _brand.json at the repo root. A FRESH build
 // copy (e.g. the container's cp -r during site generation) can transiently
@@ -235,10 +235,19 @@ function mergeGroup<T extends Record<string, unknown>>(base: T, override: unknow
 }
 
 const r = resolved as Record<string, unknown>;
-// The style preset is the BASE for font/radius/shadow/motion; a per-key
-// `_brand.json` value still wins via mergeGroup below (so a source-extracted
-// font is never clobbered). Unknown/absent themeStyle → 'classic' == DEFAULT_BRAND.
-const preset = resolvePreset(r.themeStyle);
+const businessClassValue = pick('businessClass', DEFAULTS.businessClass);
+// themeStyle precedence (template-side self-healing, no LLM-compliance needed):
+//   1. an explicit VALID _brand.json themeStyle wins;
+//   2. else derive the personality from businessClass (the build reliably sets it);
+//   3. else 'classic' (presetForClass's own fallback).
+// The chosen preset is then the BASE for font/radius/shadow/motion, and a per-key
+// _brand.json value still wins via mergeGroup below (source-extracted fonts survive).
+const explicitStyle =
+  typeof r.themeStyle === 'string' && PRESET_NAMES.includes(r.themeStyle.trim().toLowerCase() as PresetName)
+    ? (r.themeStyle.trim().toLowerCase() as PresetName)
+    : null;
+const themeStyle: PresetName = explicitStyle ?? presetForClass(businessClassValue);
+const preset = resolvePreset(themeStyle);
 export const brand: Brand = {
   business: {
     name: pick('name', DEFAULTS.name),
@@ -246,7 +255,7 @@ export const brand: Brand = {
     tagline: pick('tagline', DEFAULTS.tagline),
     description: pick('description', DEFAULTS.description),
     url: normalizeUrl(pick('url', DEFAULTS.url)),
-    businessClass: pick('businessClass', DEFAULTS.businessClass),
+    businessClass: businessClassValue,
     email: pick('email', DEFAULTS.email),
     phone: pick('phone', DEFAULTS.phone),
     address: pick('address', DEFAULTS.address),
@@ -254,7 +263,7 @@ export const brand: Brand = {
   },
   color: mergeGroup(DEFAULT_BRAND.color, r.color),
   colorScheme: (typeof r.colorScheme === 'string' ? r.colorScheme : DEFAULT_BRAND.colorScheme) as Brand['colorScheme'],
-  themeStyle: normalizePresetName(r.themeStyle),
+  themeStyle,
   font: {
     // weights + fluidScale come from DEFAULT_BRAND; the preset supplies the
     // family pairing; an explicit _brand.json font still wins per-key.

@@ -16,6 +16,7 @@ W3C Design Tokens Community Group spec, v2025.10. Every leaf node has `$value`, 
 business      identity (name, contact, hours, etc.)
 color         OKLCH palette + master hue/chroma
 colorScheme   "dark" | "light" | "auto"
+themeStyle    visual personality preset (classic|editorial|warm|luxe|brutalist)
 font          Google Fonts names + weights + scale strategy
 radius        border-radius scale
 spacing       8pt spacing scale
@@ -123,6 +124,22 @@ These are designed for a **dark-first** palette. For light mode, the `[data-them
 - `auto` — follows `prefers-color-scheme`
 
 The user can override at runtime via the `ThemeToggle` in the header. Their choice persists in `localStorage` under `projectsites:theme`.
+
+## themeStyle
+
+```jsonc
+{ "themeStyle": { "$value": "editorial" } }   // classic | editorial | warm | luxe | brutalist
+```
+
+The site's visual **personality** — a preset that supplies the font pairing, radius scale, shadow character, motion curve, and a matching decorative flourish (`src/themePresets.ts`). It is the biggest lever against every generated site looking identical; `colorScheme` controls light/dark, `themeStyle` controls the whole feel.
+
+- `classic` — saas, tech, auto, general modern (Space Grotesk/Inter — geometric)
+- `editorial` — legal, medical, nonprofit, consulting (Fraunces serif — trustworthy)
+- `warm` — restaurant, salon, gym, wellness, family (Poppins — rounded, inviting)
+- `luxe` — fine dining, high-end retail, real-estate, hospitality (Playfair — refined)
+- `brutalist` — creative agency, portfolio, events, bold brands (Archivo — hard-edged)
+
+Precedence: the preset is the BASE; any `font`/`radius`/`shadow`/`motion` value you set explicitly in `_brand.json` still wins per-key. Omit those groups to let the preset drive them. Absent → `classic` (the historical default). `applyBrand()` stamps `:root[data-style="…"]` for the flourish layer.
 
 ## font.*
 

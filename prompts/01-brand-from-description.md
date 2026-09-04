@@ -54,6 +54,7 @@ Given the business description that follows, produce a complete `_brand.json` ma
     "info":        { "$value": "..." }
   },
   "colorScheme": { "$value": "dark|light|auto" },
+  "themeStyle": { "$value": "classic|editorial|warm|luxe|brutalist" },
   "font": {
     "heading":    { "$value": "Google Font name" },
     "body":       { "$value": "Google Font name" },
@@ -149,6 +150,18 @@ Pick from Google Fonts. Curated pairings by industry:
 - Wellness / health: `Crimson Pro` + `Inter`
 - Default fallback: `Space Grotesk` + `Inter`
 
+### `themeStyle` (visual personality — ALWAYS set)
+
+The single biggest lever against every generated site looking identical. It bundles font pairing + radius + shadow + motion + a matching flourish. Pick the personality that fits the business:
+
+- `classic` — saas, tech, auto-repair, general modern (geometric, confident)
+- `editorial` — legal, medical, dental, nonprofit, consulting (serif, calm, trustworthy)
+- `warm` — restaurant, salon, gym, wellness, family/kids (rounded, soft, inviting)
+- `luxe` — fine dining, high-end retail, real-estate, hospitality, jewelry (refined serif, premium)
+- `brutalist` — creative agency, portfolio, events, streetwear, bold brands (high-impact, hard-edged)
+
+The font pairings above are already personality-aligned, so keep them OR omit the `font`/`radius` groups to let the chosen preset supply them (any color/token you genuinely extracted still wins per-key).
+
 ### `business.description`
 
 120–156 chars HARD limit. Active voice. Mentions what, who-for, and where if local.
@@ -190,6 +203,7 @@ If the brief explicitly contradicts (e.g. "no pricing on our site" for a SaaS), 
 - `color.brandHue.$value`: numeric string `"0"`-`"360"`
 - `color.brandChroma.$value`: numeric string `"0.05"`-`"0.30"`
 - `colorScheme.$value`: `"dark"` or `"light"` or `"auto"`
+- `themeStyle.$value`: one of `"classic"` `"editorial"` `"warm"` `"luxe"` `"brutalist"`
 - `font.heading.$value` + `font.body.$value`: real Google Fonts names
 
 ## Begin

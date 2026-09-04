@@ -104,9 +104,20 @@ Always go through `_brand.json`. The resolver in `src/brand.ts` handles aliasing
     "primary":     { "$value": "oklch(0.62 {color.brandChroma} {color.brandHue})" }
   },
   "colorScheme": { "$value": "auto" },         // dark | light | auto
+  "themeStyle":  { "$value": "editorial" },    // ← visual PERSONALITY — ALWAYS set it (see below)
   "features":    { "pricing": { "$value": true } }  // toggle homepage sections
 }
 ```
+
+**`themeStyle` is the site's visual PERSONALITY** — it bundles the font pairing + radius scale + shadow character + motion + a matching flourish. **ALWAYS set it to fit the business**; it is what stops every generated site from looking identical (color alone is not enough). Pick ONE:
+
+- `classic` — saas, tech, auto-repair, general modern brands (geometric, confident)
+- `editorial` — legal, medical, dental, nonprofit, consulting (serif, calm, trustworthy)
+- `warm` — restaurant, salon, gym, wellness, family/kids (rounded, soft, inviting)
+- `luxe` — fine dining, high-end retail, real-estate, hospitality, jewelry (refined serif, premium)
+- `brutalist` — creative agency, portfolio, events, streetwear, bold brands (high-impact, hard-edged)
+
+To let the chosen preset SUPPLY the font pairing + radii, **omit the `font` and `radius` groups** from `_brand.json` (keep only colors/values you genuinely extracted from the source brand — those still win per-key). Full reference: `src/themePresets.ts` + `docs/BRAND.md`.
 
 ### When to add a new section vs reuse
 

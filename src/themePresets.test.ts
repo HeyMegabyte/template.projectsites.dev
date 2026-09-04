@@ -3,8 +3,10 @@ import {
   THEME_PRESETS,
   PRESET_NAMES,
   DEFAULT_PRESET,
+  CLASS_TO_PRESET,
   resolvePreset,
   normalizePresetName,
+  presetForClass,
   type ThemePreset,
 } from './themePresets.ts';
 
@@ -55,5 +57,24 @@ describe('themePresets', () => {
     expect(normalizePresetName('garbage')).toBe('classic');
     expect(normalizePresetName(undefined)).toBe('classic');
     for (const n of PRESET_NAMES) expect(normalizePresetName(n)).toBe(n);
+  });
+
+  it('presetForClass maps every businessClass to a valid preset (self-healing)', () => {
+    // Every value in the class map must be a real preset name.
+    for (const [cls, style] of Object.entries(CLASS_TO_PRESET)) {
+      expect(PRESET_NAMES, `${cls}→${style}`).toContain(style);
+    }
+    expect(presetForClass('legal')).toBe('editorial');
+    expect(presetForClass('salon')).toBe('warm');
+    expect(presetForClass('portfolio')).toBe('brutalist');
+    expect(presetForClass('SAAS')).toBe('classic'); // case-insensitive
+    for (const bad of [undefined, null, '', 'nope', 42]) {
+      expect(presetForClass(bad as unknown), String(bad)).toBe('classic');
+    }
+  });
+
+  it('covers the full businessClass enum from brandSchema', () => {
+    const ENUM = ['storefront', 'restaurant', 'medical', 'retail', 'salon', 'gym', 'auto-repair', 'saas', 'portfolio', 'nonprofit', 'legal', 'organization'];
+    for (const cls of ENUM) expect(Object.keys(CLASS_TO_PRESET), cls).toContain(cls);
   });
 });
