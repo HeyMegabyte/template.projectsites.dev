@@ -1006,7 +1006,11 @@ main#main { view-transition-name: ps-main; }
   padding: 0.125rem 0.375rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  color: var(--color-text-subtle);
+  /* --color-text-subtle (L0.60 on dark) clears 4.5:1 on the near-black main bg
+     but this ⌘K hint sits on the LIGHTER elevated cmdk surface (~#18221c) where
+     it drops to 4.15:1. --color-text-muted (L0.65 dark / 0.42 light, forced
+     legible by the contrast arc) is 5.06:1 there and scheme-adaptive. */
+  color: var(--color-text-muted);
   margin-left: auto;
 }
 
