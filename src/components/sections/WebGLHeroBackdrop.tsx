@@ -1,0 +1,284 @@
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+
+/**
+ * WebGLHeroBackdrop — a gorgeous, brand-tinted animated hero backdrop rendered
+ * with a hand-written GLSL fragment shader on a raw `<canvas>` (NO three.js).
+ *
+ * WHY RAW WEBGL, NOT three.js / R3F:
+ * three.js + R3F is ~150 KB gzip — it blows this template's TTFR / JS-budget gate
+ * and hurts LCP for the low-bandwidth audiences these sites serve. A single
+ * fragment shader gives the same "wow" (flowing aurora / mesh) at ~3 KB with zero
+ * dependencies. If a build ever needs true 3D geometry, lazy-load R3F in a
+ * `@defer`-style dynamic import behind these same guards — never in the initial bundle.
+ *
+ * LCP-SAFE BY CONSTRUCTION:
+ *   - It is a DECORATIVE backdrop (`aria-hidden`, `pointer-events-none`), absolutely
+ *     positioned BEHIND the hero content. The hero's H1/text is the LCP element and
+ *     paints immediately, independent of this canvas.
+ *   - The WebGL context + RAF loop start AFTER mount (post-hydration), so they never
+ *     block first paint. Animation pauses when the tab/section isn't visible.
+ *
+ * GRACEFUL DEGRADATION (always legible):
+ *   - `prefers-reduced-motion: reduce` → NO canvas, NO RAF; a static brand gradient.
+ *   - WebGL unavailable / context lost → the same static brand gradient.
+ *
+ * BRAND-TINTED AUTOMATICALLY: reads `--brand-hue` from the cascade and feeds it to
+ * the shader, so the backdrop matches whatever palette the generated site uses.
+ */
+
+/** The visual character of the backdrop — pick per industry. */
+export type HeroBackdropVariant = 'aurora' | 'waves' | 'mesh';
+
+/** Shader parameters per variant (pure data — unit-tested). */
+export interface HeroBackdropConfig {
+  /** Spatial frequency of the noise field (higher = finer detail). */
+  scale: number;
+  /** Animation speed multiplier. */
+  speed: number;
+  /** Band contrast (higher = sharper light ribbons). */
+  sharpness: number;
+  /** Hue spread around the brand hue, in turns (0..1). */
+  hueSpread: number;
+  /** Overall brightness (0..1). Kept low so foreground text stays legible. */
+  intensity: number;
+}
+
+/**
+ * Per-variant shader configs. `aurora` = soft flowing ribbons (wellness/creative);
+ * `waves` = broad horizontal swells (finance/professional, calmer); `mesh` = tighter
+ * cellular shimmer (tech/AI). All stay dark + low-intensity for text legibility.
+ */
+export const HERO_BACKDROP_CONFIGS: Record<HeroBackdropVariant, HeroBackdropConfig> = {
+  aurora: { scale: 2.5, speed: 1.0, sharpness: 0.7, hueSpread: 0.08, intensity: 0.9 },
+  waves: { scale: 1.6, speed: 0.6, sharpness: 0.5, hueSpread: 0.04, intensity: 0.8 },
+  mesh: { scale: 4.0, speed: 1.3, sharpness: 0.85, hueSpread: 0.12, intensity: 0.85 },
+};
+
+/**
+ * Parse a `--brand-hue` CSS value (degrees, 0–360) into a shader turn (0–1).
+ * Falls back to 240 (the template default blue) for blank/NaN input.
+ *
+ * @example parseBrandHue('195') // → 195/360
+ * @example parseBrandHue('')    // → 240/360
+ */
+export function parseBrandHue(cssValue: string | null | undefined, fallbackDeg = 240): number {
+  const deg = Number.parseFloat((cssValue ?? '').trim());
+  const h = Number.isFinite(deg) ? deg : fallbackDeg;
+  return ((h % 360) + 360) % 360 / 360;
+}
+
+/**
+ * Decide how to render: the animated WebGL scene only when motion is allowed AND
+ * WebGL is available; otherwise the static brand gradient. Pure → unit-tested.
+ *
+ * @example resolveBackdropMode({ reducedMotion: true,  webglOk: true  }) // 'static'
+ * @example resolveBackdropMode({ reducedMotion: false, webglOk: false }) // 'static'
+ * @example resolveBackdropMode({ reducedMotion: false, webglOk: true  }) // 'webgl'
+ */
+export function resolveBackdropMode(input: {
+  reducedMotion: boolean;
+  webglOk: boolean;
+}): 'webgl' | 'static' {
+  return !input.reducedMotion && input.webglOk ? 'webgl' : 'static';
+}
+
+const FRAG_SRC = `
+precision mediump float;
+uniform vec2 uRes;
+uniform float uTime;
+uniform float uHue;       // 0..1 (brand)
+uniform float uScale;
+uniform float uSharp;
+uniform float uSpread;
+uniform float uIntensity;
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+float noise(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.0-2.0*f);
+  return mix(mix(hash(i),hash(i+vec2(1.0,0.0)),f.x), mix(hash(i+vec2(0.0,1.0)),hash(i+vec2(1.0,1.0)),f.x), f.y); }
+float fbm(vec2 p){ float v=0.0, a=0.5; for(int i=0;i<5;i++){ v+=a*noise(p); p*=2.02; a*=0.5; } return v; }
+vec3 hsl2rgb(float h,float s,float l){ vec3 r=clamp(abs(mod(h*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0,0.0,1.0); return l+s*(r-0.5)*(1.0-abs(2.0*l-1.0)); }
+void main(){
+  vec2 uv = gl_FragCoord.xy / uRes.xy;
+  vec2 p = uv * vec2(uRes.x/uRes.y, 1.0);
+  float t = uTime * 0.05;
+  float f = fbm(p*uScale + vec2(t, t*0.6));
+  f += 0.5 * fbm(p*uScale*2.0 - vec2(t*0.8, t));
+  float band = smoothstep(1.0-uSharp, 0.95, f);
+  float hue = uHue + uSpread * sin(f*3.14159 + t);
+  vec3 col = hsl2rgb(hue, 0.7, 0.13 + 0.30*band);
+  col *= smoothstep(1.25, 0.2, length(uv-0.5));   // vignette → keeps center text legible
+  gl_FragColor = vec4(col * uIntensity, 1.0);
+}`;
+
+const VERT_SRC = `attribute vec2 aPos; void main(){ gl_Position = vec4(aPos,0.0,1.0); }`;
+
+function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLShader | null {
+  const sh = gl.createShader(type);
+  if (!sh) return null;
+  gl.shaderSource(sh, src);
+  gl.compileShader(sh);
+  return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null;
+}
+
+interface Props {
+  variant?: HeroBackdropVariant;
+  className?: string;
+}
+
+/**
+ * Render the backdrop. Mount it as the FIRST child of a `relative`-positioned hero,
+ * before the content, e.g. `<section className="relative"><WebGLHeroBackdrop /> …`.
+ */
+export function WebGLHeroBackdrop({ variant = 'aurora', className }: Props) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [mode, setMode] = useState<'webgl' | 'static'>('static');
+  const cfg = HERO_BACKDROP_CONFIGS[variant] ?? HERO_BACKDROP_CONFIGS.aurora;
+
+  useEffect(() => {
+    const reducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+    const canvas = canvasRef.current;
+    let gl: WebGLRenderingContext | null = null;
+    try {
+      gl = canvas?.getContext('webgl', { antialias: true, alpha: false }) ?? null;
+    } catch {
+      gl = null;
+    }
+    const next = resolveBackdropMode({ reducedMotion, webglOk: !!gl });
+    setMode(next);
+    if (next === 'static' || !canvas || !gl) return;
+
+    const vs = compile(gl, gl.VERTEX_SHADER, VERT_SRC);
+    const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG_SRC);
+    const prog = gl.createProgram();
+    if (!vs || !fs || !prog) {
+      setMode('static');
+      return;
+    }
+    gl.attachShader(prog, vs);
+    gl.attachShader(prog, fs);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      setMode('static');
+      return;
+    }
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const u = {
+      res: gl.getUniformLocation(prog, 'uRes'),
+      time: gl.getUniformLocation(prog, 'uTime'),
+      hue: gl.getUniformLocation(prog, 'uHue'),
+      scale: gl.getUniformLocation(prog, 'uScale'),
+      sharp: gl.getUniformLocation(prog, 'uSharp'),
+      spread: gl.getUniformLocation(prog, 'uSpread'),
+      intensity: gl.getUniformLocation(prog, 'uIntensity'),
+    };
+    const hue = parseBrandHue(
+      getComputedStyle(document.documentElement).getPropertyValue('--brand-hue'),
+    );
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const resize = () => {
+      if (!canvas || !gl) return;
+      const w = Math.floor(canvas.clientWidth * dpr);
+      const h = Math.floor(canvas.clientHeight * dpr);
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    };
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+    resize();
+
+    let raf = 0;
+    let running = true;
+    const start = performance.now();
+    const frame = () => {
+      if (!running || !gl) return;
+      resize();
+      gl.uniform2f(u.res, canvas.width, canvas.height);
+      gl.uniform1f(u.time, (performance.now() - start) / 1000);
+      gl.uniform1f(u.hue, hue);
+      gl.uniform1f(u.scale, cfg.scale);
+      gl.uniform1f(u.sharp, cfg.sharpness);
+      gl.uniform1f(u.spread, cfg.hueSpread);
+      gl.uniform1f(u.intensity, cfg.intensity);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      raf = requestAnimationFrame(frame);
+    };
+    // Pause when the tab is hidden or the hero scrolls out — no wasted GPU/battery.
+    const io = new IntersectionObserver(
+      ([e]) => {
+        const visible = e?.isIntersecting ?? true;
+        if (visible && running && !raf) raf = requestAnimationFrame(frame);
+        if (!visible && raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { threshold: 0.01 },
+    );
+    io.observe(canvas);
+    const onVis = () => {
+      if (document.hidden && raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      } else if (!document.hidden && !raf) {
+        raf = requestAnimationFrame(frame);
+      }
+    };
+    document.addEventListener('visibilitychange', onVis);
+    const onLost = (ev: Event) => {
+      ev.preventDefault();
+      setMode('static');
+    };
+    canvas.addEventListener('webglcontextlost', onLost);
+    raf = requestAnimationFrame(frame);
+
+    return () => {
+      running = false;
+      if (raf) cancelAnimationFrame(raf);
+      ro.disconnect();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVis);
+      canvas.removeEventListener('webglcontextlost', onLost);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
+    };
+  }, [variant, cfg.scale, cfg.sharpness, cfg.hueSpread, cfg.intensity]);
+
+  // Static brand gradient — the always-legible fallback (reduced-motion / no-WebGL /
+  // SSR first paint). Uses the brand tokens so it matches the animated version's palette.
+  const staticStyle: CSSProperties = {
+    background:
+      'radial-gradient(120% 120% at 50% 0%, color-mix(in oklch, var(--color-primary) 22%, transparent), transparent 60%), radial-gradient(90% 90% at 80% 100%, color-mix(in oklch, var(--color-accent) 16%, transparent), transparent 55%)',
+  };
+
+  return (
+    <div
+      aria-hidden="true"
+      className={['pointer-events-none absolute inset-0 -z-10 overflow-hidden', className]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      {mode === 'webgl' ? (
+        <canvas ref={canvasRef} className="h-full w-full" />
+      ) : (
+        // Keep the canvas ref mountable so the effect can still probe WebGL on the
+        // first client pass; the visible layer is the static gradient until 'webgl' wins.
+        <>
+          <canvas ref={canvasRef} className="absolute h-0 w-0 opacity-0" aria-hidden="true" />
+          <div className="h-full w-full" style={staticStyle} />
+        </>
+      )}
+    </div>
+  );
+}

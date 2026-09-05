@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { brand } from '@/brand';
 import { scrubText, scrubImage } from '@/lib/placeholders';
+import { WebGLHeroBackdrop, type HeroBackdropVariant } from '@/components/sections/WebGLHeroBackdrop';
 
 type Trust = { icon?: 'star' | 'shield' | 'award'; label: string };
 
@@ -32,6 +33,13 @@ interface CommonProps {
   secondary?: { label: string; href: string };
   trustBadges?: Trust[];
   className?: string;
+  /**
+   * Opt-in animated WebGL hero backdrop, brand-hue-tinted, per industry
+   * ('aurora' wellness/creative · 'waves' finance/professional · 'mesh' tech/AI).
+   * Off by default; LCP-safe + reduced-motion/no-WebGL → static gradient. See
+   * {@link WebGLHeroBackdrop}.
+   */
+  webglBackdrop?: HeroBackdropVariant;
 }
 
 const TRUST_ICONS = { star: Star, shield: Shield, award: Award } as const;
@@ -75,7 +83,7 @@ function TrustRow({ items }: { items?: Trust[] }) {
  * none) and sit behind the z-10 content. All motion is gated behind
  * `prefers-reduced-motion` — base states stay fully visible + legible.
  */
-export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary, trustBadges, className }: CommonProps) {
+export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary, trustBadges, className, webglBackdrop }: CommonProps) {
   // The headline is the only <h1> — it must ALWAYS render, so fall back to the
   // real business name when the generation token is unresolved. Everything else
   // scrubs to empty/undefined and is hidden by its own guard.
@@ -87,6 +95,10 @@ export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary,
   const safeTrust = scrubTrust(trustBadges);
   return (
     <section className={cn('relative min-h-screen flex items-center justify-center overflow-hidden grain', className)}>
+      {/* Opt-in animated WebGL backdrop (deepest layer). Decorative + LCP-safe:
+          the <h1> below is the LCP element; this canvas mounts post-hydration and
+          degrades to a static brand gradient under reduced-motion / no-WebGL. */}
+      {webglBackdrop && <WebGLHeroBackdrop variant={webglBackdrop} />}
       {/* Centered accent bloom — a single OKLCH aura + slow conic halo behind the
           headline. Both decorative, always behind the z-10 content, no <img> in
           this variant so neither can become the LCP. */}
