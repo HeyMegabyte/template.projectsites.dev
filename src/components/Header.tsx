@@ -99,7 +99,7 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
           {logoOk ? (
             <img
               src="/apple-touch-icon.png"
-              alt={`${business} logo`}
+              alt=""
               width={36}
               height={36}
               className="site-logo h-9 w-9 rounded-lg object-cover border border-border shadow-sm shrink-0"
