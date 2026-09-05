@@ -186,6 +186,81 @@ export const THEME_PRESETS = {
     },
     motion: { easing: 'cubic-bezier(0.4, 0, 0.2, 1)', duration: { fast: '140ms', base: '240ms', slow: '420ms', scroll: '1100ms' } },
   },
+
+  /** Rounded humanist type, big soft radii, feather-light shadows, calm motion — fresh + reassuring. medical · wellness · spa · dental · clinics. */
+  botanical: {
+    label: 'Botanical',
+    when: 'medical, wellness, spa, dental, therapy, clinics — calming, fresh, organic, reassuring',
+    font: { heading: 'Poppins', body: 'Open Sans', mono: MONO },
+    radius: { sm: '0.5rem', md: '1rem', lg: '1.5rem', xl: '2rem', '2xl': '2.5rem', full: '9999px' },
+    shadow: {
+      sm: '0 2px 8px -2px rgb(0 0 0 / 0.12)',
+      md: '0 8px 28px -8px rgb(0 0 0 / 0.20)',
+      lg: '0 22px 56px -18px rgb(0 0 0 / 0.28)',
+      glow: '0 0 48px -12px oklch(0.85 0.14 var(--brand-hue) / 0.32)',
+    },
+    motion: { easing: 'cubic-bezier(0.22, 1, 0.36, 1)', duration: { fast: '200ms', base: '400ms', slow: '620ms', scroll: '1500ms' } },
+  },
+
+  /** High-contrast display serif + geometric body, elegant medium radii, soft lifted shadows — chic + tactile. boutique retail · fashion · beauty · lifestyle. */
+  boutique: {
+    label: 'Boutique',
+    when: 'boutique retail, fashion, beauty, lifestyle, home goods — chic, tactile, editorial-shoppable',
+    font: { heading: 'Fraunces', body: 'Jost', mono: MONO },
+    radius: { sm: '0.375rem', md: '0.75rem', lg: '1rem', xl: '1.25rem', '2xl': '1.5rem', full: '9999px' },
+    shadow: {
+      sm: '0 2px 6px -1px rgb(0 0 0 / 0.16)',
+      md: '0 10px 28px -8px rgb(0 0 0 / 0.26)',
+      lg: '0 24px 56px -16px rgb(0 0 0 / 0.34)',
+      glow: '0 0 44px -10px oklch(0.84 0.13 var(--brand-hue) / 0.34)',
+    },
+    motion: { easing: 'cubic-bezier(0.22, 1, 0.36, 1)', duration: { fast: '170ms', base: '340ms', slow: '560ms', scroll: '1400ms' } },
+  },
+
+  /** Technical condensed display, razor radii, crisp reflective shadows, fast precise motion — engineered + metallic. automotive · performance · industrial-sleek. */
+  precision: {
+    label: 'Precision',
+    when: 'automotive, dealerships, performance, machinery, hardware, industrial-sleek — engineered, sharp, metallic',
+    font: { heading: 'Rajdhani', body: 'Inter', mono: MONO },
+    radius: { sm: '0.125rem', md: '0.25rem', lg: '0.375rem', xl: '0.5rem', '2xl': '0.625rem', full: '9999px' },
+    shadow: {
+      sm: '0 1px 3px 0 rgb(0 0 0 / 0.32)',
+      md: '0 6px 18px -4px rgb(0 0 0 / 0.44)',
+      lg: '0 18px 46px -12px rgb(0 0 0 / 0.54)',
+      glow: '0 0 40px -6px oklch(0.80 0.17 var(--brand-hue) / 0.44)',
+    },
+    motion: { easing: 'cubic-bezier(0.3, 0.8, 0.2, 1)', duration: { fast: '130ms', base: '250ms', slow: '400ms', scroll: '1100ms' } },
+  },
+
+  /** Classic transitional serif, small engraved radii, subtle print elevation, dignified motion — timeless + trusted. financial · insurance · advisory · established professional. */
+  heritage: {
+    label: 'Heritage',
+    when: 'financial, accounting, insurance, advisory, wealth, established professional — timeless, authoritative, trusted',
+    font: { heading: 'Libre Baskerville', body: 'Source Sans 3', mono: MONO },
+    radius: { sm: '0.125rem', md: '0.25rem', lg: '0.375rem', xl: '0.5rem', '2xl': '0.625rem', full: '9999px' },
+    shadow: {
+      sm: '0 1px 2px 0 rgb(0 0 0 / 0.20)',
+      md: '0 6px 16px -6px rgb(0 0 0 / 0.28)',
+      lg: '0 16px 40px -14px rgb(0 0 0 / 0.36)',
+      glow: '0 0 30px -12px oklch(0.86 0.09 var(--brand-hue) / 0.26)',
+    },
+    motion: { easing: 'cubic-bezier(0.22, 1, 0.36, 1)', duration: { fast: '200ms', base: '380ms', slow: '640ms', scroll: '1500ms' } },
+  },
+
+  /** Rounded friendly display, big playful radii, soft lifted shadows, springy motion — bright + encouraging. education · tutoring · kids · courses. */
+  scholarly: {
+    label: 'Scholarly',
+    when: 'education, tutoring, schools, kids, courses, coaching — bright, friendly, approachable, encouraging',
+    font: { heading: 'Quicksand', body: 'Nunito Sans', mono: MONO },
+    radius: { sm: '0.625rem', md: '1rem', lg: '1.5rem', xl: '2rem', '2xl': '2.5rem', full: '9999px' },
+    shadow: {
+      sm: '0 2px 6px -1px rgb(0 0 0 / 0.16)',
+      md: '0 8px 22px -6px rgb(0 0 0 / 0.26)',
+      lg: '0 20px 50px -14px rgb(0 0 0 / 0.34)',
+      glow: '0 0 52px -10px oklch(0.82 0.16 var(--brand-hue) / 0.42)',
+    },
+    motion: { easing: 'cubic-bezier(0.34, 1.4, 0.5, 1)', duration: { fast: '150ms', base: '300ms', slow: '480ms', scroll: '1200ms' } },
+  },
 } as const satisfies Record<string, ThemePreset>;
 
 /** Union of valid preset names. */
@@ -243,14 +318,14 @@ export function normalizePresetName(name: unknown): PresetName {
  */
 export const CLASS_TO_PRESET: Record<string, PresetName> = {
   legal: 'editorial',
-  medical: 'editorial',
+  medical: 'botanical',
   nonprofit: 'editorial',
   restaurant: 'warm',
   salon: 'warm',
   gym: 'bold',
   storefront: 'warm',
   portfolio: 'brutalist',
-  retail: 'classic',
+  retail: 'boutique',
   'auto-repair': 'rugged',
   saas: 'futuristic',
   organization: 'classic',

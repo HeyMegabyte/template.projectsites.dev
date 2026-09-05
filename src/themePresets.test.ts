@@ -40,7 +40,31 @@ describe('themePresets', () => {
   });
 
   it('covers every documented vertical personality', () => {
-    expect(new Set(PRESET_NAMES)).toEqual(new Set(['classic', 'editorial', 'warm', 'luxe', 'brutalist', 'bold', 'futuristic', 'rugged']));
+    expect(new Set(PRESET_NAMES)).toEqual(
+      new Set([
+        'classic',
+        'editorial',
+        'warm',
+        'luxe',
+        'brutalist',
+        'bold',
+        'futuristic',
+        'rugged',
+        'botanical',
+        'boutique',
+        'precision',
+        'heritage',
+        'scholarly',
+      ]),
+    );
+  });
+
+  it('resolves each new elaborate personality to its distinctive font', () => {
+    expect(resolvePreset('botanical').font.heading).toBe('Poppins');
+    expect(resolvePreset('boutique').font.heading).toBe('Fraunces');
+    expect(resolvePreset('precision').font.heading).toBe('Rajdhani');
+    expect(resolvePreset('heritage').font.heading).toBe('Libre Baskerville');
+    expect(resolvePreset('scholarly').font.heading).toBe('Quicksand');
   });
 
   it('resolvePreset never throws and falls back to classic on bad input', () => {
@@ -69,6 +93,8 @@ describe('themePresets', () => {
     expect(presetForClass('portfolio')).toBe('brutalist');
     expect(presetForClass('gym')).toBe('bold'); // athletic, not soft-warm
     expect(presetForClass('auto-repair')).toBe('rugged'); // industrial, not geometric-classic
+    expect(presetForClass('medical')).toBe('botanical'); // calming-fresh, not generic editorial
+    expect(presetForClass('retail')).toBe('boutique'); // chic-tactile, not geometric-classic
     expect(presetForClass('SAAS')).toBe('futuristic'); // case-insensitive; glassy, not classic
     for (const bad of [undefined, null, '', 'nope', 42]) {
       expect(presetForClass(bad as unknown), String(bad)).toBe('classic');
