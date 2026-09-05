@@ -54,6 +54,7 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
   // extracted / Ideogram / DALL-E logo), falling back to a branded monogram badge
   // if that asset ever fails to load.
   const [logoOk, setLogoOk] = useState(true);
+  const [wordmarkOk, setWordmarkOk] = useState(true);
   const { pathname } = useLocation();
 
   useEffect(() => setOpen(false), [pathname]);
@@ -113,9 +114,21 @@ export default function Header({ links, ctaLabel, ctaHref }: Props) {
               {initials}
             </span>
           )}
-          <span className="text-text font-bold text-xl font-heading tracking-tight group-hover:text-accent transition-colors">
-            {business}
-          </span>
+          {wordmarkOk ? (
+            // Stylized text wordmark — the SECOND Ideogram logo, shown to the RIGHT of the
+            // square icon mark. Falls back to crisp HTML text if the generated image is
+            // absent/broken (so the brand name always renders).
+            <img
+              src="/logo-wordmark.png"
+              alt={business}
+              className="site-wordmark h-8 w-auto max-w-[190px] object-contain"
+              onError={() => setWordmarkOk(false)}
+            />
+          ) : (
+            <span className="text-text font-bold text-xl font-heading tracking-tight group-hover:text-accent transition-colors">
+              {business}
+            </span>
+          )}
         </Link>
 
         <div className="hidden md:flex gap-6 items-center">
