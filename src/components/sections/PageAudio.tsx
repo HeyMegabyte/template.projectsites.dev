@@ -1,70 +1,53 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
- * PageAudio — an AI-native "Listen to this page" audio player built entirely on the
- * browser's Web Speech API (`window.speechSynthesis` + `SpeechSynthesisUtterance`).
- * Zero backend, zero dependencies, zero API keys: the visitor's own device narrates
- * the page's main text aloud on demand.
+ * PageAudio — an AI-native "Listen to this page" player.
+ *
+ * PRIMARY path (AI audio): on play it POSTs the page's readable text to the site's
+ * own worker (`POST /api/page-audio/:slug`), which AI-SUMMARIZES the page (a warm
+ * spoken overview — NOT a verbatim read of everything) and speaks the summary with
+ * an open-source TTS (MeloTTS on Cloudflare Workers AI). The returned WAV — cached
+ * in R2 so it's generated once per page version — plays through an `<audio>` element.
+ *
+ * FALLBACK path (on-device): if the endpoint is unavailable (custom-domain sites,
+ * an older worker, an offline visitor, or any model fault → `audioUrl: null`), it
+ * degrades to the browser's own `speechSynthesis` reading the page text. A broken
+ * model must never break the button.
  *
  * @remarks
- * Progressive + SSR-safe by construction:
- *   - EVERY browser access is guarded behind `useEffect` + `typeof window !== 'undefined'`,
- *     so the module renders nothing during server render / prerender.
- *   - On mount, if `speechSynthesis` is unavailable, the component sets `unsupported`
- *     and returns `null` — it self-hides rather than showing a dead control.
- *   - It NEVER autoplays: audio starts only from a real user gesture (a button click),
- *     satisfying browser autoplay policies and respecting the visitor.
+ * Progressive + SSR-safe: every browser access is guarded behind `useEffect` +
+ * `typeof window !== 'undefined'`, so nothing renders during prerender. It NEVER
+ * autoplays — audio starts only from a real user gesture. On unmount / route change
+ * both engines are stopped so the previous page never talks over the next one.
  *
- * Cinematic layer (fully component-scoped, `.psa-` class prefix):
- *   - A glass surface with an OKLCH accent aura, `clamp()` fluid sizing, and a
- *     `text-wrap: balance` label.
- *   - While speaking, an animated equalizer of bars pulses + a soft aura breathes.
- *   - A live `aria-live="polite"` status announces "Playing…" / "Paused" / "Stopped".
- *
- * All VISUAL motion is DOUBLE-GATED — the equalizer + aura animate ONLY when BOTH
- * `prefers-reduced-motion: no-preference` AND `prefers-reduced-data: no-preference`
- * hold. When either is reduced, the bars render as static ticks and the aura is
- * still — the AUDIO still works. Accessibility (real buttons, `aria-pressed`,
- * descriptive labels, visible focus ring, keyboard operability, unmount cleanup)
- * holds in every path.
- *
- * Text source: at click time it reads `document.querySelector('main')?.innerText`
- * (falling back to `document.body.innerText`), trims + collapses whitespace, and caps
- * at ~9000 chars so a very long page can't produce a runaway utterance. The optional
- * `text` prop overrides the extracted text (e.g. for a curated read or a story), and
- * `label` overrides the control caption.
+ * Cinematic layer (component-scoped `.psa-` classes in index.css): a glass surface
+ * with an OKLCH accent aura + an animated equalizer while speaking, double-gated on
+ * `prefers-reduced-motion` AND `prefers-reduced-data`. A11y (real buttons,
+ * `aria-pressed`, descriptive labels, visible focus ring, an `aria-live` status that
+ * also announces "Summarizing…") holds in every path.
  */
 interface Props {
-  /** Overrides the auto-extracted page text with a curated string to read aloud. */
+  /** Overrides the auto-extracted page text (e.g. a curated read). */
   text?: string;
-  /** Overrides the control's caption. Default: "Listen to this page". */
+  /** Overrides the control caption. Default: "Listen to this page". */
   label?: string;
 }
 
-/** Playback lifecycle, mirrored from the utterance's `on*` events. */
-type PlayState = 'idle' | 'playing' | 'paused' | 'ended';
+/** Playback lifecycle. `loading` = summarizing + synthesizing the audio. */
+type PlayState = 'idle' | 'loading' | 'playing' | 'paused' | 'ended';
 
-/** Hard cap so a very long page can never spawn a runaway utterance. */
-const MAX_CHARS = 9000;
+/** Which engine is currently driving playback. */
+type Engine = 'audio' | 'speech' | null;
 
-/**
- * Component-scoped styles. Every selector is prefixed `.psa-` so it can never
- * collide with global or sibling-section styles (this component NEVER edits
- * `index.css`). Motion is double-gated: the equalizer + aura animate ONLY when
- * both media features are "no-preference"; when either is reduced the bars are
- * static ticks, the aura is still, and the audio path is unaffected.
- */
+/** Hard cap on page text sent for summarization / spoken as a fallback. */
+const MAX_CHARS = 12000;
 
-/** Collapse runs of whitespace and hard-cap the length so utterances stay bounded. */
+/** Collapse runs of whitespace + hard-cap length so requests + utterances stay bounded. */
 function normalizeText(raw: string): string {
   return raw.replace(/\s+/g, ' ').trim().slice(0, MAX_CHARS);
 }
 
-/**
- * Pull the page's readable text at click time. Prefers the `<main>` landmark
- * (the Layout renders `<main id="main">`), falling back to the whole body.
- * Returns '' when there's nothing meaningful to read.
- */
+/** Pull the page's readable text at click time (prefer the `<main>` landmark). */
 function extractPageText(): string {
   if (typeof document === 'undefined') return '';
   const main = document.querySelector('main');
@@ -72,22 +55,44 @@ function extractPageText(): string {
   return normalizeText(src);
 }
 
+/**
+ * Derive the site slug from a `*.projectsites.dev` host. Returns null for the
+ * marketing apex + custom domains, where the widget falls back to on-device speech.
+ */
+function deriveSlug(): string | null {
+  if (typeof location === 'undefined') return null;
+  const suffix = '.projectsites.dev';
+  const host = location.hostname;
+  if (!host.endsWith(suffix)) return null;
+  const label = host.slice(0, -suffix.length).split('.').pop() || '';
+  return label && label !== 'www' && label !== 'projectsites' ? label : null;
+}
+
 export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
   const [supported, setSupported] = useState<boolean | null>(null);
   const [state, setState] = useState<PlayState>('idle');
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null); // AI-audio engine
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null); // fallback engine
+  const audioUrlRef = useRef<string | null>(null); // cached generated URL → instant replay
+  const engineRef = useRef<Engine>(null);
 
-  // Feature-detect once, client-side only. `null` → unknown (first render / SSR);
-  // `false` → self-hide. Guarded so the server render never touches `window`.
+  // Supported when EITHER engine is available (both are near-universal).
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    setSupported('speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function');
+    const hasSpeech =
+      'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function';
+    const hasAudio = typeof window.Audio === 'function' && typeof fetch === 'function';
+    setSupported(hasSpeech || hasAudio);
   }, []);
 
-  // Always cancel any in-flight speech when the component unmounts or the route
-  // changes — otherwise the last page keeps talking over the next one.
+  // Stop both engines on unmount / route change.
   useEffect(() => {
     return () => {
+      try {
+        audioRef.current?.pause();
+      } catch {
+        /* ignore */
+      }
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
@@ -97,28 +102,34 @@ export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
   const speaking = state === 'playing' || state === 'paused';
 
   const stop = useCallback(() => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
+    try {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    } catch {
+      /* ignore */
+    }
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
     utteranceRef.current = null;
+    engineRef.current = null;
     setState('idle');
   }, []);
 
-  const start = useCallback(() => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  // Fallback engine: on-device speechSynthesis of the page text.
+  const startSpeech = useCallback((body: string) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      setState('idle');
+      return;
+    }
     const synth = window.speechSynthesis;
-    const body = normalizeText(text ?? '') || extractPageText();
-    if (!body) return;
-
-    // Fresh start: clear anything queued first (some engines stall on re-entry).
     synth.cancel();
-
     const u = new SpeechSynthesisUtterance(body);
     u.rate = 1;
     u.pitch = 1;
     u.lang = (typeof document !== 'undefined' && document.documentElement.lang) || 'en-US';
-    u.onstart = () => setState('playing');
-    u.onpause = () => setState('paused');
-    u.onresume = () => setState('playing');
     u.onend = () => {
       utteranceRef.current = null;
       setState('ended');
@@ -128,38 +139,123 @@ export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
       setState('idle');
     };
     utteranceRef.current = u;
-    // Optimistically reflect "playing" — `onstart` confirms; some engines are slow to fire it.
+    engineRef.current = 'speech';
     setState('playing');
     synth.speak(u);
-  }, [text]);
+  }, []);
 
-  // Play/Pause/Resume toggle. From idle/ended → start a fresh read; while playing →
-  // pause; while paused → resume.
+  // Primary engine: play a generated WAV URL through <audio>.
+  const startAudioUrl = useCallback((url: string) => {
+    try {
+      let a = audioRef.current;
+      if (!a) {
+        a = new Audio();
+        audioRef.current = a;
+      }
+      a.src = url;
+      a.onended = () => setState('ended');
+      a.onerror = () => {
+        engineRef.current = null;
+        setState('idle');
+      };
+      engineRef.current = 'audio';
+      setState('playing');
+      void a.play().catch(() => {
+        engineRef.current = null;
+        setState('idle');
+      });
+    } catch {
+      setState('idle');
+    }
+  }, []);
+
+  // Kick off a read: AI-summary audio when possible, else on-device speech.
+  const start = useCallback(async () => {
+    // Instant replay of an already-generated URL.
+    if (audioUrlRef.current) {
+      startAudioUrl(audioUrlRef.current);
+      return;
+    }
+    const body = normalizeText(text ?? '') || extractPageText();
+    if (!body) return;
+
+    const slug = deriveSlug();
+    // Custom domain / no fetch → straight to on-device speech.
+    if (!slug || typeof fetch !== 'function') {
+      startSpeech(body);
+      return;
+    }
+
+    setState('loading');
+    try {
+      const res = await fetch(`/api/page-audio/${encodeURIComponent(slug)}`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ route: location.pathname, text: body }),
+        mode: 'same-origin',
+        credentials: 'omit',
+      });
+      const json = (await res.json().catch(() => null)) as {
+        data?: { audioUrl?: string | null };
+      } | null;
+      const url = json?.data?.audioUrl || null;
+      if (url) {
+        audioUrlRef.current = url;
+        startAudioUrl(url);
+      } else {
+        startSpeech(body); // model unavailable → graceful on-device read
+      }
+    } catch {
+      startSpeech(body); // network fault → graceful on-device read
+    }
+  }, [text, startAudioUrl, startSpeech]);
+
+  // Play / Pause / Resume — operate on whichever engine is active.
   const toggle = useCallback(() => {
-    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-    const synth = window.speechSynthesis;
+    if (state === 'loading') return; // ignore taps while summarizing
     if (state === 'playing') {
-      synth.pause();
-      setState('paused'); // reflect immediately; `onpause` confirms
+      if (engineRef.current === 'audio') {
+        try {
+          audioRef.current?.pause();
+        } catch {
+          /* ignore */
+        }
+      } else if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.pause();
+      }
+      setState('paused');
     } else if (state === 'paused') {
-      synth.resume();
+      if (engineRef.current === 'audio') {
+        void audioRef.current?.play().catch(() => setState('idle'));
+      } else if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.resume();
+      }
       setState('playing');
     } else {
-      start();
+      void start();
     }
   }, [state, start]);
 
-  // Self-hide when unsupported or before detection resolves (SSR / first paint).
+  // Self-hide when neither engine is available or before detection resolves.
   if (supported !== true) return null;
 
   const isPlaying = state === 'playing';
-  const statusText =
-    state === 'playing' ? 'Playing…' : state === 'paused' ? 'Paused' : state === 'ended' ? 'Finished' : 'Ready';
-  // Full data-* on the band drives the double-gated animation; a11y attrs mirror state.
+  const isLoading = state === 'loading';
+  const statusText = isLoading
+    ? 'Summarizing…'
+    : state === 'playing'
+      ? 'Playing…'
+      : state === 'paused'
+        ? 'Paused'
+        : state === 'ended'
+          ? 'Finished'
+          : 'Ready';
+
   return (
     <section
       className="psa-band py-10 md:py-14 max-w-container-wide mx-auto px-6"
       data-playing={isPlaying ? 'true' : 'false'}
+      data-loading={isLoading ? 'true' : 'false'}
       aria-label="Listen to this page"
     >
       <div className="psa-shell text-text">
@@ -171,9 +267,17 @@ export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
             className="psa-btn"
             data-primary="true"
             onClick={toggle}
+            disabled={isLoading}
+            aria-disabled={isLoading}
             aria-pressed={isPlaying}
             aria-label={
-              isPlaying ? 'Pause reading this page aloud' : state === 'paused' ? 'Resume reading this page aloud' : 'Play — read this page aloud'
+              isLoading
+                ? 'Summarizing this page…'
+                : isPlaying
+                  ? 'Pause listening'
+                  : state === 'paused'
+                    ? 'Resume listening'
+                    : 'Play — AI summary of this page, read aloud'
             }
           >
             {isPlaying ? <PauseIcon /> : <PlayIcon />}
@@ -185,7 +289,7 @@ export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
             onClick={stop}
             disabled={!speaking}
             aria-disabled={!speaking}
-            aria-label="Stop reading this page aloud"
+            aria-label="Stop listening"
           >
             <StopIcon />
           </button>
@@ -194,9 +298,9 @@ export function PageAudio({ text, label = 'Listen to this page' }: Props = {}) {
         <div className="psa-copy">
           <span className="psa-label">{label}</span>
           <span className="psa-hint" aria-hidden="true">
-            AI reads it aloud — right here in your browser.
+            An AI summary of this page, read aloud.
           </span>
-          {/* Live region: assistive tech announces playback changes politely. */}
+          {/* Live region: assistive tech announces "Summarizing…" / playback changes. */}
           <span className="psa-sr" aria-live="polite" role="status">
             {statusText}
           </span>
