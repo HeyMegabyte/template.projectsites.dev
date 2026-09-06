@@ -3917,3 +3917,88 @@ main#main { view-transition-name: ps-main; }
   border: 2px solid color-mix(in oklch, var(--color-text) 30%, transparent);
   box-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.55);
 }
+
+/* botanical — calm, fresh, organic (medical · wellness · spa · dental).
+   Gently-relaxed rounded heads · softly-spaced mono · a feather-light brand-tinted
+   float with a fresh accent hairline. Airy and reassuring — you exhale on arrival. */
+:root[data-style='botanical'] h1,
+:root[data-style='botanical'] h2 { letter-spacing: 0.004em; font-weight: 600; }
+:root[data-style='botanical'] .font-mono { letter-spacing: 0.15em; }
+:root[data-style='botanical'] .card-tactile,
+:root[data-style='botanical'] .glass,
+:root[data-style='botanical'] .glass-strong {
+  border-color: color-mix(in oklch, var(--color-accent) 22%, transparent);
+  box-shadow: 0 24px 64px -26px color-mix(in oklch, var(--color-primary) 22%, transparent);
+}
+
+/* boutique — chic, tactile, editorial (fashion · beauty · lifestyle · home goods).
+   High-contrast serif heads with ligatures · MAX-tracked uppercase mono fashion
+   labels ("NEW IN") · a soft lifted card with an elegant accent hairline. Covetable. */
+:root[data-style='boutique'] h1,
+:root[data-style='boutique'] h2 {
+  letter-spacing: 0.006em;
+  font-weight: 500;
+  font-feature-settings: 'liga' 1, 'kern' 1;
+}
+:root[data-style='boutique'] .font-mono {
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+:root[data-style='boutique'] .card-tactile,
+:root[data-style='boutique'] .glass,
+:root[data-style='boutique'] .glass-strong {
+  border-color: color-mix(in oklch, var(--color-accent) 24%, transparent);
+  box-shadow: 0 20px 48px -18px rgb(0 0 0 / 0.34);
+}
+
+/* precision — engineered, sharp, metallic (automotive · performance · machinery).
+   Wide-tracked technical heads · UPPERCASE wide mono spec-chips · a crisp reflective
+   card (inner accent sheen + sharp drop) with a metallic accent edge. Kinetic. */
+:root[data-style='precision'] h1,
+:root[data-style='precision'] h2,
+:root[data-style='precision'] h3 { letter-spacing: 0.02em; font-weight: 600; }
+:root[data-style='precision'] .font-mono {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+:root[data-style='precision'] .card-tactile,
+:root[data-style='precision'] .glass,
+:root[data-style='precision'] .glass-strong {
+  border-color: color-mix(in oklch, var(--color-accent) 26%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklch, var(--color-accent) 22%, transparent),
+    0 12px 30px -10px rgb(0 0 0 / 0.5);
+}
+
+/* heritage — timeless, authoritative, trusted (financial · insurance · advisory).
+   Baskerville heads with oldstyle figures + ligatures · engraved mono labels · an
+   engraved accent top-rule (inset ⇒ zero reflow) over quiet print elevation. */
+:root[data-style='heritage'] h1,
+:root[data-style='heritage'] h2,
+:root[data-style='heritage'] h3 {
+  letter-spacing: -0.008em;
+  font-feature-settings: 'liga' 1, 'kern' 1, 'onum' 1;
+}
+:root[data-style='heritage'] .font-mono { letter-spacing: 0.18em; font-weight: 500; }
+:root[data-style='heritage'] .card-tactile,
+:root[data-style='heritage'] .glass,
+:root[data-style='heritage'] .glass-strong {
+  border-color: color-mix(in oklch, var(--color-accent) 22%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklch, var(--color-accent) 34%, transparent),
+    0 10px 26px -14px rgb(0 0 0 / 0.32);
+}
+
+/* scholarly — bright, friendly, encouraging (education · tutoring · kids · courses).
+   Rounded heads with a touch of positive tracking · friendly mono · a soft, cheerful
+   brand-tinted lift. Playful and welcoming without ever being childish. */
+:root[data-style='scholarly'] h1,
+:root[data-style='scholarly'] h2 { letter-spacing: 0.008em; font-weight: 600; }
+:root[data-style='scholarly'] .font-mono { letter-spacing: 0.12em; font-weight: 600; }
+:root[data-style='scholarly'] .card-tactile,
+:root[data-style='scholarly'] .glass,
+:root[data-style='scholarly'] .glass-strong {
+  box-shadow: 0 20px 50px -18px color-mix(in oklch, var(--color-accent) 30%, transparent);
+}

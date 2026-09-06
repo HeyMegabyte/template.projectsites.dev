@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
 import {
   THEME_PRESETS,
   PRESET_NAMES,
@@ -104,5 +105,19 @@ describe('themePresets', () => {
   it('covers the full businessClass enum from brandSchema', () => {
     const ENUM = ['storefront', 'restaurant', 'medical', 'retail', 'salon', 'gym', 'auto-repair', 'saas', 'portfolio', 'nonprofit', 'legal', 'organization'];
     for (const cls of ENUM) expect(Object.keys(CLASS_TO_PRESET), cls).toContain(cls);
+  });
+
+  // Drift guard: every personality must ship a distinguishing `:root[data-style]`
+  // flourish in index.css. `classic` is the historical default and intentionally
+  // has none. This gate exists because botanical/boutique/precision/heritage/
+  // scholarly originally shipped flourish-less (rendered generic) — a preset
+  // without a flourish is a half-built theme.
+  it('every non-classic preset has a :root[data-style] flourish in index.css', () => {
+    // cwd is the package root under `vitest run`; import.meta.url is not file:// under Vite's transform.
+    const css = readFileSync('src/index.css', 'utf8');
+    for (const name of PRESET_NAMES) {
+      if (name === 'classic') continue;
+      expect(css, `${name} needs a :root[data-style='${name}'] flourish`).toContain(`:root[data-style='${name}']`);
+    }
   });
 });
