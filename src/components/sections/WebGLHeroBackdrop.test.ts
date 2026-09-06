@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   parseBrandHue,
   resolveBackdropMode,
+  backdropForPreset,
   HERO_BACKDROP_CONFIGS,
   type HeroBackdropVariant,
 } from './WebGLHeroBackdrop';
@@ -59,5 +60,38 @@ describe('HERO_BACKDROP_CONFIGS', () => {
       expect(c.intensity).toBeGreaterThan(0);
       expect(c.intensity).toBeLessThan(1);
     }
+  });
+});
+
+describe('backdropForPreset (per-industry hero motion)', () => {
+  // Every one of the 13 themeStyle presets must resolve to a real, configured variant
+  // so wiring `webglBackdrop={backdropForPreset(brand.themeStyle)}` never renders nothing.
+  const ALL_PRESETS = [
+    'classic', 'editorial', 'warm', 'luxe', 'brutalist', 'bold', 'futuristic',
+    'rugged', 'botanical', 'boutique', 'precision', 'heritage', 'scholarly',
+  ];
+  it('maps every preset to a configured variant', () => {
+    for (const p of ALL_PRESETS) {
+      const v = backdropForPreset(p);
+      expect(HERO_BACKDROP_CONFIGS[v], `${p} → ${v}`).toBeDefined();
+    }
+  });
+  it('matches motion character to personality', () => {
+    expect(backdropForPreset('botanical')).toBe('aurora'); // organic, calm
+    expect(backdropForPreset('warm')).toBe('aurora');
+    expect(backdropForPreset('luxe')).toBe('waves'); // premium, measured
+    expect(backdropForPreset('heritage')).toBe('waves');
+    expect(backdropForPreset('editorial')).toBe('waves');
+    expect(backdropForPreset('futuristic')).toBe('mesh'); // technical, energetic
+    expect(backdropForPreset('bold')).toBe('mesh');
+    expect(backdropForPreset('precision')).toBe('mesh');
+  });
+  it('is case-insensitive + total (blank / unknown / nullish → aurora)', () => {
+    expect(backdropForPreset('LUXE')).toBe('waves');
+    expect(backdropForPreset('  futuristic  ')).toBe('mesh');
+    expect(backdropForPreset('')).toBe('aurora');
+    expect(backdropForPreset('nope')).toBe('aurora');
+    expect(backdropForPreset(null)).toBe('aurora');
+    expect(backdropForPreset(undefined)).toBe('aurora');
   });
 });

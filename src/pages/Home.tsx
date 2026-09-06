@@ -11,6 +11,7 @@ import { hasRealImage } from '@/lib/placeholders';
 
 import {
   HeroSplit,
+  backdropForPreset,
   BentoGrid,
   Stats,
   FeatureSplit,
@@ -319,6 +320,7 @@ export default function Home() {
             primary={{ label: '{HERO_CTA}', href: featureOn('quote') ? '/quote' : '/contact' }}
             secondary={{ label: '{HERO_SECONDARY_CTA}', href: '/services' }}
             image={{ src: '{HERO_IMAGE_URL}', alt: '{HERO_IMAGE_ALT}' }}
+            webglBackdrop={backdropForPreset(brand.themeStyle)}
             trustBadges={[
               { icon: 'star',   label: '{TRUST_BADGE_1}' },
               { icon: 'shield', label: '{TRUST_BADGE_2}' },

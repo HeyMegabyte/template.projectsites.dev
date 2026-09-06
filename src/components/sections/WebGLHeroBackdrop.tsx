@@ -55,6 +55,31 @@ export const HERO_BACKDROP_CONFIGS: Record<HeroBackdropVariant, HeroBackdropConf
 };
 
 /**
+ * Map a `themeStyle` preset (the 13 site personalities) to the backdrop whose
+ * MOTION matches that personality — so every generated site gets a fitting
+ * animated hero automatically (no per-build opt-in):
+ *   - `aurora` — soft flowing ribbons → welcoming / organic / creative
+ *     (botanical, warm, scholarly, boutique, classic);
+ *   - `waves`  — broad calm swells → authoritative / professional / trusted
+ *     (editorial, heritage, luxe);
+ *   - `mesh`   — tight cellular shimmer → technical / energetic / precise
+ *     (futuristic, bold, precision, rugged, brutalist).
+ * Pure + total (unknown/blank → `aurora`) so it unit-tests in isolation.
+ *
+ * @example backdropForPreset('luxe')       // → 'waves'
+ * @example backdropForPreset('futuristic') // → 'mesh'
+ * @example backdropForPreset(undefined)    // → 'aurora'
+ */
+const PRESET_BACKDROP: Record<string, HeroBackdropVariant> = {
+  botanical: 'aurora', warm: 'aurora', scholarly: 'aurora', boutique: 'aurora', classic: 'aurora',
+  editorial: 'waves', heritage: 'waves', luxe: 'waves',
+  futuristic: 'mesh', bold: 'mesh', precision: 'mesh', rugged: 'mesh', brutalist: 'mesh',
+};
+export function backdropForPreset(preset: string | null | undefined): HeroBackdropVariant {
+  return PRESET_BACKDROP[(preset ?? '').trim().toLowerCase()] ?? 'aurora';
+}
+
+/**
  * Parse a `--brand-hue` CSS value (degrees, 0–360) into a shader turn (0–1).
  * Falls back to 240 (the template default blue) for blank/NaN input.
  *

@@ -177,7 +177,7 @@ interface SplitProps extends CommonProps {
 }
 
 /** Asymmetric hero: copy left, image right. Good for storefronts + services. */
-export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, image, trustBadges, className }: SplitProps) {
+export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, image, trustBadges, className, webglBackdrop }: SplitProps) {
   const safeHeadline = scrubText(headline, brand.business.name);
   const safeEyebrow = scrubText(eyebrow);
   const safeSubheadline = scrubText(subheadline);
@@ -189,6 +189,12 @@ export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, 
   const safeImage = scrubImage(image);
   return (
     <section className={cn('relative isolate pt-32 pb-16 md:pb-24 max-w-container-wide mx-auto px-6', className)}>
+      {/* Opt-in animated WebGL backdrop (deepest layer, per-industry via
+          backdropForPreset). Decorative + LCP-safe: it mounts post-hydration
+          behind the z-10 grid, always smaller-impact than the eager hero <img>
+          (which stays the LCP), and degrades to a static brand gradient under
+          reduced-motion / no-WebGL. */}
+      {webglBackdrop && <WebGLHeroBackdrop variant={webglBackdrop} />}
       {/* Cinematic depth behind the COPY — a drifting OKLCH accent aurora + a
           fine grain layer. Both are decorative (aria-hidden, pointer-events
           none), always smaller and behind the eager hero <img>, so neither can
