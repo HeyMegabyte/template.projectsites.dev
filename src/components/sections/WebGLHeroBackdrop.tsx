@@ -70,7 +70,13 @@ export const HERO_BACKDROP_CONFIGS: Record<HeroBackdropVariant, HeroBackdropConf
  * @example backdropForPreset('futuristic') // → 'mesh'
  * @example backdropForPreset(undefined)    // → 'aurora'
  */
-const PRESET_BACKDROP: Record<string, HeroBackdropVariant> = {
+// MUST carry an explicit entry for EVERY `THEME_PRESETS` key — a preset with no entry
+// silently falls back to `aurora` below, so a tech/energetic personality (e.g. `precision`,
+// `bold`) would ship SOFT ribbons instead of the intended `mesh` shimmer: a per-industry
+// beauty regression that's invisible (no error). Presets get added often (5 in recent
+// commits), so the coverage is drift-GUARDED by a test (WebGLHeroBackdrop.test.ts asserts
+// every PRESET_NAMES entry is a key here) — add the mapping in the SAME change as a new preset.
+export const PRESET_BACKDROP: Record<string, HeroBackdropVariant> = {
   botanical: 'aurora', warm: 'aurora', scholarly: 'aurora', boutique: 'aurora', classic: 'aurora',
   editorial: 'waves', heritage: 'waves', luxe: 'waves',
   futuristic: 'mesh', bold: 'mesh', precision: 'mesh', rugged: 'mesh', brutalist: 'mesh',

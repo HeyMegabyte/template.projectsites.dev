@@ -4,8 +4,10 @@ import {
   resolveBackdropMode,
   backdropForPreset,
   HERO_BACKDROP_CONFIGS,
+  PRESET_BACKDROP,
   type HeroBackdropVariant,
 } from './WebGLHeroBackdrop';
+import { PRESET_NAMES } from '../../themePresets';
 
 /**
  * The imperative WebGL path can't run in jsdom (no WebGL context), so these guard
@@ -93,5 +95,31 @@ describe('backdropForPreset (per-industry hero motion)', () => {
     expect(backdropForPreset('nope')).toBe('aurora');
     expect(backdropForPreset(null)).toBe('aurora');
     expect(backdropForPreset(undefined)).toBe('aurora');
+  });
+});
+
+describe('PRESET_BACKDROP coverage (drift guard vs themePresets)', () => {
+  // Presets get added frequently (5 in recent commits). A newly-added preset with NO
+  // PRESET_BACKDROP entry silently falls back to `aurora` in backdropForPreset — so a
+  // tech/energetic personality (precision/bold/…) would ship soft ribbons instead of the
+  // intended `mesh`, an INVISIBLE per-industry beauty regression. Deriving the expected set
+  // from the authoritative PRESET_NAMES (not a hardcoded list) means this fails at CI the
+  // moment a preset is added without its backdrop mapping — add both in the same change.
+  it('maps EVERY themeStyle preset explicitly (no silent aurora fallback)', () => {
+    // Guard against a vacuous pass: a broken/empty PRESET_NAMES import would make the
+    // filter trivially [] and hide real drift. The template ships 13 presets today.
+    expect(PRESET_NAMES.length).toBeGreaterThanOrEqual(13);
+    const unmapped = PRESET_NAMES.filter((name) => !(name in PRESET_BACKDROP));
+    expect(unmapped, `presets missing a PRESET_BACKDROP entry: ${unmapped.join(', ') || 'none'}`).toEqual([]);
+  });
+  it('has no STALE backdrop key that is not a real preset', () => {
+    const known = new Set<string>(PRESET_NAMES);
+    const stale = Object.keys(PRESET_BACKDROP).filter((k) => !known.has(k));
+    expect(stale, `PRESET_BACKDROP keys not in THEME_PRESETS: ${stale.join(', ') || 'none'}`).toEqual([]);
+  });
+  it('every mapped variant is a configured backdrop', () => {
+    for (const [preset, variant] of Object.entries(PRESET_BACKDROP)) {
+      expect(HERO_BACKDROP_CONFIGS[variant], `${preset} → ${variant}`).toBeDefined();
+    }
   });
 });
