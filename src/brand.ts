@@ -346,6 +346,14 @@ export function applyBrand(root: HTMLElement = document.documentElement): void {
     root.style.setProperty('--font-heading', `'${font.heading}', system-ui, sans-serif`);
     root.style.setProperty('--font-body',    `'${font.body}', system-ui, sans-serif`);
     root.style.setProperty('--font-mono',    `'${font.mono}', ui-monospace, monospace`);
+    // Setting --font-heading is HALF the job — a CSS variable does not LOAD a
+    // font. The static <head> only ships the platform defaults (Inter / Space
+    // Grotesk / JetBrains Mono), so any theme whose display font differs (Oswald,
+    // Playfair Display, Cormorant Garamond, Fraunces, …) rendered its headings in
+    // system-ui — the #1 reason themed sites looked generic (ground-truth probe
+    // 2026-09-07: 4/4 sampled sites had their chosen heading font UNLOADED). Load
+    // the active families here so the theme's typography actually shows.
+    injectThemeFonts(root.ownerDocument ?? document);
 
     for (const [k, v] of Object.entries(brand.radius ?? {})) root.style.setProperty(`--radius-${k}`, String(v));
     for (const [k, v] of Object.entries(brand.spacing ?? {})) root.style.setProperty(`--space-${k}`, String(v));
@@ -431,4 +439,48 @@ export function googleFontsHref(): string {
     .filter(Boolean)
     .map((name) => `family=${encodeURIComponent(name).replace(/%20/g, '+')}:wght@${brand.font.weights.join(';')}`);
   return `https://fonts.googleapis.com/css2?${fams.join('&')}&display=swap`;
+}
+
+/** The id of the runtime-injected theme-fonts stylesheet (idempotent handle). */
+export const THEME_FONTS_LINK_ID = 'ps-theme-fonts';
+
+/**
+ * Ensure the ACTIVE brand fonts are actually loaded by injecting (or updating) a
+ * Google Fonts `<link rel="stylesheet">` built from {@link googleFontsHref}.
+ *
+ * @remarks
+ * {@link applyBrand} sets `--font-heading` / `--font-body` from the resolved theme
+ * preset (e.g. `'Oswald'`, `'Playfair Display'`), but a CSS custom property does
+ * NOT load a font. The static `<head>` only ships the platform defaults (Inter /
+ * Space Grotesk / JetBrains Mono), so any theme whose fonts differ rendered its
+ * headings in `system-ui` — the #1 reason themed sites looked generic
+ * (ground-truth probe 2026-09-07: aurelia→Oswald, emberline→Playfair Display,
+ * camden→Cormorant Garamond, vanta→Inter Tight — all UNLOADED web fonts). Loading
+ * the active families deterministically here means the theme's typography no
+ * longer depends on the build remembering to hand-edit `<head>`.
+ *
+ * Idempotent: reuses the `#ps-theme-fonts` element and only rewrites `href` when it
+ * changes (avoids a redundant stylesheet re-request). Never throws — fonts are an
+ * enhancement and this runs pre-React, outside any `ErrorBoundary`.
+ *
+ * @param doc - target document (defaults to the global `document`); parameterized for tests.
+ * @example
+ * injectThemeFonts();
+ * // → <link id="ps-theme-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@…">
+ */
+export function injectThemeFonts(doc: Document = document): void {
+  try {
+    if (!doc || typeof doc.createElement !== 'function') return;
+    const href = googleFontsHref();
+    let link = doc.getElementById(THEME_FONTS_LINK_ID) as HTMLLinkElement | null;
+    if (!link) {
+      link = doc.createElement('link');
+      link.id = THEME_FONTS_LINK_ID;
+      link.rel = 'stylesheet';
+      (doc.head ?? doc.documentElement)?.appendChild(link);
+    }
+    if (link.getAttribute('href') !== href) link.setAttribute('href', href);
+  } catch {
+    /* fonts are an enhancement — never crash brand init (runs pre-React, uncatchable by ErrorBoundary) */
+  }
 }
