@@ -136,4 +136,29 @@ describe('--color-text-subtle clears WCAG AA on the worst-case surface (all 3 so
     const ratios = HUES.map((h) => ratio(subtle, surf, h));
     expect(Math.max(...ratios) - Math.min(...ratios)).toBeLessThan(0.1);
   });
+
+  /**
+   * §C.3 regression (surfed 2026-09-07 on vanta-strength-austin): `--color-text-muted`
+   * drives real body copy (team-role-card description, StatCounter, Timeline), and
+   * `applyBrand()` can set an arbitrarily dark `--color-background` per brand — vanta's is
+   * `#0d0706` (near-black, DARKER than `--color-surface-elevated`), where the delivered
+   * muted was only 3.51:1 → an axe `color-contrast` [serious] fail at 375/390px. The
+   * existing tests only checked `subtle` vs `surface-elevated`; MUTED vs the darkest/lightest
+   * possible brand surface was the blind spot. The CSS token is `!important` (so applyBrand
+   * can't darken it); assert it clears AA on PURE BLACK (dark) / PURE WHITE (light) so it
+   * holds for ANY brand's surface, not just the neutral elevated one.
+   */
+  it('MUTED body-copy clears 4.5:1 on the WORST-CASE brand surface per scheme (near-black / white)', () => {
+    const css = read('./index.css');
+    const dark = css.slice(0, css.indexOf("[data-theme='light']"));
+    const light = css.slice(css.indexOf("[data-theme='light']"));
+    const darkMuted = tokenIn(dark, '--color-text-muted');
+    const lightMuted = tokenIn(light, '--color-text-muted');
+    const black: OKLCH = { L: 0, C: 0, H: null };
+    const white: OKLCH = { L: 1, C: 0, H: null };
+    for (const hue of HUES) {
+      expect(ratio(darkMuted, black, hue), `dark muted on near-black, hue ${hue}`).toBeGreaterThanOrEqual(AA);
+      expect(ratio(lightMuted, white, hue), `light muted on white, hue ${hue}`).toBeGreaterThanOrEqual(AA);
+    }
+  });
 });
