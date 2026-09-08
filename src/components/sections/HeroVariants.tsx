@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { brand } from '@/brand';
 import { scrubText, scrubImage } from '@/lib/placeholders';
-import { WebGLHeroBackdrop, type HeroBackdropVariant } from '@/components/sections/WebGLHeroBackdrop';
+import { WebGLHeroBackdrop, backdropForPreset, type HeroBackdropVariant } from '@/components/sections/WebGLHeroBackdrop';
 
 type Trust = { icon?: 'star' | 'shield' | 'award'; label: string };
 
@@ -34,9 +34,11 @@ interface CommonProps {
   trustBadges?: Trust[];
   className?: string;
   /**
-   * Opt-in animated WebGL hero backdrop, brand-hue-tinted, per industry
-   * ('aurora' wellness/creative · 'waves' finance/professional · 'mesh' tech/AI).
-   * Off by default; LCP-safe + reduced-motion/no-WebGL → static gradient. See
+   * Override the animated WebGL hero backdrop variant ('aurora' wellness/creative ·
+   * 'waves' finance/professional · 'mesh' tech/AI). Optional — when OMITTED the hero
+   * auto-derives the variant from the site's `brand.themeStyle` via `backdropForPreset`,
+   * so every generated site gets a fitting animated hero with no per-build opt-in.
+   * Always LCP-safe + reduced-motion/no-WebGL → static brand gradient. See
    * {@link WebGLHeroBackdrop}.
    */
   webglBackdrop?: HeroBackdropVariant;
@@ -93,12 +95,17 @@ export function HeroCenter({ eyebrow, headline, subheadline, primary, secondary,
   const safePrimary = scrubCta(primary);
   const safeSecondary = scrubCta(secondary);
   const safeTrust = scrubTrust(trustBadges);
+  // Auto-derive the per-industry backdrop from the site personality when no explicit
+  // override is passed. The generation pipeline reliably sets `themeStyle`, so every
+  // delivered site now gets its fitting animated hero with zero per-build opt-in.
+  const resolvedBackdrop = webglBackdrop ?? backdropForPreset(brand.themeStyle);
   return (
     <section className={cn('relative min-h-screen flex items-center justify-center overflow-hidden grain', className)}>
-      {/* Opt-in animated WebGL backdrop (deepest layer). Decorative + LCP-safe:
-          the <h1> below is the LCP element; this canvas mounts post-hydration and
-          degrades to a static brand gradient under reduced-motion / no-WebGL. */}
-      {webglBackdrop && <WebGLHeroBackdrop variant={webglBackdrop} />}
+      {/* Per-industry animated WebGL backdrop (deepest layer), auto-derived from the
+          site personality. Decorative + LCP-safe: the <h1> below is the LCP element;
+          this canvas mounts post-hydration and degrades to a static brand gradient
+          under reduced-motion / no-WebGL. */}
+      {resolvedBackdrop && <WebGLHeroBackdrop variant={resolvedBackdrop} />}
       {/* Centered accent bloom — a single OKLCH aura + slow conic halo behind the
           headline. Both decorative, always behind the z-10 content, no <img> in
           this variant so neither can become the LCP. */}
@@ -187,14 +194,17 @@ export function HeroSplit({ eyebrow, headline, subheadline, primary, secondary, 
   // Drop a placeholder hero image so `{HERO_IMAGE_URL}` never 404s. When there
   // is no real image the copy column spans full width (still a valid hero).
   const safeImage = scrubImage(image);
+  // Auto-derive the per-industry backdrop from the site personality when no explicit
+  // override is passed (see HeroCenter) — LCP-safe: the eager hero <img> stays the LCP.
+  const resolvedBackdrop = webglBackdrop ?? backdropForPreset(brand.themeStyle);
   return (
     <section className={cn('relative isolate pt-32 pb-16 md:pb-24 max-w-container-wide mx-auto px-6', className)}>
-      {/* Opt-in animated WebGL backdrop (deepest layer, per-industry via
-          backdropForPreset). Decorative + LCP-safe: it mounts post-hydration
-          behind the z-10 grid, always smaller-impact than the eager hero <img>
-          (which stays the LCP), and degrades to a static brand gradient under
-          reduced-motion / no-WebGL. */}
-      {webglBackdrop && <WebGLHeroBackdrop variant={webglBackdrop} />}
+      {/* Per-industry animated WebGL backdrop (deepest layer, auto-derived via
+          backdropForPreset from the site personality). Decorative + LCP-safe: it
+          mounts post-hydration behind the z-10 grid, always smaller-impact than the
+          eager hero <img> (which stays the LCP), and degrades to a static brand
+          gradient under reduced-motion / no-WebGL. */}
+      {resolvedBackdrop && <WebGLHeroBackdrop variant={resolvedBackdrop} />}
       {/* Cinematic depth behind the COPY — a drifting OKLCH accent aurora + a
           fine grain layer. Both are decorative (aria-hidden, pointer-events
           none), always smaller and behind the eager hero <img>, so neither can
