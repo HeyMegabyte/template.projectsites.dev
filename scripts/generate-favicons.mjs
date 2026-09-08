@@ -43,17 +43,18 @@ function chunk(type, data) {
   const c = Buffer.alloc(4); c.writeUInt32BE(crc32(td));
   return Buffer.concat([len, td, c]);
 }
-function pngSolid(size) {
+function pngSolid(size, rgb = [r, g, b], rounded = true) {
   const px = Buffer.alloc(size * size * 4);
   const rad = Math.floor(size * 0.18);
   const inCorner = (x, y) => { // rounded-rect alpha mask
+    if (!rounded) return true; // full-bleed (maskable: the OS adaptive mask does the cropping)
     const cx = x < rad ? rad : x >= size - rad ? size - 1 - rad : x;
     const cy = y < rad ? rad : y >= size - rad ? size - 1 - rad : y;
     return Math.hypot(x - cx, y - cy) <= rad;
   };
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const i = (y * size + x) * 4, on = inCorner(x, y);
-    px[i] = r; px[i + 1] = g; px[i + 2] = b; px[i + 3] = on ? 255 : 0;
+    px[i] = rgb[0]; px[i + 1] = rgb[1]; px[i + 2] = rgb[2]; px[i + 3] = on ? 255 : 0;
   }
   // add filter byte (0) per scanline
   const raw = Buffer.alloc(size * (size * 4 + 1));
@@ -87,4 +88,14 @@ writeFileSync(resolve(pub, 'favicon.ico'), ico(png32));
 // rich SVG favicon (brand bg + initial) + monochrome safari mask
 writeFileSync(resolve(pub, 'favicon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="${hex}"/><text x="16" y="22" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">${initial}</text></svg>`);
 writeFileSync(resolve(pub, 'safari-pinned-tab.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6"/><text x="16" y="22" font-family="system-ui" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">${initial}</text></svg>`);
-console.log(`[generate-favicons] wrote favicons · brand=${hex} initial=${initial}${keptRealLogo ? ' · kept real apple-touch-icon logo (Ideogram/official)' : ''}`);
+// Android + PWA icons the manifest references — CORRECT SIZE so no 404 + no size-mismatch.
+// The static site.webmanifest declared android-chrome-192/512, a maskable-512, and a
+// monochrome icon, but this generator never produced them → they 404'd on EVERY deployed
+// site (broken Android adaptive/install icon; caught by e2e/site-quality/verify-pwa.mjs,
+// loop AL-204). Pure-node solid brand squares, consistent with the favicon monogram
+// fallback (a logo-composited variant needs sharp → container follow-up).
+writeFileSync(resolve(pub, 'android-chrome-192x192.png'), pngSolid(192));
+writeFileSync(resolve(pub, 'android-chrome-512x512.png'), pngSolid(512));
+writeFileSync(resolve(pub, 'maskable-512x512.png'), pngSolid(512, [r, g, b], false)); // full-bleed for the adaptive mask
+writeFileSync(resolve(pub, 'monochrome-icon.png'), pngSolid(192, [255, 255, 255])); // OS tints this
+console.log(`[generate-favicons] wrote favicons + android-chrome/maskable/monochrome · brand=${hex} initial=${initial}${keptRealLogo ? ' · kept real apple-touch-icon logo (Ideogram/official)' : ''}`);
